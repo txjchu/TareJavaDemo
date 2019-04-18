@@ -1,0 +1,85 @@
+1.Hibernate的HQL操作
+ Hibernate Query Language Hibernate查询语言
+ HQL和SQL结构相似，不同点如下：
+ --HQL是面向对象查询语言;SQL是面向结构查询语言
+    因此HQL使用对象类型及属性名;SQL使用表名和字段名
+SQL:select eno,ename from t_emp
+HQL:select no,name from Emp
+HQL:from Emp
+  --HQL是大小写敏感（类名和属性名区分大小写）
+  --HQL不支持select * 写法（需要全字段查询，干脆省略select子句）
+  --HQL不支持数据库特有函数
+   （通用分组函数支持min,max,avg,sum,count）
+  --HQL不支持join...on中on子句
+  from User user join user.books;
+  from User user ,NoteBook book
+  where user.cn_user_id=book.cn_user_id;
+
+
+2.Hibernate特性
+ *a.延迟加载
+ 当使用延迟加载API方法操作时，方法执行后并没有立刻发送SQL查询数据库
+加载数据库的数据，当使用对象getXXX方法访问数据时，才会触发SQL
+发送执行，加载数据库数据。
+   操作API
+   --load()延迟加载/get()立刻加载
+   --query.iterator()延迟/query.list()立刻加载
+   --关联映射中关联属性的加载（默认采用延迟）
+
+  延迟加载:可以在一定程度上缓解操作的并发。
+                可以减少对象在内存占用的时间,提高内存使用率
+  
+  使用延迟加载操作可能会发生如下错误：
+  org.hibernate.LazyInitializationException: 
+could not initialize proxy - no Session
+  原因：将session关闭放在了getXXX方法（触发SQL加载数据）之前。
+
+  解决方案：***1.将session关闭推迟到数据加载之后；
+                  2.使用立刻加载操作
+
+  在Web程序中，会采用一种OpenSessionInView模式，用于支持
+Hibernate延迟加载操作的使用。
+（利用Filter，拦截器,AOP功能，将Session关闭操作推迟到JSP解析之后）
+ Spring提供一个OpenSessionInViewFilter组件，直接在web.xml配置
+就可以解决此问题。
+发送请求-->Filter-->Action-->Service-->DAO
+-->Result-->JSP-->回收Session-->响应
+
+
+ b.缓存（一级缓存、二级缓存、查询缓存）
+
+ 1)一级缓存(Session )
+      Session级别,独享。生命周期根据Session对象同步,session.close销毁
+      默认启用
+
+   对象查询--》查缓存--》查DB
+
+ 2)二级缓存(SessionFactory)
+      SessionFactory级别,多个session共享。生命周期根据SessionFactory
+同步。默认关闭
+   开启二级缓存的方法：
+    --添加二级缓存组件包和配置文件（ehcache组件）
+    --在hibernate.cfg.xml配置开启二级缓存及组件类型
+    --在hbm.xml中指定哪种类型实体对象采用二级缓存存储
+
+SessionFactory(缓存共享)-->多个Session（缓存独享）
+
+对象查询--》查一级缓存--》查二级缓存--》查DB
+
+ 3)查询缓存（特殊的二级缓存）
+  前面一级和二级缓存都是缓存单个对象的。如果需要缓存一个结果集
+或一列数据需要采用查询缓存。
+  查询缓存开启过程：
+  --先针对操作的对象开启二级缓存
+  --在hibernate.cfg.xml中配置开启查询缓存
+  --在执行query.list查询之前，设置query.setCacheable(true);
+
+4）使用缓存的注意问题
+  如果数据频繁增删改，建议不要使用二级缓存和查询缓存。
+  使用时，需要手工清理缓存空间数据：
+  一级缓存清理：session.evict(obj);//清理缓存的obj对象
+                         session.clear();//清理所有缓存对象
+                         session.close();//清理缓存，关闭连接
+                         session.flush();//将缓存对象状态和数据库保持同步
+3.Hibernate关联映射
+ 

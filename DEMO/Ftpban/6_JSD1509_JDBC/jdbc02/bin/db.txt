@@ -1,0 +1,7 @@
+driverName=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@ip:1521:orcl
+userName=openlab
+password=open123
+
+ÊôĞÔÎÄ¼ş   db.properties
+key=value

@@ -1,0 +1,13 @@
+<!-- AOP示例1 -->
+<bean id="debugLogger" 
+	class="org.tarena.note.aop.DebugLoggerBean">
+</bean>
+<aop:config>
+	<!-- 将debugLogger指定为切面组件 -->
+	<aop:aspect ref="debugLogger">
+	<!-- 采用前置通知将debugController方法作用到
+		所有controller组件上 -->
+		<aop:before method="debugController"
+		pointcut="within(org.tarena.note.controller..*)"/>
+	</aop:aspect>
+</aop:config>

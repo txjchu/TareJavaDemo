@@ -1,0 +1,205 @@
+SELECT ename,job,sal,deptno FROM emp_zyl;
+select concat(ename,sal) from emp_zyl
+SELECT CONCAT(CONCAT(ename, ':'),sal)FROM emp_zyl;
+
+
+1.
+
+
+
+
+2.拼接字符串常使用“||”来连接，更简单
+	SELECT ename||':'|| sal FROM emp;
+
+
+
+3.LENGTH()函数，查询字符串字符个数：
+	SELECT ename,LENGTH(ename) FROM emp;
+
+
+
+4.DUAL:ORACLE 中的伪表
+在使用SELECT语句查询内容时，语法要求FROM 子句中后面必须要跟一个表名，当我们查询的数据不来自于任何一张表时，可以使用伪表，这样查询出来的记录只会有一条记录。
+	SELECT ···FROM dual;
+
+
+4.1  UPPER,LOWER,INITCAP函数：
+upper,lower,initcap
+
+将给定内容转换为全大写，全小写，首字母大写。
+对与Initcap 而言，单词间可以使用空格分隔，那么每个单词首字母都会大写。
+
+	SELECT UPPER('hello world') FROM EMP_ZYL;
+	//查询出来的结果是查询表中每一条记录，将hello world转换为大写，但是表中没有相关内容，依然输出。
+	SELECT UPPER('hello world'),LOWER('HELLO WORLD'),initcap('hello world')From dual;
+	--FROM dual,查询的是伪表。
+
+
+4.2  TRIM函数：
+去除字符串左右两边连续重复的指定字符（一个字符）。
+	SELECT TRIM('e' FROM 'eeeeLiteeee') FROM dual;
+（1）LTRIM 和 RTRIM函数
+去除方式：
+去除左侧或者右侧指定的字符串中的所有字符，直到指定的字符串中没有该字符为止。
+	SELECT LTRIM('esddesddesdliteeee','esd')FROM dual;
+	//显示出来  liteeee
+	SELECT LTRIM('e'from'esesesliteeee')from dual;--错误
+
+
+（2）LPAD,RPAD 函数，补位函数：
+LPAD（char1,len,char2)
+其中char2必须是单一的一个字符，作用为：显示char1内容，要求显示len位，若不足，则左侧添加若干个char2 以达到该位数。若超过，则截取char1内容，只显示len位。
+RPAD（char1,len,char2)同理。
+
+	SELECT ename,LPAD(sal,5,'$')FROM emp_zyl;  
+	//一般用空格代替$，来实现左右对齐。
+
+（3）SUBSTR（substr)
+截取字符串部分内容，从指定字符串的指定下标处开始，连续截取指定个字符。
+
+与Java区分：
+1）数据库中下标都是从1开始，而不是0
+2）截取的字符串个数，而不是截取到什么位置。
+	SUBSTR(str,m,n)
+	m:指定位置出，应从1开始，但也可以是0或者负数。若是负数，则是从倒数位置开始截取。
+	n:截取的字符长度，不写则是截取到末尾，若超过可以截取的总长度，则也是截取到末尾。
+	
+	INSTR(char1,char2[,n[,m]]);
+	
+	
+	若查询不到指定内容返回值为0。
+	SELECT INSTR('thinking in java','in',4,2)FROM dual;--2换成3就返回值为0
+
+
+(4)NUMBER(P,S)表示浮点数
+
+	
+(5)ROUND函数，四舍五入
+	第二个参数可以是正数，0，负数；
+	正数表示保留小数点后多少位，
+	0表示保留到整数数位；
+	负数表示保留到小数点前的位数，-1为十位，-2为百位。
+		SELECT ROUND(45.678,2)FROM dual;--45.68
+		SELECT ROUND(45.678,0)FROM dual;--46
+		SELECT ROUND(45.678,-1)FROM dual;--50
+	
+(6)TRUNC(n[,m])
+	截取数字，截取小数点右侧m个数字，m默认为0。与ROUND的区别在于仅截取数字，不做四舍五入：
+		SELECT TRUNC(45.678,2)FROM dual;--45.67
+		SELECT TRUNC(45.678,0)FROM dual;--45
+		SELECT trunc(45.678,-1)FROM dual;--40
+	
+(7)MOD(m,n)
+	用m 除以n ，求余数。n若为0，则直接返回m。
+	查看每个员工工资百位以下的情况：
+	SELECT ename,sal,MOD(sal,1000) FROM emp;
+
+(8)CEIL(n)和FLOOR(n)
+	其中n是数字，通常是小数。
+	CEIL：返回的是大于给定数字的最小正数（向上取整）
+	FLOOR：返回小雨给定数字的最大整数（向下取整）	
+
+
+5. 日期转换函数
+5.1	SYSDATE	 返回值为当前系统时间，类型为默认日期类型 DD-MM月-YY
+	SELECT SYSDATE FROM dual;
+	Insert into student VALUES(1,'JACK',SYSDATE);
+
+
+5.2	SYSTIMESTAMP
+	SELECT SYSTIMESTAMP FROM DUAL;--时间戳
+	返回：16-11月-15 02.39.41.323000000 下午 +08:00-----？	
+
+5.3	日期类型之间可以比较大小，时间晚的大，时间早的小。
+	日期之间可以做减法操作，差为相差的天数。日期可以加减数字，等同于加减指定的天数。
+	
+	SELECT SYSDATE+1 FROM dual;
+
+5.4	TO_DATE
+	可以按照给定的日期格式解析给定的字符串并转换为一个DATE类型的值返回。
+	查看1981年以后入职的员工：
+	SELECT ename,hiredate FROM emp WHERE hiredate>TO_DATE('1981-01-01','YYYY-MM-DD');
+	查询活了多少天了
+	SELECT CEIL(SYSDATE - TO_DATE('1987-01-01','YYYY-MM-DD'))FROM DUAL;
+	查看每个员工到今天为止，入职多少天了？
+	SELECT ename,CEIL(SYSDATE-hiredate) FROM EMP_ZYL;----或者用trunc,floor
+
+5.5	TO_CHAR()函数
+	常用与将一个日期按照给定的日期格式转换为字符串。
+	SELECT TO_CHAR(hiredate,'YYYY-MM-DD')FROM EMP_ZYL;
+	SELECT TO_CHAR(TO_DATE('95-12-21','RR-MM-DD'),'yyyy-mm-dd')FROM dual;			--1995-12-21上世纪
+	SELECT TO_CHAR(TO_DATE('49-10-10','RR-MM-DD'),'YYYY-MM-DD')FROM dual;
+	--2049-10-10本世纪
+	
+	将系统时间输出为：YYYY年MM月DD日
+	SELECT TO_CHAR(SYSDATE,'YYYY"年"MM"月"DD"日"')FROM dual;
+	
+	日期格式字符串中，除字母与一般符号外的其他字符都需要使用双引号括起来。
+
+常见日期函数
+5.6	LAST_DAY(date)
+	该函数返回给定日期所在月的最后一天：
+	SELECT LAST_DAY(SYSDATE) FROM dual;
+
+5.7	ADD_MONTHS(date,1)
+	对给定日期加上给定的月。
+	i可正可负，负数则是减去。
+	查看每个员工入职20周年纪念日：
+	SELECT ename,ADD_MONTHS(hiredate,20*12)FROM emp;
+
+5.8	MONTHS_BETWEEK(date1,date2)
+	返回给定的两个日期相差的约束。
+	计算规则是：date1-date2
+
+	查看每个员工至今工作了多少个月？
+	SELECT ename,TRUNC(MONTHS_BETWEEN(SYSDATE,hiredate))FROM emp_zyl;
+
+5.9	NEXT_DAY(date,char)
+	返回据给定日期最近的，还没有过上的周几的日期。
+	char==1表示周日，7表示周六。(可以用英文单词全拼)
+	
+	SELECT NEXT_DAY(SYSDATE,4)FROM DUAL;
+
+5.10	LEAST与GREATEST	函数
+	变长参数，可以传入任意个参数，类型一致即可。
+	LEAST(expr1[,expr2[,expr3]]......)：返回参数中最小的。
+	GREATEST(expr1[,expr2[,expr3]]...)：返回参数中最大的。	
+	
+	SELECT LEAST(SYSDATE,TO_DATE('2008-10-10','YYYY-MM-DD'))FROM dual;
+
+5.11	EXTRACT函数
+	可以提取一个日期中指定时间分量对应的值；
+	SELECT EXTRACT (YEAR FROM SYSDATE) FROM dual；
+
+
+
+6.	空值操作
+6.1	NULL
+	1）NULL是数据库里的重要概念，即空值。当表中的某些字段值，数据未知或暂时不存在，取值NULL。
+	Java中的简单数据类型是不能取值NULL的，在数据库中，任何数据类型均可取值NULL。
+	数据表中插入记录时，可以显性指定NULL，或者隐形。
+
+	2）将字段更新为NULL；-----该字段不能是非NULL字段
+	UPDATE student SET gender= null where(id=1000);
+	
+	3）NULL条件查询语句
+	SELECT *FROM student WHERE gender is NULL;
+	--查询出来无数据，不能用 = ,要用 IS NULL或者IS NOT NULL。
+
+6.2	NULL与字符串拼接，等于什么也没做。
+	NULL与数字运算，结果还是NULL。
+
+
+6.3	空值函数
+	1）NVL（arg1,arg2) 若arg1为NULL，则函数返回arg2的值，否则返回arg1。
+	简单说就是将NULL值替换为一个非NULL值。
+	
+	查询员工的工资
+	SELECT ename,sal,comm,sal+NVL(comm,0)From emp_zyl;
+	
+	2）NVL2(arg2,arg2,arg3)
+	当arg1不为NULL时，函数返回arg2,当arg1为NULL时，函数返回arg3。
+	NVL2后两个参数的类型不需要与第一个一致。
+
+	查询员工的奖金情况，有奖金的显示“有奖金”，没有奖金的显示“没有奖金”。
+	SELECT ename,comm,NVL2(comm,'有奖金','没有奖金')FROM EMP_ZYL;

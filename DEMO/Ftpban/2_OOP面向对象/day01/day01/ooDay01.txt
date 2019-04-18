@@ -1,0 +1,472 @@
+回顾:
+1.方法:
+    封装一段特定的逻辑功能
+    尽可能独立，只干一件事
+    可以被调用多次
+    避免代码的重用，便于维护
+  定义:
+    修饰词 返回值类型 方法名(参数列表){
+      方法体
+    }
+  调用:
+    无返回值: 方法名(有参传参);
+    有返回值: 数据类型 变量 = 方法名(有参传参);
+              方法名(有参传参);
+2.猜字母小游戏
+
+
+public static void main(String[] args){
+  int num = plus(5,6); //正确
+  System.out.println(num); //11
+
+  plus(5,6); //正确，但不建议
+}
+public static int plus(int a,int b){
+  int c = a+b;
+  return c;
+}
+若方法有返回值，调用时:
+  可以声明变量接收也可以不声明变量接收
+  一般情况下都声明变量来接收，因为后期还得用
+
+
+
+
+public static int[] generateArray(int len,int max){
+  int[] arr = new int[len];
+  for(int i=0;i<arr.length;i++){
+    arr[i] = (int)(Math.random()*max);
+  }
+  return arr;
+}
+
+
+不过脑:
+  不注重听我讲
+  只注重最后的代码
+
+
+
+有0基础的，有有基础的
+
+你会觉得你会
+
+
+猜字母小游戏-----药
+
+
+
+讲的是解题的思路
+
+吃药，吃糖豆
+
+if(num%2==0){
+  偶数
+}
+
+if(boolean){
+  语句块1
+}else{
+  语句块2
+}
+
+自我放弃
+
+
+
+
+
+
+语法基础:固定
+         猜字符小游戏
+	 去银行取钱
+
+面向对象:因抽象而难
+         飞机大战
+	 向着社会主义社会发展
+
+
+迷迷糊糊的、晕乎乎的---------正常的
+
+
+不晕:
+1.什么也不会
+2.自以为不晕-----很好很好很好的结果
+
+
+扩展性好、维护性好、移植性好、
+复用性好、健壮性好........
+
+
+30万块钱
+
+
+
+
+
+
+正课:
+1.什么是类？什么是对象？
+  1)现实世界是由很多对象组成的
+    基于对象抽出了类
+  2)对象:真实存在的单个个体
+    类:代表一个类别、一类个体
+  3)类中可以包含:
+    3.1)所有对象共有的特征/属性--变量(静的)
+    3.2)所有对象共有的行为-------方法(动的)
+  4)一个类可以创建多个对象
+    同一个类创建的对象，结构相同，数据不同
+  5)类是对象的模板，对象是类的具体的实例
+2.如何创建类？如何创建对象？
+3.引用类型之间画等号:
+  1)指向同一个对象
+  2)对其中一个引用的修改影响另外一个
+    eg:钥匙
+  基本类型之间画等号:
+  1)赋值
+  2)对其中一个变量的修改不会影响另外一个
+    eg:身份证复印件
+4.null:空，不再指向任何对象
+       若引用值为null，则不能再进行任何操作了，
+       若操作则空指针异常NullPointerException
+
+new Student(); //创建一个学生对象
+类型     引用类型变量(引用)     对象
+Student  zs                  =  new Student();
+
+    变量
+int a = 5;
+Cell c = new Cell(); //引用
+int[] arr = new int[4]; //引用
+
+类   引用   对象
+Cell c    = new Cell();
+Cell cc = c;
+c.row = 2;  cc.row = ?; //2
+
+堆:1个Cell对象(row=0,col=0)
+栈:2个引用(地址一样)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+房子:对象
+钥匙:引用
+配一把钥匙:引用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+分析过程:
+1.找对象:很多很多的小格子
+2.抽类:格子类Cell
+3.设计类的成员变量和方法
+4.创建对象并测试
+
+类   引用   对象
+Cell c    = new Cell();
+
+c.row = 2;
+c.col = 5;
+
+
+
+
+
+
+
+
+
+类型     引用类型变量(引用)     对象
+Student  zs                  =  new Student();
+
+    变量
+int a = 5;
+Cell c = new Cell(); //引用
+int[] arr = new int[4]; //引用
+
+double dou = 5.6; //变量
+Cell c = new Cell(); //引用
+int[] arr = new int[4]; //引用
+
+
+
+
+
+
+
+new Student(); //创建一个学生对象
+
+
+
+
+
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 23;
+zs.address = "河北廊坊";
+
+
+
+
+
+
+
+Student ls = new Student();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cell
+CellTest
+
+
+
+
+class Cell{ //格子类
+  int row; //行号
+  int col; //列号
+
+  void drop(){ //下落一格
+    row++;
+  }
+  void moveLeft(int n){ //左移n格
+    col-=n;
+  }
+  String getCellInfo(){ //获取格子行列号
+    return row+","+col;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+做经典案例
+前4天的经典案例------俄罗斯方块
+
+
+
+
+
+int[] arr = new int[3]; //0,0,0
+
+
+
+
+
+
+
+
+Student zs = new Student();
+Student ls = new Student();
+Student ww = new Student();
+Student zl = new Student();
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "廊坊";
+zs.eat();
+zs.sleep();
+zs.study();
+zs.abc = 123; //编译错误
+
+Student ls = new Student();
+ls.name = "lisi";
+ls.age = 18;
+ls.address = "佳木斯";
+ls.eat();
+ls.sleep();
+ls.study();
+
+
+
+Student
+StudentTest
+
+
+
+
+class Student{
+  String name;
+  int age;
+  String address;
+  void eat(){}
+  void sleep(){}
+  void study(){}
+}
+class StudentTest{ //Student测试类
+  main(){
+    创建对象，点访问
+  }
+}
+
+
+
+
+
+class Teacher{
+  String name;
+  int age;
+  String address;
+  double salary;
+  void eat(){}
+  void sleep(){}
+  void teach(){}
+}
+
+class Dog{
+  String type;
+  String color;
+  void fei(){}
+  void run(){}
+}
+
+class Car{
+  String type;
+  String color;
+  double price;
+  void run(){}
+  void stop(){}
+}
+
+
+
+
+
+对象       类
+WKJ        老师
+FY         老师
+XY         老师
+
+对象       类
+张三       学生
+李四       学生
+王五       学生
+
+对象       类
+小花       狗
+小黑       狗
+小强       狗
+
+对象       类
+马六       汽车
+4个圈      汽车
+宝马       汽车
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+基本数据类型:byte,short,int,long,float,double,char,boolean
+数组:能装一堆数，但类型必须相同---不好使
+
+自己创建一个数据类型
+
+byte/short/int...----1个数
+int[]/boolean[]------1堆数(类型相同)
+Emp------------------1堆数(类型不同)
+
+
+
+
+
+面向过程缺陷:
+1.缺乏对数据的封装
+2.数据和方法(对数据操作)的分离
+
+
+
+class Emp{ //Emp为自造的一种数据类型
+  String name;
+  int age;
+  double salary;
+  void print(){
+    System.out.println("姓名:"+name);
+    System.out.println("年龄:"+age);
+    System.out.println("工资:"+salary);
+  }
+}
+
+class Demo{
+  public static void main(String[] args){
+    Emp e = new Emp(); //创建了Emp的一个对象
+    e.name = "zhangsan";
+    e.age = 25;
+    e.salary = 5000;
+    e.print();
+  }
+}
+
+的
+
+
+
+
+
+
+
+
+
+
+
+
+
+

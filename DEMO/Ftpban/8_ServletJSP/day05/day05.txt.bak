@@ -1,0 +1,30 @@
+1.JSP隐含对象
+  1）什么是JSP隐含对象
+    A.在JSP中可以直接使用的变量；
+    B.这些变量是在JSP执行前初始化的，
+      其实是在生成的service方法开头
+      初始化的。
+  2）包含9个隐含对象
+    A.request
+      HttpServletRequest
+    B.response
+      HttpServletResponse
+    C.out
+      JSPWriter = PrintWriter
+    D.config
+      ServletConfig
+    E.application
+      ServletContext
+    F.session
+      HttpSession，后面讲
+    G.exception
+      Throwable
+      是页面发生的异常，只有页面发生
+      异常时该对象才有效。
+    H.page
+      Object
+      代表页面本身，即this
+    I.pageContext
+      PageContext
+      页面上下文(环境)
+      

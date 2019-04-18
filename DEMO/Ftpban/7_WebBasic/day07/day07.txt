@@ -1,0 +1,80 @@
+确认弹窗
+var b = confirm("你真的要这样吗？");
+
+定时器
+var id = setInterval(function(){alert(1);},2000);
+
+一次性定时器
+setTimeout(function(){alert(1);},3000);
+
+获取客户端浏览器和操作系统信息
+navigator.userAgent
+"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36"
+
+var p=document.getElementById("p2")
+undefined
+p.getAttribute("class")
+"a"
+p.getAttribute("id")
+"p2"
+p.setAttribute("class","b")
+undefined
+p.getAttribute("class")
+"b"
+p.removeAttribute("class")
+undefined
+p.setAttribute("class","b")
+undefined
+p.className
+"b"
+p.className=""
+""
+p.className="a"
+"a"
+p.className
+"a"
+
+var div=document.getElementById("d1");
+undefined
+div.children
+[<h1>?孙悟空?</h1>?,<p>?玉兔精?</p>?,<p>?大大王?</p>?, <p>?二大王?</p>?]
+div.getElementsByTagName("p")
+[<p>?玉兔精?</p>?, <p>?大大王?</p>?, <p>?二大王?</p>]
+
+document.getElementsByName("sex")
+[<input type=?"radio" name=?"sex">?, <input type=?"radio" name=?"sex">?]
+
+
+在内存当中创建一个li新节点。
+var li=document.createElement("li")
+li
+<li>?</li>?
+li.innerHTML="廊坊";
+"廊坊"
+li
+<li>?廊坊?</li>?
+var ul=document.getElementById("city");
+undefined
+ul.appendChild(li)
+<li>?廊坊?</li>?
+var sh=document.getElementById("sh")
+undefined
+//----插入到上海之前
+ul.insertBefore(li,sh);
+<li>?廊坊?</li>?
+
+//从父元素中删除子元素
+var ul=document.getElementById("city")
+undefined
+var sh=document.getElementById("sh")
+undefined
+ul.removeChild(sh)
+<li id=?"sh">?上海?</li>?
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript">
+var obj1 = {"id":1,"name":"tom"};
+//alert(obj1.id);
+//alert(obj1.name);
+var obj2 = {"name":"tom",
+			"friends":["rose","jack"]};
+//alert(obj2.friends[1]);
+//for(var i=0;i<obj2.friends.length;i++){
+//	alert(obj2.friends[i]);
+//}
+//JSON对象数组
+var obj3 = [{"id":1,"name":"芈月"},
+            {"id":2,"name":"小琴"}];
+//alert(obj3[0].name);
+/*
+for(var i=0;i<obj3.length;i++){
+	var id = obj3[i].id;
+	var name = obj3[i].name;
+	alert(id+"="+name);
+}
+*/
+//将JSON格式字符串转成JSON对象类型
+var str = '{"id":5,"name":"scott"}';//字符串类型
+//var json_str1 = eval("("+str+")");//转换方法1
+var json_str1 = JSON.parse(str);//转换方法2
+//其他方法，使用第三方js脚本库
+alert(json_str1.name);
+</script>
+</head>
+<body>
+</body>
+</html>

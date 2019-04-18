@@ -1,0 +1,21 @@
+
+
+
+
+
+
+Statement	语句对象
+	execute(sql);
+	executeUpdate(sql); insert,update,delete
+	close();
+
+ResultSet 	结果集对象
+	next();移动结果指针，返回boolean值
+		falsebiaoshi meiyou jilu
+		true
+	getXXX("columnName");
+CRUD:
+Create
+Read
+Update
+Delete

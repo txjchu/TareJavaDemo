@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.tarena.dao.CostDao">
+
+<select id="findNameById" 
+	parameterType="int"
+	resultType="map">
+select cost_id,name 
+from COST
+where cost_id=#{id}
+</select>
+
+<select id="findAll" 
+  resultType="org.tarena.entity.Cost">
+select * from COST
+</select>
+
+<select id="findById" 
+	parameterType="int" 
+	resultType="org.tarena.entity.Cost">
+select * from COST
+where cost_id=#{id}
+</select>
+
+<insert id="save" 
+	parameterType="org.tarena.entity.Cost">
+insert into COST
+	(cost_id,name,base_duration,
+	base_cost,unit_cost,status,
+	descr,creatime,startime,cost_type)
+values 
+    (cost_seq.nextval,#{name},#{base_duration},
+	#{base_cost},#{unit_cost},#{status},
+	#{descr},#{creatime},#{startime,jdbcType=DATE},
+	#{cost_type})
+</insert>
+
+<update id="start" 
+	parameterType="map">
+update COST
+set status='1',startime=#{startime}
+where cost_id=#{id}
+</update>
+
+<delete id="delete" parameterType="int">
+delete from COST
+where cost_id=#{id}
+</delete>
+
+
+
+</mapper>

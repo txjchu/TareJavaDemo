@@ -1,0 +1,32 @@
+1.系统分层
+	登录
+	step1, 建表
+		  admin_info表
+	step2, 创建一个web工程,搭建好spring mvc的
+	开发环境(jar包,web.xml配置,applicationContext.xml)。
+	step3,Admin实体类
+	step4,AdminDAO,并测试通过
+	step5,LoginService,并测试通过
+	step6,login.jsp,index.jsp
+	step7,LoginController
+	
+	
+	
+	注：
+		数据库连接池:
+				因为连接的建立比较耗费资源和时间，
+			所以，可以将多个连接先建立好，然后放
+			到一个集合当中。这样，当需要连接的时候，
+			从连接池当中直接获取即可，用完之后，
+			需要归还到连接池。
+				这样做的好处是：可以做到连接的复用，
+			提升性能。
+	  DataSource(数据源):
+	  	用来管理连接池的一个对象，程序应该通过
+	  	DataSource来获得连接池当中的连接。
+	  
+	  	
+	  	
+		
+	
+	

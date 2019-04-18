@@ -1,0 +1,487 @@
+回顾:
+1.方法的重写(override)
+    父子类，方法名相同，参数列表相同
+2.重写(override)与重载(overload)的区别
+    
+3.package和import
+4.访问控制修饰符--数据私有化，行为公开化
+  public:公开的，任何类
+  private:私有的，本类
+  protected:受保护的，本类、子类、同包类
+  默认的:什么也不写，本类、同包类
+5.static:静态的
+  1)静态变量:
+      static、属于类、一份、方法区中
+      类名点来访问
+      何时用:所有对象的数据都一样
+  2)静态方法:
+      static、没有隐式this传递
+      静态方法中不能直接访问实例成员
+      何时用:方法的操作仅与参数有关而与对象无关
+  3)静态块:
+      static{}
+      类被加载期间执行，只执行一次
+      何时用:初始化静态资源(图片、音频、视频......)
+6.final:不可变的
+  1)修饰变量:变量不可被改变
+  2)修饰方法:方法不可被重写
+  3)修饰类:类不可被继承
+
+
+
+
+简述override与overload的区别:
+重载:同一类，方法名相同，参数列表不同
+重写:父子类，方法名相同，参数列表相同
+
+
+
+
+
+
+package a;
+class Aoo{
+}
+
+package b;
+class Aoo{
+}
+
+package c;
+class Test{
+  void show(){
+    a.Aoo o = new a.Aoo();
+    b.Aoo oo = new b.Aoo();
+  }
+}
+
+
+
+
+
+
+正课:
+1.static final常量:
+  1)必须声明同时初始化
+  2)常量不能被改变
+  3)通过类名点来访问
+  4)建议:常量名所有字母大写
+  5)编译器在编译时被替换为具体的值--效率高
+2.抽象方法:
+  1)由abstract修饰
+  2)只有方法的定义，没有方法的实现({}也没有)
+3.抽象类:
+  1)由abstract修饰
+  2)包含抽象方法的类必须是抽象类
+    类中不包含抽象方法也可以声明为抽象类---我愿意
+  3)抽象类不能被实例化(new对象)
+  4)抽象类都是要被继承的，子类:
+    4.1)重写抽象类中的所有抽象方法--建议
+    4.2)也声明为抽象类---不建议
+  5)抽象类的意义:
+    5.1)封装所有子类共有的数据和行为----父类的意义
+    5.2)为所有子类提供了一种公共的类型--父类的意义
+    5.3)可以包含抽象方法，为子类提供一个统一的入口
+4.接口
+  1)是一个标准、规范
+    遵守了这个标准就能干某件事---API后体会
+  2)由interface定义
+  3)只能包含常量和抽象方法
+  4)接口不能被实例化
+  5)接口是需要被实现(implements)的，
+    实现类/子类必须重写接口中的所有抽象方法
+  6)可以实现多个接口
+    若既继承又实现时，先继承extends，后实现implements
+  7)接口可以继承接口
+
+UnionPayTest
+
+
+
+
+
+
+
+
+interface UnionPay{ //银联接口
+  存();
+  取();
+  转帐();
+  查余额();
+}
+interface 工行 extends UnionPay{
+  在线支付();
+}
+interface 农行 extends UnionPay{
+  支付电话费();
+}
+
+class 工行卡 implements 工行{
+  public 存(){}
+  public 取(){}
+  public 转帐(){}
+  public 查余额(){}
+  public 在线支付(){}
+}
+
+class 农行卡 implements 农行{
+  public 存(){}
+  public 取(){}
+  public 转帐(){}
+  public 查余额(){}
+  public 支付电话费(){}
+}
+
+
+
+
+
+
+
+
+
+balance-number=-1000(意味着正好够)
+
+scan
+
+double num = Double.parseDouble(input.next());
+
+
+
+
+
+
+
+
+
+
+类和类----------extends
+接口和接口------extends
+类和接口--------implements
+
+
+
+Aoo    o1 = new Aoo();
+Inter2 o2 = new Aoo(); //向上造型
+Inter1 o3 = new Aoo(); //向上造型
+
+interface Inter1{
+  void a();
+}
+interface Inter2 extends Inter1{
+  void b();
+}
+class Aoo implements Inter2{
+  public void b(){}
+  public void a(){}
+}
+
+
+
+
+
+
+
+
+
+interface Inter1{
+  void a();
+  void b();
+}
+interface Inter2{
+  void c();
+}
+abstract class Aoo{
+  abstract void d();
+}
+class Boo extends Aoo implements Inter1,Inter2{
+  public void a(){}
+  public void b(){}
+  public void c(){}
+  void d(){}
+}
+
+
+
+
+class Boo implements Inter1,Inter2{
+  public void a(){}
+  public void b(){}
+  public void c(){}
+}
+
+
+
+
+
+
+
+interface Inter1{
+  void a();
+  void b();
+}
+class Aoo implements Inter1{
+  public void a(){}
+  public void b(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+new Inter1(); //编译错误
+Inter1 o; //正确
+
+interface Inter1{
+  public static final int NUM = 1;
+  public abstract void show();
+
+  double PI = 3.14159; //默认public static final
+  void say(); //默认public abstract
+
+  int a; //编译错误
+  void say(){} //编译错误
+}
+
+
+
+
+
+
+
+
+
+
+
+生活中的接口:
+1.电脑厂商USB口-------制定标准、规范
+  U盘、鼠标、摄像头---遵守标准、规范
+2.国家对商品房--------制定标准、规范
+  国家对家具----------制定标准、规范
+  开发商、家具厂商----遵守标准、规范
+3.银行----------------制定标准、规范
+  银行卡--------------遵守标准、规范
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new T();
+new J();
+new O();
+new S();
+new Z();
+new I();
+new L();
+new Tetromino(); //没有意义
+
+
+
+abstract class Tetromino{
+  Cell[] cells;
+  void drop(){}
+  void moveLeft(){}
+}
+class T extends Tetromino{
+}
+class J extends Tetromino{
+}
+
+
+ShapeTest
+
+
+
+
+
+
+
+
+Person,Animal,Tetromino
+---存在的意义只是代码的重用，被子类用
+---不需要去new对象
+
+
+凡是动物都能跑---------
+abstract class 动物{
+  abstract void 跑(); //统一的入口
+}
+class 鱼 extends 动物{
+  跑(){
+    游
+  }
+}
+class 老虎 extends 动物{
+  跑(){
+    4条腿跑
+  }
+}
+class 鸟 extends 动物{
+  跑(){
+    飞
+  }
+}
+
+
+
+
+
+
+
+
+new Shape(); //编译错误
+Shape s; //正确的
+
+
+
+
+
+
+
+
+
+给我一堆图形，找最大面积
+
+Circle[] cs = new Circle[3];
+cs[0] = new Circle(1);
+cs[1] = new Circle(2);
+cs[2] = new Circle(3);
+
+Square[] ss = new Square[3];
+ss[0] = new Square(1);
+ss[1] = new Square(2);
+ss[2] = new Square(3);
+
+Six[] sixs = new Six[3];
+sixs[0] = new Six(1);
+sixs[1] = new Six(2);
+sixs[2] = new Six(3);
+
+1.找到cs中的最大面积cMax
+2.找到ss中的最大面积sMax
+3.找到sixs中的最大面积sixMax
+3.找到cMax与sMax与sixMax中的最大值
+
+Shape s1 = new Circle(1); //向上造型
+Shape s2 = new Square(1);
+Shape s3 = new Six(1);
+
+new Shape(); //编译错误
+
+
+Shape[] shapes = new Shape[12];
+shapes[0] = new Circle(1);
+shapes[1] = new Circle(2);
+shapes[2] = new Circle(3);
+shapes[3] = new Square(1);
+shapes[4] = new Square(2);
+shapes[5] = new Square(3);
+shapes[6] = new Six(1);
+shapes[7] = new Six(2);
+shapes[8] = new Six(3);
+能点出来什么，看引用的类型
+重写方法被调时，看对象的类型
+
+double max = shapes[0].area();
+for(int i=1;i<shapes.length;i++){
+  double area = shapes[i].area();
+  if(area>max){
+    max = area;
+  }
+}
+System.out.println("max="+max);
+
+
+
+abstract class Shape{ //抽象类
+  double c;
+  abstract double area(); //抽象方法
+}
+class Circle extends Shape{ 
+  double area(){ //重写--变不完整为完整
+    return 0.0796*c*c;
+  }
+}
+class Square extends Shape{
+  double area(){
+    return 0.0625*c*c;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+new Shape(); //编译错误
+
+abstract class Shape{ //抽象类--不完整
+  double c; 
+  abstract double area(); //抽象方法
+}
+class Circle extends Shape{
+  double area(){ //重写-变不完整为完整
+    return 0.0796*c*c;
+  }
+}
+class Square extends Shape{
+  double area(){
+    return 0.0625*c*c;
+  }
+}
+class Six extends Shape{
+  double area(){
+    return 0.0721*c*c;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

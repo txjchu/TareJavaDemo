@@ -1,0 +1,205 @@
+day04	SQL高级查询
+1子查询
+为其他SQL语句提供数据。
+有时候我们在执行某条SQL语句时，需要的数据不是确定只，必须要先查询一次表得到，那么先执行的这个查询语句往往是嵌套在实际要操作的SQL语句之中，为其提供数据的。那么这个查询语句就是子查询。
+	查看和BLAKE相同部门的员工有哪些：
+	SELECT ename,deptno FROM emp_zyl WHERE deptno=(SELECT deptno FROM emp_zyl WHERE ename ='BLAKE');
+	在DDL当中使用子查询
+	CREATE TABLE employee AS 
+	SELECT e.empno,e.ename,e.job,e.sal,d.deptno,d.dname,d.loc 
+	FROM emp_zyl e,dept_zyl d
+ 	WHERE e.deptno = d.deptno;
+
+	删除BLAKE所在部门的所有员工。
+	DELETE FROM emp_zyl WHERE deptno=(SELECT deptno FROM emp_zyl WHERE ename='BLAKE');
+
+（1）子查询根据子查询结果的字段数量与记录数分为：
+	单行单列子查询
+	多行单列子查询
+	多行多列子查询
+	【其中单列子查询常用语WHERE中作为过滤条件，	
+	而多列子查询常当作一张表看待出现在FROM子句中。】
+
+	查看与SALESMAN同部门的其他职位员工：
+	SELECT ename,job,deptno FROM emp_zyl WHERE deptno IN
+	(SELECT deptno FROM emp_zyl WHERE job='SALESMAN')
+	 AND job<>'SALESMAN';
+
+	查看比所有SALESMAN和CLERK工资都高的员工信息：	
+	SELECT ename,job,sal FROM emp_zyl WHERE sal>ALL
+	(SELECT MAX(sal) FROM emp_zyl 
+	WHERE job IN ('SALESMAN','CLERK'));
+1）子查询在WHERE子句中
+（1）EXISTS关键字后面跟一个子查询，只要该查询能查询出至少一条记录，那么就返回true----？？？
+	
+	查看有员工的部门的信息：
+	SELECT deptno,dname 	FROM dept_zyl d 
+	WHERE EXISTS (SELECT *FROM emp_zyl e WHERE d.deptno=e.deptno);
+	----EXISTS(exists)存在，也可以用NOT EXISTS表示相反的逻辑。
+
+	查询列出最低薪水高于部门30的最低薪水的部门信息。
+	SELECT MIN(sal)，deptno FROM emp_zyl WHERE MIN(sal)>(SELECT MIN(sal) FROM emp_zyl WHERE deptno=30);
+	----WHERE里面不允许使用分组函数
+	SELECT MIN(sal),deptno FROM emp_zyl GROUP BY deptno HAVING MIN(sal)>
+	(SELECT MIN(sal) FROM emp_zyl WHERE deptno=30);
+
+	查看比自己所在部门的平均工资高的员工信息：
+	SELECT e.ename,e.sal,e.deptno 
+	FROM emp_zyl e,(SELECT AVG(sal) avg_sal，deptno 
+			FROM emp_zyl GROUP BY deptno) t 
+	WHERE e.deptno = t.deptno AND e.sal>t.avg_sal;
+	
+2)子查询在SELECT中
+子查询出现在SELECT 子句中，通常是实现外连接的效果。
+	SELECT e.ename,e,sal，
+	(SELECT d.dname FROM dept_zyl d WHERE d.deptno=e.deptno) dname 
+	FROM emp_zyl e;
+
+2.	分页查询
+2.1当一条查询语句执行后的数据量过于庞大时，通常会采取实用分页措施，一次只查询出其中的一部分数据，分段获取。这样可以提高响应速度，以及减少系统资源的开销。
+
+1）分页的SQL语句没有标准，所以不同的数据库的分页语句不同。
+   ORACLE中是使用行号（ROWNUM)的策略，为结果集编号，然后获取部分数据实现的。
+	SELECT ROWNUM,ename,sal,job,deptno FROM emp_zyl;
+   ROWNUM :伪列，不是表中的一个真实字段，但是可以应用在任何一张表中，在结果集体现的样子   就是每一行记录出一个行号。行号是在查询数据的过程中生成的，只要SQL语句能查询出一条记录   ，ROWNUM就会为该条记录出一个行号，从1开始。
+
+   由于ROWNUM 只有在查询出一条数据后，才会为其编号，然后自身进行增长，所以在第一次查询数据进行编号的过程中不要使用ROWNUM进行大于1以上的数字作为过滤条件。否则查询不出任何数据。
+
+	查看表中ROWNUM 的6-10号员工：
+	SELECT *FROM(SELECT ROWNUM rn,ename,sal,job,deptno FROM emp_zyl) t 
+	WHERE t.rn BETWEEN 6 AND 10;
+	
+   由于ORDER BY 是在最后数据被查询出来后才排序，所以不能直接--------
+
+
+
+   所以若分页中在排序需求时，就应当先排序，然后再编号，最后按照编号去范围内的数据。	
+
+	查看公司中工资的6-10名员工：	
+	SELECT *FROM
+	(SELECT ROWNUM rn,t.*FROM
+	(SELECT ename,sal,job,deptno FROM emp_zyl ORDER BY sal DESC) t)
+	 WHERE rn BETWEEN 6 AND 10;
+
+   pageSize:每页显示的条目数
+   page:页码
+   通过以上两个值计算行号范围：
+   start:(page-1)*pageSize+1
+   end:page*pageSize	
+
+2)DECODE函数，可以实现类似于分支的结构。
+	由于GROUP BY 只能根据后面指定的内容值相同的记录看做一组进行分组，所以我们可以将给定不同值的字段的应用时使用DECODE 转换为相同的值即可。
+	
+	SELECT ename,job,sal, DECODE			(job,'MANAGER',sal*1.2,'ANALYST',sal*1.1,'SALASMAN',sal*1.05,sal) bonus 
+	FROM emp_zyl;   	
+
+	SELECT ename,job,sal,CASE job WHEN 'MANAGER' THEN sal*1.2 
+                              	      WHEN 'ANALYST' THEN sal*1.2
+                               	      WHEN 'SALESMAN' THEN sal*1.1
+                                      ELSE sal END
+                     		bonus
+	FROM emp_zyl;
+
+3)	统计analyst+manager 共计多少人，其他职位共计多少人？
+	SELECT COUNT(*),DECODE(job,
+				'MANAGER','VIP',
+				'ANALYST','VIP',
+				'OTHER') AAA
+	FROM emp_zyl
+	GROUP BY DECODE(job,
+			'MANAGER','VIP',
+			'ANALYST','VIP',
+			'OTHER');
+				
+4)NULL在排序中被认为是最大值。
+	应用在排序中：
+	SELECT deptno,dname,loc FROM dept_zyl 
+	ORDER BY DECODE(dname,
+			'OPERATIONS',1,
+			'ACCOUNTING',2,
+			'SALES',3);	
+	
+3.排序函数
+	可以按照指定的字段分组，按照指定的字段排序，然后生成组内的编号。
+3.1	ROW_NUMBER() 函数------生成组内连续且唯一的数字
+	
+	查看每个部门的工资排名：
+	SELECT ename,sal,deptno,
+	ROW_NUMBER() OVER( PARTITION BY 
+				deptno ORDER BY sal DESC) rank 
+	FROM emp_zyl;
+
+3.2	RANK()函数，----生成组内不连续也不唯一的数字，
+		
+	SELECT ename,sal,deptno, RANK() OVER(
+					PARTITION BY deptno
+					ORDER BY sal DESC) rank
+	FROM emp_zyl;
+
+3.3	DENSE_RANK()函数，----生成组内连续但是不唯一的数字。
+	
+	SELECT ename,sal,deptno,DENSE_RANK() OVER(
+						PARTITION BY deptno
+						ORDER BY sal DESC) rank
+	FROM emp_zyl;
+
+4.集合操作
+4.1并集，交集，差集，----函数前后字段名以及顺序都必须一样。
+	查看职位是MANAGER或者（和）薪资大于2500的员工信息。
+	（并集，UNION，全并集，UNION ALL)
+	SELECT ename,job,sal FROM emp_zyl WHERE job='MANAGER' 
+	UNION
+	SELECT ename,job,sal FROM emp_zyl WHERE sal>2500;
+
+	查看职位是MANAGER并且薪资大于2500的员工：
+	 		
+	查看职位是MANAGER但是薪资不大与2500的员工：
+
+
+
+5.高级分组函数
+
+	每天营业额：
+	SELECT year_id,month_id,day_id,SUM(sales_value)		FROM sales_tab 
+	GROUP BY year_id,month_id,day_id 
+	ORDER BY year_id,month_id,day_id;
+	每月营业额：
+	SELECT year_id,month_id,SUM(sales_value)	FROM sales_tab 
+	GROUP BY year_id,month_id
+ 	ORDER BY year_id,month_id;
+	每年营业额：
+	SELECT year_id, SUM(sales_value)	FROM sales_tab 
+	GROUP BY year_id
+ 	ORDER by year_id;
+	总营业额：
+	SELECT SUM(sales_value)FROM sales_tab;
+
+5.1)	ROLLUP函数
+	ROLLUP函数用在GROUP BY子句中，可以为我们提供若干分组方式，然后将这些分组的结果并在一个结果集中显示。
+	分组方式：
+	GROUP BY ROLLUP（a,b,c）等同于	
+	GROUP BY a,b,c	UNION 	GROUP BY a,b	UNION	GROUP BY a	UNION		GROUP BY 全表
+
+	SELECT year_id,month_id,day_id,SUM(sales_value) 	FROM sales_tab 
+	GROUP BY ROLLUP(year_id,month_id,day_id)
+	ORDER BY year_id,month_id,day_id;
+
+	GROUP BY CUBE（a,b,c）等同于	
+	GROUP BY a,b,c	UNION 	GROUP BY a,b  ..bc..ac..a..b..c..全表
+
+5.2)	grouping sets()
+	该高级分组函数允许按照给定的集中分组方式进行统计，
+	然后并在一个结果击中显示。比较灵活方便。
+
+	查看每天与每月的销售额：
+	SELECT year_id,month_id,day_id,SUM(sales_value)	FROM sales_tab 
+	GROUP BY 	GROUPING SETS((year_id,month_id,day_id),(year_id,month_id))	ORDER BY year_id,month_id,day_id;	
+
+
+
+
+
+
+
+	
+	

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>新闻图片</title>
+		<style type="text/css">
+			div {
+				border: 3px solid #888;
+				width: 256px;
+			}
+			p {
+				border: 1px solid red;
+				margin: 0;
+				padding: 5px;
+				text-align: center;
+			}
+			/*图片是行内块，后面的空格无法通过
+			  外边距直接消除，需要先将其设置为
+			  块，再通过外边距消除才可以。*/
+			img {
+				display: block;
+				margin: 0;
+			}
+			/*绝对定位*/
+			/*1.在长辈上加position，以此为基准*/
+			div {
+				/*只设置定位，不设置偏移量，
+				   所以位置不变，这样做仅仅
+				   是为了便于对子元素绝对定位。*/
+				position: relative;
+			}
+			/*2.设置绝对定位，产生偏移*/
+			p {
+				/*绝对定位，以长辈为基准*/
+				position: absolute;
+				/*设置偏移量*/
+				top: 0;
+				width: 246px;
+				border: 0;
+				background-color: #888;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="../images/image1.png"/>
+			<p>苍老师到此一游！</p>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+

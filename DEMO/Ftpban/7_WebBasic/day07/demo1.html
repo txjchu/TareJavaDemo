@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>定时器</title>
+		<style type="text/css">
+			#p1 {
+				width: 200px;
+				height: 30px;
+				border: 1px solid blue;
+			}
+			#p2 {
+				border: 1px solid red;
+				width: 100px;
+				text-align: center;
+			}
+			.show {
+				display: block;
+			}
+			.hide {
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+			var id;
+			var is_start = false; //是否启动
+			//启动电子时钟
+			function start() {
+				console.log(is_start);
+				//如果已经启动，就不必再启动了
+				if(is_start) {
+					return;
+				}
+				//启动周期性定时器，
+				//每1S执行一次function
+				is_start = true;
+				id = setInterval(function(){
+					//刷新当前时间
+					var d = new Date();
+					var now = d.toLocaleTimeString();
+					var p = document.getElementById("p1");
+					p.innerHTML = now;
+				}, 1000);
+			}
+			//暂停动态时钟
+			function stop() {
+				console.log(is_start);
+				//如果已经暂停，就不必再暂停了
+				if(!is_start) {
+					return;
+				}
+				clearInterval(id);
+				is_start = false;
+			}
+			//删除
+			function del() {
+				//删除数据
+				//给予提示
+				var p = document.getElementById("p2");
+				p.className = "show";
+				//2S后自动关闭提示
+				setTimeout(function(){
+					p.className = "hide";
+				}, 2000);
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="start();">启动</button>
+		<button onclick="stop();">暂停</button>
+		<p id="p1"></p>
+		<hr/>
+		<button onclick="del();">删除</button>
+		<p id="p2" class="hide">操作成功！</p>
+	</body>
+</html>
+
+
+
+
+
+

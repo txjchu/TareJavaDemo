@@ -1,0 +1,34 @@
+Struts2内建拦截器的简要介绍
+
+alias（别名拦截器）：允许参数在跨越多个请求时使用不同别名，该拦截器可将多个Action采用不同名字链接起来，然后用于处理同一信息。
+autowiring（自动装配拦截器）：主要用于当Struts2和Spring整合时，Struts2可以使用自动装配的方式来访问Spring容器中的Bean。
+(*)chain（链拦截器）：构建一个Action链，使当前Action可以访问前一个Action的请求信息，一般和<result type="chain" .../>一起使用。
+(*)checkbox（多选框拦截器）：将没有选中的checkbox项设置为false，协助管理多选框。在HTTP请求里，那些没有被选中的项通常没有任何值。
+conversionError（转换器错误拦截器）：这是一个负责处理类型转换错误的拦截器，它负责将类型转换错误从ActionContext中取出，并转换成Action的FieldError错误。
+(*)createSession（创建Session拦截器）：该拦截器负责创建一个HttpSession对象，主要用于那些需要有HttpSession对象才能正常工作的拦截器中。
+(*)clearSession(清除Session拦截器)：负责销毁HttpSession对象.
+(*)debugging（调试拦截器）：当使用Struts2的开发模式时，这个拦截器会提供更多的调试信息。
+execAndWait（执行和等待拦截器）：后台执行Action时，给用户显示一个过渡性的等待页面。
+externalRef（扩展拦截器）：负责扩展引用
+(*)exception（异常拦截器）：将Action抛出的异常映射到结果，这样就通过重定向自动处理异常。
+(*)fileUpload（文件上传拦截器）：这个拦截器主要用于文件上传，它负责解析表单中文件域的内容。
+(*)i18n（国际化拦截器）：主要负责把用户所选的语言、区域放入用户Session中。
+logger（日志拦截器）：主要是输出Action的名字，提供简单的日志输出。
+modelDriven（模型驱动拦截器）：这是一个用于模型驱动的拦截器，当某个Action类实现了ModelDriven接口时，它负责把getModel()方法的结果堆入ValueStack中。
+scopedModelDriven（作用域模型驱动拦截器）：如果一个Action实现了一个ScopedModelDriven接口，该拦截器负责从指定生存范围中找出指定的Model，并将通过setModel方法将该Model传给Action实例。
+(*)params（参数过滤拦截器）：这是一个最基本的拦截器，它负责解析HTTP请求中的参数，并将参数值设置成Action对应的属性值。
+prepare（预备拦截器）：如果action实现了Preparable接口，将会调用该拦截器的prepare()方法。
+(*)staticParams（静态参数拦截器）：这个拦截器负责将xml中<action>标签下<param>标签中的参数传入action。
+scope（作用域拦截器）：这是范围转换拦截器，它可以将Action状态信息保存到HttpSession范围，或者保存到ServletContext范围内。
+servletConfig（Servlet配置拦截器）：如果某个Action需要直接访问Servlet API，就是通过这个拦截器实现的，它提供访问HttpServletRequest和HttpServletResponse的方法，以map方式访问。
+roles（角色拦截器）：这是一个JAAS（Java Authentication and Authorization Service，Java授权和认证服务）拦截器，只有当浏览者取得合适的授权后，才可以调用被该拦截器拦截的Action。
+(*)timer（计时拦截器）：这个拦截器负责输出Action的执行时间，在分析该Action的性能瓶颈时比较有用。
+(*)token（令牌拦截器）：这个拦截器主要用于阻止重复提交，它检查传到Action中的token，从而防止多次提交。
+(*)tokenSession（令牌会话拦截器）：这个拦截器的作用与前一个基本类似，只是它把非法提交的数据保存在HttpSession中，不跳转到错误页面，再次生成与第一次相同的响应页面
+(*)validation（验证拦截器）：通过执行在xxxAction-validation.xml中定义的校验器，从而完成数据校验。
+(*)workflow（工作流拦截器）：这个拦截器负责调用Action类中的validate方法，如果校验失败，则不执行业务方法，而是返回input的逻辑视图。
+jsonValidation(json拦截器)：验证失败时，可以将fieldError和actionErrors信息序列化成json，返回给客户端
+profiling（概要拦截器）：允许Action记录简单的概要信息。
+actionMappingParams（Action映射拦截器）：Parameters set by the action mapping are not set/not available through ParameterAware 
+annotationWorkflow（注解工作流拦截器）：利用注解替代XML配置，使用annotationWorkflow拦截器可以使用@After、@Before、@BeforeResult等注解，执行流程为before-execute-beforeResult-after顺序
+store（消息存储拦截器）：在会话中为Action存储和检索消息、字段错误以及Action错误，该拦截器要求Action实现ValidationAware接口。

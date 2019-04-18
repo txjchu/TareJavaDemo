@@ -1,0 +1,33 @@
+1.Hibernate+Spring整合应用
+ --引入hibernate开发包、SpringIOC,AOP,ORM,DAO,DBCP
+ --添加applicationContext.xml(使用Spring配置文件替代hibernate.cfg.xml)
+    (定义DataSource,LocalSessionFactoryBean) 
+ --编写实体类
+ --编写映射描述文件
+ --在applicationContext.xml配置DataSource
+   和LocalSessionFactoryBean
+
+/cost/list.action或/cost/list
+-->Filter-->struts.xml
+-->CostListAction
+    -->CostService
+    -->CostDao.findAll()
+-->Result
+-->fee_list.jsp
+
+/cost/detail.action
+   -->CostDetailAction
+   -->CostService
+   -->CostDao.findById
+-->Result
+-->fee_detail.jsp
+
+
+
+session.save(cost);
+
+cost-->org.tarena.entity.Cost
+-->hbm.xml--》获取Cost类和COST表对应信息
+--》利用表名和字段名拼一个insert语句
+--》根据映射信息将cost属性值给insert语句的字段参数
+--》执行insertSQL操作

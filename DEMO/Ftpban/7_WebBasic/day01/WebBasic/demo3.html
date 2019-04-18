@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>文本元素</title>
+	</head>
+	<body>
+		<!-- 使用超链接，链到本页的锚点处 -->
+		<!-- 使用“#锚点名”链接到锚点。 -->
+		<p>
+			<a href="#cang">苍老师</a>，
+			真的是好老师，
+			不但会讲课，
+			还会拍片子。
+		</p>
+		
+		<!-- 标题h -->
+		<h1>苍老师</h1>
+		<h2>王克晶</h2>
+		<h2>范传奇</h2>
+		<!-- 段落p -->
+		<p>范传奇暗恋王克晶，苍老师吃醋！</p>
+		<!-- p可以默认限制字的大小，还能独立成行。
+			直接写文字并换行，是不会独立成行的。 -->
+		aaa
+		bbb
+		ccc
+		<!-- 有序列表ol，下面包含列表项li -->
+		<ol>
+			<li>浙江省</li>
+			<li>江苏省</li>
+			<li>山东省</li>
+		</ol>
+		<!-- 无序列表ul，下面包含列表项li -->
+		<ul>
+			<li>杭州</li>
+			<li>宁波</li>
+		</ul>
+		<!-- 列表嵌套，先写外层，再写内层 -->
+		<ol>
+			<li>
+				浙江省
+				<ul>
+					<li>杭州市</li>
+					<li>宁波市</li>
+				</ul>
+			</li>
+			<li>
+				江苏省
+				<ul>
+					<li>南京</li>
+					<li>无锡</li>
+				</ul>
+			</li>
+			<li>
+				山东省
+				<ul>
+					<li>济南</li>
+					<li>青岛</li>
+				</ul>
+			</li>
+		</ol>
+		<!-- 行内元素 -->
+		<p><b>北京市</b>海淀区<i>北三环</i>西路甲<u>18号</u><span style="color:red;">中鼎大厦</span>B8</p>
+		<!-- 空格折叠，HTML中文字间的多个
+			空格/换行/缩进都当做一个空格对待。-->
+		<p>
+			那&nbsp;&nbsp;&nbsp;是一个秋天，<br/>
+			看&nbsp;&nbsp;&nbsp;着传奇跑偏。<br/>
+			奔&nbsp;&nbsp;&nbsp;着克晶而去，<br/>
+			误&nbsp;&nbsp;&nbsp;入老苍心间。
+		</p>
+		<!-- 图片 -->
+		<p>
+			<!-- 绝对路径 -->
+			<img src="C:\Documents and Settings\Administrator\桌面\lhh\WebBasic\images\01.jpg"/>
+			<!-- 相对路径 -->
+			<!-- 1.图片和页面平级，直接写图片名 -->
+			<img src="02.jpg"/>
+			<!-- 2.图片在页面的下级，写路径+图片名 -->
+			<img src="pic/03.jpg"/>
+			<!-- 3.图片在页面的上级，写../+图片名 -->
+			<!-- ../表示当前页面向上跳一级 -->
+			<img src="../04.jpg"/>
+			<!-- 通常的情况 -->
+			<img src="../images/05.jpg"/>
+		</p>
+		<!-- 超链接 -->
+		<p>
+			<!-- href用来指定链接的网址。
+				target用来指定打开网址的方式：
+				_self是在当前窗口打开；
+				_blank是在新窗口打开； -->
+			<a href="http://www.tmooc.cn" target="_blank">TMOOC</a>
+			<!-- 利用a元素做一个锚点，超链接可以
+				直接链到这个锚点上来。 -->
+			<!-- name用来声明锚点的名字 -->
+			<a name="cang">苍老师</a>
+			<!-- 顶部默认为锚点，且没名字 -->
+			<a href="#">TOP</a>
+		</p>
+		<!-- 表格 -->
+		<!-- table是表格的范围；
+			tr是表格的行；td是行内的列。 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>苍老师</td>
+				<td>王克晶</td>
+			</tr>
+			<tr>
+				<td>范传奇</td>
+				<td>李洪鹤</td>
+			</tr>
+		</table>
+		<!-- 跨列 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="2">苍老师</td>
+				<!-- <td>王克晶</td> -->
+			</tr>
+			<tr>
+				<td>范传奇</td>
+				<td>李洪鹤</td>
+			</tr>
+		</table>	
+		<!-- 跨行 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td rowspan="2">苍老师</td>
+				<td>王克晶</td>
+			</tr>
+			<tr>
+				<!-- <td>范传奇</td> -->
+				<td>李洪鹤</td>
+			</tr>
+		</table>
+		<!-- 行分组 -->
+		<table border="1px" width="60%">
+			<!-- 标题 -->
+			<!-- 标题列可以写成th，
+				th=带有默认样式的td -->
+			<thead>
+				<tr>
+					<th>商品名</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>金额</th>
+				</tr>
+			</thead>
+			<!-- 数据 -->
+			<tbody style="color:red;">
+				<tr>
+					<td>鼠标</td>
+					<td>100</td>
+					<td>1</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>键盘</td>
+					<td>200</td>
+					<td>1</td>
+					<td>200</td>
+				</tr>
+				<tr>
+					<td>耳机</td>
+					<td>50</td>
+					<td>1</td>
+					<td>50</td>
+				</tr>
+			</tbody>
+			<!-- 合计 -->
+			<tfoot>
+				<tr>
+					<td colspan="3" align="right">合计</td>
+					<td>350</td>
+				</tr>
+			</tfoot>
+		</table>		
+	</body>
+</html>
+
+
+
+
+
+

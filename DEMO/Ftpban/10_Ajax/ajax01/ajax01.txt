@@ -1,0 +1,68 @@
+CostDao-->costDao
+ICostDao-->ICostDao
+=======云笔记系统=======
+Spring框架：IOC,MVC,AOP
+MyBatis框架
+jQuery js框架：选择器,事件,属性,隐藏和显示,Ajax函数
+Ajax技术
+MySQL
+==========Ajax=============
+1.Ajax简介
+ Asynchronous JavaScript and XML
+ 异步JavaScript和XML技术
+ *作用：局部页面刷新,增强用户体验，异步处理
+
+*2.Ajax原理
+ 利用浏览器集成的Ajax对象（XMLHttpRequest）,发送请求接收响应。
+ IE是以ActiveXObject插件形式存在。
+ Ajax是多种技术一种综合运用。
+ a.以XMLHttpRequest为核心,发送和接收请求
+ b.以JavaScript语言为基础
+ c.以XML/JSON格式作为数据传输
+ d.以HTML,CSS等技术作为渲染
+
+
+3.XMLHttpRequest对象的使用
+ xhr.open(请求类型,请求地址,同步异步) //创建Ajax请求
+ xhr.send(提交的数据); //get请求为null;post请求写key=value
+
+ 回调函数注册
+ xhr.onreadystatechange 一定要在send函数调用前注册
+ xhr.readyState属性0,1,2,3,4
+  0:请求创建完毕
+  1:请求发出
+  2:请求正在处理
+  3:请求正在响应
+  4:请求响应完毕
+
+ xhr.status属性404,500,200
+
+ xhr.responseText属性//获取服务器响应文本信息
+ 
+4.jQuery对Ajax的支持
+ jQuery提供以下几个主要的函数，封装了发送Ajax请求接收响应处理。
+$.ajax();-->XMLHttpRequest
+$.get();-->$.ajax
+$.post();-->$.ajax
+load();-->$.get/$.post
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+1.使用标注的方式来开发spring mvc应用
+	step1,创建web工程
+	step2,导入spring mvc相关的jar文件
+	step3,添加配置applicationContext.xml
+	step4,web.xml配置DispatcherServlet(前
+			端控制器)
+	step5,开发Controller,并使用@Controller来
+	配置二级控制器。
+			注：
+				与实现Controller接口相比，使用
+				@Controller接口的好处：
+				a.非侵入式
+				b.可以写多个处理方法
+				c.不用在配置文件当中进行配置
+			使用@RequestMapping来配置请求地址与
+			Controller的对应关系,该标注可以加到
+			类前面，也可以加到方法前面。
+	step6,开发jsp
+	step7,配置applicationContext
+				<context:component-scan base-package=""/>
+				<mvc:annotation-driven/>
+				<bean id="" class="ViewResolver"
+	练习：
+		输入http://ip:port/spring04_lab/toLogin.do，
+		显示一个登录页面(login.jsp)。
+		要求使用标注的方式来开发。
+
+2.如何读取请求参数值
+	(1)直接使用request
+	比如
+			checkLogin1(HttpServletRequest request)
+	(2)在处理方法当中添加参数名
+	比如
+			checkLogin2(String username,
+			@RequestParam("password") String pwd)
+	(3)使用bean自动封装
+	比如
+			checkLogin3(User user)
+3.如何向jsp传值
+	(1)使用request
+	比如
+		checkLogin4(HttpServletRequest request)
+		request.setAttribute("message","welcome");
+	(2)使用session
+	比如
+		checkLogin5(HttpSession session)
+		session.setAttribute("message","welcome");
+	(3)使用ModelAndView
+	比如
+		checkLogin6(){
+			Map<String,String> data = 
+			new HashMap<String,String);
+			data.put("message","welcome");
+			return new ModelAndView("success",data);
+		}
+	(4)使用ModelMap
+		比如
+			checkLogin7(ModelMap data){
+				data.put("message","welcome");
+				return "success";
+			}
+	(5)使用@ModelAttribute
+	
+练习：
+	 使用ModelAndView向list.jsp传递一个
+	 List<Student>，然后输出。
+	 提示：
+	 	使用jstl提供的<forEach>标签。
+
+
+
+
+
+
+
+

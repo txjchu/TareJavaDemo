@@ -1,0 +1,1356 @@
+结构化查询语言：
+
+
+DDL:数据定义语言		-------不伴随事务，直接对数据产生影响。
+    create:
+    alter:alter--add;
+          alter--drop;
+          alter--modify:
+    drop:
+    truncat:------删除表中数据
+
+
+	创建表:
+	CREATE TABLE emp(
+  	 id NUMBER(4),
+   	 name VARCHAR2(20) NOT NULL,
+   	 gender CHAR(1) DEFAULT 'M',
+   	 birth DATE,
+   	 salary NUMBER(6,2),
+   	 job VARCHAR2(30),
+   	 deptno NUMBER(2)
+	);
+
+	DESC table_name
+
+	DROP TABLE table_name
+	TRUNCATE TABLE table_name
+
+	数据库的表中，无论字段是什么类型。默认值都是NULL。
+
+	DEFAULT关键字:
+	在定义列的同时，可以指定默认值。
+
+	NOT NULL约束:
+	若一个字段被NOT NULL约束后，那么插入数据时，该字
+	段必须给值。
+
+	RENAME emp TO myemp
+
+
+	若想修改表结构(字段类型，改变长度，添加或删除字段)
+	这样的操作，应当在表中没有数据的时候修改。
+	SYSDATE表示当前系统时间。
+
+	ALTER TABLE employee ADD (hiredate DATE DEFAULT SYSDATE)
+
+	删除表中的字段：
+	ALTER TABLE myemp DROP(hiredate)
+
+	修改表中字段可以修改类型以及长度，默认值等
+	ALTER TABLE myemp MODIFY
+	(job VARCHAR2(40) DEFAULT 'CLERK')
+
+	修改字段，若表中有数据，尽量不要修改字段类型，
+	若修改长度，尽量不要减小。否则都可能修改不成功。
+
+
+DML:数据操纵语言
+    insert--into:
+    update--set:
+    delete from:
+
+	向表中插入数据:INSERT 语句
+
+	INSERT INTO myemp
+	(id, name, job, salary) 
+	VALUES
+	(1001, 'rose', 'PROGRAMMER', 5500)
+	
+	全列插入
+	INSERT INTO myemp
+	VALUES
+	(1002,'jack','M',SYSDATE,6000,'CLERK',50)
+
+
+	插入日期:
+	INSERT INTO myemp 
+	(id, name, job, birth) 
+	VALUES
+	(1002, 'martha', 'ANALYST', '01-SEP-03');
+
+	推荐使用TO_DATE
+	INSERT INTO myemp 
+	(id, name, job, birth) 
+	VALUES
+	(1002, 'martha', 'ANALYST', 
+	 TO_DATE('2003-09-01','YYYY-MM-DD')
+	)
+
+	UPDATE myemp 
+	SET salary = 8500 
+	WHERE name = 'rose';
+
+	修改数据是通常要添加where子句，来提出条件。否则
+	是整张表所有记录都被修改。
+
+	删除数据
+
+	DELETE FROM myemp WHERE name='rose'
+
+DQL:数据查询语言
+    select:
+
+	CONCAT函数可以实现连接字符串
+	CONCAT(CHAR c1,CHAR c2)
+	例如:
+	SELECT CONCAT(CONCAT(ename,':'),sal) FROM emp
+
+	连接字符串可以使用"||"
+
+	SELECT ename||':'||sal FROM emp
+
+
+	UPPER，LOWER，INITCAP函数
+
+	分别用于将英文字符转换为全大写，全小写，首字母大写。
+	对于INITCAP可以使用空格来分隔单词，它会将每个单词
+	的首字母变为大写。
+	SELECT 
+   		UPPER('hello world'), 
+   		LOWER('HELLO WORLD'), 
+   		INITCAP('hello world') 
+	FROM DUAL;
+
+	TRIM,LTRIM,RTRIM
+	分别用于去除字符串两边的给定字符，左面的字符和右面的字符
+	例如
+	SELECT 
+ 	TRIM('e' from 'elite'),
+ 	LTRIM('elite', 'e'),
+ 	RTRIM('elite', 'e') 
+	FROM DUAL;
+
+	LPAD,RPAD
+	可以要求将给定的字符串显示指定的长度，若字符串
+	本身长度不满足，则在左侧或右侧补充给定的额外字符
+	以达到指定的长度
+	LPAD(sal, 6, '$')
+	将工资显示为6位，若不够则左侧补充若干$
+	800 -->$$$800
+	1500-->$$1500
+
+	SUBSTR
+	截取子串
+
+	SELECT 
+ 	 SUBSTR('Doctor Who travels in TARDIS',-6,2)
+	FROM DUAL;
+
+	从倒数第6个字符开始，连续获取2个字符
+
+	连续获取的字符量若超过当前字符串能截取的字符量时
+	就表示截取到字符串末尾。
+	从哪位开始截取可正可负。正数就是从前面开始取，负
+	数就是从倒数位置开始取
+	数据库中1表示字符串的第一个字符，注意与java区分。
+
+
+	INSTR(char1,char2[,n,m])
+	查看char2在char1中的位置。首先需要完全匹配上，然
+	后返回char2第一个字符在char1中的位置。
+	若指定了n,则表示从char1的第n个位置开始查找第一次
+	出现char2的位置。
+	若指定了m,则表示从char1中查找第m次出现char2的位置
+	若char1中不含有char2则返回的位置为0
+
+	查看Who在字符串中第二次出现的位置:
+	SELECT 
+ 	   INSTR('Doctor Who Who Who', 'Who',1,2)
+	FROM DUAL;
+
+
+	数字类型相关函数
+
+	ROUND(n,m)
+	对n进行四舍五入，保留小数点后m位。
+	m若是正数，则表示保留小数点后m位。
+	m若为0,则表示保留到个位数。
+	m若为负数，则表示保留小数点前m为。-1保留到十位.
+
+
+	TRUNC(n,m)
+	截取数字，参数与ROUND作用一致。只是没有四舍五入的
+	作用。
+
+
+	MOD(m,n)
+	使用m除以n,并获取余数。n若为0则直接返回m
+
+
+	CEIL与FLOOR
+
+	CEIL(n)
+	若n为小数，则该函数返回大于n的最小整数
+	若n为整数，直接返回n
+	向上取整
+
+	FLOOR(n)
+	若n为小数，则该函数返回小于n的最大整数
+	若n为整数，直接返回n向下取整
+
+
+	日期类型
+	Date与Timestamp区别
+	Date表示到秒。时间戳表示到纳秒
+	所以精度上时间戳更精确
+	Date 7个字节，时间戳可以到11个字节。
+
+	SYSDATE关键字
+	ORACLE内部是靠一个函数实现。返回当前系统时间
+	返回的是Date类型。
+
+	查看当前系统时间，显示格式为:DD-MON-RR
+	SELECT sysdate FROM dual;
+	显示的是日月年，但实际上是能精确到秒的。
+
+
+	获取当前系统时间的时间戳
+	SYSTIMESTAMP也是一个内部函数。
+	返还当前系统日期和时间精确到毫秒
+
+	SELECT systimestamp FROM dual;
+
+
+	TO_DATE
+	可以将字符串按照给定的时间格式字符串解析为Date类型。
+	SELECT TO_DATE('2012-01-02','YYYY-MM-DD') FROM DUAL;
+
+	TO_CHAR
+	可以将日期类型按照给定的时间格式字符串转化为字符串。
+	SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD') FROM DUAL;
+
+	需要注意的是，时间格式字符串中若出现了中文，需要
+	使用双引号。'YYYY"年"MM"月"DD"日"'
+
+
+	LAST_DAY()函数
+	用来获取给定日期所在月的最后一天。
+
+	获取当前系统时间所在月的最后一天:
+	SELECT LAST_DAY(SYSDATE) FROM DUAL;
+
+	获取09年2月最后一天
+	SELECT 
+ 	 LAST_DAY(TO_DATE('09-02-20','YYYY-MM-DD')) 
+	FROM DUAL;
+
+
+	ADD_MONTHS()函数
+	用来对给定的日期加上给定的月。
+	若给定的月是正数，则向后加。
+	若给定的月是负数，则向前减。
+	若给定的月是小数，要先截取为整数，在进行计算。
+
+	查看每个员工入职20年后的日期
+	SELECT ename, 
+ 	 ADD_MONTHS(hiredate, 20 * 12) 
+	FROM emp;
+
+
+	MONTHS_BETWEEN()函数
+	计算给定的两个时间之间间隔月。
+	使用的是参数1减去参数2。
+	若参数2比参数1晚，则得到的是负数.
+
+	查看每个员工入职到现在总共多少个月
+	SELECT ename, 
+  	  MONTHS_BETWEEN(SYSDATE, hiredate)
+	FROM emp
+
+	在数据库中，两个日期之间是可以做减法操作的。
+	结果就是两个日期之间间隔的天数。
+	对于时间而言，表示的时间越晚的越大。
+	SELECT 
+	 sysdate-hiredate
+	FROM emp
+
+	到今天为止问问ORACLE我活了多少天了
+	SELECT
+	 sysdate-TO_DATE('1990-01-14','YYYY-MM-DD')
+	FROM DUAL
+
+
+	NEXT_DAY函数
+	计算离给定的日期最近的下一个周几。若给定的周几
+	与给定的日期是一天，则返回的是下周的日期。
+	周几最好使用数字表示，避免语言环境问题。
+	1表示周日，2表示周1以此类推，7表示周6
+
+	计算的周几若已经过了，就是下周的，
+	没过的就是当周的。
+
+
+	计算离当前系统时间最近的下一个周4。
+	SELECT 
+	  NEXT_DAY(SYSDATE, 5) 
+	FROM DUAL;
+
+
+	LEAST()函数，参数可以传入任意个。
+	该函数的作用为，比较给定的所有参数，将最小的参数
+	值返回。
+	参数的类型可以不一致。该函数会以第一个参数为参考
+	将后面的参数隐式的转换为和参数一相同的类型。若
+	转换失败则抛出异常。
+
+	SELECT 
+ 	  LEAST(SYSDATE,TO_DATE('2008-10-10','YYYY-MM-DD'),) 
+	FROM DUAL;
+
+	GREATEST函数，取所有参数中最大的作为返回值.
+	参数的作用与LEAST一致。只不过一个取最大值，一个
+	取最小值。
+
+
+
+	EXTRACT函数，用于提取给定日期的某个时间分量的值
+	对于提取Date类型的时间分量是，可以是:年月日
+	对应的是YEAR,MONTH,DAY
+
+	查看每个员工的入职月份:
+	SELECT 
+ 	  EXTRACT(MONTH FROM hiredate)
+	FROM emp;
+
+	若提取的是时间戳的时间分量，可以是：年月日时分秒
+	对应的是:YEAR,MONTH,DAY,HOUR,MINUTE,SECOND
+	当提取时间戳分量的时候要注意，没有考虑时区问题。
+
+	查看当前系统时间中的秒数
+	SELECT 
+	 EXTRACT(SECOND FROM SYSTIMESTAMP)
+	FROM DUAL;
+
+
+	NULL值的插入:
+
+	INSERT INTO student 
+	VALUES(1000, '李莫愁', 'F');
+
+	--显示的插入NULL值
+	INSERT INTO student 
+	VALUES(1001, '林平之', NULL);
+
+	--隐式的插入NULL值
+	INSERT INTO student
+	(id, name) VALUES(1002, '张无忌');
+
+
+	更新字段为NULL
+	需要注意的是，要更新的字段不能有非空约束。否则
+	更新失败。
+
+	UPDATE student SET gender=NULL
+
+	判断某个字段的值是否为空，不能使用等号
+	而是要使用 IS NULL来判断没有任何值等于NULL
+
+	查找性别为空的记录:
+	SELECT * FROM student
+	WHERE gender IS NULL
+
+	查看性别不为空的记录
+	SELECT * FROM student
+	WHERE gender IS NOT NULL
+
+
+	在ORACLE中数字与NULL进行运算，结果还是NULL
+
+	SELECT ename,sal+comm FROM emp
+	执行上面的sql,会发现，没有奖金的人，计算结果还是
+	null。工资就不能正常显示了。
+	为了正常显示没有奖金的员工的工资，我们可以将奖金
+	为NULL的转换为奖金的值是0.
+
+	SELECT ename,sal+NVL(comm,0)FROM emp
+
+	需要注意的是，两个参数的类型应当一致
+
+
+	--下面的SQL会抛出异常
+
+	SELECT ename,NVL(comm,'没有奖金')FROM emp
+
+
+
+	NVL2(e1,e2,e3)
+	该函数会判断e1，若e1不为NULL，返回e2,否则返回e3
+	需要注意的是，e2,e3应当是相同类型。但不必和e1一致
+
+	若奖金为null显示工资，否则显示工资加奖金
+
+	SELECT ename,NVL2(comm,sal+comm,sal)FROM emp
+
+
+	SELECT ename,NVL2(comm,sal+comm||'','没有奖金')
+	FROM emp
+
+
+	在判断条件中不等于最好使用"<>"
+
+	查看不是10号部门的员工信息:
+	SELECT ename, sal, job FROM emp 
+	WHERE deptno <> 10;
+
+
+	AND与OR都是作为连接多个条件使用的。但是需要注意的
+	是，AND的优先级是高于OR的。
+
+	下面语句的意思是:查看工资大于1250的CLERK，或者是
+	不限制工资的所有SALESMAN。
+
+	SELECT ename, sal, job FROM emp 
+	WHERE sal > 1250 AND job = 'CLERK'
+ 		OR job = 'SALESMAN'
+
+	提高优先级后的意思:
+	查看工资大于1250的CLERK和SALESMAN
+	SELECT ename, sal, job FROM emp 
+	WHERE sal > 1250 AND 
+ 	(job = 'CLERK' OR job = 'SALESMAN')
+
+	LIKE语句表示模糊查询
+	其中通配符支持两种:
+	_:表示任意一个字符
+	%:表示任意个字符(0-任意多)
+	例如:
+	查看名字中第二个字母是A的用户信息
+	SELECT ename, job 
+	FROM emp 
+	WHERE ename LIKE '_A%';
+
+
+	IN比较符
+	IN可以比较等于列表中的其中之一。
+
+	查看职位是MANAGER或CLERK或SALESMAN的员工信息
+	SELECT * FROM emp
+	WHERE job IN ('MANAGER','CLERK','SALESMAN')
+
+
+	NOT IN表示不等于列表中的所有
+	SELECT * FROM emp
+	WHERE deptno NOT IN (10,20)
+
+	BETWEEN...AND... 
+	判断给定的内容在一个范围之间
+	需要注意的是AND左边是最小范围，右面是最大范围。
+
+	SELECT ename, sal FROM emp  
+	WHERE sal BETWEEN 1500 AND 3000;
+	等价于
+	SELECT ename, sal FROM emp  
+	WHERE sal >= 1500 AND sal <= 3000;
+
+	ANY与ALL用于大小比较
+	例如:
+	若是ANY则是大于列表中其中之一即可，所以是大于
+	最小的，若是ALL则是大于最大的。
+
+	而ANY与ALL常用在子查询。而非这样直接给值。
+
+	SELECT empno, ename, job, sal, deptno
+	FROM emp
+	WHERE sal > ANY (3500,4000,4500);
+
+
+	WHERE子句中可以使用函数或者表达式作为条件进行过滤
+	SELECT ename, sal, job 
+	FROM emp 
+	WHERE UPPER(ename) = UPPER('rose');
+
+	SELECT ename, sal, job 
+	FROM emp 
+	WHERE sal * 12 >50000;
+
+
+	DISTINCE关键字，用于去除给定列的重复数据
+
+	查看公司中都有哪些职位。重复的将被去除。
+	SELECT DISTINCT job FROM emp
+
+
+	当我们对多个列进行去重时，表示这几个列的值的组合
+	没有重复的。
+	SELECT DISTINCT deptno, job 
+	FROM emp;
+
+
+	ORDER BY子句，用于对结果集进行排序
+	ORDER BY子句只能出现在SELECT语句的最后。
+
+	ORDER BY 后面可以指定若干字段。排序优先级为从左
+	到右。
+	ASC表示升序，默认就是升序，所以可以不写
+	DESC表示降序。
+
+	按照部门编号从小到大的顺序排序结果集。
+	SELECT * FROM emp ORDER BY deptno
+
+	查看10号部门的员工工资情况，并按照工资的降序排列
+	SELECT ename,sal
+	FROM emp
+	WHERE deptno=10
+	ORDER BY sal DESC
+
+
+	在排序一个含有NULL值的字段时，NULL值被认为是无限
+	大，所以在降序排序时，NULL值会出现在最前面
+
+
+	对于多列排序时，第一列的排序最优先，只有第一列的
+	值相同时，才会参考第二列的排序方式。
+	多个列进行排序时，每个列都可以单独的设置排序方式
+
+	SELECT ename,sal,deptno
+	FROM emp
+	ORDER BY sal,deptno DESC 
+
+	聚合函数
+	通常用于统计
+
+	查看最晚入职和最早入职的时间
+	SELECT MAX(hiredate),MIN(hiredate) FROM emp
+
+	查看挣得最多的和挣得最少的工资
+	SELECT MAX(sal),MIN(sal)
+	FROM emp
+
+	AVG用来计算平均值
+	SUM用来计算综合
+
+	查看公司平均工资，和工资总和
+	SELECT AVG(sal),SUM(sal) FROM emp
+	
+	***聚合函数都是忽略NULL值的。
+
+
+	COUNT()函数用来统计记录的条数。
+	同样的，也是忽略NULL值的。
+
+	SELECT COUNT(comm)
+	FROM emp
+	若这样，只能返回comm不为null的总记录条数
+
+	若想查看一张表中总共有多少条记录，
+	可以使用COUNT(*).
+
+	SELECT COUNT(*) FROM emp
+
+
+	因为聚合函数忽略NULL值，所以可以配合使用NVL函数
+	来将NULL值转换。
+
+	SELECT AVG(NVL(comm,0))
+	FROM emp
+
+
+
+	GROUP BY子句
+	用于将表中的数据进行分组。分组原则为:
+	GROUP BY后面给定的字段的值相同的记录被看做一组
+
+	查看每个部门的最大工资，最小工资等:
+	SELECT 
+	 MAX(sal),MIN(sal),
+ 	 AVG(sal),SUM(sal),
+ 	deptno
+ 	FROM emp
+	GROUP BY deptno
+
+
+	查看每个职位的平均工资
+	SELECT AVG(sal),job
+	FROM emp
+	GROUP BY job
+
+
+	聚合函数又称为组函数
+	SQL有一个要求。
+	在SELECT子句中若出现了组函数，那么不在组函数中的
+	其他字段，必须出现在GROUP BY子句中。
+	但是反过来则不是必须的。
+
+	若字段中每条记录的值都不重复，那么该字段通常不应
+	在GROUP BY子句中作为分组的参照。
+
+	若指定了GROUP BY子句，那么SELECT子句中不在组函数
+	中的其他字段且不在GROUP BY子句中则不能出现!
+
+	分组大部分的目的是为了统计。
+
+
+	查看谁的年龄大于平均年龄
+
+	STUDENT
+
+	name            age
+	张三            16 
+	李四            22 
+	王五            15
+	赵六            18
+	钱七            23
+	小范            25
+	小苍            29
+	小泽            35
+	小强            19
+	小明            17
+
+	查看比平均年龄大的都有谁
+
+	HAVING的作用
+	也是用作过滤条件的，只不过HAVING是用在第二次过滤的。
+
+	WHERE是用在第一次查询表的时候过滤条件的。
+	HAVING是在第一次查询后，得到结果的基础上再次进行
+	过滤使用的。
+
+	查看最大工资高于4000的部门有哪些
+	SELECT MAX(sal),deptno
+	FROM emp
+	GROUP BY deptno
+	HAVING MAX(sal)>4000
+
+	HAVING子句必须写在GROUP BY后，不能单独出现。
+	所以，HAVING用在分组进行统计结果后再进行的过滤。
+	
+	SQL语句执行顺序：
+
+	(5) select deptno,avg(salary+nvl(comm,0))
+	(1) from emp
+	(2) where deptno is not null
+	(3) group by deptno
+	(4) having avg(salary+nvl(comm,0))>5000
+	(6) order by avg(salary+nvl(comm,0));
+	
+	关联查询
+
+	N张表联合查询，至少要有N-1个连接条件。
+	否则会产生笛卡尔积:A表的记录总数 X B表的记录总数
+	无意义的结果集。
+
+	查看员工以及所在的部门名称
+
+	两张表联合查询，要添加至少一个连接条件。
+	因为查询时很难避免两张表出现相同名字的字段，为了
+	解决这个问题，可以使用【表名.字段】来确定。
+	若表名比较长，可以给表名叫上别名来简化。
+
+	SELECT 
+	  e.ename,e.sal,d.dname,e.deptno
+	FROM  emp e,dept d
+	WHERE e.deptno=d.deptno
+
+	内连接也可以实现多表关联查询
+	SELECT 
+	  e.ename,e.sal,d.dname,e.deptno
+	FROM emp e JOIN dept d 
+	ON e.deptno=d.deptno
+
+
+	查看SALES部门的员工
+	SELECT e.ename,d.dname
+	FROM emp e,dept d
+	WHERE 
+	 e.deptno = d.deptno
+	AND
+	 d.dname='SALES'
+
+	SQL89标准时，弊端在于，连接条件与过滤条件都要写在
+	WHERE子句中，可读性相对较差。尤其多表查询加上过滤
+	条件多的时候。
+
+
+	SELECT e.ename,d.dname
+	FROM emp e JOIN dept d 
+	ON e.deptno=d.deptno
+	WHERE d.dname='SALES'
+
+	SQL92标准建议我们在进行多表连接时使用内连接形式
+	这样会发现，连接条件单独定义在ON子句中。而过滤
+	条件写在WHERE子句中。可读性比较强。
+
+
+	外连接
+		外连接的作用是显示那些不满足连接条件的数据。
+	分为左外连接，右外连接，全外连接。
+	  左外连接:以左面的表为驱动表，左面的表有不满足连接
+	     条件的字段，全部补充为NULL进行显示
+	  右外连接:右面表中的字段不满足连接条件的补充为NULL
+	  全外连接:哪边不足的哪边补NULL。
+
+	SELECT e.ename,d.dname
+	FROM emp e FULL OUTER JOIN  dept d
+	ON e.deptno = d.deptno
+
+
+
+	自连接
+	当前表中的数据关联当前表中的其他数据。就构成了
+	自连接。
+	通常表被设计成自连接是为了表示同类型数据有存在
+	上下级关系。(树状结构的数据通常设计为自连接。)
+	例如:
+	淘宝网的类别。就被设计为自连接。
+
+	查看员工以及领导的名字:
+	SELECT e.ename,m.ename
+	FROM emp e JOIN emp m
+	ON e.mgr=m.empno
+
+
+	设计表的时候以及关联关系时通常有两个字段很重要
+	他们被称为:主键，外键
+
+	通常每张表的第一个字段就是主键。主键保存的值一般
+	与表中保存的实际数据没关系。他只是用来表示每条
+	数据的唯一性。
+	所以主键的要求是，存储的值非空且唯一。
+
+	外键，用来保存关系表中记录的主键的值。
+	例如
+	部门表与员工表有关联关系。设计表时会发现
+	emp表中有一个字段叫做dept,它用来保存dept表中某条
+	记录主键的值。那么emp表中dept字段就是外键。
+
+
+	在关联关系中，保存外键的表通常是:
+	"一对多"中"多"的一方。
+
+	而我们在编写多表查询的SQL语句时，连接条件通常也
+	是写的主键=外键。
+
+	子查询:
+	当我们的一个操作需要基于另一个查询结果，那么先行
+	执行的这个查询就是子查询。
+	子查询分为:
+	单行单列子查询:查询出的结果只有一行，
+               且只有一个字段
+	多行单列子查询:查询出来的结果有多行，
+               但只有一列
+	多行多列子查询:查询出多行和多个列。
+
+	通常，单行单列与多行单列子查询用于WHERE子句中
+	而多行多列子查询用于FROM子句中。
+ 
+
+	查看和SCOTT相同职位的其他员工
+
+	SELECT ename,sal,job
+	FROM emp
+	WHERE 
+ 	job=(SELECT job FROM emp WHERE ename='SCOTT')
+	AND ename <> 'SCOTT'
+
+
+	查看哪些员工工资高于平均水平
+	SELECT ename,sal
+	FROM emp
+	WHERE sal>(SELECT AVG(sal) FROM emp)
+
+
+	查看公司中和SALESMAN相同部门的其他职位员工的信息
+
+	当子查询返回的是一个多行单列的结果。我们就不能
+	使用"="了，但是可以使用IN。
+	SELECT ename,job,deptno
+	FROM emp
+	WHERE deptno IN (SELECT deptno
+                	           FROM emp
+                	           WHERE job='SALESMAN')
+	AND job <> 'SALESMAN'
+
+
+	查看比20部门所有员工工资都高的其他员工
+	SELECT ename,deptno,sal
+	FROM emp
+	WHERE sal > ALL(SELECT sal
+	  		FROM emp
+			WHERE deptno=20)
+	AND deptno<>20
+
+
+
+
+	EXISTS的作用
+	当子查询中可以至少返回一条记录，
+	那么表达式返回true
+	下面的例子表示:查看含有员工的部门
+	SELECT deptno, dname FROM dept d
+	WHERE EXISTS (SELECT * 
+		         FROM emp e
+       		         WHERE d.deptno = e.deptno);
+
+
+	查看最低薪水高于30号部门最低薪水的部门
+	SELECT deptno,MIN(sal) min_sal
+	FROM emp
+	GROUP BY deptno
+	HAVING MIN(sal) >(SELECT MIN(sal)
+		  	  FROM emp
+		          WHERE deptno=30)
+
+
+
+	查询比本部门平均薪水高的员工信息
+
+	这里的思路是，我们应当先统计每个部门的平均工资
+	因为这个查询结果是一个多行多列的，所以我们将其
+	当做一张表看待，然后使用EMP表与其关联查询即可。
+	所以，多行多列子查询一般用在FROM子句后。
+
+	FROM中书写的子查询，一般称为内视图。
+
+	SELECT e.ename,e.sal,e.deptno
+	FROM emp e,(SELECT AVG(sal) avg_sal,deptno
+	    	    FROM emp
+	              GROUP BY deptno) x
+	WHERE e.deptno = x.deptno
+	AND e.sal>x.avg_sal
+    
+
+	子查询也可以出现在SELECT子句中。通常实现的效果
+	是外连接效果
+	若emp表中deptno字段的值在进行关联查询dept表中没有
+	查询到数据时，那么该值显示为null.
+	SELECT e.ename, e.sal, 
+ 		(SELECT d.deptno 
+  		 FROM dept d 
+  		 WHERE d.deptno = e.deptno)  deptno
+	FROM emp e;
+
+
+	分页，将所有记录分批获取。
+	目的:加快查询，减小系统资源消耗。
+
+	分页至少需要，为记录编号，以及排序。
+
+	编号:
+	在ORACLE中可以使用ROWNUM的伪列
+	ROWNUM本身不在表中，使用他作为一列，值是源自表中
+	查询出来的数据进行的编号。ORACLE自动生成该列的值
+
+	SELECT ROWNUM,ename,sal,deptno
+	FROM emp
+
+	查看emp表中10条以后数据
+
+	SELECT ROWNUM,ename,sal,deptno
+	FROM emp
+	WHERE ROWNUM > 10
+
+	只想上述代码会发现没有任何记录
+	原因在于ROWNUM的生成时机:
+	当我们在表中查询数据时，只有确定取出一条记录后
+	ROWNUM才会生成，并作为该条记录该字段的值。
+	ROWNUM默认值为1.每当确定作为一条记录的值后，该值
+	会自动累加1.
+	所以，在第一次查询表时，ROWNUM默认是不大于10的。
+	所以WHERE条件永远不成立，不成立就不会获取数据，
+	不获取数据ROWNUM就不会累加，所以最终没有数据被
+	查询出来。
+
+
+
+	所以若想获取部分记录，我们需要两次查询，第一次
+	先将所有数据进行编号。然后再基于这个结果，进行
+	二次查询，来获取部分数据。
+
+	SELECT ROWNUM,e.*
+	FROM emp e
+
+	需要注意的是，子查询编号后，要给编号字段加别名
+	这样才能避免外层查询使用关键字ROWNUM导致查询不出
+	数据。
+	SELECT * 
+	FROM (SELECT ROWNUM rn,e.* FROM emp e)
+	WHERE rn >=5 AND rn <=10
+
+
+	每页分为10条，第三页?
+	分页中上限与下限公式:
+	每页显示的条目数为:pageSize
+	页数为:n
+
+	下限:(n-1)*pageSize+1
+	上限:n*pageSize
+	
+	标准分页通常分为三步:1排序，2编号，3取部分数据
+
+	SELECT * FROM (
+	  SELECT ROWNUM rn,e.* FROM(
+	    SELECT * FROM emp ORDER BY sal DESC
+	  ) e )
+	WHERE rn BETWEEN 5 AND 10
+
+
+
+
+	DECODE函数
+	有点类似JAVA中的SWITCH-CASE
+	当第一个参数的值等于第二个参数的值，函数返回第三
+	个参数的值，否则如果等于第四个参数的值，则返回
+	第五个参数的值，以此类推。若最后一个参数default有
+	设定，那么前面都不满足的话，返回default的结果，
+	否则函数返回NULL
+	SELECT ename, job, sal,DECODE(job,
+         				   'MANAGER',sal * 1.2,
+         				   'ANALYST',sal * 1.1,
+         				   'SALESMAN',sal * 1.05,
+         			          	   sal ) bonus
+	FROM emp;
+
+
+	将MANAGER与ANALYST这两个职位看做一组，其他职位的
+	看做另一组，统计这两组的总人数。
+	思路:将需要被看做一组，但值有不相同的那些数据，我
+       	 们使用DECODE将他们改为相同的值即可。
+	SELECT COUNT(*)
+	FROM emp
+	GROUP BY DECODE(
+         			 job,
+          			'MANAGER','VIP',
+          			'ANALYST','VIP',
+          			'OPERATIONS'
+			)
+
+
+	当我们按照某个字段的值进行排序，但是字段值的比较
+	大小规则不满足我们排序需求是，可以使用DECODE将
+	值转换为一个其他的值，从新进行大小顺序排序。
+	SELECT deptno,dname
+	FROM dept
+	ORDER BY DECODE(
+          			dname, 
+          			'OPERATIONS',1,
+          			'ACCOUNTING',2,
+          			'SALES',3);
+
+
+	ROW_NUMBER() OVER(partition by col1 order by col2)函数，可以按照给定的col1分组，
+			再按照col2字段进行排序后，生成组内连续且唯一的数字。
+
+	按照部门分组，按照工资降序，产生组内连续唯一数字:
+	SELECT ename,deptno,sal,
+      		 ROW_NUMBER() OVER(
+        	 PARTITION BY deptno
+        	 ORDER BY sal DESC
+                 ) rank
+	FROM emp
+
+	RANK() OVER(partition by col1 order by col2)表示根据col1分组，
+	在分组内部根据col2排名，会生成组内不连续且不唯一的数字。
+	
+	RANK函数与ROW_NUMBER的区别在于，进行排序的字段若
+	值相同，且他们在同一组时，那么他们得到的数字是相
+	同的。但是，在下面的数字会有跳跃。
+	
+	SELECT ename,deptno,sal,
+       		RANK() OVER(
+        		PARTITION BY deptno
+        		ORDER BY sal DESC
+      			 ) rank
+	FROM emp
+
+
+	DENSE_RANK函数与RANK的区别在于会生成组内连续但
+	不唯一的数字。
+	SELECT ename,deptno,sal,
+        DENSE_RANK() OVER(
+        PARTITION BY deptno
+        ORDER BY sal DESC
+       ) rank
+	FROM emp
+
+
+	集合操作中:
+	并集:将两个集合中的所有元素合成一个集合
+	普通并集与全并集。
+	全并集:会产生重复元素，两个集合都有的元素，会在合、
+       并后在新的集合中出现两次。
+
+	交集:新的集合中只保留两个集合都有的元素
+	差集:新的集合中只保存我有你没有的元素。
+
+
+
+	高级分组函数：
+	需求1:
+	统计销售额，统计分为:
+	1:按照年月日(每天的销售额)
+	2:按照年月(每月的销售额)
+	3:按照年(每年的销售额)
+	4:整张表(所有的销售额)
+	依次统计，并将所有结果显示时
+	需要执行4条SQL来分别统计
+	SELECT year_id,month_id,day_id,SUM(sales_value) 
+	FROM sales_tab
+	GROUP BY year_id,month_id,day_id
+	ORDER BY year_id,month_id,day_id
+
+	SELECT year_id,month_id,SUM(sales_value)
+	FROM sales_tab
+	GROUP BY year_id,month_id
+	ORDER BY year_id,month_id
+
+	SELECT year_id,SUM(sales_value)
+	FROM sales_tab
+	GROUP BY year_id
+	ORDER BY year_id
+
+	SELECT SUM(sales_value)
+	FROM sales_tab
+
+
+	ROLLUP分组函数可以解决上述问题
+
+	SELECT year_id,month_id,day_id,SUM(sales_value)
+	FROM sales_tab
+	GROUP BY ROLLUP(year_id,month_id,day_id)
+
+	当前SQL会统计ROLLUP参数的个数+1次。
+
+	ROLLUP(a,b,c)
+	统计4次
+	1:分组按照a,b,c
+	2:a,b
+	3:a
+	4:全表
+
+
+
+	CUBE是最全面的分组，每种组合都要进行一次分组
+	所以，有几个参数就会进行2的参数个数次方的分组。
+	CUBE(a,b,c)
+	那么就会执行2的3次方次分组，分别是:
+	a,b,c
+	a,b
+	a,c
+	b,c
+	a
+	b
+	c
+	整体
+
+
+
+	查看，每天的销售额，和每月的销售额
+	GROUPING SETS可以按照指定的参数做不同的分组，然后
+	统计在一起。相对比较灵活。
+
+	SELECT year_id,month_id,day_id,SUM(sales_value)
+	FROM sales_tab
+	GROUP BY GROUPING SETS(
+      (year_id,month_id,day_id),
+      (year_id,month_id)
+      )
+	ORDER BY year_id,month_id,day_id
+
+     视图:
+	视图并非一张表，而是依靠一条SELECT语句。查询出来
+	的结果集就是视图。
+
+    创建视图:
+	CREATE OR REPLACE的意义在于若视图不存在就创建，
+	存在就替换。
+	这里不适用ALTER来修改视图，因为视图没有实际的字段
+	以及对应的类型与长度，只是一条SELECT语句而已。
+	CREATE OR REPLACE VIEW v_emp_10
+	AS
+	SELECT empno id  , ename name ,  sal salary , deptno 
+	FROM emp 
+	WHERE deptno = 10;
+
+     视图通常用来:
+	1:简化查询
+	2:限制数据访问
+
+
+	允许对简单视图进行DML操作。但是实际开发中很少对
+	视图进行DML操作。
+	复杂视图不能进行DML操作。
+
+
+	对简单视图进行插入操作:
+	INSERT INTO v_emp_10 
+	VALUES(1234, 'DOCTOR', 4000, 10);
+
+	甚至可以插入视图看不到的数据。比如部门改为20
+	INSERT INTO v_emp_10 
+	VALUES(1234, 'DOCTOR', 4000, 20);
+	但这样的操作会对数据有破坏效果。逾越了视图查看的范围。
+
+	UPDATE语句也有通常的问题。可能更新后，数据不会在
+	视图中再次找到。
+
+
+	若需要限制上面的情况，可以为视图添加检查选项
+	CREATE OR REPLACE VIEW v_emp_10
+	AS
+	SELECT empno id, ename name, sal salary, deptno 
+	FROM emp 
+	WHERE deptno = 10
+	WITH CHECK OPTION;
+
+	当视图添加了 WITH CHECK OPTION后
+	那么对视图进行INSERT时，必须保证插入后的记录视图
+	可以看到。
+	当进行UPDATE时，必须保证更新后该记录能被视图看到
+
+
+	若想严格显示不允许向视图执行DML操作，可以将视图
+	设置为只读模式。
+	CREATE OR REPLACE VIEW v_emp_10
+	AS
+	SELECT empno, ename, sal, deptno FROM emp 
+	WHERE deptno = 10
+	WITH READ ONLY;
+
+	当视图被WITH READ ONLY修饰后，那么该视图不允许任
+	何DML操作。
+
+
+	数据字典:
+	ORACLE中内建的一些表，用来维护用户创建的数据库
+	对象，和其他信息。
+	user_tables表:该表中记录了用户创建过的所有表。
+
+	查看用户建立过的表:
+	SELECT table_name FROM user_tables
+
+
+	视图也有:user_views
+	SELECT table_name FROM user_views
+
+
+	查看用户建立过的所有数据库对象:user_objects
+	SELECT object_name 
+	FROM user_objects
+	WHERE object_type = 'VIEW'
+
+
+	复杂视图:
+	视图中的查询语句中含有函数，表达式，分组等内容
+	CREATE VIEW v_emp_salary
+	AS
+	SELECT d.dname, avg(e.sal) avg_sal, sum(e.sal) sum_sal, 
+	max(e.sal) max_sal, min(e.sal) min_sal 
+	FROM emp e join dept d
+	ON e.deptno = d.deptno
+	GROUP BY d.dname;
+	需要注意的是，复杂视图不能进行DML操作。
+
+	删除视图:
+	DROP VIEW v_emp_10
+	删除视图不会影响基表数据。
+
+
+
+	序列:
+	提供了一种可以生成一组数字的机制。是数据库对象。
+	序列有两个伪列:
+
+	1）NEXTVAL:该伪列会获取序列的下一个值，这个操作会
+          消费序列的一个值，不可逆。
+
+	CURRVAL:获取序列最后生成的数字。可以重复调用，
+          不会消费序列的值。需要注意，在第一次使用
+         序列时，要先执行一次NEXTVAL后才可以使用。
+
+	序列通常被用来为某张表的主键生成值。序列可以被
+	多个表共享，但一般不这样使用。会造成生成的数字不
+	连续。
+
+
+	主键生成机制:
+	UUID:32位不重复字符串
+
+	ORACLE中提供了对应的函数 sys_guid()
+
+	SELECT sys_guid() FROM dual;
+
+
+
+
+	索引
+	可以加快查询效率的机制。ORACLE自动维护索引，创建
+	的算法以及自动应用所以。
+
+	创建索引:
+	CREATE INDEX idx_emp_ename ON emp(ename);
+	为emp表中的ename字段添加一个索引。
+
+	为多个列建立联合索引
+	CREATE INDEX idx_emp_sal_job ON emp(sal,job);
+	通常当我们经常对多个列进行排序操作时，那么就可以
+	为这几个列建立一个联合索引，来加快查询时的排序
+	效果。需要注意的是ORDER BY中的顺序要与建立索引时
+	的顺序一致:
+	SELECT *
+	FROM emp
+	ORDER BY sal,job;
+	就对应上面的索引。注意sal,job的顺序要一致。
+
+
+	当我们经常将一个函数的结果作为过滤条件是，我们也
+	可以为该函数添加一个索引。
+	CREATE INDEX idx_emp_ename_upper 
+	ON emp(UPPER(ename));
+
+	下面的sql会自动套用上面创建的索引，来提高检索效率
+	SELECT * 
+	FROM emp
+	WHERE UPPER(ename)='KING'
+
+
+	约束
+	约束分为表级约束与列级约束
+	表级约束，在创建表时，所有列都声明完毕后，单独再
+	为某个列指定约束。
+
+	列级约束，定义列的同时声明对应的约束。
+
+
+	NOT NULL 非空约束，指定定义为列级。
+
+
+	在修改表时，为某个字段添加约束时，应当注意的是
+	该字段的所有记录应当满足要添加的约束，否则可能
+	添加约束失败。
+	例如添加非空约束，就应当确保该字段所有记录的值
+	没有空值，否则可能添加非空约束失败。
+
+
+
+	唯一性约束
+	当某个字段声明了唯一性约束后，该字段的值在整张表
+	中不能有重复值。NULL值除外。
+	唯一性约束可以声明为表级约束，也可以声明为列级约束
+
+	删除约束:
+	将给定的表中的约束删除。
+	ALTER TABLE table_name
+	DROP CONSTRAINT constraint_name
+
+	例如:
+	ALTER TABLE employess
+	DROP CONSTRAINT employees_name_uk
+
+
+DCL:数据控制语言
+    grant:
+	grant connect,resource to (chris);
+	grant create view to (chris);
+	grant create table,create view,create synonym to (chris);
+    revoke:
+    create user:
+	create user （chris）identified by （password）;
+	
+TCL:事物控制语言
+    commit:
+    rollback:
+    savepoint:
+
+
+
+细节串讲：
+
+		 truncate 、delete与drop区别  
+相同点：
+1.truncate和不带where子句的delete、以及drop都会删除表内的数据。
+2.drop、truncate都是DDL语句(数据定义语言),执行后会自动提交。
+
+不同点：
+1. truncate 和 delete 只删除数据不删除表的结构(定义)
+	drop 语句将删除表的结构被依赖的约束(constrain)、触发器(trigger)、索引(index)；
+	依赖于该表的存储过程/函数将保留,但是变为 invalid 状态。
+2. delete 语句是数据库操作语言(DML)，这个操作会放到 rollback segment 中，
+	事务提交之后才生效，不会自动提交；如果有相应的 trigger，执行的时候将被触发。
+	truncate、drop 是数据库定义语言(DDL)，操作立即生效，执行后会自动提交，
+	原数据不放到 rollback segment 中，不能回滚，操作不触发 trigger。
+3.速度，一般来说: drop> truncate > delete
+4.安全性：小心使用 drop 和 truncate，尤其没有备份的时候.否则哭都来不及；
+	在使用上：
+	想删除部分数据行用 delete，注意带上where子句. 回滚段要足够大.
+	想删除表,当然用 drop
+	想保留表而将所有数据删除：
+		如果和事务无关，用truncate即可。
+		如果和事务有关,或者想触发trigger,还是用delete。
+		如果是整理表内部的碎片，可以用truncate跟上reuse stroage，再重新导入/插入数据。
+5、truncate  table 在功能上与不带 where 子句的 delete 语句相同：二者均删除表中的全部行。
+	但truncate  table 比delete 速度快,且使用的系统和事务日志资源少。
+	 delete 语句每次删除一行，并在事务日志中为所删除的每行记录一项。
+	truncate  table通过释放存储表数据所用的数据页来删除数据,并且只在事务日志中记录页的释放。 
+6、truncate  table 删除表中的所有行，但表结构及其列、约束、索引等保持不变。
+	新行标识所用的计数值重置为该列的种子。如果想保留标识计数值，请改用 delete 。
+	如果要删除表定义及其数据，请使用drop table语句。  
+
+
+约束条件的基本规则：
+1：必须在表级定义引用多个列的约束条件；
+2：notnull只能在列级而不能在表级指定约束条件；
+3：UNIQUE,PRIMARY KEY,FOREIGN KEY和CHECK约束条件既可以在列级又可以在表级定义约束条件；
+4：如果create table语句中使用了保留字CONSTRAINT， 则必须为约束条件命名；
+
+
+    
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

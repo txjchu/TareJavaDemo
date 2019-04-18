@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- unix系统日志文件名 -->
+	<logfile>wtmpx</logfile>
+	
+	<!-- 解析后日志的文件名 -->
+	<textlogfile>log.txt</textlogfile>
+	
+	<!-- 书签文件名 -->
+	<lastpositionfile>last-position.txt</lastpositionfile>
+	
+	<!-- 每次解析日志的条目数 -->
+	<batch>10</batch>
+</config>
+
+
+
+
+

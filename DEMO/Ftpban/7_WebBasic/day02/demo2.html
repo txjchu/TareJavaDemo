@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>css的使用</title>
+		<!-- 2.内部样式写在style元素内，
+			此样式可以被当前页面的元素复用。
+			type="text/css"声明书写的文本类型。 -->
+		<style type="text/css">
+			h2 {
+				color:blue;
+			}
+		</style>
+		<!-- 3.外部样式写在.css文件中，并通过
+			link标签引入到当前页面中，此文件
+			中的样式可以被多个页面所复用。 -->
+		<!-- rel声明引入的文件是样式表文件；
+			type声明引入的文件内容是css文本；
+			href声明引入的文件名； -->
+		<link rel="stylesheet" 
+			type="text/css" href="a.css"/>
+	</head>
+	<body>
+		<!-- 1.内联样式写在元素的style
+			属性里，此样式无法复用。 -->
+		<h1 style="color:red;">CSS的用法</h1>
+		<h2>有3种用法</h2>
+		<p>1.内联样式</p>
+		<p>2.内部样式</p>
+		<p>3.外部样式</p>
+	</body>
+</html>
+
+
+
+

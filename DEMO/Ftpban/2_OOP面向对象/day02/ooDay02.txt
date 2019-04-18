@@ -1,0 +1,449 @@
+回顾:
+1.什么是类？什么是对象？
+2.如何创建类？如何创建对象？
+3.引用之间画等号:指向同一个对象
+4.null和NullPointerException
+  null:空，不指向任何对象
+       若引用为null，则不能进行任何操作，
+       若操作则NullPointerException空指针异常
+
+
+Cell c = new Cell();
+c = null; 
+
+
+Cell c = new Cell();
+Cell c1 = c;
+c.row = 2;
+c1.row = 5;
+System.out.println(c.row); //5
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.sayHi();
+
+class Student{
+  String name;
+  void sayHi(){
+  }
+}
+
+
+笔记:
+1.方法的签名:方法名+参数列表
+2.方法的重载(overload):
+  1)同一个类中，方法名相同，参数列表不同
+  2)编译器在编译时自动根据方法的签名绑定调用不同的方法
+3.构造方法:
+  1)常常用于给成员变量初始化
+  2)与类同名，没有返回值类型
+  3)在创建对象时被自动调用
+  4)若自己不写构造，则编译器默认提供一个无参的构造
+    若自己写了构造，则编译器不再默认提供
+  5)构造方法可以重载
+4.this:指代当前对象，哪个对象调指的就是哪个对象
+       方法中访问成员变量之前默认有个this.
+  this用法:
+  1)this.成员变量-----访问成员变量
+  2)this.方法名()-----调用方法
+  3)this()------------调用构造方法
+5.引用类型数组:
+  1)Cell[] cells = new Cell[4];
+    cells[0] = new Cell();
+    cells[1] = new Cell();
+    cells[2] = new Cell();
+    cells[3] = new Cell();
+  2)Cell[] cells = new Cell[]{
+      new Cell(),
+      new Cell(),
+      new Cell(),
+      new Cell()
+    };
+  3)int[][] arr = new int[3][]; //数组的数组
+    arr[0] = new int[2];
+    arr[1] = new int[3];
+    arr[2] = new int[2];
+    arr[1][0] = 100; //arr中第2个元素中的第1个元素赋值为100
+    System.out.println(arr[0][1]); //输出arr中第1个元素中的第2个元素的值
+  4)int[][] arr = new int[3][4]; //3行4列
+    for(int i=0;i<arr.length;i++){
+      for(int j=0;j<arr[i].length;j++){
+        arr[i][j] = 100;
+      }
+    }
+
+    
+
+
+【】【】【】【】【】【】【】
+1)找对象:一堆图形
+2)抽类:T,J,L,S,Z,O,I
+3)设计类的成员变量和方法
+4)创建对象并测试
+【】【】【】【】【】【】【】
+T t = new T();  //00,01,02,11
+T tt = new T(2,5); //25,26,27,36
+
+class T{
+  Cell[] cells;
+  T(){
+    this(0,0);
+  }
+  T(int row,int col){
+    cells = new Cell[4];
+    cells[0] = new Cell(row,col);
+    cells[1] = new Cell(row,col+1);
+    cells[2] = new Cell(row,col+2);
+    cells[3] = new Cell(row+1,col+1);
+  }
+  void drop(){
+    for(int i=0;i<cells.length;i++){
+      cells[i].row++;
+    }
+  }
+  void moveLeft(){
+    for(int i=0;i<cells.length;i++){
+      cells[i].col--;
+    }
+  }
+  void moveRight(){
+    for(int i=0;i<cells.length;i++){
+      cells[i].col++;
+    }
+  }
+  void print(){ //输出4个格子的行列号
+    for(int i=0;i<cells.length;i++){
+      String str = cells[i].getCellInfo();
+      System.out.println(str);
+    }
+  }
+}
+
+
+
+
+
+
+class J{
+  Cell[] cells;
+  J(int row,int col){
+    cells = new Cell[4];
+    cells[0] = new Cell(row,col);
+    cells[1] = new Cell(row,col+1);
+    cells[2] = new Cell(row,col+2);
+    cells[3] = new Cell(row+1,col+2);
+  }
+}
+
+
+
+
+
+
+
+
+class L{
+}
+class S{
+}
+class Z{
+}
+class O{
+}
+class I{
+}
+
+
+
+
+
+
+    i=0
+      j=0 arr00=100
+      j=1 arr01=100
+      j=2 arr02=100
+      j=3 arr03=100
+    i=1
+      j=0 arr10=100
+      j=1 arr11=100
+      j=2 arr12=100
+      j=3 arr13=100
+    i=2
+    
+
+
+
+
+int   [] arr   = new int[3];   //基本类型数组
+
+//声明Cell型数组cells，包含3个元素
+//每个元素都是Cell型，默认值为null
+Cell  [] cells = new Cell[3];  //引用类型数组
+
+
+
+
+//声明int[]型数组arr，包含3个元素
+//每个元素都是int[]型，默认值为null
+int[] [] arr   = new int[3][]; //引用类型数组
+arr[0] = new int[2];
+arr[1] = new int[3];
+arr[2] = new int[2];
+给arr中第2个元素中的第1个元素赋值为100
+arr[1][0] = 100;
+
+arr------------int[][]
+arr[0]---------int[]
+arr[0][0]------int
+
+
+
+
+int[] arr = new int[]{
+  1,
+  2,
+  3
+};
+Cell[] cells = new Cell[]{
+  new Cell(),
+  new Cell(),
+  new Cell(),
+  new Cell()
+};
+
+
+
+
+
+
+//声明int型数组arr，包含4个元素
+//每个元素的类型都是int型，默认值为0
+int[] arr = new int[4];
+
+//声明Cell型数组cells，包含4个元素
+//每个元素的类型都是Cell型，默认值为null
+Cell[] cells = new Cell[4];
+
+//声明Student型数组stus，包含40个元素
+//每个元素都是Student型，默认值为null
+Student[] stus = new Student[40];
+int[] arr = new int[4];
+arr[0] = 5;
+
+Cell[] cells = new Cell[4]; //创建Cell数组对象
+cells[0] = new Cell(); //创建Cell对象
+cells[1] = new Cell();
+cells[2] = new Cell();
+cells[3] = new Cell();
+
+
+
+Cell c = new Cell();
+c.row = 2;
+c.col = 5;
+
+
+
+int [] arr   = new int[4];  //基本类型数组
+Cell[] cells = new Cell[4]; //引用类型数组
+
+
+
+Cell c1 = new Cell();
+Cell c2 = new Cell(2);
+Cell c3 = new Cell(2,5);
+
+class Cell{
+  int row;
+  int col;
+  Cell(){
+    this(0,0);
+  }
+  Cell(int n){
+    this(n,n); //调构造方法
+  }
+  Cell(int row,int col){
+    this.row = row;
+    this.col = col;
+  }
+}
+
+
+
+Cell c = new Cell(2,5);
+
+class Cell{
+  int row;
+  int col; //成员变量
+  Cell(int row,int col){
+    this.row = row;
+    this.col = col; //局部变量与成员变量同名时，this不能省略
+  }
+  void drop(){
+    this.row++;
+  }
+}
+
+
+
+Cell c = new Cell();
+c.row = 2;
+c.col = 5;
+c.drop(); //c.row=3
+
+Cell cc = new Cell();
+cc.row = 6;
+cc.col = 2;
+cc.drop(); //7
+
+Cell ccc = new Cell();
+ccc.row = 0;
+ccc.col = 6;
+ccc.drop();
+
+
+class Cell{
+  int row;
+  int col;
+  void drop(){
+    this.row++; //ccc.row++;
+  }
+}
+
+
+
+Cell c = new Cell(); //正确
+
+class Cell{
+  int row;
+  int col;
+  Cell(){
+    row = 0;
+    col = 0;
+  }
+  Cell(int n){
+    row = n;
+    col = n;
+  }
+  Cell(int row1,int col1){
+    row = row1;
+    col = col1;
+  }
+}
+
+
+Cell c = new Cell();
+c.row = 2;
+c.col = 5;
+
+Cell c = new Cell(2,5);
+Cell c = new Cell(); //编译错误
+class Cell{
+  int row;
+  int col;
+  Cell(int row1,int col1){
+    row = row1;
+    col = col1;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+Student zs = new Student("zhangsan",25,"廊坊");
+Student ls = new Student("lisi",26,"佳木斯");
+
+Student zs = new Student(); //编译错误
+ 
+class Student{
+  String name;
+  int age;
+  String address;
+  Student(){
+  }
+  Student(String name1){
+  }
+  Student(String name1,int age1){
+  }
+  Student(String name1,int age1,String address1){
+    name = name1;
+    age = age1;
+    address = address1;
+  }
+}
+
+//1.创建Student对象
+//2.调Student的构造方法
+Student zs = new Student();
+
+
+
+Student zs = new Student();
+zs.setInfo("zhangsan",25,"廊坊");
+
+Student ls = new Student();
+ls.setInfo("lisi",26,"佳木斯");
+
+
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "廊坊";
+
+Student ls = new Student();
+ls.name = "lisi";
+ls.age = 26;
+ls.address = "佳木斯";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+调方法时，参数类型与个数，必须匹配
+public static void println(String str){ 
+}
+public static void println(int num){
+}
+public static void println(double num){
+}
+public static void println(){
+}
+
+println("HelloWorld");
+println(111);
+println(1.456);
+
+System.out.println("HelloWorld");
+System.out.println(123);
+System.out.println(123.456);
+System.out.println('你');
+System.out.println(true);
+System.out.println();
+
+

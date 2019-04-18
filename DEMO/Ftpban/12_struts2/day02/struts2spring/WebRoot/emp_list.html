@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" 
+	src="scripts/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	//发送ajax请求
+	$.ajax({
+		url:"http://localhost:8088/struts2spring/emp/ajaxlist.action",
+		type:"post",
+		dataType:"json",
+		success:function(result){//返回的Emp对象集合
+			var $table = $("<table></table>");
+			for(var i=0;i<result.length;i++){
+				var eno = result[i].eno;
+				var ename = result[i].ename;
+				var $tr = $("<tr><td>"+eno
+						+"</td><td>"+ename
+						+"</td><td><input type='button' value='删除'/></td></tr>");
+				$table.append($tr);
+			}
+			$("body").append($table);//将table加入到body里
+		},
+		error:function(){
+			alert("加载数据异常");
+		}
+	});
+});
+</script>
+<script type="text/javascript">
+$(function(){
+	//单击删除
+	$(document).on("click","table tr :button",function(){
+		//获取请求参数
+		var $tr = $(this).parents("tr");
+		var no = $tr.find("td:first").text();
+		//发送ajax请求
+		$.ajax({
+			url:"http://localhost:8088/struts2spring/emp/ajaxdelete.action",
+			type:"post",
+			data:{"no":no},
+			dataType:"json",
+			success:function(result){
+				if(result.status==0){
+					//删除tr
+					$tr.remove();
+					//弹出提示框
+					alert(result.msg);
+				}
+			},
+			error:function(){
+				alert("删除异常");
+			}
+		});
+	});
+});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

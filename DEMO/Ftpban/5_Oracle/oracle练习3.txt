@@ -1,0 +1,516 @@
+ 
+1. 以下不可以改变线程的状态的方法是：（）。
+  A. start 
+ B. run 
+ C. isAlive 
+ D. sleep 
+正确答案：C
+2. 下列代码运行的结果是：
+public class TestTwo implements Runnable {
+ public static void main(String[] args) throws Exception {
+  Thread t = new Thread(new TestTwo());
+  t.start();
+  System.out.print("Started");
+  t.join();
+  System.out.print("Complete");
+ }
+
+ public void run() {
+  for (int i = 0; i < 4; i++) {
+   System.out.print(i);
+  }
+ }
+}
+  A. StartedComplete
+ B. StartedComplete0123
+ C. Started0123Complete
+ D. 0l23StartedComplete
+正确答案：C
+3. 下列选项中能够得到字符串的一部分的单行函数是（）。 
+  A. INSERT 
+ B. SUBSTR 
+ C. LPAD   
+ D. LEAST
+正确答案：B
+4. 在Java中，在尝试对null 对象操作时，会产生的异常类型是：
+  A. ArithmeticException
+ B. NullPointerException
+ C. IOException
+ D. EOFException
+正确答案：B
+5. 可以在Oracle中获取当前时间的Sql语句是（） 
+  A. SELECT SYSDATE
+ B. SELECT SYSDATE FROM DUAL
+ C. SELECT DATE
+ D. SELECT DATE FROM DUAL
+正确答案：B
+6. 操作cost表，若一个月使用了200小时,计算每种资费标准对应的最终费用是多少（考虑单位费用和基础费用为null的情况，最终费用=固定费用+超时部分×单位费用），下列sql语句正确的是：
+  A. select id,nvl(base_cost,0) + (200 - nvl(base_duration,0)) * nvl(unit_cost,0)  fee
+      from cost;
+ B. select id,nvl(base_cost,0)  fee from cost;
+ C. select id,200*nvl(unit_cost,0)  fee from cost;
+ D. select id, base_cost + (200 - base_duration)*unit_cost fee from cost;
+正确答案：A
+7. Oracle数据库中，在SQL语句中连接字符串的方法是：（）。 
+  A. CAT 
+ B. CONCAT 
+ C. JOIN 
+ D. UNION 
+正确答案：B
+8. 在Oracle中，删除表Student中的所有数据，可以使用的Sql是（）。
+  A. DROP TABLE Student
+ B. DELETE FROM Student
+ C. DELETE * FROM Student
+ D. DROP * FROM Student
+正确答案：B
+9. 关于Java线程说法错误的是（）。
+ A. 创建线程的有2种方式，方式1是继承Thread类，方式2是实现 Runnable 接口
+ B. 解决线程安全使用问题 synchronized关键字，使得同一时间只有一个线程执行该关键字限定的代码段
+ C. 线程间通信所使用的方法有，wait，notify，notifyAll，它们都是 Thread 的方法
+ D. Java线程包括5个状态，线程的创建，可运行，运行，阻塞和消亡
+正确答案：C
+10. 下列代码的运行结果是（） 
+public class Foo {  
+	static void test() throws RuntimeException {         
+		try {             
+			System.out.print("test ");             
+			throw new RuntimeException();        
+ 		} catch (Exception ex) {           
+			  System.out.print("exception ");        
+		 }    
+	}    
+	public static void main(String[] args) {         
+		try {             
+			test();        
+		 } catch (RuntimeException ex) {            
+			 System.out.print("runtime ");        
+	 	}         
+		System.out.print("end ");    
+	 } 
+} 
+  A. test end
+ B. test
+ C. test runtime end
+ D. test exception end
+正确答案：D
+11. 试图使用下面句子查询数据： SELECT 100/NVL(quantity, 0) FROM inventory; quantity为 NULL 空值时，将导致出错，其原因是：（）
+  A. 除数表达式为空值. 
+ B. 函数参数数据类型不一致. 
+ C. 空值不能被转成实际值 
+ D. 除数表达式为零 
+正确答案：D
+12. 下列代码中对象锁的使用效率最高的是：
+  A. public class Foo{
+	 private Object o1,o2;
+ 	public synchronized void methodA(){对o1进行操作}
+ 	public synchronized void methodB(){对o1进行操作} 
+ 	public synchronized void methodC(){对o2进行操作}
+ 	public synchronized void methodD(){对o2进行操作} 
+      }
+
+ B. public class Foo{   
+ 	private Object lock = new Object();
+ 	private Object o1,o2;
+ 	public void methodA(){synchronized(lock){对o1进行操作}}
+	public void methodB(){synchronized(lock){对o1进行操作}} 
+	public void methodC(){synchronized(lock){对o2进行操作}}
+ 	public void methodD(){synchronized(lock){对o2进行操作}}
+     }
+ C. public class Foo{ 
+ 	private Object lock = new Object(),lock2 = new Object();
+ 	private Object o1,o2;
+	public void methodA(){synchronized(lock){对o1进行操作}}
+ 	public void methodB(){synchronized(lock){对o1进行操作}} 
+ 	public void methodC(){synchronized(lock2){对o2进行操作}}
+ 	public void methodD(){synchronized(lock2){对o2进行操作}}
+     }
+
+ D. public class Foo{   
+ 	private Object lock = new Object(),lock2 = new Object();
+ 	private Object o1,o2;
+ 	public void methodA(){synchronized(lock){对o1进行操作}}
+ 	public void methodB(){synchronized(lock2){对o1进行操作}} 
+ 	public void methodC(){synchronized(lock){对o2进行操作}}
+ 	public void methodD(){synchronized(lock2){对o2进行操作}}
+     }
+正确答案：C
+13. 分析如下代码，语法正确的Sql语句是（）。 
+  A. SELECT class,COUNT(stuId) 
+     	FROM students 
+	WHERE stuAge>18 GROUP BY class 
+	HAVING count(stuId)>3 
+  B. SELECT name,class,COUNT(stuId) 
+	FROM students 
+	WHERE stuAge>18 
+	GROUP BY class 
+	HAVING count(stuId)>3 
+  C. SELECT class,COUNT(stuId) 
+	FROM students 
+	GROUP BY class 
+	HAVING stuAge>18 
+  D. SELECT name,class,COUNT(stuId) 
+	FROM students 
+	WHERE COUNT(stuId)>3 
+	GROUP BY class 
+正确答案：A
+14. 有一个表leanr，表里有三个字段分别是学号（student_id）,课程（kc）,成绩（grade）。查询表中存在课程重复2次以上的记录,显示课程和重复的次数,并且按照重复次数的降序排列,下列SQL语句正确的是：（）。 
+  A. SELECT kc,COUNT(kc) FROM leanr ORDER BY COUNT(kc) DESC  GROUP BY kc  WHERE COUNT(kc)>=2 ; 
+ B. SELECT kc,COUNT(kc) FROM leanr ORDER BY COUNT(kc) DESC  GROUP BY kc  HAVING COUNT(kc)>=2 ; 
+ C. SELECT kc,COUNT(kc) FROM leanr  GROUP BY kc  WHERE COUNT(kc)>=2   ORDER BY COUNT(kc) DESC; 
+ D. SELECT kc,COUNT(kc) FROM leanr  GROUP BY kc  HAVING COUNT(kc)>=2   ORDER BY COUNT(kc) DESC; 
+正确答案：D
+15. 在Oracle中，现有Student表，其中包括学号stuId,姓名stuName,成绩stuGrade，现要查询成绩为80分的学生姓名，并且结果按照学号降序排列，下面查询语句正确的是（）。 
+  A. SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId
+ B. SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId DESC
+ C. SELECT stuName FROM student WHERE stuGrade like 80 GROUP BY stuId
+ D. SELECT stuName FROM student WHERE stuGrade=80 GROUP BY stuId DESC
+正确答案：B
+16. 查询cost表中资费名称，月固定费用，月包在线时长，单位费用,下列sql语句正确的是：
+  A. select name/base_duration/base_cost/unit_cost from cost
+ B. select name，base_cost,unit_cost from cost
+ C. select name and base_duration and base_cost and unit_cost from cost
+ D. select name,base_duration,base_cost,unit_cost from cost
+正确答案：D
+17. 下列代码的作用说法不正确的是：（）。
+class Card implements java.io.Serializable{} 
+  A. 开启序列化功能，使得Card类的对象可以存储到文件中
+ B. 开启序列化功能，使得Card类的对象可以在网络上传输
+ C. 使得Card类的子类的对象可以被序列化
+ D. 导致Card的子类的对象不可以被反序列化 
+正确答案：D
+18. synchronized关键字做同步，可以使用在：（）。
+  A. 方法上 
+ B. 接口上 
+ C. 变量上 
+ D. 类上 
+正确答案：A
+19. 在Oracle中，控制年龄必须在18到50之间(包含18和50)，可使用的代码是（）。
+  A. age>18 and age<50
+ B. age>=18 and age<=50
+ C. age>=18 && age<=50
+ D. age>18 && age<50
+正确答案：B
+20. 现有如下建表SQL语句： 
+	CREATE TABLE departments (   
+		department_id NUMBER(4) PRIMARY KEY,   
+		department_name VARCHAR2(20),   
+		city  VARCHAR2(20),   
+		province VARCHAR2(20) ) 
+下面插入语句正确的是：( )。 
+  A. INSERT INTO departments VALUES(300,’abc’); 
+ B. INSERT INTO departments(department_name,department_id) VALUES(300,’design’); 
+ C. INSERT INTO departments(department_name,city) VALUES(‘design’,’bj’); 
+ D. INSERT INTO departments VALUES(300,’abc’,null,null); 
+正确答案：D
+21. 查询客户姓名以及他的推荐人，没有推荐人的客户信息不显示，下列sql语句正确的是：
+  A. select a1.real_name customer,
+          a2.real_name recommender
+from account a1 join account a2
+on a1.id = a2.id;
+ B. select a1.real_name customer,
+          a2.real_name recommender
+from account a1 join account a2
+on a1.recommender_id = a2.recommender_id;
+ C. select a1.real_name customer,
+          a2.real_name recommender
+from account a1 join account a2
+on a1.recommender_id = a2.id;
+ D. select a1.real_name customer,
+          a2.real_name recommender
+from account a1, a2
+on a1.recommender_id = a2.id;
+正确答案：C
+22. 下列代码的运行结果是（）。 
+public class TestOne implements Runnable {    
+	 public static void main(String[] args) throws Exception {        
+		 Thread t = new Thread(new TestOne());         
+			t.start();         
+			System.out.print("Started");         
+			t.join();         
+			System.out.print("Complete");    
+	 }    
+	 public void run() {        
+		 for (int i = 0; i < 4; i++) {             
+			System.out.print(i);        
+		 }    
+	 } 
+} 
+  A. StartedComplete
+ B. StartedComplete0123
+ C. Started0l23Complete
+ D. 0123StartedComplete
+正确答案：C
+23. 下列Oracle语句中，可以实现更新记录的是（）。
+  A. UPDATE 数据表 SET 字段名称=值,… [WHERE 条件] [GROUP BY 字段名称]
+ B. UPDATE 数据表,数据表,… SET 字段名称=值,… WHERE 条件
+ C. UPDATE 数据表 SET 字段名称=值,… [WHERE 条件]
+ D. UPDATE 数据表 Set 字段名称=值,… [WHERE 条件] [ORDER BY 字段名称]
+正确答案：C
+24. 类A的定义如下： 
+class A { protected void f() throws FileNotFoundException {        ……… } } 
+下列代码段没有编译错误的是：（）。
+
+  A. class B extends A { public void f() throws Exception {        ……… } } 
+
+ B. class B extends A { public void g() throws IOException { f(); } } 
+ C. class B extends A { public void g() { try { f(); ……… }catch(IOException  e) {        ……… }catch(FileNotFoundException  e1) {        ……… } } } 
+ D. class B extends A { public void g() { try {     f(); }catch(FileNotFoundException e) {        throw new RuntimeException(e); } } } 
+正确答案：D
+25. Oracle中查询的时候可以去掉重复记录的是()
+  A. SELECT DISTINCT name FROM user
+ B. SELECT name DISTINCT FROM user
+ C. SELECT name FROM user
+ D. SELECT name FROM user LIMIT 1
+正确答案：A
+26. 需要读取一个比较大的文本文件，这个文件里有很多字节的数据，那么下列最合适读这个文件的选项是：（）。
+  A. new FileInputStream(“fileName”); 
+ B. new InputStreamReader(new FileInputStream(“fileName”)); 
+ C. new BufferedReader(new InputStreamReader(new FileInputStream(“fileName”))); 
+ D. new RandomAccessFile(“fileName”,”+rw”); 
+正确答案：C
+27. 运行下面程序: 
+	public class Foo{       
+		 public static void main(String[] args) {              
+			 try {                     
+			 	test();                      
+				System.out.println("condition 1");              
+			 } catch (ArrayIndexOutOfBoundsException e) {                     
+				 System.out.println("condition 2");              
+			 } catch (Exception e) {                      
+				System.out.println("condition 3");              
+			 } finally {                      
+				System.out.println("finally");             
+			  }        
+		}        
+		public static void test() {               
+			String str = "cc";              
+			 str.compareTo("abc");        
+		}
+	 } 
+输出的结果是：（）。
+  A. condition 1 finally 
+ B. condition 2 finally 
+ C. condition 1 condition 3 finally 
+ D. condition 1 condition 2 finally 
+正确答案：A
+28. 关于Java 异常，下列说法错误的是（）。
+ A. 异常是定义了程序中遇到的非致命的错误，而不是编译时的语法错误
+ B. try……catch语句中对try 内语句监测，如果发生异常，则把异常信息放入Exception类的对象中
+ C. throws 用来表示一个方法有可能抛出异常给上一层，则在调用该方法时必须捕捉异常，否则无法编译通过
+ D. main方法不可以使用 throws 抛出异常
+正确答案：D
+29. 显示上个月的今天，这个月的今天，下个月的今天，精度到时、分、秒，下列sql语句正确的是：
+  A. alter session set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select add_months(sysdate,-1),sysdate,add_months(sysdate,1) from dual;
+ B. alter user set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select add_months(sysdate,-1),sysdate,add_months(sysdate,1) from dual;
+ C. alter session set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select last_month(),this_month(),next_month() from dual;
+ D. alter user set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select last_month(),this_month(),next_month() from dual;
+正确答案：A
+30. 下面是SqlPlus命令的是：（）。 
+  A. DESC 
+ B. ALTER 
+ C. SELECT 
+ D. DELETE 
+正确答案：A
+31. 下列代码编译和运行的结果是：
+public class A {
+ void process() throws Exception {
+  throw new Exception();
+ }
+ public static void main(String[] args) {
+  A a = new B();
+  a.process();
+ }
+}
+class B extends A {
+ void process() {
+  System.out.println("B ");
+ }
+}
+  A. 输出:B
+ B. 无输出
+ C. B类的process方法处，出现编译错误
+ D. 代码a.process();行，出现编译错误
+正确答案：D
+32. 在Oracle中，若想查询家庭地址在’北京’,’上海’,’广州’的用户信息，下列Sql语句正确的是（）。 
+  A. SELECT * FROM student WHERE address=’北京’,’上海’,’广州’ 
+  B. SELECT * FROM student WHERE address LIKE(’北京’,’上海’,’广州’) 
+  C. SELECT * FROM student WHERE address IN(’北京’,’上海’,’广州’) 
+  D. SELECT * FROM student WHERE address=‘北京’ AND address=’上海’ AND address=‘广州’ 
+正确答案：C
+33. 阅读下面程序段:
+BufferedOutputStream bos = new BufferedOutputStream(
+                               new FileOutputStream("file.dat"));
+bos.write(100);
+假设file.dat不存在，运行该程序段后，文件file.dat的字节数为:
+  A. 0
+ B. 1
+ C. 2
+ D. 3
+正确答案：A
+34. 以下选项中可以用来从表 state中删除列 update_dt 的是( )。 
+  A. ALTER  TABLE  state  DROP  COLUMN  update_dt; 
+ B. ALTER  TABLE  state  DELETE  COLUMN  update_dt; 
+ C. DROP  COLUMN  update_dt  FROM  state; 
+ D.  REMOVE  COLUMN  update_dt  FROM  state; 
+正确答案：A
+35. 在oracle中，判断一条记录的某个列是否为NULL，应该使用:( )。 
+  A. != 
+ B. <> 
+ C. IS 
+ D. = 
+正确答案：C
+36. 下列说法正确的是（）
+ A. InputStream 是字符流
+ B. Reader 是字节流
+ C. Writer 是字节流
+ D. BufferedReader可以从文件中读取一行
+正确答案：D
+37. 在service表中，查询os账号名为：huangr 的unix服务器ip地址，os帐号名，下列sql语句正确的是：
+  A. select unix_host,os_username from service 
+where os_username = 'huangr';
+ B. select unix_host,os_username from service 
+where os_username = 'HUANGR';
+ C. select unix_host,os_username from service 
+where os_username = "huangr";
+ D. select unix_host,os_username from service 
+where os_username = "HUANGR";
+正确答案：A
+38. 下列Oracle语句中，属于DCL的有（）
+  A. GRANT
+ B. DESC
+ C. CONNECT
+ D. INSERT
+正确答案：A
+39. 在Oracle中，当数据量较大时，删除表中所有数据，效率较高的是（）。 
+  A. DELETE FROM Student 
+  B. DELETE FROM Student WHERE id>0 
+  C. TRUNCATE table Student 
+  D. TRUNCATE table Student WHERE id>0 
+正确答案：C
+40. 下列属于DML语句的是 ：（） 。
+  A. COMMIT         
+ B. INSERT     
+ C. DROP   
+ D. GRANT 
+正确答案：B
+41. joinFile方法用于将指定目录下（不包含子目录）所有的扩展名为txt的文本文件连接成一个大的文本文件，代码如下：
+ public void joinFile(String srcDir, String destFile)throws IOException {      
+	if (srcDir == null || srcDir.length() == 0 || destFile == null || destFile.length() == 0){             
+		 throw new IllegalArgumentException("...");     
+	 }         
+		File dir = new File(srcDir);         
+	if (          代码处1          ) { //1             
+		throw new IllegalArgumentException("指定源目录不存在");       
+	  }        
+		 BufferedOutputStream bos = new BufferedOutputStream(  new FileOutputStream(destFile));            
+		代码处2                  
+	if (files != null && files.length > 0) {            
+		 for (File sub : files) {                 
+			if (          代码处3          ) {                    
+				 BufferedInputStream bis = new BufferedInputStream( new FileInputStream(sub));                    				 int b;                     	
+				while ( 代码处4) {                                  
+				 代码处5                              
+				}                       
+				bis.close();                    
+			           bos.flush();                
+			 }             
+		}            
+			 bos.close();        
+	 }     
+}
+(1). 程序中1处应该填入的代码是：（）。
+ A. dir.exists() || dir.isFile()
+ B. !dir.exists() || !dir.isDirectory()
+ C. dir.exists() || dir.isDirectory()
+ D. !dir.exists() || !dir.isFile()
+正确答案：B
+(2). 程序中2处应该填入的代码是：（）。
+ A. File[] files = dir.listFiles();
+ B. File[] files = dir.lists();
+ C. File[] files = dir.getFiles();
+ D. File[] files = dir.files();
+正确答案：A
+(3). 程序中3处应该填入的代码是：（）。
+ A. sub.isDirectory() && sub.getPath().endsWith(".txt")
+ B. sub.isDirectory() && sub.getName().endsWith(".txt")
+ C. sub.isFile() && sub.getPath().endsWith(".txt")
+ D. sub.isFile() && sub.getName().endsWith(".txt")
+正确答案：D
+(4). 程序中4处应该填入的代码是：（）。
+ A. (b = bis.read()) != 0
+ B. (b = bis.read()) != -1
+ C. (b = bis.read()) != null
+ D. (b = bis.read()) >=0
+正确答案：B
+(5). 程序中5处应该填入的代码是：（）。
+ A. bos.writeBytes(b);
+ B. bos.writeInt(b);
+ C. bos.write(b);
+ D. bos.writeByte(b);
+正确答案：C
+42. IO类实现了打开并读取一个文本文件，每次读取一行内容。 将每行作为一个String字符串放入String数组里面返回。阅读代码并完成以下5题： 
+public class IO {     
+	public String[] read(InputStream in) throws IOException {        
+		 String[] arr = new String[1];         
+		 String[] temp = null;                      
+		空白处1        String line =””;         
+		while ((           空白处2          ) != null) {             
+			arr[arr.length - 1] = line;                          
+			 空白处3                      
+			for (int i = 0; i < arr.length; i++) {                 
+				temp[i] = arr[i];            
+			 }                         
+			 空白处4                      
+			for (int i = 0; i < arr.length; i++) {                 
+				arr[i] = temp[i];            
+			 }        
+		 }         
+			arr = new String[temp.length - 1];                   
+			for (int i = 0; i < arr.length; i++) {           
+			  arr[i] = temp[i];         
+			}         
+				br.close();         
+				return arr;     
+	}    
+	 public static void main(String[] args) throws IOException {         
+		String[] arr = new IO().read(new FileInputStream("data.txt"));        
+		 System.out.println(arr);                    
+			空白处5                     
+		 System.out.println(str);        
+	           }     
+	 } 
+}
+(1). 下列选项中，能填入空白处1的代码是(    )
+ A. BufferedReader br = new BufferedReader(new InputStreamReader(in));
+ B. BufferedReader br = new BufferedReader(new FileReader(in));
+ C. FileReader br=new FileReader(in);
+ D. InputStreamReader br=new InputStreamReader(in);
+正确答案：A
+(2). 下列选项中，能填入空白处2的代码是(    )
+ A. line = br.read();
+ B. line = br.readLine();
+ C. line = br.readString();
+ D. line = br.readUTF();
+正确答案：B
+(3). 下列选项中，能填入空白3的代码是(    )
+ A. temp = new String[arr.length + 1];
+ B. temp = new String[arr.length];
+ C. temp = new String[arr.length-1];
+ D. temp = new String[arr.length/2];
+正确答案：A
+(4). 下列选项中，能填入空白处4的代码是(    )
+ A. arr = new String[temp.length/2];
+ B. arr = new String[temp.length-1];
+ C. arr = new String[temp.length+1];
+ D. arr = new String[temp.length];
+正确答案：D
+(5). 下列选项中，能填入空白处5的代码是(    )
+ A. for (arr: String str) {
+ B. for (arr[]:String str){
+ C. for (String str : arr) {
+ D. for (String str : arr[]) {
+正确答案：C

@@ -1,0 +1,57 @@
+1.netctoss
+  net：网络
+  c：China 中国
+  t：Telecom 电信
+  o：Operation 运营
+  s：Support 支持
+  s：System 系统
+   中国电信运营支持系统-网络版
+2.路径规划   
+  1）资费(cost)
+         查询：/netctoss/cost/find.do
+  2）登录(login)
+     
+  3）角色(role)
+         查询：/netctoss/role/find.do
+3.页面规划
+  1）资费
+  	/WEB-INF/cost/*.jsp
+  2）登录
+    /WEB-INF/login/*.jsp
+
+
+补充：
+WEB-INF的作用：
+   该文件夹具有特殊的能力，放在它内部的文件不能直接
+   访问，必须通过转发的方式才能访问。
+   即，该文件夹对资源具有保护作用。
+1.为什么jsp要放在WEB_INF下？
+  1）jsp放在WEB_INF，用户就不能直接访问它了，
+         就必须通过Servlet来访问它。
+  2）这就是我们要的效果，因为我们不希望jsp被直接访问。
+  3）在MVC模式下开发的代码，jsp的数据来源于Servlet，
+        一旦直接访问jsp，会报错。
+   综上所述：将jsp放在WEB-INF下，是为了强制用户按照
+           MVC的规则来访问它，避免出现BUG。
+2.为什么静态资源(css/img/js)要放在WebRoot下？
+  1）浏览器发出请求访问Servlet，然后转发至JSP，
+        本次请求返回的仅仅是HTML文本。
+  2）浏览器会执行HTML，创建DOM模型，如果发现有
+     img类型的节点，那么它就会根据该节点的src
+        属性，向服务器发出请求，索取一张图。
+  3）由于获取图片的请求是独立的，与访问JSP无关，
+         因此本次请求中不存在转发，所以不能将图片放在
+     WEB-INF下，否则将无法访问。
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   

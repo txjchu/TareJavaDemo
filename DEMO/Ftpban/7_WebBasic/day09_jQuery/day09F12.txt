@@ -1,0 +1,393 @@
+$("#sh")
+[<li id="sh">上海</li>]
+$("#sh+li")
+[<li>广州</li>]
+//表示我要选择其下一个弟弟
+
+$("#sh+")
+[<li>广州</li>]
+$("#sh~")
+[<li>广州</li>, <li>深圳</li>]
+//表示要选中其所有的弟弟
+
+
+
+$("li")
+[<li>北京</li>, <li id="sh">上海</li>, <li>广州</li>, <li>深圳</li>]
+$("li:first")
+[<li>北京</li>]
+$("li:even")
+[<li>北京</li>, <li>广州</li>]
+//北京是0，广州是2，even选中偶数
+
+$("li:odd")
+[<li id="sh">上海</li>, <li>深圳</li>]
+$("li:eq(1)")
+[<li id="sh">上海</li>]
+//eq(i),可以选中下标是i的元素
+
+$("li:lt(1)")
+[<li>北京</li>\]
+$("li:gt(1)")
+[<li>广州</li>, <li>深圳</li>]
+//gt(i)下标大于i,lt(i)下标小于i。
+
+$("li:not(#sh)")
+[<li>北京</li>, <li>广州</li>, <li>深圳</li>]
+$("li:not(li)")
+[]
+//not()可以选中除去括号中所表示的元素的其他元素
+
+$("#d1 p:contains('师兄')")
+[<p>孙悟空大师兄</p>, <p>猪八戒二师兄</p>]
+//eq(i),可以选中下标是i的元素
+
+$("#d1 p:empty")
+[<p></p>]
+
+
+//ke可见性元素选择器，选择可见的元素
+undefined
+$("p:visible")
+[<p>孙悟空大师兄</p>, <p>猪八戒二师兄</p>, <p>小白龙</p>, <p></p>]
+$("p:hidden")
+[<p style="display:none;">老梁</p>]
+//选择不可见的元素
+
+
+$("li[id]")
+[<li id="sh">上海</li>, <li id="gz">广州</li>]
+$("li[id='sh']")
+[<li id="sh">上海</li>]
+$("li[id!='sh']")
+[<li>北京</li>, <li id="gz">广州</li>, <li>深圳</li>]
+
+
+$("input:enabled")
+[<input type="text">, <input type="password">]
+$("input:disabled")
+[<input type="text" value="徒弟" disabled>]
+
+
+$("input:checked")
+[<input type="checkbox">, <input type="checkbox">]
+//选择已经被选中的复选框
+$("option:selected")
+[<option>本科</option>]
+//选择被选中的下拉选，能够获取被选中的选项
+
+
+$(":text")
+[<input type="text">, <input type="text" value="徒弟" disabled>]
+$("input:text")
+[<input type="text">, <input type="text" value="徒弟" disabled>]
+$(":checked")
+[<input type="checkbox">, <input type="checkbox">, <option>本科</option>]
+$(":checkbox")
+[<input type="checkbox">, <input type="checkbox">, <input type="checkbox">]
+
+
+//必须对jQuery对象才能使用下面的jQuery的.html()方法
+$("#d1 p:first").html()
+"孙悟空大师兄"
+$("#d1 p:first").html("孙悟空齐天大圣")
+[<p>孙悟空齐天大圣</p>]
+$(":text:enabled")
+[<input type="text">]
+//de得到的是可用的文本框。
+
+$(":text:enabled").val()
+"admin"
+$(":text:enabled").val("system")
+[<input type="text">]
+
+
+$("img")
+[<img src="../images/01.jpg">]
+$("img").attr("src")
+"../images/01.jpg"
+//获取元素的属性，
+
+$("img").attr("src","../images/02.jpg")
+[<img src="../images/02.jpg">]
+
+
+var $li = $("<li>重庆<li>")
+undefined
+$li
+[<li>重庆</li>, <li></li>]
+$("ul").append($li)
+[<ul>…</ul>]
+$("ul").prepend($li)
+[<ul>…</ul>]
+$("#sh").after($li)
+[<li id="sh">上海</li>]
+$("#sh").before($li)
+[<li id="sh">上海</li>]
+
+
+$("#d1 p:first").addClass("male")
+[<p class="male">孙悟空大师兄</p>]
+$("#d1 p:first").addClass("big")
+[<p class="male big">孙悟空大师兄</p>]
+$("#d1 p:first").removeClass("big")
+[<p class="male">孙悟空大师兄</p>]
+$("#d1 p:eq(1)").removeClass("big")
+[<p class="male">猪八戒二师兄</p>]
+//移除样式
+$("#d1 p:first").hasClass("big")
+false
+//pa判断该元素上是否有此样式
+undefined
+$("#d1 p:first").toggleClass("big")
+[<p class="male big">孙悟空大师兄</p>]
+//切换样式：有样式就删除，没有此样式就加上此样式
+
+
+$("#d1 p:first").css("font-size")
+"16px"
+//只写一个参数，则是读取样式参数
+
+$("#d1 p:first").css("font-size","50px")
+[<p class="male">孙悟空大师兄</p>]
+//此方法带2个参数，则是更改样式参数。
+$("#d1 p:first").css("color","red")
+[<p class="male" style="font-size: 50px; color: red;">孙悟空大师兄</p>]
+
+
+
+遍历节点
+$("ul").parent()
+[<body>?…?</body>?]
+$("ul").children()
+[<li>?北京?</li>?, <li id=?"sh">?上海?</li>?, <li id=?"gz">?广州?</li>?, <li>?深圳?</li>?]
+$("#sh").next()
+[<li id=?"gz">?广州?</li>?]
+//找上海的兄弟广州
+
+$("#sh").prev()
+[<li>?北京?</li>?]
+//找上海的哥哥北京
+
+$("#sh").siblings()
+[<li>?北京?</li>?, <li id=?"gz">?广州?</li>?, <li>?深圳?</li>?]
+//找上海的所有兄弟，除去本身
+
+$("ul").find("#sh")
+[<li id=?"sh">?上海?</li>?]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

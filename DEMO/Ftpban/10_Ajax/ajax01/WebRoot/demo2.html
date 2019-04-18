@@ -1,0 +1,37 @@
+<html>
+<head>
+<!-- 添加jQuery框架 -->
+<script type="text/javascript" 
+	src="scripts/jquery.min.js">
+</script>
+<!-- btn1处理 -->
+<script type="text/javascript">
+//$(fn),浏览器载入body内容后执行fn函数处理
+$(function(){
+	$("#btn1").click(function(){
+		//以ajax方式发送get请求
+		$.get(
+		"http://localhost:8088/ajax01/demo1.do",
+		function(result){//result是服务器返回的结果
+			$("#msg_span").html(result);
+		});
+		//提示
+		$("#msg_span").html("正在加载...");
+	});
+});
+
+</script>
+</head>
+<body>
+<input type="button" value="获取Ajax对象">
+<input type="button" id="btn1" value="发送Ajax请求">
+<br/><span id="msg_span"></span>
+<hr/>
+用户名:<input type="text" id="username">
+<span id="name_span"></span><br/>
+密码:<input type="password" id="password"><br/>
+<input type="button" value="注册">
+</body>
+</html>
+
+

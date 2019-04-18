@@ -1,0 +1,54 @@
+=====MyBatis动态SQL=====
+在XML中根据参数对象数据动态拼接SQL语句。
+MyBatis提供了以下标签:
+<if test="条件">...</if>
+<choose>
+  <when test="条件1">...</when>
+  <when test="条件2">...</when>
+  <otherwise>...</otherwise>
+</choose>
+<foreach collectoin="" item="">...</foreach>
+<where> : 生成where关键字;过滤条件前面多余的and或or关键字
+<set>:生成set关键字;过滤更新字段后多余的逗号","
+
+1.组合查询
+有多个查询条件，根据用户输入动态产生不同的select查询语句检索
+
+select * from cn_note
+where cn_note_title like ?
+   and  cn_note_status_id=?
+   and  cn_note_create_time>?
+   and  cn_note_create_time<=?
+
+
+
+2.动态更新
+有多个更新项，根据用户输入动态产生不同的update更新语句检索
+
+
+
+/note/highSearch.do?status=2
+
+
+
+emp
+
+id name  sex age
+1   scott   M   20
+
+update emp set age=21,name='scott' where id=1
+
+
+array=[10,20,40,60,80]
+id
+
+delete from cn_note
+where cn_note_id in (10,20,40,60,80)
+
+delete from cn_note
+where cn_note_id in (10,20,40,60)
+
+
+
+
+

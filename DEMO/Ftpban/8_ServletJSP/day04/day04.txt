@@ -1,0 +1,21 @@
+1.JSP概述
+  1）JSP借鉴了微软的ASP
+  2）JSP用来改善Servlet动态生成页面的开发
+  3）Java Server Page
+    A.Java服务端的动态页面技术。
+    B.它更像网页，但是它是服务端组件，
+      不是客户端组件，和HTML有本质的区别。
+    C.JSP运行在服务器上，HTML运行在浏览器上
+2.JSP的使用
+  1）HTML/CSS/JS
+    直接书写
+  2）Java
+    *A.JSP表达式
+      用来输出变量
+    *B.JSP脚本
+      写Java的语法(分支、循环)
+    C.JSP声明
+      声明Java函数
+      建议将Java函数封装在类中，在
+      JSP中对其进行调用，最好别直接
+      在JSP中写Java。

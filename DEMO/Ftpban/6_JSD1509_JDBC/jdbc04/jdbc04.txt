@@ -1,0 +1,45 @@
+JDBC 晋级
+========================
+专题一、可滚动结果集
+专题二、事务处理  
+  update t_account set balance
+  = balance-1000 where id=1001;  
+  stmt.executeUpdate(sql1);   
+  update t_account set balance
+  = balance+1000 where id=1002;  
+  stmt.executeUpdate(sql2);  
+  * 创建账号表  
+专题三、批处理
+	批量保存数据
+	批量删除数据	
+专题四、关联保存
+专题五、分页
+Oracle分页：子查询+rownum
+
+	
+	int page = 2;
+	int pageSize = 10;
+	
+	int begin = (page-1)*pageSize+1;  
+	int end = page*pageSize;
+	
+	select * from(
+	select rownum rn,empno,ename 
+	from emp)
+	where rn between ? and ?;
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+

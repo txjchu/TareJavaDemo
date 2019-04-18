@@ -1,0 +1,125 @@
+1.Web应用的演变
+  1）从单击到网络
+  2）从CS到BS
+2.什么是Servlet
+  1）如何远程访问静态页面？
+    A.服务器上部署HTML
+    B.浏览器访问服务器的HTML
+  2）如何访问动态页面？
+    A.服务器上部署Servlet
+    B.浏览器访问Servlet，由Servlet
+      动态生成HTML
+  3）Servlet
+    A.Servlet是服务器端的满足规范
+      的组件（类）
+    B.它可以处理HTTP协议，动态生成HTML
+3.Tomcat的使用
+  1）Linux：
+    A.安装Tomcat
+      /文件系统/opt/apache-tomcat7.0
+      -->
+      /文件系统/home/soft01
+    B.启动Tomcat
+      打开/tomcat/bin，右键打开终端，
+      执行命令：./startup.sh
+    C.访问Tomcat
+      打开浏览器，输入地址
+      http://localhost:8080
+      看到一只猫则代表访问成功。
+    D.关闭Tomcat
+      打开/tomcat/bin，右键打开终端，
+      执行命令：./shutdown.sh
+  2）Windows
+    A.安装JDK，配置JAVA_HOME;
+    B.安装Tomcat
+      打开/tomcat/bin，双击startup.bat
+    C.访问Tomcat
+      打开浏览器，输入地址
+      http://localhost:8080
+      看到一只猫代表访问成功。
+    D.关闭Tomcat
+      打开/tomcat/bin，双击shutdown.bat
+  3）修改Tomcat端口
+    打开/tomcat/conf/server.xml，在
+    70行修改端口号。
+4.开发Servlet(手动部署)
+  1）创建Java项目
+  2）创建WEB目录
+    WebRoot
+      WEB-INF
+        classes
+        lib
+	  *.jar
+	web.xml
+  3）Build Path -> Libraries -> Add Jars
+     Build Path -> source -> Output folder
+  4）创建Servlet
+    A.实现Servlet接口
+    B.继承HttpServlet类
+  5）注册Servlet
+    在web.xml中注册Servlet
+  6）手动部署
+    将WebRoot整体复制到/tomcat/webapps下
+  7）访问Servlet
+    http://localhost:8080/WebRoot/hello
+5.开发Servlet(MyEclipse自动部署)
+  1）创建Web项目  
+  2）写Servlet
+  3）注册Servlet
+  4）使用MyEclipse部署项目
+    A.在MyEclipse下配置Tomcat，
+      告诉它要使用哪一个Tomcat。
+    B.使用MyEclipse启动Tomcat
+      点击服务器图标下的Tomcat7-> Start
+    C.访问Tomcat
+    D.关闭Tomcat
+      点击服务器图标下的Tomcat7 
+      -> Stop Server
+  5）使用MyEclipse启动Tomcat
+  6）访问Servlet
+  7）使用MyEclipse关闭Tomcat
+6.HTTP协议
+  1）用来规范客户端和服务器通信的
+    方式和数据格式。
+  2）其特点是一次连接处理一个请求。
+  3）请求步骤
+    A.建立连接
+    B.发送请求
+    C.接收响应
+    D.关闭连接
+  4）数据格式
+    
+  
+  
+补充：
+1.什么是JavaBean
+  满足如下规范的类
+  1）有包
+  2）有默认构造器
+  3）实现序列化接口
+  4）有bean属性(get/set方法所对应的属性)
+  public class Teacher {
+    //对象属性
+    private String techerName;
+    //name是bean属性
+    public void setName(String name) {
+      this.techerName = name;
+    }
+    public String getName() {
+       return this.teacherName;
+    }
+    //userName是bean属性
+    public String getUserName() {
+      
+    }
+  }
+2.名词解析
+  1）部署
+    A.就是把编译后的代码拷贝到Tomcat/
+    webapps下。
+    B.部署是专业的说法。
+  2）服务器
+    Tomcat是服务器，也叫Java Web服务器，
+    也叫Web服务器，也叫Servlet容器。
+
+

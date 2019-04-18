@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js的用法</title>
+		<!-- 2.嵌入式，在head下面的
+			script标签内写js。 -->
+		<script type="text/javascript">
+			//声明一个函数
+			//由于js中变量不区分类型，
+			//所以不需要声明返回类型。
+			function f2() {
+				alert("传奇哥");
+			}
+		</script>
+		<!-- 3.文件调用式，在.js文件中写js，
+			然后将其引入到此页面中，等价于
+			将.js文件中的代码复制到script
+			标签下一样。 -->
+		<!-- 如果用此标签引入js，就不要在此
+			标签下写其他的js； -->
+		<!-- 此标签必须写成双标签； -->
+		<script type="text/javascript" src="d5.js"></script>
+	</head>
+	<body>
+		<!-- js代码必须通过事件触发，如
+		  单击事件，双击事件、光标切入事件... -->
+		<!-- 1.事件定义式，在声明事件时
+			直接写js -->
+		<input type="button" value="按钮1"
+			onclick="alert('苍老师');"/>
+		<input type="button" value="按钮2"
+			onclick="f2();"/>
+		<input type="button" value="按钮3"
+			onclick="f3();"/>
+	</body>
+</html>
+
+
+
+

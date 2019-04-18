@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>阶乘</title>
+		<script type="text/javascript">
+			//计算阶乘
+			function cal() {
+				//获取文本框和段落元素
+				var input = document.getElementById("num");
+				var p = document.getElementById("result");
+				//获取输入的值
+				var n = input.value;
+				//判断输入的值
+				if(n=="" || isNaN(n)) {
+					//给予错误提示
+					p.innerHTML = "请输入数字";
+				} else {
+					//计算阶乘
+					n = parseInt(n);
+					var sum = 1;
+					//js中表达式可以返回布尔值，
+					//也可以返回其他任意的值，此时
+					//空值代表false，非空代表true。
+					for(var i=n;i;i--) {
+						sum*=i;
+					}
+					p.innerHTML = sum;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- n的阶乘=1*2*3*...*n -->
+		<input type="text" id="num"/>
+		<button onclick="cal();">阶乘</button>
+		<p id="result"></p>
+	</body>
+</html>
+
+
+
+
+
+
+

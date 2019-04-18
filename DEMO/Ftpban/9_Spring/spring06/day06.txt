@@ -1,0 +1,28 @@
+1.使用spring提供的过滤器解决
+表单中文参数问题
+	注意：
+		a.表单提交方式必须为post
+		b.表单所在的页面的编码与
+		过滤器的编码必须一致，比如
+		都为"utf-8"
+2.spring的异常处理
+	(1)对于系统异常，在配置文件当中
+	配置异常解析器。
+	(2)对于应用异常，使用@ExceptionHandler
+	来处理。
+	
+练习：
+	资费列表
+	http://ip:port/netctoss02/find.do
+	step1,建表(Cost),插入相应的记录。
+	step2,Cost类
+	step3,CostDAO类, 并测试。
+				List<Cost> findAll()
+	step4,CostService类,并测试
+				List<Cost> findAll()
+	step5,CostController类
+	step6,cost_list.jsp
+
+3.拦截器
+	
+			

@@ -1,0 +1,15 @@
+任务：完成之前的笔记本，笔记添加
+新任务：完成“保存笔记”按钮的操作
+
+
+/note/update.do
+-->UpdateNoteController
+   -->NoteService.updateNote
+   -->NoteDao.update-->cn_note(更新)
+-->返回JSON结果
+
+
+$("#note_list").on("click",".btn_delete",function(){
+   var $li = $(this).parents("li");
+
+});

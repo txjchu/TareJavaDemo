@@ -1,0 +1,39 @@
+======注册========
+1.客户端
+  a.发送ajax请求
+  --发送时机
+  --提交数据
+  b.ajax回调函数
+  --注册成功，给用户alert提示,然后切换到登录界面
+
+2.服务器端
+  c.Spring+MyBatis
+/user/regist.do
+-->DispatcherServlet-->handlerMapping
+-->UserRegistController.execute
+   -->UserService.registUser
+   -->UserDao.save-->cn_user(插入操作)
+-->返回NoteResult结构的json数据
+
+/user/regist.do?username=demo&password=1234
+
+======显示笔记本列表=======
+a.发送ajax请求
+ --页面加载后自动发送请求
+ --提交用户ID
+b.ajax回调
+  解析服务器返回JSON结果,动态生成笔记本li
+
+c.服务器端
+/notebook/loadbooks.do
+-->LoadUserBooksController.execute
+   -->BookService.loadUserBooks
+   -->BookDao.findByUserId-->cn_notebook(按用户ID查询)
+-->返回NoteResult结构的JSON数据
+
+
+
+
+
+
+

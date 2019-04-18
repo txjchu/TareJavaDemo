@@ -1,0 +1,150 @@
+======预览笔记=======
+功能：查看搜索结果列表中的分享笔记信息
+
+a.发送ajax请求
+  --用户单击分享笔记列表元素时
+  --提交列表li绑定的shareId
+b.回调函数
+  --将分享笔记信息显示出来（标题+内容）
+c.服务器处理
+/note/loadShare.do
+-->LoadShareController.execute
+-->NoteService.loadShare
+-->ShareDao-->cn_share(按shareId查询)
+-->返回NoteResult结构的json结果 
+
+select cn_share_title from cn_share
+limit 0,10;
+
+limit 抓取记录起点(0开始), 最大抓取记录数量
+
+
+limit #{begin},10
+
+1-->begin 0
+2-->begin 10
+3-->begin 20
+n-->begin (n-1)*10
+
+=====Spring事务=====
+1.什么是事务
+事务和数据库操作有关，commit事务提交;rollback事务回滚
+事务作用:用于保证一组和数据库有关的操作的完整性
+
+try{
+开启事务
+操作1-->db操作
+操作2-->db操作
+操作3-->db操作
+提交事务
+}catch(){
+回滚事务
+}
+
+2.JDBC事务管理
+JDBC事务默认提交,每执行一个executeUpdate()方法
+自动commit或出异常rollback.
+
+try{
+conn.setAutoCommit(false);
+操作1-->db操作
+操作2-->db操作
+操作3-->db操作
+conn.commit();
+}catch(){
+conn.rollback();
+}
+
+3.MyBatis框架(单独使用)
+默认没有自动提交,需要执行sqlSession.commit();
+
+4.与Spring结合
+JDBC和MyBatis与Spring结合默认一个db操作就自动提交。
+如果需要将多个操作绑定一个整体,需要使用Spring事务管理。
+
+Spring事务管理有以下两种方式：
+**a.声明式事务管理(基于配置)
+  --注解配置（更简单,灵活）
+   
+  --XML配置(繁琐,耦合度更低)
+
+b.编程式事务管理（基于Java编写,TransactionTemplate）
+
+
+try{
+开启事务
+执行带@Transactional注解的方法
+提交事务
+}catch(){
+回滚事务
+}
+
+
+5.Spring事务特性
+  a.读写
+    默认可读写,查询建议使用只读模式
+    readOnly=true
+  b.回滚
+   默认运行时异常回滚,检查异常不会回滚
+   可以使用@Transactional(rollbackFor=IOException.class)
+   遇到IOException也会事务回滚
+
+@Transactional
+public void f1 throws MyException{
+
+}
+
+//不会回滚，需要使用rollbackFor=MyException.class
+public class MyException extends Exception{}
+//建议，会回滚
+public class MyException extends RuntimeException{}
+
+更新db个人信息
+上传图片
+
+ c.传播
+ 默认情况是REQUIRED,可以使用propagation=Propagation.类型
+@Transactional 
+public void f1(){
+  处理1
+  处理2
+  f2();
+ }
+
+@Transactional (propagation=Propagation.REQUIRED)
+public void f2(){
+  处理3
+  处理4
+ }
+
+ d.隔离
+  对相同数据进行读写操作，事务并发会产生错误数据处理。
+  会产生脏读，幻读，不可重复读等错误。这些可以通过设置事务隔离级别
+  解决。
+
+  读未提交READ_UNCOMMITTED
+  读已提交READ_COMMITTED
+  可重复读REPEATABLE_READ
+  序列化操作SERIALIZABLE
+  默认值DEFAULT（根据数据库决定,oracle第二个,mysql第三个）
+
+  级别由低到高为READ_UNCOMMITTED--》SERIALIZABLE
+  级别越高安全性越高,并发处理能力越低。
+
+@Transactional()
+public void f1(){
+  A-->对id=1的emp处理
+  B
+  C-->对id=1的emp处理
+}
+
+select * from emp where id=1 for update;
+更新
+事务结束，释放锁
+
+1  scott  12000   2.0
+
+A-->查询1.0--》更新12000--》提交，版本加1
+B-->查询1.0--》更新11000--》提交 失败
+
+

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>登录</title>
+		<style type="text/css">
+			/*验证成功的样式*/
+			.ok {
+				color: green;
+				border: 1px solid green;
+			}
+			/*验证失败的样式*/
+			.error {
+				color: red;
+				border: 1px solid red;
+			}
+		</style>
+		<script type="text/javascript">
+			//校验账号的格式
+			function check_name() {
+				//1.获取账号的值
+				var code = document.getElementById("code").value;
+				console.log(code);
+				//2.判断账号的格式(正则)
+				var reg = /^\w{6,20}$/;
+				var span = document.getElementById("code_msg");
+				console.log(span);
+				if(!reg.test(code)) {
+					//3.格式不对，给span加error样式
+					console.log("error");
+					//className就是元素的class属性
+					span.className = "error";
+					return false;
+				} else {
+					//4.格式正确，给span加ok样式
+					console.log("ok");
+					span.className = "ok";
+					return true;
+				}
+			}
+			//校验密码
+			function check_pwd() {
+				var pwd = document.getElementById("pwd").value;
+				var reg = /^\w{8,16}$/;
+				var span = document.getElementById("pwd_msg");
+				if(!reg.test(pwd)) {
+					span.className = "error";
+					return false;
+				} else {
+					span.className = "ok";
+					return true;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- form上的onsubmit事件，是表单
+			提交事件，当提交表单时触发。 -->
+		<!-- onsubmit中的js若返回false，
+			则表单提交的行为被终止； 
+			若返回true，则表单会被提交。-->
+		<form action="http://www.tmooc.cn"
+			onsubmit="return check_name()+check_pwd()==2;">
+			<!-- onblur是光标移除(切换)事件，
+				在光标移除此框时触发。 -->
+			<p>
+				账号：<input type="text" id="code"
+						onblur="check_name();"/>
+				<span id="code_msg">6-20位字母数字下划线的组合</span>
+			</p>
+			<p>
+				密码：<input type="password" id="pwd"
+						onblur="check_pwd();"/>
+				<span id="pwd_msg">8-16位字母数字下划线的组合</span>
+			</p>
+			<p>
+				<input type="submit" value="登录"/>
+			</p>
+		</form>
+	</body>
+</html>
+
+
+
+
+
+

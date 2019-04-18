@@ -1,0 +1,33 @@
+1.笔记转移
+
+/note/move.do
+-->MoveNoteController.execute
+-->NoteService.moveNote
+-->NoteDao.updateBookId-->cn_note(更新book_id)
+-->返回JSON结果
+
+2.分享笔记搜索
+cn_share
+
+/note/search.do？keyword=xxx
+-->SearchShareController.execute
+   -->NoteService.searchNote
+  -->ShareDao.findLikeTitle-->cn_share(按标题模糊查询)
+-->返回NoteResult格式的json结果
+
+select * from cn_share
+where cn_share_title like '%测试%';
+
+$.post(url,function(){
+//js代码1
+})
+//js代码2
+
+---异步---
+//发送ajax请求
+//js代码2
+//js代码1
+---同步---
+//发送ajax请求
+//js代码1
+//js代码2

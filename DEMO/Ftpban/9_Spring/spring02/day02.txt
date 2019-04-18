@@ -1,0 +1,38 @@
+1.参数值的注入
+	(1)基本类型String,int...
+		<bean value="">
+	(2)对象
+		<bean ref="">
+	(3)集合
+		<list>
+			<value>
+		</list>
+		<set>
+			<value>
+		</set>
+		<map>
+			<entry key="" value=""/>
+		</map>
+		<props>
+			<prop key=""></prop>
+		</props>
+		可以将集合配置为一个bean,方便重用。
+		<util:list id="">
+			<value>
+		</util:list>
+
+2.标注的方式注入
+	(1)spring容器会扫描添加了相应的标准的
+	java类(javabean)，然后将其作为一个bean
+	进行管理。
+		可以不用在配置文件当中使用<bean>来配置。
+	这样可以大大简化配置文件。
+	(2)使用步骤
+		step1,在配置文件当中使用
+		<util:component-scan base-package="ioc3"/>
+		step2,在java类当中，使用
+		@Component 通用
+		@Repository 持久层
+		@Service  业务层
+		@Controller 控制层
+		

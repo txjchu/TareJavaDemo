@@ -1,0 +1,33 @@
+<html>
+<head>
+<!-- 功能：页面一显示,自动加载下拉单option元素 -->
+<script type="text/javascript" 
+	src="scripts/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	//发送ajax请求加载option选项
+	$.get(
+	"http://localhost:8088/ajax01/demo5.do",
+	function(data){
+		//将data数组循环,生成option元素
+		for(var i=0;i<data.length;i++){
+			var id = data[i].id;
+			var name = data[i].name;
+			var sopt = '<option value="'+id+'">'
+					+name+'</option>';
+			$("#user_select").append(sopt);//插入到<select>中
+		}
+	},
+	"json");
+});
+</script>
+</head>
+<body>
+<select id="user_select">
+</select>
+</body>
+</html>
+
+
+

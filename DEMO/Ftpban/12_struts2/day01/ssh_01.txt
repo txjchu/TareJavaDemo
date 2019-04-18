@@ -1,0 +1,52 @@
+======Struts2==========
+1.Struts2简介
+ Struts1版本,Apache，MVC框架--》JavaWeb
+ Struts2版本和Struts1版本关系不大，源于WebWork2内核
+ 由Apache负责推广
+ WebWork框架，Opensymphony
+
+2.Struts2的MVC结构
+
+
+
+StrutsPreparedAndExecuteFilter
+
+3.基本应用
+ a.搭建Struts2环境
+  --引入jar包
+  --引入配置文件struts.xml
+
+ b.涉及流程
+ /hello.action
+-->Filter控制器(web.xml配置)  默认识别/hello.action或/hello
+-->HelloAction(编写,struts.xml配置)
+-->Result(dispatcher)(struts.xml配置)
+-->/hello.jsp(编写)
+
+测试请求URL
+http://localhost:8088/struts2/hello.action
+http://localhost:8088/struts2/hello
+
+===显示登录页面====
+/tologin.action
+-->Filter-->底层默认Action-->Result-->/WEB-INF/login.jsp
+
+=====登录按钮处理==========
+/login.action
+-->Filter-->LoginAction-->Result-->正确ok.jsp;错误login.jsp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

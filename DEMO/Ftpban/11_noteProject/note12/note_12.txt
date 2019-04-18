@@ -1,0 +1,84 @@
+====MyBatis关联映射=====
+查询使用。多表关联查询。
+将多个关联表记录查询出来，如何映射成实体对象。
+
+cn_user:用户信息
+cn_notebook:笔记本信息，关系字段cn_user_id
+关联条件cn_user.cn_user_id=cn_notebook.cn_user_id
+
+
+cn_user-->User
+cn_notebook-->NoteBook
+
+User
+List<NoteBook>
+
+User
+User.setBooks(List<NoteBook>)
+
+public class User{
+  //原来的User属性信息
+  //关联属性信息,与NoteBook关联
+  private List<NoteBook> books;
+}
+
+JSP
+查看笔记本列表
+笔记本名 创建时间 所属用户名
+
+User
+NoteBook
+
+使用关联映射，封装查询结果
+
+select * 
+from cn_notebook book
+   join cn_user user 
+  on(book.cn_user_id=user.cn_user_id)
+
+
+/notebook/list.do
+-->BookListController.execute
+  -->BookService.loadBooks
+  -->BookJoinDao.findJoinUser-->cn_notebook(关联cn_user查询)
+-->ViewResolver-->book_list.jsp
+
+
+MyBatis关联映射分类：
+ a.单个对象关联
+  notebook-->user
+  操作方法：
+    --追加单个对象的关联属性
+    --在sql定义中用<resultMap>的<association>元素定义
+  
+  还可以细分为：与主对象一起加载或另外发送一个SQL加载
+
+ b.集合对象关联
+   user-->notebook
+  操作方法：
+    --追加集合类型的关联对象属性
+    --在sql定义中用<resultMap>的<collection>元素定义
+
+ 还可以细分为：与主对象一起加载或另外发送一个SQL加载
+
+案例：查看某个用户信息以及包含的笔记本信息
+
+======主键映射=======
+create sequence emp_seq;
+
+select emp_seq.nextval from dual//先执行，将获取的序列主键值放入参数Emp对象eno属性中
+insert into t_emp(eno,ename) values (#{eno},#{ename})//执行insert，将Emp对象信息插入db表
+
+<insert id="save" 
+	parameterType="org.tarena.entity.Emp">
+	<selectKey order="BEFORE" 
+		resultType="int" keyProperty="eno">
+	select emp_seq.nextval from dual
+	</selectKey>
+	insert into t_emp (eno,ename)
+		values (#{eno},#{ename})
+</insert>
+
+
+
+

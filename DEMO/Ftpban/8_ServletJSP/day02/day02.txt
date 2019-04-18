@@ -1,0 +1,39 @@
+1.请求方式
+  1）get
+    A.利用URL传参
+      浏览器会把参数自动附加在URL上
+      传递给服务器，在传参的过程中
+      参数是可见的。
+    B.对传递的数据有限制，很小
+    C.使用get的时机
+      --传递的数据少
+      --如查询、删除
+  2）post
+    A.利用实体内容传参
+      数据在传递的过程中不可见
+    B.对传递的数据没有限制，很大
+    C.使用post的时机
+      --传递的数据多
+      --如新增保存、修改保存、注册、登录
+2.给服务器传参时的乱码问题   
+ 1）get
+   get_encoding.png
+ 2）post
+   post_encoding.png
+ 3）总结
+   A.浏览器请求服务器时
+     尽量避免get请求传中文；
+     post请求乱码采用
+     req.setCharacterEncoding()设置
+   B.服务器给浏览器响应时
+     res.setContentType(
+         "text/html;charset=utf-8")
+   
+
+
+
+
+
+
+
+

@@ -1,0 +1,354 @@
+1. 在 JavaEE中，使用 Servlet 过滤器，需要在 web.xml中配置的元素是：（） 
+
+  A. <servlet>和<servlet-mapping> 
+ B. <filter>和<filter-mapping> 
+ C. <servlet-filter> 
+ D. <filter-config> 
+正确答案：B
+2. 在jQuery中，如果想要从DOM中删除所有匹配的元素，下面选项中正确的是（）。 
+  A. remove() 
+ B. empty() 
+ C. removeAll() 
+ D. delete() 
+正确答案：A
+3. JSP文件代码如下： <% int  temp; %>     <h1> temp is <%=temp%></h1>     编译或运行结果是：（）。 
+  A. 输出：temp is 0 
+ B. 输出：temp is  
+ C. 编译出错，因为temp没有被初始化 
+ D. 输出：temp is null 
+正确答案：C
+4. 有关Servlet的生命周期说法不正确的是：（）。 
+  A. Servlet的生命周期由Servlet实例控制 
+ B. init()方法在创建完Servlet实例后对其进行初始化，传递的参数为实现ServletConfig类的对象 
+ C. service()方法响应客户端发出的请求 
+ D. 在容器移除servlet 时，调用destroy方法，进行资源的释放 
+正确答案：A
+5. 下列代码的输出结果是（）。 
+var arr2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];  
+$.each(arr2, function(i, item){ document.write(item[i]+“   ”);  }); 
+  A. 2  4  8 
+  B. 1  2  3 
+  C. 1  4  7 
+  D. 1  5  9 
+正确答案：D
+6. 关于MVC模式，下列选项中的说法错误的是 ：（）。 
+  A. MVC是一种软件架构思想，将软件的组成划分成三部分 
+ B. 采用MVC模式使模型和视图可以独立修改 
+
+ C. 在MVC中，M指的是Model；V指的是View；C指的是Controller 
+ D. 采用MVC模式，模型部分并不能重用，而视图部分则可以完全的重用 
+正确答案：D
+7. 在JSP中，要定义一个方法，需要用到以下的元素是（）。
+ A. <%= %>
+ B. <%   %>
+ C. <%! %>
+ D. <%@ %>
+正确答案：C
+8. 在Java Web应用中，下面关于HttpSession的说法正确的是（ ）。 
+  A. Servlet实例负责创建HttpSession对象 
+ B. 每个HttpSession对象都有唯一的ID 
+ C. 客户端浏览器负责为HttpSession分配唯一的ID 
+  D. HttpSession对象的ID值,由程序进行分配 
+正确答案：B
+9. 在Java Web应用程序中，给定servletA的代码片段如下所示：
+ public void doPost(HttpServletRequest request,HttpServletResponse response) 
+ throws ServletException,IOException{ String id=”kingdom”; ______________________ } 
+ServletB与servletA同在一个有效的会话范围内，
+当把请求转发给ServletB后，要是在ServletB中能够获得“kingdom”值，
+下划线处应填入（ ）。 
+  A. request.getSession().setAttribute(“ID”,id)； 
+ B. request.getSession().getAttribute(“ID”,id)； 
+ C. request.getSession().setParameter(“ID”,id)； 
+ D. request.getSession().getParameter(“ID”,id)； 
+正确答案：A
+10. 在Servlet中用于创建会话的方法是：（）。 
+  A. HttpServletRequest的getSession方法 
+ B. HttpServletResponse的newSession方法 
+ C. HtttpSession的newInstance方法 
+ D. HttpSession的getSession方法 
+正确答案：A
+11. 以下代码能否编译通过，假如能编译通过，运行时得到输出结果是什么（）。
+ <%    session.setAttribute("count",new Double(0));   
+ Double count = session.getAttribute("count") ; 
+%> 
+<%=count %> 
+
+  A. 编译不通过 
+ B. 可以编译运行，输出0 
+  C. 编译通过，但运行时抛出ClassCastException 
+
+  D. 可以编译通过，但运行时无输出 
+正确答案：A
+12. 在JSP中，page指令的属性中，用来引入需要的包或类的是(  )。
+ A. extends
+ B. import
+ C. languge
+ D. contentType
+正确答案：B
+13. jQuery中与$(this).get(0)相同的等价写法是（）。 
+  A. $(this){0} 
+ B. $(this).get[0] 
+ C. $(this).get{0} 
+ D. $(this)[0] 
+正确答案：D
+14. 在JavaEE中，要将某个过滤器映射到Web应用程序的每个Web资源，以下在web.xml，中的配置正确的是（    ）。
+ A. <filter-mapping>
+        <filter-name>someFilter</filter-name>
+        <url-pattern>/*<url-pattern> </filter-mapping>
+ B. <filter>
+      <filter-name>someFilter</filter-name>
+      <url-pattern>/*<url-pattern>
+</filter>
+ C. <filter-mapping>
+      <filter-name>someFilter</filter-name>
+      <url-pattern>*<url-pattern>
+</filter-mapping>
+ D. <filter>
+       <filter-name>someFilter</filter-name>
+       <url-pattern>*<url-pattern>
+</filter>
+正确答案：A
+15. 下列是html和jQuery的代码片段： 
+html代码片段：  
+<div id="d1">     
+<a href="javascript:;" id="a1">Click</a>  </div>  
+jQuery代码片段：  
+$(function(){   $('#a1').click(function(e){    alert('你点击了一个链接');   });   
+$('#d1').click(function(e){    alert('你点击了一个div');   });  }); 
+点击超链后，弹出对话框的情况是：（） 
+  A. 弹出一个对话框，显示“你点击了一个链接”      
+ B.  弹出一个对话框，显示“你点击了一个div” 
+ C. 首先弹出对话框，显示“你点击了一个链接”，接着弹出对话框，显示“你点击了一个div” 
+ D. 首先弹出对话框，显示“你点击了一个div”，接着弹出对话框，显示“你点击了一个链接” 
+正确答案：C
+16. 下面关于JSP作用域对象的说法错误的是（）。 
+  A. request对象可以得到请求中的参数 
+ B. session对象可以保存用户信息 
+ C. application对象可以被多个应用共享 
+ D. 作用域范围从小到大是request、session、application 
+正确答案：C
+17. 在Java Web开发中，不同的客户端需要共享的数据应存储在（ ）中。 
+  A. session 
+ B. application 
+ C. request 
+ D. response 
+正确答案：B
+18. 在a.jsp中有代码片断如下： 
+<form action =”b.jsp” method =”post” name=”myForm”> 
+   loginName:<input type=”text” name=”loginName”/> 
+   <input  type=”submit” name=”submit”/>             
+</form> 
+在b.jsp中想输出在a.jsp页面上输入的loginName的值，以下选项正确的是：（）。
+ A. <%= request.getParameter(“loginName”)%>
+ B. <%=(String )request.gerAttribute(“loginName”)%>
+ C. <%= request.getParameter(“loginname”) %>
+ D. <%=(String )request.getAttribute(“loginname”) %>
+正确答案：A
+19.  在JSP中，只有一行代码：<%=A+B%>，运行的结果是（）。
+ A. A+B
+ B. AB
+ C. 113
+ D. 错误信息
+正确答案：D
+20. 下列不属于XmlHttpRequest对象的属性的是（）。 
+  A. onreadystatechange 
+ B. readyState 
+ C. status 
+ D. responseJson 
+正确答案：D
+21. 在Java Web应用程序中，给定某Servlet程序的代码如下所示： public class ServletFoo extends HttpServlet{ public void doGet(HttpServletRequest request,HttpServletResponse response)    throws ServletException IOException{    System.out.println(“get”); } public void doPost(HttpServletRequestrequest.HttpServletResponse response)      throws ServletException,IOException{      System.out.println(“post”);      doGet(reauest,response);    } } 用户在浏览器地址栏中键入正确的请求URL并回车后，在控制台上显示的结果是（ ）。 
+  A. get 
+ B. post 
+ C. get post 
+ D. post get 
+正确答案：A
+22.  请看下列代码，使用jQuery给id是u_item的第二个<li>设置字体的颜色。  <ul id="u_item">   <li>item1</li>   <li>item2</li>   <li>item3</li>  </ul> 下列代码正确的是:() 
+
+  A. var $obj = $('#ul li');    $obj.each(function(index){     if(index == 1){      $(this).css('color','red');     }    }); 
+ B. var $obj = $('#ul li');    $obj.each(function(index){     if(index == 2){      $(this).css('color','red');     }    }); 
+ C.  var $obj = $('#u_item li');    $obj.each(function(index){     if(index == 1){      $(this).css('color','red');     }    }); 
+ D.  var $obj = $('#u_item li');    $obj.each(function(index){     if(index == 2){      $(this).css('color','red');     }    }); 
+正确答案：C
+23. 在JavaEE中，若要在JSP中正确使用标签：<x:getKing/>，在JSP中声明的taglib指令为：<%@taglib uri = “/WEB-INF/myTags.tld” prefix = “_____”>，下划线处应该是（）。 
+  A. x 
+ B. getKing 
+ C. myTags 
+ D. king 
+正确答案：A
+24. 类别（Category）类的定义如下： class Category {   private int id;   private String name;   private List<Category> subCat;   // getter and setter... } request对象中存有名为cat的Category对象，可以将该对象的subCat属性迭代输出的代码是：(  )。 
+  A. <c:forEach items="${cat.subCat}" var="cat">...</c:forEach> 
+ B. <c:forEach items="${cat}" var="cat">...</c:forEach> 
+ C. <c:forEach items="${cat.subCat}" var="${cat}">...</c:forEach> 
+ D. <c:forEach items="${cat}" var="${cat}">...</c:forEach> 
+正确答案：A
+25. 在HTTP协议中，用于发送大量数据的方法是（）。
+ A. get
+ B. post
+ C. put
+ D. options
+正确答案：B
+26. 请看下列代码： a.jsp <form>    <input name=”name” value=”save”/> </form> <%          response.sendRedirect(“b.jsp");   %>  b.jsp: <%=request.getParameter(“name") %> b.jsp页面将显示为（）。 
+  A. null 
+ B. 无信息输出 
+ C. 异常信息 
+ D. save 
+正确答案：A
+27. 现在session中没有设置任何属性，阅读下面2个JSP中的代码，将分别输出：（）。   1.jsp页面代码：        <%               out.print(session.getAttribute("svse ")+" , ");        %>    2.jsp页面代码：        <%               session.invalidate();               out.println(session.getAttribute("svse "));        %> 
+  A. null, 异常信息 
+ B.  null, null 
+ C. 异常信息,异常信息 
+ D. 异常信息,null 
+正确答案：A
+28. 在jQuery中$("#test")和$(".test”)表示的含义是:( )。 
+  A. $("#test")表示选择id为test的元素 $(".test”) 表示选择id为test的元素 
+ B. $("#test")表示选择id为test的元素 $(".test”) 表示选择所用CSS类为test的元素 
+ C. $("#test")表示选择所用CSS类为test的元素 $(".test”) 表示选择id为test的元素 
+ D. $("#test")表示选择所用CSS类为test的元素 $(".test”) 表示选择所用CSS类为test的元素 
+正确答案：B
+29. 在web.xml设置了<url-pattern>*.abc</url-pattern>，以下不是正确的访问路径的是：（）。 
+  A. http://localhost:8080/ScoreManager/list 
+ B. http://localhost:8080/ScoreManager/list.abc 
+ C. http://localhost:8080/ScoreManager/jsp/list.abc 
+ D. http://localhost:8080/ScoreManager/jsp/emp/list.abc 
+正确答案：A
+30. 在web.xml设置了<url-pattern>*.do</url-pattern>，以下路径不是正确访问路径的是：（）。 
+  A. http://localhost:8080/web /list 
+ B. http://localhost:8080/web/list.do 
+ C. http://localhost:8080/web/jsp/list.do 
+ D. http://localhost:8080/web/jsp/emp/list.do 
+正确答案：A
+31. 某JSP中有如下代码，显示结果为: （）。 <%          String user= "allen";         request.setAttribute("user","smith");         session.setAttribute("user","jerry"); %> <c:out value="${user}"/> 
+  A. allen 
+ B. smith 
+ C. jerry 
+ D. null 
+正确答案：B
+32. 给定一个 Servlet 的doPost方法中的代码片段，如下：        request.setAttribute(“name”,”zhang”);        request.getRequestDispatcher("/myservlet").forward(request, response);//转发到MyServlet  以下说法正确的是：（）。 
+  A. 在 MyServlet 中，可以使用 String str=request.getAttribute(“name”); 把属性 name的值取出来 
+ B. 在 MyServlet 中，可以使用String str=(String)request.getAttribute(“name”); 把属性 name的值取出来 
+ C. 在 MyServlet 中，可以使用String str=request.getParameter (“name”); 把属性 name的值取出来 
+ D. 在 MyServlet 中，无法取出属性name的值 
+正确答案：B
+33. 在J2EE中，重定向到另一个页面，以下语句正确的是（）。
+ A. request.sendRedirect(“http : // www . baidu. com ”);
+ B. request.getRequestDispatcher (“http : // www . baidu. com ”);
+ C. response.sendRedirect(“http : // www . baidu. com ”);
+ D. response.getRequestDispatcher (“http : // www . baidu. com ”);
+正确答案：C
+34. 下列选项中不属于Ajax技术体系的组成部分的是：( )。 
+  A. XMLHttpRequest 
+ B. DAO 
+ C. CSS 
+ D. DOM 
+正确答案：B
+35. 某JSP中有如下代码，显示结果为（） <%        int a = 5;        request.setAttribute(“a”,”123”);        session.setAttribute(“a”,”456”); %> <c:out value="${a}"/> 
+  A. 5 
+ B. 123 
+ C. 456 
+ D. Null 
+正确答案：B
+36. 现有 AjaxDemo.jsp 页面，该页面需要使用 AJAX 的方式实现每隔 3 秒钟与服务器进行交互，取回服务器端的数据并显示在页面上的<span>中。 此页面的代码如下： <%@page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%> <html>        <head>               <script type="text/javascript">               //创建XMLHttpRequest对象               function getXmlHttpRequest(){                      var xhr = null;                      if(window.XMLHttpRequest){                             //Firefox,Safari              空白处1                                       }else{                    //IE              空白处2                                       }                      return xhr;               }               var xhr = null;//定义全局的XMLHttpRequest变量               function checkForm(){                      xhr = getXmlHttpRequest();                      //基于xhr发送请求                      var url = "check.do";                      xhr.open("get",url);//创建一个请求                      //注册一个回调函数,用于处理响应数据                                   空白处3                  {                             var nameSpan = document.getElementById("namespan");                            if(xhr.readyState == 4){                                   if(xhr.status == 200){                                          //将响应回来的数据,显示到namespan中                                                       空白处4                                                    }                            }                      };                      xhr.send(null);//发送请求               }             function start() {             //每 3 s 取一次数据                              空白处5                                                        } </script>        </head>        <body onload="start();" style="font-size: 30px;">               <form id="myform" method="post">                      <span id="namespan"></span>               </form>        </body> </html> 服务器端的代码如下：     public void doGet(HttpServletRequest request, HttpServletResponse response)                      throws ServletException, IOException {               PrintWriter out = response.getWriter();               Random r = new Random();               int d = r.nextInt(100);               out.write(d+" ");               out.flush();               out.close();        }
+(1). 下列选项中，可以填入横线空白处 1 的代码是（）。
+ A. xhr = new XMLHttpRequest();
+ B.  xhr = new XMLRequest();
+ C. xhr = new XMLHttpRequest ("Microsoft.XMLHTTP");
+ D.  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+正确答案：A
+(2). 下列选项中，可以填入横线空白处 2 的代码是（）。
+ A. xhr = new XMLHttpRequest();
+ B. xhr = new XMLRequest();
+ C. xhr = new XMLHttpRequest ("Microsoft.XMLHTTP");
+ D.  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+正确答案：D
+(3). 下列选项中，可以填入横线空白处 3 的代码是（）。
+ A. xhr.onstatechange = handleData()
+ B. xhr.onstatechange = handleData
+ C. xhr.onreadystatechange = function
+ D. xhr.onreadystatechange = function()
+正确答案：D
+(4). 下列选项中，可以填入横线空白处 4 的代码是（）。
+ A. nameSpan.innerHTML = xhr.responseText;
+ B. nameSpan.value = xhr.responseText;
+ C. nameSpan.value = xhr.responseXML;
+ D.  nameSpan.innerHTML = xhr.responseXML;
+正确答案：A
+(5). 下列选项中，可以填入横线空白处 5 的代码是（）。
+ A. window.setTimeout(checkForm, 3000);
+ B. window.setTimeout(checkForm (), 3000);
+ C. window.setInterval(checkForm, 3000);
+ D. window.setInterval(checkForm (), 3000);
+正确答案：C
+37. 有 login.jsp 页面，该页面用于实现用户登录的功能。用户在页面录入用户名和密码并点击“登录”按钮后，需要判断是否可以成功登录。如果成功登录，则需要记载当前用户的信息，以便在主页（home.jsp）上使用。另外，还需要统计当前页面的访问量，并在页面上显示。 login.jsp 文件的代码如下： <%@ page language="java" pageEncoding="utf-8"%> <html>        <head>               <title>登录</title>        </head>        <body>               <%                      Integer appCount;                      //对application同步                      synchronized (application) {                             appCount = (Integer) application.getAttribute("accCount");                             //如果第一次访问，此时appCount为null，则初始化它                             if (appCount == null) {                                    appCount = 0;                             }                             //在原来基础上加1，并存储到application中                             appCount = appCount + 1;                             application.setAttribute("accCount", appCount);                      }                      out.println("你是本网站第" + appCount.intValue() + "个访问者！");               %>                      <form action="login.do" method="post">                             姓名：<input type="text" name="userName"/><BR>                             密码：<input type="password" name="pwd"/><BR><BR>                                   <input type="submit" value="登录">                      </form>        </body> </html> LoginServlet.java代码如下： public void doPost(HttpServletRequest request, HttpServletResponse response)                      throws ServletException, IOException {               PrintWriter pw = response.getWriter();               String userName = request.getParameter("userName");               String pwd = request.getParameter("pwd");           User user=isLogin(userName,pwd);          //登录成功               if (user!=null){               HttpSession session=request.getSession();                      session.setAttribute("user",user);                      pw.println("login success");               }               else{                      //如果登录失败，返回到登录表单                      response.sendRedirect("login.jsp");               }        }
+(1). 上述代码中，使用了  application 对象存储访问人数。下列关于 application 对象的描述中，错误的是（）。
+ A. 可以在 web.xml文件中设置 application 对象的生命周期
+ B. 使用 synchronized (application)是为了解决数据的并发问题
+ C. application 对象在 web 应用程序的所有用户间实现信息共享
+ D. application 对象是一个可以从当前站点的任何页面都可以获取到变量
+正确答案：A
+(2). 上述代码中，使用了 session 对象存储用户信息。下列关于 session  对象的描述中，错误的是：（）。
+ A. session 状态只记载当前用户会话的信息
+ B. seesion 状态不能关闭
+ C. session 持续时间可以在 web.xml文件中设置
+ D. session 对象由 sessionID 来唯一标识
+正确答案：B
+(3). 如果需要在 home.jsp页面上得到当前登录用户的姓名，下列代码中，正确的是（）。
+ A. User user=(User)session.getAttribute(“user”); String userName=user.getUserName();
+ B. String userName=(String)session.getAttribute(“user”);
+ C. String userName=(String)session.getAttribute(“userName”);
+ D. User userName=session.getAttribute(“user”);
+正确答案：A
+(4). 上述代码中使用了JSP的隐士对象。下列选项中不属于JSP隐士对象的是：（）
+ A. session
+ B. application
+ C. out
+ D. synchronized
+正确答案：D
+(5). 为了实现登录是否成功的判断，页面调用了组件 UserDao 中的方法 isLogin。请根据上述代码中的调用方式推断isLogin方法的签名。下列选项中，正确的是（）。
+ A. public  String  isLogin（String userName，String pwd）
+ B. public  boolean  isLogin（String userName，String pwd）
+ C. public  User isLogin（String userName，String pwd）
+ D. public  void  isLogin（String userName，String pwd）
+正确答案：C
+38. 阅读以下代码，完成下面 5 题 以下代码可以完成列表框选项的移动，而且新移动的选项位于原选项的位置之后，根据需要在代码处填写相应的代码，以保证程序的正确运行。 <script type="text/javascript" src="jquery-1.7.1.js"></script> <script type="text/javascript"> function moveOption(source,destination,isAll){     $("#" + source + ">option" + (   代码1   )).   代码2   ($("#" + destination)); } function changeBtnStatus(){     if($('#select1>option').length){         $('#button1').attr('disabled',false);         $('#button2').attr('disabled',false);     } else {         $('#button1').attr('disabled',true);         $('#button2').attr('disabled',true);     }     if($('#select2>option').length){         $('#button3').attr('disabled',false);         $('#button4').attr('disabled',false);     } else {         $('#button3').attr('disabled',true);         $('#button4').attr('disabled',true);            } } $(document.body).  代码3  (function(){           代码4       $('#button1').click(function(){             moveOption('select1','select2',false);         changeBtnStatus();     });     $('#button2').click(function(){             moveOption('select1','select2',true);         changeBtnStatus();     });     $('#button3').click(function(){             moveOption('select2','select1',false);         changeBtnStatus();     });     $('#button4').click(function(){             moveOption('select2','select1',true);         changeBtnStatus();     }); }) </script> </head> <body> <form id="form1" name="form1" method="post" action="">   <table width="100%" border="1" cellspacing="0" cellpadding="10">     <tr>       <td width="33%"><select name="select1" size="10" multiple="multiple" id="select1">         <option value="0">北京市</option>         <option value="1">上海市</option>         <option value="2">天津市</option>         <option value="3">重庆市</option>         <option value="4">广东省</option>       </select>       </td>       <td width="33%" align="center"> <p><input name="button1" type="button" id="button1" value="右移&gt;&gt;" /></p> <p><input name="button2" type="button" id="button2" value="全部右移&gt;&gt;&gt;"/></p> <p><input name="button3" type="button" id="button3" value="&lt;&lt;左移"/>       </p> <p><input name="button4" type="button" id="button4" value="&lt;&lt;&lt;全部左移" /></p></td>       <td><select name="select2" size="10" multiple="multiple" id="select2">       </select>       </td>     </tr>   </table> </form> </body>
+ (1). 代码1处应填写的代码是（）。
+ A. isAll ? true : ':selected'
+ B. isAll ? '' : ':selected'
+ C. isAll ? true : false
+ D. isAll ? false : ':selected'
+正确答案：B
+(2). 自定义函数changeBtnStatus()，可以简写成（）。
+ A. $('#button1').attr('disabled',$('#select1>option').length);
+$('#button2').attr('disabled',$('#select1>option').length);
+$('#button3').attr('disabled',$('#select2>option').length);
+$('#button4').attr('disabled',$('#select2>option').length);
+ B. $('#button3').attr('disabled',!$('#select1>option').length);
+$('#button4').attr('disabled',!$('#select1>option').length);
+$('#button1').attr('disabled',!$('#select2>option').length);
+$('#button2').attr('disabled',!$('#select2>option').length);
+ C. $('#button1').attr('disabled',!$('#select1>option').length);
+$('#button2').attr('disabled',!$('#select1>option').length);
+$('#button3').attr('disabled',!$('#select2>option').length);
+$('#button4').attr('disabled',!$('#select2>option').length);
+ D. $('#button3').attr('disabled', $('#select1>option').length);
+$('#button4').attr('disabled', $('#select1>option').length);
+$('#button1').attr('disabled', $('#select2>option').length);
+$('#button2').attr('disabled', $('#select2>option').length);
+正确答案：C
+(3). 代码2处应填写的代码是（）。
+ A. append
+ B. prepend
+ C. prependTo
+ D. appendTo
+正确答案：D
+(4). 代码3处应填写的代码是（）。
+ A. load
+ B. ready
+ C. unload
+ D. click
+正确答案：B
+(5). 代码4处应填写的代码是（）。
+ A. changeBtnStatus();
+ B. moveOption();
+ C. changeBtnStatus;
+ D. moveOption;
+正确答案：A

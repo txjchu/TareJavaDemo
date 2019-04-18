@@ -1,0 +1,43 @@
+1.Strut2基本使用
+2.Struts2+SpringIOC容器（struts-spring-plugin.jar）
+   Struts2+Ajax响应（json类型Result）
+3.Struts2中的ValueStack和Interceptor
+
+1）ValueStack组件（值栈）
+ 值栈：用于存储值的；存储和请求上下文相关的数据信息
+  例如：request,action,session,application,parameters等
+ 
+Struts2-->WebWork-->核心xwork
+-->存在valuestack结构（ognl工具，OgnlValueStack）
+
+ 结构：分为OGNL引擎、root存储区(栈)、context存储区（Map）
+ 如果需要访问存储区的数据，需要使用OGNL表达式给OGNL引擎
+
+ OGNL? : Object Graphics Navigation Language
+               对象图导航语言（属于表达式语言，类似EL）
+ 源于ognl.jar工具包，作用如下：
+ --方便动态存取对象属性值
+ --动态调用方法
+
+<s:property value="#session.user.name"/>//获取session内容显示
+<s:property value="name"/>//获取action属性显示
+
+2）Interceptor组件
+  Struts拦截器，可以在Action执行前，Result执行后两个位置点拦截。
+
+  action请求-->Filter-->拦截器--》Action-->Result-->拦截器-->响应
+  
+  Struts2框架提供了很多内置的拦截器,默认走一个defaultStack拦截器栈。
+  如果内置拦截器不满足业务需要，程序员可以自定义扩展拦截器
+
+  扩展拦截器组件的方法:
+   --编写一个实现类,实现Interceptor接口及其约定方法
+   --在struts.xml配置拦截器组件，配置格式参考strut-default包
+   --使用时采用<interceptor-ref name="xx"/>
+      
+  注意：如果使用自定义拦截器，默认的defaultStack不会再执行。
+
+
+
+
+

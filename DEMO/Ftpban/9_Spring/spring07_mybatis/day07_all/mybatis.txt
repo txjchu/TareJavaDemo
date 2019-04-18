@@ -1,0 +1,84 @@
+梁建全：liangjq@tedu.cn
+=====MyBatis========
+1.MyBatis简介
+ iBatis-->MyBatis
+
+ 功能数据库访问。JDBC -->Socket
+ 
+SqlSession
+
+MyBatis是对JDBC技术封装,简化数据库操作代码.
+MyBatis封装了一下功能：
+--封装了建立连接,设置参数执行SQL,释放连接过程
+  (提供连接参数,SQL,SQL参数值)
+--封装了查询结果映射成实体对象过程
+  (实体类属性名与数据表字段名保持一致)
+ Emp emp = new Emp();
+ emp.setName(rs.getString("name"));
+ ......
+findById-->Emp-->sqlSession.selectOne()
+findAll-->List<Emp>-->sqlSession.selectList()
+--封装了SQL语句中参数设置过程
+  (提供SQL时,参数想给SQL映射,利用#{属性名}替代?)
+insert into Emp values (#{属性名},?,?,?,?)
+pst = conn.prepareStatement(sql);
+pst.setString(1,"tom");
+pst.setString(2,20);
+......
+
+select * from COST where cost_id=?---#{属性}
+
+***开发者使用需要做以下工作***:
+--搭建MyBatis框架环境
+--根据表写实体类(名称一致)
+--根据操作写SQL(使用#{属性}替代?)
+--根据Mapper规则定义接口(生成实现组件调用SQL操作)
+--利用SqlSession调用操作（提供SQL参数）
+
+2.MyBatis结构
+MyBatis使用涉及哪些文件
+--SqlMapConfig.xml(主配置文件)
+  定义连接参数,框架参数，加载SQL文件
+--SQL文件(定义SQL语句的XML文件)
+--实体类.java
+  
+**3.MyBatis基本应用
+
+
+sqlSession.selectOne();
+sqlSession.selecList("findAll")
+sqlSession.insert()
+sqlSession.update()
+sqlSession.delete()
+
+
+**4.Mapper映射器(映射SQL操作)
+ 本质：是一个接口规则,如果按这套规则定义接口,
+        MyBatis可以根据接口动态生成接口实现组件。（DAO）
+        该组件方法可以调用SQL操作。
+a.SQL定义文件里namespace属性指定接口名"包名.接口名"
+b.接口名定义方法规则
+ --方法名需要与SQL定义中的id属性一致
+ --参数类型与SQL定义中的parameterType属性一致
+ --返回类型参考resultType属性
+    如果是单行结果，就采用resultType定义类型
+    如果是多行结果,就采用List<resultType定义类型>
+
+
+public class $Proxy4 implements CostDao{
+   public 返回类型 方法名(参数类型 参数值){
+       return sqlsession.selectList("方法名",参数值);
+  }
+
+  public Cost findById(Integer id){
+     return sqlsession.selectOne("findById",id);
+  }
+}
+
+5.resultMap定义
+  resultMap等价于resultType,二者选一
+  不同点：resultMap开发者可以自定义字段和属性对应关系
+               resultType是默认字段和属性名保持一致
+
+
+

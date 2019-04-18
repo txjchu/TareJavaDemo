@@ -1,0 +1,115 @@
+
+创建一个新表
+CREATE TABLE employee_ZYL(
+id NUMBER(4),
+name VARCHAR2(20),
+gender CHAR(1),
+birth DATE,
+salay NUMBER(6,2),
+job VARCHAR2(30),
+deptno NUMBER(2)
+);
+
+1.--查看表结构
+DESC employee_zyl
+
+
+2.SQL语句本身是不区分大小写的，但是为了增加可读性，通常会将关键字大写，非关键字使用全小写。
+但是需要注意，字符串的值是区分大小写的，数据库中，字符串的字面量使用单引号括起来。
+
+
+3.数据库中字段无论什么类型，默认值都是NULL，在插入数据是，只要该子段没有给定值，就会将NULL插入该子段。
+可以单独使用DEFAULT关键字为字段指定默认值，这样不给值时则使用指定的默认值而不再是NULL。
+	gender CHAR(1) DEFAULT'M',----设置默认为M
+
+
+4.--删除表
+	DROP TABLE employee_ZYL			DROP TABLE 表名
+	drop table 
+
+
+5.非空约束
+  非空约束要求指定的字段在任何时候值都不允许为NULL
+	gename VARCHAR2(20) NOT NULL，
+
+
+6.修改表
+
+  6.1修改表名
+	RENAME old_name TO new_name
+	RENAME employee_ZYL TO myemp
+
+  6.2修改表结构
+	需要注意，添加的字段只会被追加到表的最后，而不能在现有字段中间“插入”一个字段。
+	向myemp表中添加一个字段hiredate,类型为DATE，默认值为当前系统时间。
+   
+	SYSDATE:该关键字表示DATE类型的
+		
+  6.3删除myemp表中的字段hiredate
+	ALTER TABLE myemp DROP(hiredate)
+
+  6.4修改表中的字段
+	可以修改字段的类型，长度，添加默认值，设置是否非空。
+	同样不建议在表中已经存在数据后再修改，有可能修改不成功：
+	长度尽量不要减少，否则不满足现有数据要求的话修改不成功的。
+	尽量不修改类型。	
+	ALTER TABLE myemp MODIFY( job VARCHAR2(40) DEFAULT 'CLERK' );//--设置了默认值为''
+	alter table myemp modify( job varchar2(40) default 'clerk' );
+	
+
+7.DML语句
+用于增、删、改表中数据。伴随失误。
+7.1插入数据
+	INSERT INTO table_name(col_name1,col_name2,....)VALUES(value1,value2....)
+
+	INSERT INTO myemp(id,name,gender,salay,deptno) VALUES(1,'JACK','M',5000,20);
+ 
+	INSERT INTO myemp(id,name,salay,deptno)VALUES(2,'tom',5000,20);
+
+虽然gender没有插入值，但是因为设置了默认值“M”所以性别还是M。
+
+INSERT INTO myemp(id,salay,deptno) VALUES(3,5000,20)   
+错误报告:
+SQL 错误: ORA-01400: 无法将 NULL 插入 ("CHRIS"."MYEMP"."NAME")                 
+    
+                                                
+8.事物的开启与关闭
+8.1事务的开启：
+当执行第一条DML语句时，会自动开启一个事务，然后执行该语句，再次之后所有被执行的DML语句都在这一个事务的控制范围内。
+
+8.2事务的关闭：
+无论是提交或者回退，事务都会关闭。
+提交：将这次事务中的所有DML操作全部真实执行，对表进行操作。提交后无法再进行回滚（回退）。
+回滚：回退到事务开启前的状态，这次事务中所有的DML操作均被
+撤销。
+
+
+9.插入日期类型的值
+可以直接使用字符串，但是格式有要求，必须是‘DD-MON-RR',由于有语言差异，月的写法不同，所以不建议使用。
+
+可以使用TO_DATE函数，自行将字符串按照指定的日期格式转换为DATE值。
+
+
+10.INSERT语句可以不指定字段，若不指定，则是全列插入，那么VALUES后面必须将所有值按照表中字段顺序全部指定，否则会报错。
+INSERT INTO myemp VALUES(3,'CLARK',4000,TO_DATE('1990-05-21','YYYY-MM-DD'))
+
+
+11.UPDATE语句，用于修改表中数据
+UPDATE table_name
+SET col_name1 = new_value1,
+    col_name2 = new_value2,
+	....
+[WHERE con = con_value]
+
+UPDATE语句修改表中数据时，通常要使用WHERE子句添加条件来限制要修改的记录。这样才能将只满足WHERE条件的记录进行修改，若不添加则是全表每一条记录都修改，通常很少这样做。
+
+
+12.删除表中数据
+DELETE FROM table_name
+[WHERE con = con_value]
+同样的，不添加WHERE条件则是情况表操作！
+
+
+13.COMMIT提交事务
+
+

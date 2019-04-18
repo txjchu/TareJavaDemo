@@ -1,0 +1,176 @@
+1.列的别名：
+当我们在SELECT子句中查询的内容不是直接使用字段的名字看，而是表达式，或者一个函数。这时候在查询出来的结果击中该列的名字就是这个函数或者表达式，可读性插，为此，我们可以为当前列添加别名，这样结果击中当前列的名字就是该列别名。
+	SELECT ename,sal*12 sal FROM emp_zyl;	----sal*12 as sal(中间也可以加as)
+	SELECT ename,sal*12 "year sal" FROM emp_zyl;
+	别名中若希望区分大小写或者含有空格时，可以使用双引号括起来。
+	在使用子查询时，通常要求含有表达式，函数的字段必须加别名。
+
+2.WHERE子句在SELECT语句中的作用是添加过滤条件，这样以来只会将满足条件的记录查询出来。
+	查看10号部门的员工：
+	select ename,deptno FROM emp_zyl WHERE deptno=10;
+	查看职位是‘SALESMAN’的员工：	
+	SELECT ename, job FROM emp_zyl WHERE job='SALESMAN';
+
+
+3.查询条件
+3.1）AND,OR关键字	
+当在WWHERE中需要使用多个条件进行过滤时，可以使用AND和OR。
+AND:并且关系，两个都为真时才为真，
+OR：或者关系，两个都为假时才为假。
+
+	SELECT ename,sal,job FROM emp WHERE sal>1000 AND job ='CLERK';
+	AND的优先级高于OR
+	SELECT ename,sal,job FROM emp_zyl WHERE sal>1250 AND( job = 'CLERK' OR job = 'SALESMAN');
+
+3.2）LIKE条件（模糊查询）
+	LIKE用于对字符串进行模糊匹配。支持两个通配符：
+	%：表示0到多个字符 
+	_：标识单个字符 
+	
+	查询职员姓名中第二个字符是‘A’的员工信息：
+	SELECT ename,job FROM emp_zyl WHERE ename LIKE'_A%';
+
+3.3)IN 和NOT IN 
+	IN（list）:判断等于列表中任何一项即可，常用于判断子查询的结果，这种情况下是不能用OR代替的。list表示值的列表。
+	NOT IN(list)则是判断不在列表中。
+	SELECT ename,job FROM emp_zyl WHERE job NOT IN ('MANAGER','CLERK');
+
+3.4）BETWEEN...AND...用来查询符合某个值域范围条件的数据。常用与数字类型的数据范围上，对字符、日期也可以。（相当于...<...>...,...>...and...<...)
+	SELECT ename,sal FROM emp_zyl WHERE sal BETWEEN 1500 AND 3000;
+
+3.5）ANY（list） 和ALL（list）条件
+	当需要判断诸如>,>=,<,<=多个值时，要配合ANY和ALL使用。
+	>ANY：大于列表中最小的即可
+	>ALL：大于列表中最大的
+	<ANY：小于列表中最大的即可
+	<ALL：小于列表中最小的
+	通常是为了判断子查询结果使用，列表很少直接给定几个固定值。	
+
+3.6）WHERE子句可以使用函数或表达式的结果作为过滤条件。
+3.7）DISTINCT关键字，去除重复行，将结果击中指定字段值重复的去除。
+     distinct
+	查看公司总共有多少种职位：
+	SELECT DISTINCT job FROM emp_zyl;
+     	
+	DISTINCT关键字必须紧跟在SELECT关键字之后。
+	SELECT DISTINCT job , DEPINO FROM emp_zyl;
+	--输出为去除了多字段同时重复的行的结果。
+	DISTINCT对多个字段去重，不能保证结果集中某一个字段没有重复值。
+	作用是保证这几个字段值的组合没有重复的。
+
+4.ORDER BY子句
+排序结果集，可以按照给定的字段的值进行“升序”或者“降序”排列。
+ORDER BY 的执行顺序是先进行SELECT 查询数据，然后再对查询出来的结果集按照指定的字段进行排序。所以，ORDER BY 子句必须写在SELECT 语句的最后。
+
+ORDER BY 也可以按照多个字段排序，每个字段都可以分别指定升降序。
+排序存在优先级，先按照第一个字段的排序规则进行排序，当第一个字段值一样的记录，才会按照第二个字段的排序规则进行排序。以此类推。
+4.1	DESC:降序，从大到小，	
+	ASC：升序，从小到大，默认就是升序，所以ASC关键字通常不写。
+	
+	查看公司员工工资排名情况：
+	SELECT ename,sal FROM emp_zyl order by sal desc;
+	
+5.聚合函数
+	又名多行函数，分组函数。作用是进行统计工作，
+	可以将多条记录的值进行统计然后得到一个结果。
+5.1）MAX() 与MIN() 求最大值与最小值。
+	查看公司最高工资与最低工资：
+	SELECT max(sal),min(sal) from emp_zyl;
+5.2）AVG() 与SUM() 求平均值与综合
+	查看公司平均工资以及工资总和：
+	SELECT AVG(sal)，SUM(sal) FROM emp_zyl;
+	SELECT ROUND(AVG(sal))，SUM(sal) FROM emp_zyl;	
+	
+	查看员工奖金的平均值和奖金总和：
+	SELECT AVG(comm),SUM(comm) FROM emp_zyl;
+	SELECT ename,comm FROM emp_zyl;
+	从上面的SQL结果可以看出，聚合函数是忽略NULL值的。
+	只有4条记录comm有值，所以平均值是综合除以4的结果。
+	可以将NULL替换为0，来进行平均数统计
+	SELECT AVG（NVL(comm,0)) FROM emp_zyl;
+5.3)COUNT()函数;
+	用来统计指定字段非NULL的记录总共多少条，并不关心字段具体取值。
+	SELECT COUNT(*) FROM table;----通常查看一张表的记录数，可以使用COUNT(*)
+	
+	查看公司总共多少人：
+	SELECT COUNT(ename) FROM emp_zyl;
+	SELECT COUNT(*) FROM emp_zyl;
+6.分组 GROUP BY子句
+       GROUP BY可以根据指定的字段值相同的记录进行分组，然后配合组函数进行更新的统计工作。
+	查看每个部门的最高工资与最低工资：
+	SELECT MAX(sal),MIN(sal) FROM emp_zyl GROUP BY deptno;	
+
+	当SELECT子句中出现了聚合函数，那么凡不是聚合函数中的字段，其他字段必须出现在GROUP BY子句中，反之则不是必须的。
+	SELECT MAX(SAL),MIN(sal),deptno ,ename FROM emp_zyl GROUP BY deptno;
+	----语法错误，不是 GROUP BY 表达式。
+	
+	根据多个字段分组，则是按照这几个字段值组合一样的看做一组。
+	列出同部门同职位的员工的最高工资与最低工资：
+	SELECT MAX(sal),MIN(sal) ,job,deptno FROM emp_zyl GROUP BY deptno,job;
+	
+	SELECT AVG(sal),deptno FROM emp_zyl GROUP BY deptno;
+	查看部门平均工资高于2000的部门的平均工资是多少：
+	SELECT AVG(sal),deptno FROM emp_zyl GROUP BY deptno  HAVING AVG(sal)>2000;
+	HAVING不能独立存在，必须跟在GROUP BY子句之后，用于进行分组统计后进行的过滤使用.
+HAVING 与WHERE区别：
+	WHERE是在第一次查表的时候进行过滤，只有满足WHERE要求的记录才会被查询出来，
+	而HAVING是在查询出的数据基础上进行了分组统计后得到的结果进行的过滤。
+	所以WHERE先进行的过滤，HAVING 后进行过滤。
+	
+	HAVING子句中并非SELECT 中查询什么，才可以用于过滤。
+	查看平均工资高于2000的部门的最高工资与最低工资：
+	SELECT MAX(sal),MIN(sal),deptno FROM emp_zyl GROUP BY deptno HAVING AVG(sal)>2000;
+
+7.多表关联查询
+7.1   多表关联查询中连接条件是十分重要的，它能告知数据库在表与表的数据之间如何进行连线找到对应关系，从而查询数据。
+	
+	查看SALES部门的员工姓名：
+	SELECT ename FROM emp_ZYL,dept_ZYL WHERE emp_ZYL.deptno=dept_ZYL.deptno AND DNAME='SALES';
+
+	当查询的字段在联合查询的表中均有出现，那么必须明确指定从哪张表上取该字段的值。
+	可以为表添加别名，然后使用别名来代替表名指定字段。
+	SELECT e.ename,d.dname,e.deptno,d.loc FROM emp_zyl e,dept_zyl d WHERE e.deptno=d.deptno;
+
+	N张表查询至少要有N-1个连接条件，否则会出现【笛卡尔积】。
+	笛卡尔积，结果集的条数是参与表的记录总数乘积的结果。是个无用的结果集，消耗资源巨大，要避免出现！	
+	查看在DALLAS工作的员工都有谁，工资是多少：
+	SELECT e.ename,e.sal,d.dname,d.loc FROM emp_zyl e,dept_zyl d WHERE e.deptno=d.deptno AND d.loc='DALLAS';
+
+7.2	使用内连接实现关联查询：
+	内连接使用JOIN来连接表。在ON子句中书写连接条件，相对传统的关联查询语句而言，是将连接条件与过滤条件分开在不同的地方书写，语句表达更加清晰。
+
+	查看每个员工以及所在部门名称：
+	SELECT e.ename,d.dname FROM emp_zyl e JOIN dept_zyl d ON e.deptno=d.deptno;
+	查看SALES部门的员工姓名：
+	SELECT e.ename,d.dname FROM emp_zyl e JOIN dept_zyl d ON e.deptno=d.deptno WHERE d.dname = 'SALES';
+	查看职位是SALESMAN的员工都在哪里工作：
+	SELECT e.ename,e.job,d.loc FROM emp_zyl e JOIN dept_zyl d ON e.deptno = d.deptno WHERE e.job='SALESMAN';
+
+	SCOTT部门号改成50
+	UPDATE emp_zyl SET deptno=50 WHERE ename='SCOTT';
+
+	SELECT e.ename,e.job,e.sal,d.dname,e.deptno FROM emp_zyl e JOIN dept_zyl d ON e.deptno=d.deptno ;
+	SCOTT没有被查询出来，原因是SCOTT不满足连接条件，其部门号是50，而dept表中没有部门号是50的记录。
+
+7.3	外连接
+	如果某张表中的某条记录，不满足多表连接的连接条件，则查询中会被忽略。
+	当需要将不满足连接条件的记录也在关联查询中显示出来时，就要使用外连接。
+	
+	外连接分为左外连接、右外连接、全外连接。
+	左外连接：以JOIN左侧的表为驱动表（显示所有数据的表），来自右面表中的字段当不满足		  连接条件时，全部为NULL。
+	右外连接与全外连接等同。
+
+	查看
+	SELECT e.ename,e.deptno,d.dname FROM emp_zyl e LEFT|RIGHT|FULL OUTER JOIN dept_zyl d ON e.deptno=d.deptno;
+	
+	SELECT e.ename,e.deptno,d.dname FROM emp_zyl e,dept_zyl d WHERE e.deptno(+)=d.deptno;----相当于外连接中的左连接。
+	----两个表的后面都可以写（+），但是不能同时写。
+
+
+
+
+
+
+
+
+

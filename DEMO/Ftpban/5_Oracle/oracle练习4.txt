@@ -1,0 +1,442 @@
+  
+1. 阅读以下SQL语句： 
+INSERT INTO student(stu_no)VALUES(1001); SAVEPOINT sp1; 
+DELETE FROM student; SAVEPOINT sp2; 
+如果想要恢复student表中所有数据，并且结束该事务的正确做法是（）。 
+  A. rollback to sp2; 
+  B. rollback to sp1; 
+  C. commit； 
+  D. rollback； 
+正确答案：D
+2. 下列选项中能够得到字符串的一部分的单行函数是（）。 
+  A. INSERT 
+ B. SUBSTR 
+ C. LPAD   
+ D. LEAST
+正确答案：B
+3. 在Oracle中，不能通过DROP关键字进行删除的是（）。 
+  A. 表
+ B. 视图
+ C. 表中记录
+ D. 序列
+正确答案：C
+4. 在Oracle中，现有Student表，其中包括学号stuId,姓名stuName,成绩stuGrade，
+现要查询成绩为80分的学生姓名，并且结果按照学号降序排列，下面查询语句正确的是（）。 
+  A. SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId
+ B. SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId DESC
+ C. SELECT stuName FROM student WHERE stuGrade like 80 GROUP BY stuId
+ D. SELECT stuName FROM student WHERE stuGrade=80 GROUP BY stuId DESC
+正确答案：B
+5.  现有a表和b表 
+表a：jigou(机构)，kehhao(客户号)，jiaoyrq(交易日期),jioyje(交易金额) 
+表b: kehhao(客户号)，表b为VIP客户号表 统计分机构VIP客户的数量，
+下面SQL语句正确的是:（）。 
+  A. SELECT COUNT(a.kehhao) FROM a INNER JOIN b ON a.kehhao = b.kehhao GROUP BY jigou 
+ B. SELECT COUNT(a.kehhao) FROM a INNER JOIN b ON a.kehhao = b.kehhao ORDER BY jigou 
+ C. SELECT SUM(a.kehhao) FROM a INNER JOIN b ON a.kehhao = b.kehhao ORDER BY jigou 
+ D. SELECT COUNT(a.kehhao) FROM a INNER JOIN b ON a.kehhao = b.kehhao HAVING jigou 
+正确答案：A
+6. 以下选项中可以用来在books表的isbn列上创建一个主键约束pk_books的是（）。 
+  A. CREATE PRIMARY KEY ON books(isbn); 
+ B. CREATE CONSTRAINT pk_books PRIMARY KEY ON books(isbn); 
+ C. ALTER TABLE books ADD CONSTRAINT pk_books PRIMARY KEY (isbn); 
+ D. ALTER TABLE books ADD PRIMARY KEY (isbn); 
+正确答案：C
+7. 实现一个多行文本输入域的HTML代码是：（） 
+  A. <input type="textarea">                   
+ B. <input type="textbox"> 
+ C. <textarea>                                       
+ D. <textbox> 
+正确答案：C
+8. DELETE和 TRUNCATE 都可以用来删除表内容，以下描述正确的是：（）。 
+  A. TRUNCATE 不需要 RollbackSegment 
+ B. DELETE 不需要RollbackSegment 
+ C. TRUNCATE在 提交COMMIT之前仍可回滚 
+ D. TRUNCATE还可以删除表结构 
+正确答案：A
+9. 下列Oracle语句中，属于DCL的有（）
+  A. GRANT
+ B. DESC
+ C. CONNECT
+ D. INSERT
+正确答案：A
+10. 下面不属于表单属性的有（）。 
+  A. action 
+ B. method 
+ C. enctype 
+ D. size 
+正确答案：D
+11. 在service表中，查询os账号名为：huangr 的unix服务器ip地址，os帐号名，下列sql语句正确的是：
+  A. select unix_host,os_username from service 
+where os_username = 'huangr';
+ B. select unix_host,os_username from service 
+where os_username = 'HUANGR';
+ C. select unix_host,os_username from service 
+where os_username = "huangr";
+ D. select unix_host,os_username from service 
+where os_username = "HUANGR";
+正确答案：A
+12. 下面关于结果集，说法错误的是：（）。
+  A. 调用Connection对象的preparedStatement(String sql)方法所创建的PreparedStatement对象执行查询所得到的结果集不可以调用previous()方法。
+ B. Statement在执行完查询后，会把查询得到的所有数据通过网络一次加载到内存中。
+ C. ResultSet的getDate方法返回的类型是java.sql.Date而不是java.util.Date。
+ D. ResultSet的初始状态游标位于第一行之上，必须先调用其next方法，才可以获取到数据。
+正确答案：B
+13. ResultSet提供了获取数据库中某个字段值的方法，如果某个字段为NUMBER类型,可以获取该字段值的方法是：( )。
+  A. getNumber()
+ B. getDouble()
+ C. setNumber()
+ D. setDouble()
+正确答案：B
+14. 在JDBC连接数据库编程应用开发中，可以实现数据库连接的是（）。 
+  A. Connection接口 
+ B. PreparedStatement类 
+ C. CallableStatement类 
+ D. Statement类 
+正确答案：A
+15. 显示上个月的今天，这个月的今天，下个月的今天，精度到时、分、秒，下列sql语句正确的是：
+  A. alter session set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select add_months(sysdate,-1),sysdate,add_months(sysdate,1) from dual;
+ B. alter user set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select add_months(sysdate,-1),sysdate,add_months(sysdate,1) from dual;
+ C. alter session set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select last_month(),this_month(),next_month() from dual;
+ D. alter user set nls_date_format = 'yyyy mm dd hh24:mi:ss';
+select last_month(),this_month(),next_month() from dual;
+正确答案：A
+16. 查询cost表中资费名称，月固定费用，月包在线时长，单位费用,下列sql语句正确的是：
+  A. select name/base_duration/base_cost/unit_cost from cost
+ B. select name，base_cost,unit_cost from cost
+ C. select name and base_duration and base_cost and unit_cost from cost
+ D. select name,base_duration,base_cost,unit_cost from cost
+正确答案：D
+17. 有一个表leanr，表里有三个字段分别是学号（student_id）,课程（kc）,成绩（grade）。
+查询表中存在课程重复2次以上的记录,显示课程和重复的次数,并且按照重复次数的降序排列,
+下列SQL语句正确的是：（）。 
+  A. SELECT kc,COUNT(kc) FROM leanr ORDER BY COUNT(kc) DESC  GROUP BY kc  WHERE COUNT(kc)>=2 ; 
+ B. SELECT kc,COUNT(kc) FROM leanr ORDER BY COUNT(kc) DESC  GROUP BY kc  HAVING COUNT(kc)>=2 ; 
+ C. SELECT kc,COUNT(kc) FROM leanr  GROUP BY kc  WHERE COUNT(kc)>=2   ORDER BY COUNT(kc) DESC; 
+ D. SELECT kc,COUNT(kc) FROM leanr  GROUP BY kc  HAVING COUNT(kc)>=2   ORDER BY COUNT(kc) DESC; 
+正确答案：D
+18. 请看下列代码，文字“红旗飘飘”显示的颜色是：（） 
+<html>        
+	<head> 
+		<style> body {color: blue; } </style>        
+	</head>        
+	<body style="color: green;">               
+		<div style="color:red">红旗飘飘</div>        
+	</body> 
+</html>
+ A. 绿色 
+ B. 蓝色 
+ C. 黑色 
+ D. 红色 
+正确答案：D
+19. 在oracle中，判断一条记录的某个列是否为NULL，应该使用:( )。 
+  A. != 
+ B. <> 
+ C. IS 
+ D. = 
+正确答案：C
+20. 下列选项中，是在新窗口中打开网页文档的是（）。 
+  A. _self 
+ B. _blank 
+ C. _top 
+ D. _parent 
+正确答案：B
+21. 在HTML中，插入图片的HTML代码是：( ) 
+  A. <img href="tomcat.gif>                    
+ B. <img src="tomcat.gif"> 
+ C. <image src="tomcat.gif">                 
+ D. <img>tomcat.gif</img> 
+正确答案：B
+22. 表student有两个字段stu_no和stu_name，现在使用序列seq_student给stu_no赋值,下列写法正确的是（）。 
+  A. String sql = "insert into student (stu_no,stu_name)values(seq_student.nextval,?)";        
+	 PrepareStatement stmt = con.prepareStatement(sql);         
+	stmt.setString(1,”习近平”); 
+ B. String sql = " insert into student (stu_no,stu_name)values(?,?)"; 
+	PrepareStatement stmt = con.prepareStatement(sql); 
+	stmt.setString(1, seq_ student.nextval);        
+	stmt.setString(2,”习近平”); 
+ C. String sql = " insert into student (stu_no,stu_name)values(?)";         
+	PrepareStatement stmt = con.prepareStatement(sql);         
+	stmt.setString(1,”习近平”);
+  D. String sql = " insert into student (stu_no,stu_name)values(seq_student.nextval,?)";        
+	PrepareStatement stmt = con.prepareStatement(sql); 
+	stmt.setString(2,”习近平”); 
+正确答案：A
+23. 查询客户姓名以及他的推荐人，没有推荐人的客户信息不显示，下列sql语句正确的是：
+  A. select a1.real_name customer,a2.real_name recommender
+      from account a1 join account a2 on a1.id = a2.id;
+ B. select a1.real_name customer,a2.real_name recommender
+     from account a1 join account a2 on a1.recommender_id = a2.recommender_id;
+ C. select a1.real_name customer,a2.real_name recommender
+    from account a1 join account a2 on a1.recommender_id = a2.id;
+ D. select a1.real_name customer,a2.real_name recommender
+    from account a1, a2 on a1.recommender_id = a2.id;
+正确答案：C
+24. 如果查询表a(有3行数据)和表b（有4行数据），使用SELECT  * FROM a,b，返回的查询结果的行数是：（）。 
+  A. 7         
+ B. 1         
+ C. 0         
+ D. 12 
+正确答案：D
+25. CSS这个缩写名词所代表的具体含义是：（）。 
+  A. Cascading Style Sheets           
+ B. Creative Style Sheets 
+ C. Computer Style Sheets                      
+ D. Colorful Style Sheets 
+正确答案：A
+27. 以下选项中可以用来从表 state中删除列 update_dt 的是( )。 
+  A. ALTER  TABLE  state  DROP  COLUMN  update_dt; 
+ B. ALTER  TABLE  state  DELETE  COLUMN  update_dt; 
+ C. DROP  COLUMN  update_dt  FROM  state; 
+ D.  REMOVE  COLUMN  update_dt  FROM  state; 
+正确答案：A
+28. 下列不属于CSS选择器的有（）。
+  A. ID选择器
+ B. 类选择器
+ C. JS选择器
+ D. 元素选择器
+正确答案：C
+29. 一个VIEW被以下语句创建，请问在该VIEW上可进行操作是：（）。
+ CREATE VIEW usa_states AS SELECT *FROM state WHERE cnt_code =1 WITH READ ONLY; 
+  A. SELECT 
+ B. SELECT , UPDATE 
+ C. SELECT , DELETE 
+ D. SELECT , INSERT 
+正确答案：A
+30. 下列会自动创建索引的约束的是：（）。 
+  A. UNIQUE 
+ B. NOT NULL 
+ C. FOREIGN KEY 
+ D. CHECK 
+正确答案：A
+31. 分析如下代码，语法正确的Sql语句是（）。 
+  A. SELECT class,COUNT(stuId) FROM students WHERE stuAge>18 GROUP BY class HAVING count(stuId)>3 
+  B. SELECT name,class,COUNT(stuId) FROM students WHERE stuAge>18 GROUP BY class HAVING count(stuId)>3 
+  C. SELECT class,COUNT(stuId) FROM students GROUP BY class HAVING stuAge>18 
+  D. SELECT name,class,COUNT(stuId) FROM students WHERE COUNT(stuId)>3 GROUP BY class 
+正确答案：A
+32. 在Oracle中，当数据量较大时，删除表中所有数据，效率较高的是（）。 
+
+  A. DELETE FROM Student 
+  B. DELETE FROM Student WHERE id>0 
+  C. TRUNCATE table Student 
+  D. TRUNCATE table Student WHERE id>0 
+正确答案：C
+33. 实现一个下拉菜单的HTML代码是:（）。
+  A. <input type="list"> 
+ B. <list>
+ C. <input type="dropdown"> 
+ D. <select>
+正确答案：D
+34. 下列不属于CSS的应用方式的是:（）。 
+  A. 书写于文档头部 
+ B. 链接到外部的JavaScript文档 
+ C. 链接到外部CSS文档 
+ D. 书写于标记内部 
+正确答案：B
+35. 可以在Oracle中获取当前时间的Sql语句是（） 
+  A. SELECT SYSDATE
+ B. SELECT SYSDATE FROM DUAL
+ C. SELECT DATE
+ D. SELECT DATE FROM DUAL
+正确答案：B
+36. 在JDBC中使用事务,想要回滚事务的方法是 (  )。
+  A. Connection的commit()
+ B. Connection的setAutoCommit()
+ C. Connection的rollback()
+ D. Connection的close()
+正确答案：C
+37. 操作account表和service表，查询申请远程登录业务的客户的数据，下列sql语句正确的是：
+  A. select real_name from account
+	where in (select account_id from service);
+ B. select real_name from account o
+	where id exists
+             (select 1 from service i
+              where o.id = i.account_id); 
+
+ C. select real_name from account
+	where id in (select account_id from service);
+ D. select real_name from account o
+	where exists
+             (select 1 from service i
+              where o.id = i.account_id);
+正确答案：CD
+38. 下列语句在建表的同时在c2,c3列上创建了唯一约束，其中正确的是：
+  A. create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number constraint test_c2_uk
+           foreign key,
+ c3 number constraint test_c3_uk
+           foreign key);
+ B. create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number ,
+ c3 number ,
+ constraint test_c3_uk foreign key(c2,c3));  
+
+ C. create table test
+(c1 number constraint test_c1_pk
+ primary key,
+ c2 number ,
+ c3 number ,
+ constraint test_c3_uk unique(c2,c3));
+ D. create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number constraint test_c2_uk
+           unique,
+ c3 number constraint test_c3_uk
+           unique);
+正确答案：CD
+39. 请看下列建表语句：
+create table  test
+(c1 number(3)  constraint  test_c1_pk primary key,
+ c2 number(2) ,
+ c3 number(2) , 
+ constraint test_c2_ck  check (( c2 + c3  ) > 100 )  
+);
+下列选项中能向test表中成功实施插入数据的插入语句是：
+  A. insert into test values (1,40,60);
+ B. insert into test values (2,41,61);
+ C. insert into test values (3,101,1);
+ D. insert into test values (4,50,51);
+正确答案：BD
+40. 操作account表和age_segment表，查询客户huangrong的年龄段，下列sql语句正确的是：
+  A. select real_name,birthdate,s.name
+from account a join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+and real_name = 'huangrong';
+ B. select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+and real_name = 'huangrong';
+ C. select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+where real_name = 'huangrong';
+ D. select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+正确答案：AC
+41. 有产品表 Products，用于记载产品的详细信息，表结构及数据如下：  
+ProductID	 ProductName	 UnitPrice
+1	              Chai	           18.00
+2	             Chang	           19.00
+3	             Aniseed Syrup	 10.00
+4	     Chef Anton's Cajun Seasoning	 22.00
+。。。其他数据   有订单表 Orders，用于记载订单的信息，表结构及数据如下：
+OrderID	 CustomerID	 EmployeeID
+10248	 VINET	               5
+10249	 TOMSP	               6
+。。。其他数据，有订单详细表 OrderDetails，用于记载订单的详细信息，表结构及数据如下：
+OrderID	 ProductID	 UnitPrice	 Quantity
+10248	 11	            14.00	             12
+10248	 42	              9.80	             10
+10248	 72	             34.80	              5
+10249	 14	             18.60	              9
+10249	 51	             42.40	              40
+。。。其他数据	  	  	  
+(1). 现需要查询产品表中所有产品的id、价格、均价以及该产品价格与均价的差值。下列 SQL 语句中，正确的是（）。
+ A. SELECT ProductId,UnitPrice,(SELECT AVG(unitprice) FROM Products) AS "均价",UnitPrice - (SELECT AVG(unitprice) 
+	FROM Products) AS "差额" FROM Products
+ B. SELECT ProductId,UnitPrice,(SELECT AVG(unitprice) FROM Products) AS "均价",UnitPrice - AVG(unitprice) AS “差额” 
+	FROM Products
+ C. SELECT ProductId,UnitPrice,AVG(unitprice) AS “均价”,UnitPrice - AVG(unitprice) AS “差额” 
+	FROM Products
+ D. SELECT ProductId,UnitPrice,AVG(unitprice) AS “均价”,UnitPrice - AVG(unitprice) AS “差额” 
+	FROM Products GROUP BY ProductID
+正确答案：A
+(2). 需要查询产品表中单价最低的产品的详细信息（注意：可能会有相同价格的产品）。下列 SQL 语句中，正确的是（）。
+ A. SELECT  * FROM Products ORDER BY UnitPrice WHERE ROWNUM<2
+ B. SELECT  * FROM Products ORDER BY UnitPrice DESC WHERE ROWNUM<2
+ C. SELECT * FROM Products WHERE UnitPrice = (SELECT MIN(UnitPrice) FROM Products)
+ D. SELECT * FROM Products WHERE UnitPrice = MIN(UnitPrice)
+正确答案：C
+(3). 需要查询订购数量最多的前5种商品的ID 及其订购总数（提示：OrderDetails 表中的 Quantity 列表示产品的订购数量）,下列SQL 语句中，正确的是（）。
+ A. SELECT ProductId,SUM(Quantity) AS "Sum" FROM OrderDetails  GROUP BY ProductID HAVING ROWNUM<=5
+ B. SELECT ProductId,SUM(Quantity) AS "Sum"  FROM orderdetails GROUP BY ProductID DESC HAVING ROWNUM<=5
+ C. SELECT ProductId,SUM(Quantity) AS "Sum"  FROM OrderDetails  GROUP BY ProductID ORDER BY SUM(Quantity) DESC  WHERE ROWNUM<=5
+ D. SELECT * FROM (SELECT ProductId,SUM(Quantity) AS "Sum"  FROM OrderDetails  GROUP BY ProductID  ORDER BY SUM(Quantity) DESC) WHERE ROWNUM<=5
+正确答案：D
+(4). 需要查询产品表中，产品名称以字符串 cha 开头，且名称的总长度为4个字符的产品的详细数据。下列SQL 语句中，正确的是（）。
+ A. SELECT * FROM Products WHERE ProductName LIKE 'cha%'
+ B. SELECT * FROM Products WHERE ProductName LIKE 'cha_'
+ C. SELECT * FROM Products WHERE ProductName = 'cha%'
+ D. SELECT * FROM Products WHERE ProductName = 'cha_'
+正确答案：B
+(5). 需要查询订单ID为 10248 的订单所购买的商品 ID、商品名称、顾客ID以及购买数量。查询的结果如下所示：
+ProductID	 ProductName	 CustomerID	 Quantity
+11	           Queso Cabrales	    VINET	 12
+42	  Singaporean Hokkien Fried Mee	 VINET	 10
+72	 Mozzarella di Giovanni	    VINET	 5 
+下列SQL 语句中，正确的是（）。
+ A. SELECT od.ProductID,p.ProductName,o.CustomerID, od.Quantity  
+	FROM Products  p JOIN OrderDetails od, Orders  o  
+	WHERE P.ProductID = od.ProductID AND  od.OrderID = o.OrderID and o.OrderID = 10248
+ B. SELECT od.ProductID,p.ProductName,o.CustomerID, od.Quantity 
+	 FROM Products  p JOIN OrderDetails od, Orders  o  ON p.ProductID = od.ProductID AND  od.OrderID = o.OrderID 	WHERE o.OrderID = 10248
+ C. SELECT od.ProductID,p.ProductName,o.CustomerID, od.Quantity 
+	 FROM Products  p JOIN OrderDetails  od ON p.ProductID = od.ProductID AND Orders  o ON od.OrderID = o.OrderID 
+	WHERE o.OrderID = 10248
+ D. SELECT  od.ProductID,p.ProductName,o.CustomerID, od.Quantity 
+	FROM Products  p JOIN OrderDetails  od ON p.ProductID = od.ProductID JOIN Orders  o ON od.OrderID = o.OrderID 	WHERE o.OrderID = 10248
+正确答案：D
+42. 阅读以下代码，并完成5题：
+ <html>  
+ 	<head>     
+		<title>Insert Title</title>     
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">   
+	</head>  
+ 	<body>     
+		<div id="div1">       
+			<div id="div2">网站LOGO</div>       
+			<div id="div3">网站名称</div>     
+		</div>     
+		<div id="div4">xxx网站 &raquo; 网站首页</div>     
+		<div id="div5">       
+			<ul>         
+				<li><a href="">网站首页</a></li>        
+ 				<li><a href="">会员登陆</a></li>         
+				<li><a href="">会员注册</a></li>         
+				<li><a href="">公司简介</a></li>         
+				<li><a href="">产品介绍</a></li>         
+				<li><a href="">联系我们</a></li>       
+			</ul>    
+ 		</div>   
+	</body> 
+</html> 
+(1). 通过样式表要让div1在IE、FireFox浏览器中同时居中，正确的做法是（）。 
+  A. 给body添加如下样式： text-align:center;   给div1添加如下样式： margin-left:auto; 
+  B. 给div1添加如下样式： margin:0 auto 0 auto; 
+  C. 给body添加如下样式： text-align:center;   给div1添加如下样式： margin:0 auto 0 auto; 
+  D. 给body添加如下样式： text-align:center;
+正确答案：C
+(2). 通过样式表使div4距离上边的div1 10个像索，应该给div4添加的样式是（）。 
+  A. margin-top:10px; 
+  B. <br> 
+  C. padding-top:10px; 
+  D. margin-bottom:10px; 
+正确答案：A
+(3). 在div2、div3都添加了float:left;样式后，FireFox浏览器中div1的高度会自动变为0。以下哪个选项可以解决该问题（）。 
+  A. 给div1添加如下样式 clear:both; 
+  B. 给div2添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+  C. 给div3添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+  D. 给div1添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+正确答案：D
+(4). 以下哪个选择可以将ul列表前的点全部去掉（）。 
+  A. float:left; 
+  B. list-style-type:none; 
+  C. display:none; 
+  D. visibility:hidden; 
+正确答案：B
+(5). ul列表中的所有li默认都是在一列上，如果将所有的li全部合为一行，正确的做法是（）。 
+  A. 给ul添加如下样式 float:left; 
+  B. 给ul添加如下样式 list-style-type:none; 
+  C. 给li添加如下样式 float:left; 
+  D. 给li添加如下样式 list-style-type:none; 
+正确答案：C

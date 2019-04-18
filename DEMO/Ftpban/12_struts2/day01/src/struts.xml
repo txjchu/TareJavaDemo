@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<!-- name包名(不要重复即可)
+		extends继承框架底层包,该包有result组件等
+		namespace用于限制action元素的name请求名 -->
+	<package name="demo1" 
+			extends="struts-default" 
+			namespace="/">
+		<!-- name请求名；class Action组件类名;
+		method指定Action的业务方法名,默认execute -->
+		<action name="hello" 
+			class="org.tarena.action.HelloAction" 
+			method="execute">
+			<!-- name标识符,与Action返回结果对应;
+			type指定result类型,默认dispatcher -->
+			<result name="success" type="dispatcher">
+				/hello.jsp
+			</result>
+		</action>
+	</package>
+	
+	<package name="demo2" extends="struts-default">
+		<!-- 调用底层Action返回success -->
+		<action name="tologin">
+			<!-- name默认success,type默认dispatcher -->
+			<result>
+				/WEB-INF/login.jsp
+			</result>
+		</action>
+		
+		<action name="login" 
+			class="org.tarena.action.LoginAction">
+			<result name="success">/WEB-INF/ok.jsp</result>
+			<result name="error">/WEB-INF/login.jsp</result>
+		</action>
+		
+	</package>
+	
+</struts>
+
+
+
+

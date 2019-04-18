@@ -1,0 +1,77 @@
+public class LoginAction{
+
+   private String name;//成员变量name
+
+   //属性名是username
+   public void setUsername(String name){
+          this.name = name;
+   }
+   //${username}
+   public String getUsername(){
+         return name;
+   }
+
+}
+=====================
+1.Struts2和Spring结合
+
+a. Struts2版本示例：
+   Emp列表显示 
+  /emp/list.action
+-->Filter
+-->EmpListAction
+-->EmpDao.findAll()
+-->Result
+-->emp_list.jsp
+
+b. Struts2+Spring版本
+
+SpringIOC：管理Action,Service,Dao，注入关系  
+--引入Spring的IOC开发包
+--添加了src/applicationContext.xml配置
+
+Struts2框架去SpringIOC容器获取Action对象
+--引入struts-spring-plugin.jar
+--修改<action>的class属性值
+--给struts-spring-plugin.jar指定Spring容器
+  (在web.xml中配置ContextLoaderListener,
+在spring-web-3.2.8.RELEASE.jar包中)
+
+StrutsObjectFactory-->ObjectFactory
+StrutsSpringObjectFactory-->ObjectFactory
+默认Struts2使用StrutsObejctFactory创建Action对象使用,
+当引入struts-spring-plugin.jar,将底层配置ObjectFactory
+改成了StrutsSpringObjectFactory，该组件去访问Spring容器
+抓取某个Bean对象给Filter控制器处理请求使用
+（抓取规则：使用<action>的class值做id抓取bean）
+
+
+2.Struts2+Ajax结合(Struts2的json响应)
+
+Result组件：调用视图生成响应信息。
+json类型的Result:可以将Action指定的属性以json方式输出
+
+  /emp/ajaxlist.action
+-->Filter
+-->EmpListAction
+-->EmpDao.findAll()
+-->Result（json）
+-->JSON响应
+
+/emp/ajaxdelete.action
+-->Filter
+-->EmpDeleteAction
+-->EmpService
+-->EmpDao
+-->Result(json)
+-->JSON响应
+
+CREATE TABLE t_emp (
+  eno int primary key AUTO_INCREMENT,
+  ename varchar(20) 
+)
+
+
+
+
+

@@ -1,0 +1,76 @@
+/*1.整体设置页面的布局*/
+/*a.将body边距归0*/
+body {
+	margin:0;
+	padding:0;
+}
+/*b.统一设置div的边框和外边距*/
+div {
+	border: 1px solid #000;
+	margin: 0 auto;
+}
+/*c.逐个设置div的宽、高、内外边距*/
+#logo {
+	width:960px;
+	height:61px;
+}
+#nav {
+	width:100%;
+	height:91px;
+}
+#content {
+	width:100%;
+	height:410px;
+	padding-top:10px;
+}
+#copy {
+	width:960px;
+	height:50px;
+}
+#main {
+	width:950px;
+	height:390px;
+	border:5px solid #8ac1db;
+}
+#operate {
+	width:910px;
+	height:40px;
+}
+#data {
+	width:910px;
+	height:310px;
+}
+#page {
+	width:910px;
+	height:40px;
+}
+/*2.设置背景色及背景图*/
+/*a.设置页面整体背景色*/
+body {
+	background-color: #0ea8d8;
+}
+/*b.设置logo区背景图*/
+#logo {
+	background-image: url("../img/top_bg.png");
+}
+/*c.设置其他区域背景色*/
+#nav {
+	background-color: #0488bb;
+}
+#main {
+	background-color: #e8f3f8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

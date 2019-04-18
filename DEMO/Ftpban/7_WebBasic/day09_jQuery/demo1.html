@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery的使用</title>
+		<!-- 1.引入js必须使用双标记，
+			且标签内不能写其他的js； -->
+		<!-- 2.自己写的js由于要使用jQuery，
+			必须写在此引用之后。 -->
+		<script type="text/javascript" 
+			src="../js/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			//每次点击让段落字体+1
+			function bigger() {
+				//$("p")获取所有的p
+				//css("font-size")获取p的字号(14px)
+				var size = $("p").css("font-size");
+				//将字号+1，再设置给所有的p
+				var s = parseInt(size.replace("px",""));
+				$("p").css("font-size", ++s + "px");
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="bigger();">+</button>
+		<h1>jQuery使用的3个步骤</h1>
+		<p>1.引入jQuery</p>
+		<p>2.使用选择器选中节点</p>
+		<p>3.调用方法操作节点</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+

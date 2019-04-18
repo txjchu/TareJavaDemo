@@ -1,0 +1,86 @@
+(HTML)Ajax-->SpringMVC-->IOC-->Service-->Dao(MyBatis)
+-->JSON结果
+
+采用Ajax方式显示资费列表功能
+1.客户端程序
+ a.发送Ajax请求
+    --发送请求时机
+    --需要提交的数据
+ b.回调函数
+    解析服务器返回的JSON结果,显示到页面
+
+2.服务器端
+c.接收Ajax请求,给回调函数返回JSON结果
+/cost/list.do
+-->DispatcherServlet-->HanlderMapping
+-->CostListController
+   -->CostService
+   -->CostDao-->COST表（查询）
+-->Controller返回JSON结果
+
+1)实现CostDao
+2)实现CostService
+3)实现CostListController
+4)配置MVC流程
+
+=========DB导入=========
+set names utf8;
+//将coud_note.sql文件拷贝到soft01下
+source \home\soft01\cloud_note.sql   //linux
+
+show databases; //查看有哪些库
+use cloud_note;//进入cloud_note库
+show tables;//查看库中的表
+desc cn_user;//查看cn_user表结构
+其他select,update,insert,delete和以前一样
+==========================
+云笔记：
+ 用户模块：用户登录、注册、修改密码、退出
+ 笔记本模块：查看列表,创建,删除,修改笔记本名
+ 笔记模块：查看列表,创建,删除,修改,分享,转移,收藏,分享笔记搜索
+ 回收站：查看列表,继续删除,恢复
+ 收藏夹：查看列表,取消收藏
+ 活动：查看活动笔记,将自己笔记参加活动,收藏活动笔记等
+采用技术架构：
+Ajax,jQuery
+SpringMVC,SpringIOC/AOP,MyBatis
+Ajax:异步请求响应处理,局部页面刷新
+jQuery:简化客户端js和ajax编程
+SpringMVC：接收请求分发给业务组件处理(控制)
+SpringIOC:管理Controller,Service,Dao，组件解耦
+SpringAOP:统一对事务进行管理,统一对异常进行日志处理
+MyBatis:用于简化对数据库表的操作
+交互模式
+ （HTML界面）--->Ajax-->SpringMVC+SpringIOC/AOP+MyBatis
+解析显示到界面 <---JSON<---
+
+约定服务器返回的JSON格式统一
+{
+  "status":xxx,//处理状态
+  "msg":xxx,//消息信息
+  "data":数据 //返回的数据
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+1.项目功能简介
+2.项目技术架构(特殊技术)
+3.个人负责哪些工作
+4.遇到了哪些问题,如何解决
+5.项目收获
+====================
+1.确认创建笔记本处理
+ a.发送Ajax请求
+  单击对话框中的"创建"按钮
+  提交笔记本名称，用户ID
+b.Ajax回调函数
+  成功关闭添加对话框，弹出提示信息
+  失败关闭添加对话框，弹出提示信息
+
+c.服务器端处理
+ /notebook/add.do
+-->AddBookController.execute
+  -->BookService.addBook
+  -->BookDao.save-->cn_notebook(插入操作)
+--返回NoteResult结构信息
+
+========================
+确认创建笔记
+
+
+/note/add.do
+-->AddNoteController.execute
+-->NoteService.addNote
+-->NoteDao.save-->cn_note(插入)
+-->返回NoteResult结构的JSON
+
+
+/note/add.do?bookId=11&userId=2&noteTitle=day01
+
+
+
+
+
+
+
+ 

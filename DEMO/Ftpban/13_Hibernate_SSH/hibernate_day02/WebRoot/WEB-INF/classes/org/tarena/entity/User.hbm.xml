@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.tarena.entity.User"
+		table="cn_user">
+		<!-- 采用二级缓存存储 -->
+		<cache usage="read-write"/>
+		<id name="id" column="cn_user_id" 
+			type="string">
+			<generator class="uuid">
+			</generator>
+		</id>
+		<property name="name" column="cn_user_name" 
+			type="string">
+		</property>
+		<property name="password" column="cn_user_password" 
+			type="string">
+		</property>
+		<property name="token" column="cn_user_token" 
+			type="string">
+		</property>
+		<property name="descr" column="cn_user_desc" 
+			type="string">
+		</property>
+		<!-- 关联映射,采用一对多方式加载NoteBook -->
+		<set name="books">
+			<key column="cn_user_id"></key>
+			<one-to-many class="org.tarena.entity.NoteBook"/>
+		</set>
+	</class>
+</hibernate-mapping>

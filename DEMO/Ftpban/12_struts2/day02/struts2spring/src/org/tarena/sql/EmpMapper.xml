@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.tarena.dao.EmpDao">
+	
+	<delete id="delete" parameterType="int">
+	delete from t_emp
+	where eno=#{no}
+	</delete>
+	
+	<select id="findAll" 
+		resultType="org.tarena.entity.Emp">
+	select * from t_emp
+	</select>
+	
+</mapper>

@@ -1,0 +1,24 @@
+======MyBatis+Spring========
+IOC,AOP,MVC
+
+
+Controller
+Service
+Dao
+
+1.Spring+MyBatis需要引入mybatis-spring.jar整合包
+  
+ SqlSessionFactoryBean:在Spring容器创建SqlSessionFactory对象
+ MapperFactoryBean:可以根据Dao接口创建对象并放入Spring容器
+
+
+2.Spring+MyBatis整合操作
+ a.引入框架环境
+   --MyBatis框架(MyBatis,数据库驱动,dbcp)
+   --Spring 框架（涉及IOC,AOP,DAO）
+   --整合包mybatis-spring.jar
+   --src添加applicationContext.xml(MyBatis主配置取消)
+ 
+
+
+

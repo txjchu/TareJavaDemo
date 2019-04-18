@@ -1,0 +1,352 @@
+Shoot射击游戏第一天:
+1.class FlyingObject{
+    image,width,height,x,y
+  }
+2.interface Enemy{
+    int getScore();
+  }
+3.interface Award{
+    DOUBLE_FILE,LIFE
+    int getType();
+  }
+4.class Airplane extends 1 implements 2{
+    speed
+    Airplane(){}
+    重写getScore()
+  }
+5.class Bee extends 1 implements 3{
+    xSpeed,ySpeed,awardType
+    Bee(){}
+    重写getType()
+  }
+6.class Bullet extends 1{
+    speed
+    Bullet(int x,int y){}
+  }
+7.class Hero extends 1{
+    life,doubleFire,images,index
+    Hero(){}
+  }
+8.class ShootGame extends JPanel{
+    WIDTH,HEIGHT
+    background,start,pause,gameover
+    airplane,bee,bullet,hero0,hero1
+    static{}
+
+    hero(Hero)
+    flyings(FlyingObject[])
+    bullets(Bullet[])
+    ShootGame(){初始化对象}
+    
+    重写paint(g){
+       画背景图
+       paintHero(g);
+       paintFlyingObjects(g);
+       paintBullets(g);
+    }
+    paintHero(g){} //画英雄机
+    paintFlyingObjects(g){} //画敌人
+    paintBullets(g){} //画子弹
+    
+    main(){
+      ...
+      frame.setVisible(true);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+回顾:
+1.多态
+   意义:行为的多态，对象的多态
+   向上造型:父类、实现的接口
+   强转:引用所指向的对象就是该类型
+                        实现了该接口
+   ClassCastException类型转换异常
+   强转之前通过instanceof判断
+2.成员内部类:
+    类中套类，内部类通常只服务于外部类
+    内部类对象通常是在外部类中被创建
+    内部类中可以直接访问外部类成员，默认有个
+      隐式的引用指向了创建它的外部类对象
+      Outer.this.
+  匿名内部类:
+    Inter1 o1 = new Inter1(){
+      public void a(){
+
+      }
+    };
+    o1.a();
+
+    interface Inter1{
+      void a();
+    }
+
+
+1)找对象:英雄机，敌机，小蜜蜂，子弹
+2)抽类:Hero,Airplane,Bee,Bullet
+3)设计类的成员变量和方法
+4)创建对象
+
+符合既是也是，接口
+
+
+
+安排这个项目的目的:
+  明白一个项目从无以有的一个过程
+
+不要想着看就能明白
+必须得写
+
+写过了就会了
+
+class FlyingObject{ //飞行物
+  x,y,width,height,image
+}
+interface Enemy{ //敌人
+  int getScore();
+}
+interface Award{ //奖励
+  int getType();
+}
+class Hero extends FlyingObject{ //英雄机
+}
+class Airplane extends FlyingObject implements Emeny{ //敌机
+}
+class Bee extends FlyingObject impelments Award{ //小蜜蜂
+}
+class Bullet extends FlyingObject{ //子弹
+}
+class ShootGame{ //测试类
+  main(){
+  }
+}
+
+
+
+MyShoot
+com.tarena.shoot
+FlyingObject
+Enemy
+Award
+Airplane
+Bee
+Bullet
+Hero
+ShootGame
+
+
+10,11,12,13,14,15
+
+x = 
+y = -height;
+
+Math.random()*(ShootGame.WIDTH-airplane.width)
+---0到99的
+
+---0到ShootGame.WIDTH-airplane.width
+
+
+Random rand = new Random();
+x = rand.nextInt(ShootGame.WIDTH-airplane.width); //0到99
+y = -airplane.height;
+
+
+x = (int)(Math.random()*100);
+
+
+子弹的x和y不是固定的，而是随着英雄机而确定的
+
+
+
+
+出来一个窗口，画出4个对象
+Hero hero = new Hero();
+hero.image = 
+hero.width = 
+hero.height = 
+hero.x = 
+hero.y = 
+...
+...
+...
+...
+Airplane air = new Airplane();
+父类的5个加上本类的1个
+
+
+
+
+
+Shoot游戏第一天:
+
+
+
+两种模式:
+1)C/S:Client/Server(客户端/服务器)
+2)B/S:Browser/Server(浏览器/服务器)
+
+
+
+1)窗口------有了
+2)对象------有了
+3)将对象画到窗口上
+
+
+
+
+
+
+
+frame.setVisible(true); //1.可见  2.尽快调用paint()方法
+但是ShootGame类中没有paint()方法
+虽然ShootGame类中没有paint()，
+但它的父类JPanel中有paint()，所以能调到
+只不过父类的paint()方法中什么也没有帮咱们画
+需求中需要画对象，所以需要改父类中的paint()
+也就是需要重写父类的paint()方法
+
+
+
+
+JFrame-----窗口(相框)
+JPanel-----面板(板)
+它的父类JPanel中有paint()，所以能调到
+
+
+
+
+
+
+一个英雄机
+一个敌机
+一个小蜜蜂
+一个子弹
+
+
+Hero hero = new Hero();
+Bullet[] bullets = new Bullet[10];
+FlyingObject[] flyings = new FlyingObject[10];
+flyings[0] = new Airplane();
+flyings[1] = new Bee();
+
+
+
+
+
+
+
+
+
+
+Airplane[] as = new Airplane[10];
+Bee[] bs = new Bee[10];
+
+
+
+
+
+
+
+
+
+
+
+对象有几个
+1.一个英雄机
+2.多个子弹
+
+
+
+
+
+
+
+
+
+
+JFrame-----窗口(相框)
+JPanel-----面板(板)
+
+板装到框上
+照片装到板上
+
+
+没有那句话，关小叉子只是关闭了窗口
+但程序依然运行着
+
+有那句话，则关小叉子同时退出程序
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+共24步骤:
+1)讲16个步骤-----最简单的
+  -----画出一个窗口，并画出4个对象(不动)
+2)讲4个步骤
+  -----窗口上的对象动起来
+3)讲4个步骤
+  -----打起来
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+打掉一个敌机-----得分(5)
+打掉一个蜜蜂-----得奖励(命、火力值)
+
+英雄机火力值默认为0(单倍火力)
+得一个火力值奖励则加40(双倍火力)
+发射一次双倍火力则减2
+
+
+0
+0+40---40
+40-4---36
+36+40--76
+76+40--116
+116-20-96
+减命同时火力值清零0
+
+
+
+

@@ -1,0 +1,31 @@
+1.笔记删除（放入回收站）
+
+/note/recycle.do
+-->RecycleNoteController.execute
+   -->NoteService.recycleNote
+   -->NoteDao.updateStatus-->cn_note(修改状态)
+-->返回NoteResult结构的json
+
+
+====================
+2.笔记分享
+ 
+ 根据分享笔记的ID，提取笔记信息，写入cn_share
+ /note/share.do
+-->ShareNoteController.execute
+   -->NoteService.shareNote
+   -->ShareDao-->cn_share(插入)
+-->返回NoteResult结构的json数据
+
+==================
+3.选做功能
+ （回收站列表显示）
+ a.点左下方“回收站”按钮显示已删除的笔记列表
+ （笔记转移）
+ b.点击“转移”笔记按钮，弹出移动笔记对话框，选择笔记本后，
+   将当前笔记移动到选择的笔记本
+
+
+
+
+

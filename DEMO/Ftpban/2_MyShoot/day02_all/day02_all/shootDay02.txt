@@ -1,0 +1,509 @@
+Shoot射击游戏第一天:
+1.class FlyingObject{
+    image,width,height,x,y
+  }
+2.interface Enemy{
+    int getScore();
+  }
+3.interface Award{
+    DOUBLE_FILE,LIFE
+    int getType();
+  }
+4.class Airplane extends 1 implements 2{
+    speed
+    Airplane(){}
+    重写getScore()
+  }
+5.class Bee extends 1 implements 3{
+    xSpeed,ySpeed,awardType
+    Bee(){}
+    重写getType()
+  }
+6.class Bullet extends 1{
+    speed
+    Bullet(int x,int y){}
+  }
+7.class Hero extends 1{
+    life,doubleFire,images,index
+    Hero(){}
+  }
+8.class ShootGame extends JPanel{
+    WIDTH,HEIGHT
+    background,start,pause,gameover
+    airplane,bee,bullet,hero0,hero1
+    static{}
+
+    hero(Hero)
+    flyings(FlyingObject[])
+    bullets(Bullet[])
+    ShootGame(){初始化对象}
+    
+    重写paint(g){
+       画背景图
+       paintHero(g);
+       paintFlyingObjects(g);
+       paintBullets(g);
+    }
+    paintHero(g){} //画英雄机
+    paintFlyingObjects(g){} //画敌人
+    paintBullets(g){} //画子弹
+    
+    main(){
+      ...
+      frame.setVisible(true);
+    }
+  }
+
+
+
+Shoot射击游戏第二天:
+1.敌人入场的实现步骤:
+  1)main(){ game.action(); }
+  2)action(){
+      ...
+      run(){ //10毫秒定时执行
+        enteredAction(); //敌人入场
+	repaint();
+      }
+    }
+  3)int index = 0;
+    enteredAction(){ //10毫秒
+      index++;
+      if(index%40==0){  //40*10毫秒
+        FlyingObject one = nextOne(); //创建一个敌人对象
+        flyings = Arrays.copyOf(flyings,flyings.length+1); //扩容
+        flyings[flyings.length-1] = one; //将敌人对象添加到敌人数组中
+      }
+    }
+  4)nextOne(){
+      生成0到19间的随机数
+      为0时return new Bee();
+      否则return new Airplane();
+    }
+2.飞行物走一步的实现步骤:
+  1)FlyingObject----抽象方法step();
+  2)Airplane,Bee,Bullet,Hero---重写step()
+  3)action(){
+      ...
+      run(){
+        enterAction();
+	stepAction();
+	repaint(); //重画
+      }
+    }
+  4)stepAction(){
+      遍历所有敌人,调用step()
+      遍历所有子弹,调用step()
+      hero.step();
+    }
+3.子弹入场的实现步骤:
+  1)Hero---shoot()英雄机发射子弹
+  2)action(){
+      run(){
+        ...
+	shootAction(); //发射子弹
+	repaint();
+      }
+    }
+  3)int shootIndex = 0;
+    shootAction(){ //10毫秒走一次
+      shootIndex++;
+      if(shootIndex%30==0){ //300毫秒
+        调用Hero的shoot()得到发射出的子弹数组bs
+	将bullets扩容
+	将bs追加到bullets数组中--System.arraycopy()
+      }
+    }
+4.英雄机随着鼠标移动的实现步骤:
+  1)Hero---moveTo(int x,int y)
+  2)action(){
+      MouseAdapter l = new MouseAdapter(){
+         重写MouseMoved(){
+	   获取鼠标的x和y
+	   hero.moveTo(x,y); //移动
+	 }
+      };
+      this.addMouseMotionListener(l);
+      this.addMouseListener(l);
+      ...
+      run(){
+        ...
+      }
+    }
+5.删除越界的敌人和子弹的实现步骤:
+  1)FlyingObject----abstract outOfBounds();
+  2)Airplane,bee,bullet,Hero--重写outOfBounds()
+  3)action(){
+      run(){
+        ...
+	outOfBoundsAction(); //删除越界的
+	repaint();
+      }
+    }
+  4)outOfBoundsAction(){
+      1)声明活着的数组
+      2)遍历flyings/bullets数组
+        判断对象是否不越界:
+        若true:
+          将对象添加到活着的数组中
+      3)将活着的数组复制到flyings/bullets数组中
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+shoot第二天:
+1.敌人(敌机+小蜜蜂)入场
+2.飞行物(英雄机、子弹、敌机、小蜜蜂)走一步
+3.子弹入场
+4.英雄机随着鼠标动
+5.删除越界的飞行物----提高运行效率
+
+
+
+
+
+
+
+
+
+
+
+
+
+100个元素，其中有30个越界了
+
+
+
+
+
+public void outOfBoundsAction(){
+  int index = 0; //1.计数器  2.下标
+  FlyingObject[] flyingLives = new FlyingObject[flyings.length];
+  for(int i=0;i<flyings.length;i++){
+    FlyingObject f = flyings[i];
+    if(!f.outOfBounds()){ //不越界
+      flyingLives[index] = f;
+      index++;
+    }
+  }
+  flyings=Arrays.copyOf(flyingLives,index);
+}
+
+
+
+flyings-----100个对象(30个越界，70个不越界)
+flyingLives----70个对象(不越界)
+flyings-----70个对象(不越界)
+
+
+
+
+
+
+
+
+
+
+for(int i=0;i<flyings.length;i++){
+    FlyingObject f = flyings[i];
+    if(f.outOfBounds()==true){
+      删除这个对象---需要做30次
+      缩容
+      flyings = Arrays.copyOf(flyings,flyings.length-1);
+    }
+  }
+
+
+
+
+
+
+
+
+flyings
+bullets------有意义的对象
+
+
+
+
+
+
+
+
+
+
+
+swing:
+事件:发生了一个事
+事件处理:发生那个事后所做的处理
+侦听器:
+1.有侦听器对象
+2.把侦听器装到你家去(面板上)
+
+侦听面板的事件
+
+
+1.创建侦听器对象
+2.将侦听器装到面板上
+
+MouseListener l = new MouseListener(){
+  重写5个方法
+};
+MouseMotionListener ll = new MouseMotionListener(){
+  重写2个方法
+};
+
+
+MouseAdapter l = new MouseAdapter(){
+  重写MouseMoved(){
+    鼠标随着动
+  }
+};
+this.addMouseListener(l);
+this.addMouseMotionListener(l);
+
+
+
+
+
+
+
+爷爷辈-----抽象方法
+爸爸辈-----重写(空的)
+孙子辈-----
+
+
+
+
+
+
+
+
+                      MouseListener
+		      MouseAdapter
+		      MouseAdapter的子类
+this.addMouseListener(l);
+this.addMouseMotionListener(ll);
+
+
+abstract class MouseAdapter implements MouseListener, MouseWheelListener, MouseMotionListener {
+  public void mouseClicked(MouseEvent arg0){}
+  public void mousePressed(MouseEvent arg0){}
+  public void mouseReleased(MouseEvent arg0){}
+  public void mouseEntered(MouseEvent arg0){}
+  public void mouseExited(MouseEvent arg0){}
+
+  public void mouseWheelMoved(MouseWheelEvent arg0){}
+
+  public void mouseDragged(MouseEvent arg0){}
+  public void mouseMoved(MouseEvent arg0){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface MouseMotionListener extends java.util.EventListener {
+  public abstract void mouseDragged(java.awt.event.MouseEvent arg0);
+  public abstract void mouseMoved(java.awt.event.MouseEvent arg0);
+}
+
+interface MouseListener extends java.util.EventListener {
+  public abstract void mouseClicked(java.awt.event.MouseEvent arg0);
+  public abstract void mousePressed(java.awt.event.MouseEvent arg0);
+  public abstract void mouseReleased(java.awt.event.MouseEvent arg0);
+  public abstract void mouseEntered(java.awt.event.MouseEvent arg0);
+  public abstract void mouseExited(java.awt.event.MouseEvent arg0);
+}
+
+
+
+
+
+
+
+
+
+
+1.鼠标点击事件----启动状态变为运行状态
+2.鼠标移动事件----英雄机随着动
+3.鼠标移出事件----运行状态变为暂停状态
+4.鼠标移入事件----暂停状态变为运行状态
+
+
+
+
+
+
+
+
+
+
+子弹入场:
+1.创建子弹对象
+2.将对象添加到bullets数组中
+
+
+
+Bullet[] bs = hero.shoot();
+bullets = Arrays.copyOf(bullets, bullets.length+bs.length); 
+System.arraycopy(bs,0,bullets,bullets.length-bs.length,bs.length);
+
+
+
+
+
+
+
+Bullet[] bullets = new Bullet[2];
+bullets[0] = new Bullet();
+bullets[1] = new Bullet();
+return bullets;
+
+
+
+
+
+
+
+敌人入场并走步
+英雄机-----------?
+子弹不能走步的原因是因为还没有入场
+
+
+切换图片
+
+
+
+
+paint()方法两种调用方式:
+1.frame.setVisible(true);
+2.repaint();
+
+
+
+
+
+
+
+
+
+
+
+
+假设flyings中有3个元素了
+又来一个敌人
+
+flyings得变到4个元素-----扩容
+把来的那个敌人装到最后一个元素上
+Arrays
+
+
+
+5+2
+5+(-2)
+
+
+
+
+
+
+
+
+
+
+
+
+敌人(敌机+小蜜蜂)入场:
+1.创建敌人对象
+2.将对象添加到flyings数组中
+
+
+
+定时发生----定时器
+
+               TimerTask类型
+timer.schedule(new TimerTask(){
+  public void run(){ //定时干的那个事
+    //敌人入场
+  }
+},10,10);
+
+
+
+
+
+
+
+class Aoo extends TimerTask{
+  
+}
+
+
+
+
+
+
+
+
+
+
+第1个10:程序启动到第一次执行的间隔时间
+第2个10:第一次到第二次的间隔时间
+        第二次到第三次的间隔时间
+
+
+
+现在定一个闹表，每天早上7点开始叫我
+
+
+
+
+
+
+
+
+flyings
+ShootGame(){
+  
+}

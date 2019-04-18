@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>购物车</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      h1 {
+        text-align:center;
+      }
+      table {
+        margin:0 auto;
+        width:60%;
+        border:2px solid #aaa;
+        border-collapse:collapse;
+      }
+      table th, table td {
+        border:2px solid #aaa;
+        padding:5px;
+      }
+      th {
+        background-color:#eee;
+      }
+    </style>
+    <script type="text/javascript"
+    	src="../js/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+    	//加入购物车
+    	function add_shoppingcart(btn) {
+			//1.找按钮的大爷们(tds)
+			var $tds = $(btn).parent().siblings();
+			//2.获取大爷的孩子(商品名)
+			//[i]和get(i)返回dom对象；
+			//eq(i)返回jQuery对象。
+			var name = $tds.eq(0).html();
+			//3.获取二大爷的孩子(单价)
+			var price = $tds.eq(1).html();
+			//4.创建一行，追加到购物车table内
+			var $tr = 
+			  $('<tr>'+
+		          '<td>'+name+'</td>'+
+		          '<td>'+price+'</td>'+
+		          '<td align="center">'+
+		            '<input type="button" value="-" onclick="decrease(this);"/> '+
+		            '<input type="text" size="3" readonly value="1"/> '+
+		            '<input type="button" value="+" onclick="increase(this);"/>'+
+		          '</td>'+
+		          '<td>'+price+'</td>'+
+		          '<td align="center"><input type="button" value="x" onclick="del(this);"/></td>'+
+		        '</tr>');
+	       	//5.追加此行
+	       	$("#goods").append($tr);
+	       	//6.求合计
+	       	sum();
+        }
+        //删除
+        function del(btn) {
+			$(btn).parent().parent().remove();
+			sum();
+        }
+        //加法
+        function increase(btn) {
+            //1.获取按钮的哥哥(文本框)
+			var $text = $(btn).prev();
+			//2.获取文本框的值
+			var amount = parseInt($text.val());
+			//3.+1，然后设置回文本框
+			$text.val(++amount);
+			//4.获取单价(按钮二大爷的孩子)
+			var price = parseFloat($(btn).parent().prev().html());
+			//5.计算金额
+			var mny = price*amount;
+			//6.将金额写入金额列(按钮叔叔)
+			$(btn).parent().next().html(mny);
+			//7.求合计
+			sum();
+        }
+        //减法
+        function decrease(btn) {
+            //1.获取按钮的弟弟(文本框)
+			var $text = $(btn).next();
+			//2.获取文本框的值
+			var amount = parseInt($text.val());
+			//如果已经是1，则不能再减少
+			if(amount==1) {
+				return;
+			}
+			//3.-1，然后设置回文本框
+			$text.val(--amount);
+			//4.获取单价(按钮二大爷的孩子)
+			var price = parseFloat($(btn).parent().prev().html());
+			//5.计算金额
+			var mny = price*amount;
+			//6.将金额写入金额列(按钮叔叔)
+			$(btn).parent().next().html(mny);
+			//7.求合计
+			sum();
+        }        
+        //求合计
+        function sum() {
+			//1.获取购物车table下所有数据行
+			var $trs = $("#goods").children();
+			//2.遍历这些行
+			var sum = 0;
+			for(var i=0;i<$trs.length;i++) {
+				//3.取当前行第4个孩子(td)的内容
+				var mny = $trs.eq(i).children().eq(3).html();
+				//4.累加
+				sum += parseFloat(mny);
+			}
+			//5.将合计值写入对应的列
+			$("#total").html(sum);
+        }
+    </script>
+  </head>
+  <body>
+    <h1>真划算</h1>
+    <table>
+      <tr>
+        <th>商品</th>
+        <th>单价(元)</th>
+        <th>颜色</th>
+        <th>库存</th>
+        <th>好评率</th>
+        <th>操作</th>
+      </tr>   
+      <tr>
+        <td>罗技M185鼠标</td>
+        <td>80</td>
+        <td>黑色</td>
+        <td>893</td>
+        <td>98%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>微软X470键盘</td>
+        <td>150</td>
+        <td>黑色</td>
+        <td>9028</td>
+        <td>96%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>洛克iphone6手机壳</td>
+        <td>60</td>
+        <td>透明</td>
+        <td>672</td>
+        <td>99%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>蓝牙耳机</td>
+        <td>100</td>
+        <td>蓝色</td>
+        <td>8937</td>
+        <td>95%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>金士顿U盘</td>
+        <td>70</td>
+        <td>红色</td>
+        <td>482</td>
+        <td>100%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+    </table>
+  
+    <h1>购物车</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>商品</th>
+          <th>单价(元)</th>
+          <th>数量</th>
+          <th>金额(元)</th>
+          <th>删除</th>
+        </tr>
+      </thead>
+      <tbody id="goods">
+      	<!-- 
+        <tr>
+          <td>罗技M185鼠标</td>
+          <td>80</td>
+          <td align="center">
+            <input type="button" value="-"/>
+            <input type="text" size="3" readonly value="1"/>
+            <input type="button" value="+"/>
+          </td>
+          <td>80</td>
+          <td align="center"><input type="button" value="x"/></td>
+        </tr>
+         -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" align="right">总计</td>
+          <td id="total"></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>    
+  </body>
+</html>

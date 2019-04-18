@@ -1,0 +1,21 @@
+1.cost_list.jsp引用images/logo.png，
+  为什么写一个../？
+  1）页面存储的位置
+    /workspace/netctoss/WebRoot
+    /WEB-INF/cost/cot_list.jsp
+  2）图片存储的位置
+    /workspace/netctoss/WebRoot
+    /images/logo.png
+  3）结论：
+    jsp和图片差2级，应该写../../images
+    以上结论是源代码之间他们差2级，但是
+    我们访问的不是源代码，而是部署在
+    Tomcat中的代码。
+  4）Tomcat中的代码(资源)需要通过网络
+    访问，即通过网络上的路径访问。
+    cost_list.jsp路径
+    /netctoss/cost/find.do
+    images/logo.png路径
+    /netctoss/images/logo.png
+    所以find.do和images差1级，
+    ../images/logo.png

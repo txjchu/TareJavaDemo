@@ -1,0 +1,532 @@
+2. 某JSP中有如下代码，显示结果为（）
+ <% int a = 5;        
+request.setAttribute(“a”,”123”);       
+ session.setAttribute(“a”,”456”);
+ %> 
+<c:out value="${a}"/> 
+  A. 5 
+ B. 123 
+ C. 456 
+ D. Null 
+正确答案：B
+3. 在JavaScript中，在页面上打印出"Hello World"的JavaScript语法是：（）
+  A. document.write("Hello World") 
+ B. response.write("Hello World") 
+ C. "Hello World"
+ D. ("Hello World")
+正确答案：A
+4. 以下JavaScript代码的输出结果是（）。 
+var a = 3; var b = 2; var c = (a+2)/b; document.write (c); 
+  A. 2.5 
+ B. 2 
+ C. 32/2 
+ D. 16 
+正确答案：A
+5.  JSP 的EL 表达式：${user.loginName}执行效果等同于：（）。 
+  A. <% = user.getLoginName()%> 
+ B. <%user.getLoginName();%> 
+ C. <% = user.setLoginName()%> 
+ D. <% user.setLoginName();%> 
+正确答案：A
+6. 在JavaEE中，要将某个过滤器映射到Web应用程序的每个Web资源，以下在web.xml，中的配置正确的是（    ）。
+ A. <filter-mapping>
+        <filter-name>someFilter</filter-name>
+        <url-pattern>/*<url-pattern> </filter-mapping>
+ B. <filter>
+      <filter-name>someFilter</filter-name>
+      <url-pattern>/*<url-pattern>
+</filter>
+ C. <filter-mapping>
+      <filter-name>someFilter</filter-name>
+      <url-pattern>*<url-pattern>
+</filter-mapping>
+ D. <filter>
+       <filter-name>someFilter</filter-name>
+       <url-pattern>*<url-pattern>
+</filter>
+正确答案：A
+7. 在J2EE中，重定向到另一个页面，以下语句正确的是（）。
+ A. request.sendRedirect(“http : // www . baidu. com ”);
+ B. request.getRequestDispatcher (“http : // www . baidu. com ”);
+ C. response.sendRedirect(“http : // www . baidu. com ”);
+ D. response.getRequestDispatcher (“http : // www . baidu. com ”);
+正确答案：C
+8. 下列不属于浏览器内置的对象的是：（）
+  A. navigator
+ B. document
+ C. window
+ D. request
+正确答案：D
+9. 请看下列代码，文字“红旗飘飘”显示的颜色是：（）
+ <html>        
+	<head> 
+		<style>    
+ 			body { color: blue;     } 
+		</style>       
+ 	</head>       
+ 	<body style="color: green;">              
+ 		<div style="color:red">                  
+		红旗飘飘            
+		</div>        
+	</body>
+ </html>
+ A. 绿色 
+ B. 蓝色 
+ C. 黑色 
+ D. 红色 
+正确答案：D
+10. 下面JavaScript代码的执行结果是（）。
+ var a=new Array(2,3,4,5,6,7); var sum=0; for(var i=1;i<a.length;i++ ) sum +=a[i]; document.write(sum); 
+  A. 25 
+ B. 15 
+ C. 20 
+ D. 37 
+正确答案：A
+11. 在Java Web应用程序中，给定某Servlet程序的代码如下所示：
+ public class ServletFoo extends HttpServlet{ public void doGet(HttpServletRequest request,HttpServletResponse response)   
+ throws ServletException IOException{    System.out.println(“get”); }
+ public void doPost(HttpServletRequestrequest.HttpServletResponse response)     
+ throws ServletException,IOException{      System.out.println(“post”);      
+doGet(reauest,response);   
+ } } 
+用户在浏览器地址栏中键入正确的请求URL并回车后，在控制台上显示的结果是（ ）。 
+  A. get 
+ B. post 
+ C. get post 
+ D. post get 
+正确答案：A
+12.  以下代码能否编译通过，假如能编译通过，运行时输出结果是（）。
+<%
+  request.setAttribute("count",new Integer(0));
+  Integer count = request.getAttribute("count") ;
+%>
+<%=count %>
+ A. 编译通不过
+ B. 可以编译运行，输出0
+ C. 编译通过，但运行时抛出ClassCastException
+ D. 可以编译通过，但运行无输出
+正确答案：A
+13. 假设想做一个如下图所示的左-上-下的框架，需要的页面个数是（）。  
+ 	  
+ 
+  A. 3
+ B. 4
+ C. 5
+ D. 6
+正确答案：B
+14. 下面关于JSP作用域对象的说法错误的是（）。 
+  A. request对象可以得到请求中的参数 
+ B. session对象可以保存用户信息 
+ C. application对象可以被多个应用共享 
+ D. 作用域范围从小到大是request、session、application 
+正确答案：C
+15. 下面关于结果集，说法错误的是：（）。
+  A. 调用Connection对象的preparedStatement(String sql)
+方法所创建的PreparedStatement对象执行查询所得到的结果集不可以调用previous()方法。
+ B. Statement在执行完查询后，会把查询得到的所有数据通过网络一次加载到内存中。
+ C. ResultSet的getDate方法返回的类型是java.sql.Date而不是java.util.Date。
+ D. ResultSet的初始状态游标位于第一行之上，必须先调用其next方法，才可以获取到数据。
+正确答案：B
+16. 在Java Web应用程序中，给定servletA的代码片段如下所示： 
+public void doPost(HttpServletRequest request,HttpServletResponse response)  
+throws ServletException,IOException{ String id=”kingdom”; ______________________ } 
+ServletB与servletA同在一个有效的会话范围内，当把请求转发给ServletB后，
+要是在ServletB中能够获得“kingdom”值，下划线处应填入（ ）。 
+  A. request.getSession().setAttribute(“ID”,id)； 
+ B. request.getSession().getAttribute(“ID”,id)； 
+ C. request.getSession().setParameter(“ID”,id)； 
+ D. request.getSession().getParameter(“ID”,id)； 
+正确答案：A
+17. 代码 result.push(curCode) 用于将产生的整数 curCode 放入数组变量 result 中。
+下列代码中，可以替换此代码的是（）。
+  A. result[i] = curCode;
+ B. result.add(curCode);
+ C. result.join(curCode);
+ D. result.concat(curCode);
+正确答案：A
+18. 在Servlet中用于创建会话的方法是：（）。 
+  A. HttpServletRequest的getSession方法 
+ B. HttpServletResponse的newSession方法 
+ C. HtttpSession的newInstance方法 
+ D. HttpSession的getSession方法 
+正确答案：A
+19. 实现一个下拉菜单的HTML代码是:（）。
+  A. <input type="list"> 
+ B. <list>
+ C. <input type="dropdown"> 
+ D. <select>
+正确答案：D
+20. 在JDBC连接数据库编程应用开发中，可以实现数据库连接的是（）。 
+  A. Connection接口 
+ B. PreparedStatement类 
+ C. CallableStatement类 
+ D. Statement类 
+正确答案：A
+21. 以下对JavaScript理解正确的是（）。 
+  A. JavaScript是网景公司开发的一种Java脚本语言，其目的是为了简化Java的开发难度 
+ B. FireFox和IE存在大量兼容性问题的主要原因在于他们对JavaScript的支持不同上 
+ C. JavaScript是一门客户端脚本语言 
+ D. JavaScript技术和CSS技术一样，是为了设计样式而存在的 
+正确答案：C
+22. 某JSP中有如下代码，显示结果为: （）。 
+<% String user= "allen";        
+ request.setAttribute("user","smith");        
+ session.setAttribute("user","jerry"); 
+%> 
+<c:out value="${user}"/> 
+  A. allen 
+ B. smith 
+ C. jerry 
+ D. null 
+正确答案：B
+23.  请看下列代码，使用jQuery给id是u_item的第二个<li>设置字体的颜色。
+  <ul id="u_item">   
+<li>item1</li>   
+<li>item2</li>   
+<li>item3</li>  
+</ul> 下列代码正确的是:() 
+
+  A. var $obj = $('#ul li');    $obj.each(function(index){     if(index == 1){      $(this).css('color','red');     }    }); 
+ B. var $obj = $('#ul li');    $obj.each(function(index){     if(index == 2){      $(this).css('color','red');     }    }); 
+ C.  var $obj = $('#u_item li');    $obj.each(function(index){     if(index == 1){      $(this).css('color','red');     }    }); 
+ D.  var $obj = $('#u_item li');    $obj.each(function(index){     if(index == 2){      $(this).css('color','red');     }    }); 
+正确答案：C
+24.  题目代码的功能是：使浏览器正文的“红旗飘飘”显示成红色。 
+<html>        
+	<head>              
+ 		<style>                      
+		《插入代码》               
+		</style>        
+	</head>        
+	<body>           
+		<div id="d_info" class="div_block">                 
+		红旗飘飘          
+		 </div>        
+	</body>
+ </html> 
+在《插入代码》处，填入选项中的代码，不能达到上述效果的是：（）。 
+  A. div.div_block{color: red; font-size: 9pt} 
+ B. .div_block{color: red; font-size: 9pt} 
+ C. div.d_info{color: red; font-size: 9pt} 
+ D. #d_info{color: red; font-size: 9pt} 
+正确答案：C
+25. 在JavaScript中,表单文本框（Text）不支持的事件有（）。 
+  A. onblur 
+ B. onlostfocused 
+ C. onfocus 
+ D. onchange 
+正确答案：B
+26. 假设web应用的文件根目录为servlet01，那么可以找到struts-core.jar文件的目录是：（）。 
+  A. servlet01目录下 
+ B. servlet01\WEB-INF目录下 
+ C. servlet01\WEB-INF\classes目录下 
+ D. servlet01\WEB-INF\lib目录下 
+正确答案：D
+27. 在a.jsp中有代码片断如下： 
+<form action =”b.jsp” method =”post” name=”myForm”> 
+   loginName:<input type=”text” name=”loginName”/> 
+   <input  type=”submit” name=”submit”/>             
+</form> 
+在b.jsp中想输出在a.jsp页面上输入的loginName的值，以下选项正确的是：（）。
+ A. <%= request.getParameter(“loginName”)%>
+ B. <%=(String )request.gerAttribute(“loginName”)%>
+ C. <%= request.getParameter(“loginname”) %>
+ D. <%=(String )request.getAttribute(“loginname”) %>
+正确答案：A
+28. 请看下列代码：
+ a.jsp <form>    <input name=”name” value=”save”/> 
+</form> 
+<%         
+ response.sendRedirect(“b.jsp");   
+%>  
+b.jsp: <%=request.getParameter(“name") %>
+ b.jsp页面将显示为（）。 
+  A. null 
+ B. 无信息输出 
+ C. 异常信息 
+ D. save 
+正确答案：A
+29. 在XHTML中，电子邮件链接的正确写法是:（）。
+  A. <a href="http:电子邮件地址">...</a>
+ B. <a href="mailto:电子邮件地址">...</a>
+ C. <a href="ftp:电子邮件地址">...</a>
+ D. <a href="smtp:电子邮件地址">...</a>
+正确答案：B
+30.  下面的代码用于删除emp表中的id为100的记录：
+ Class.forName("orcale.jdbc.OracleDriver"); 
+Connection con =
+ DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.26:1521:tarena" ,"openlab","open123"); 
+（空白处） 
+stmt.close();
+ con.close(); 
+空白处应填入的代码是：（）。
+  A. Statement stmt = con.createStatement("delete from emp where id=100");
+int updateRows = stmt.executeUpdate(); 
+ B. Statement stmt = con.createStatement();
+int updateRows = stmt.executeUpdate("delete from emp where id=100"); 
+ C. Statement stmt = con.createStatement();
+int updateRows = stmt.execute("delete from emp where id=100"); 
+ D. Statement stmt = con.createStatement("delete from emp where id=100");
+int updateRows = stmt.execute(); 
+正确答案：B
+31. 在WEB应用程序的目录结构中，在WEB-INF文件夹外的文件可以为:（）。 
+  A. .jsp文件 
+ B.  .class文件 
+ C.  .jar文件 
+ D. web.xml文件 
+正确答案：A
+32. obj对象有att属性,获取att属性的值，以下选项错误的是（）。 
+  A. obj.att 
+ B. obj("att") 
+ C. obj["att"] 
+ D. obj["a"+"t"+"t"] 
+正确答案：B
+33. 实现一个多行文本输入域的HTML代码是：（） 
+  A. <input type="textarea">                   
+ B. <input type="textbox"> 
+ C. <textarea>                                       
+ D. <textbox> 
+正确答案：C
+34. 有关Servlet的生命周期说法不正确的是：（）。 
+  A. Servlet的生命周期由Servlet实例控制 
+ B. init()方法在创建完Servlet实例后对其进行初始化，传递的参数为实现ServletConfig类的对象 
+ C. service()方法响应客户端发出的请求 
+ D. 在容器移除servlet 时，调用destroy方法，进行资源的释放 
+正确答案：A
+35. 在web.xml设置了<url-pattern>*.do</url-pattern>，以下路径不是正确访问路径的是：（）。 
+  A. http://localhost:8080/web /list 
+ B. http://localhost:8080/web/list.do 
+ C. http://localhost:8080/web/jsp/list.do 
+ D. http://localhost:8080/web/jsp/emp/list.do 
+正确答案：A
+36. 有 login.jsp 页面，该页面用于实现用户登录的功能。
+用户在页面录入用户名和密码并点击“登录”按钮后，
+需要判断是否可以成功登录。如果成功登录，则需要记载当前用户的信息，
+以便在主页（home.jsp）上使用。另外，还需要统计当前页面的访问量，
+并在页面上显示。 login.jsp 文件的代码如下： 
+<%@ page language="java" pageEncoding="utf-8"%> 
+<html>        
+	<head>             
+  		<title>登录</title>       
+ 	</head>        
+	<body>              
+	 	<%                     
+	 	Integer appCount;                     
+ 		//对application同步                     
+ 		synchronized (application) {                             
+			appCount = (Integer) application.getAttribute("accCount");                             
+			//如果第一次访问，此时appCount为null，则初始化它                             
+			if (appCount == null) {
+				appCount = 0;
+			 }                             
+			//在原来基础上加1，并存储到application中                            
+ 			appCount = appCount + 1;                            
+ 			application.setAttribute("accCount", appCount); 
+		}                     
+ 		out.println("你是本网站第" + appCount.intValue() + "个访问者！");              
+		 %>                      
+		<form action="login.do" method="post">                            
+ 		姓名：<input type="text" name="userName"/><BR>                             
+		密码：<input type="password" name="pwd"/><BR><BR>                                   
+		<input type="submit" value="登录">                      
+		</form>        
+	</body> 
+</html> 
+LoginServlet.java代码如下：
+ public void doPost(HttpServletRequest request, HttpServletResponse response)                      
+	throws ServletException, IOException {               
+	PrintWriter pw = response.getWriter();              
+ 	String userName = request.getParameter("userName");               
+	String pwd = request.getParameter("pwd");          
+	 User user=isLogin(userName,pwd);          
+	//登录成功               
+	if (user!=null){               
+	HttpSession session=request.getSession();                      
+	session.setAttribute("user",user);                      
+	pw.println("login success");              
+	 }              
+ 	else{                     
+ 	//如果登录失败，返回到登录表单                     
+ 	response.sendRedirect("login.jsp");               
+	}        
+}
+(1). 上述代码中，使用了  application 对象存储访问人数。下列关于 application 对象的描述中，错误的是（）。
+ A. 可以在 web.xml文件中设置 application 对象的生命周期
+ B. 使用 synchronized (application)是为了解决数据的并发问题
+ C. application 对象在 web 应用程序的所有用户间实现信息共享
+ D. application 对象是一个可以从当前站点的任何页面都可以获取到变量
+正确答案：A
+(2). 上述代码中，使用了 session 对象存储用户信息。下列关于 session  对象的描述中，错误的是：（）。
+ A. session 状态只记载当前用户会话的信息
+ B. seesion 状态不能关闭
+ C. session 持续时间可以在 web.xml文件中设置
+ D. session 对象由 sessionID 来唯一标识
+正确答案：B
+(3). 如果需要在 home.jsp页面上得到当前登录用户的姓名，下列代码中，正确的是（）。
+ A. User user=(User)session.getAttribute(“user”); String userName=user.getUserName();
+ B. String userName=(String)session.getAttribute(“user”);
+ C. String userName=(String)session.getAttribute(“userName”);
+ D. User userName=session.getAttribute(“user”);
+正确答案：A
+(4). 上述代码中使用了JSP的隐士对象。下列选项中不属于JSP隐士对象的是：（）
+ A. session
+ B. application
+ C. out
+ D. synchronized
+正确答案：D
+(5). 为了实现登录是否成功的判断，页面调用了组件 UserDao 中的方法 isLogin。请根据上述代码中的调用方式推断isLogin方法的签名。下列选项中，正确的是（）。
+ A. public  String  isLogin（String userName，String pwd）
+ B. public  boolean  isLogin（String userName，String pwd）
+ C. public  User isLogin（String userName，String pwd）
+ D. public  void  isLogin（String userName，String pwd）
+正确答案：C
+37. 阅读以下代码，并完成5题： 
+<html>   
+<head>     
+<title>Insert Title</title>     
+<meta http-equiv="content-type" content="text/html;charset=utf-8">   
+</head>   
+<body>     
+<div id="div1">       
+<div id="div2">网站LOGO</div>       
+<div id="div3">网站名称</div>     
+</div>     
+<div id="div4">xxx网站 &raquo; 网站首页</div>     
+<div id="div5">      
+ <ul>         
+<li><a href="">网站首页</a></li>        
+ <li><a href="">会员登陆</a></li>        
+ <li><a href="">会员注册</a></li>         
+<li><a href="">公司简介</a></li>         
+<li><a href="">产品介绍</a></li>         
+<li><a href="">联系我们</a></li>       
+</ul>     
+</div>   
+</body> 
+</html> 
+(1). 通过样式表要让div1在IE、FireFox浏览器中同时居中，正确的做法是（）。 
+  A. 给body添加如下样式： text-align:center;   给div1添加如下样式： margin-left:auto; 
+  B. 给div1添加如下样式： margin:0 auto 0 auto; 
+  C. 给body添加如下样式： text-align:center;   给div1添加如下样式： margin:0 auto 0 auto; 
+  D. 给body添加如下样式： text-align:center;
+正确答案：C
+(2). 通过样式表使div4距离上边的div1 10个像索，应该给div4添加的样式是（）。 
+  A. margin-top:10px; 
+  B. <br> 
+  C. padding-top:10px; 
+  D. margin-bottom:10px; 
+正确答案：A
+(3). 在div2、div3都添加了float:left;样式后，FireFox浏览器中div1的高度会自动变为0。以下哪个选项可以解决该问题（）。 
+  A. 给div1添加如下样式 clear:both; 
+  B. 给div2添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+  C. 给div3添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+  D. 给div1添加如下样式 content:"."; visibility:hidden; display:block; height:0px; clear:both; 
+正确答案：D
+(4). 以下哪个选择可以将ul列表前的点全部去掉（）。 
+  A. float:left; 
+  B. list-style-type:none; 
+  C. display:none; 
+  D. visibility:hidden; 
+正确答案：B
+(5). ul列表中的所有li默认都是在一列上，如果将所有的li全部合为一行，正确的做法是（）。 
+  A. 给ul添加如下样式 float:left; 
+  B. 给ul添加如下样式 list-style-type:none; 
+  C. 给li添加如下样式 float:left; 
+  D. 给li添加如下样式 list-style-type:none; 
+正确答案：C
+38. EmpDaoImpl类的findAllEmp方法用于实现从员工表（emp）和
+部门表（dept）中查询所有员工的empno，ename，sal,deptno和dname信息。
+dept表和emp表的表结构如下： 部门表：dept
+字段名	 数据类型	 约束
+deptno	 number(4)	 primary key
+dname	 varchar2(20)	 not null 员工表：emp
+字段名	 数据类型	 约束
+empno	 number(4)	 primary key
+deptno	 number(4)	 foreign key
+ename	 varchar2(20)	  
+sal	 number(8,2)	   
+程序代码如下所示：
+ public class Emp {  
+	 private Integer empNo;  
+ 	private String empName;  
+ 	private BigDecimal salary;  
+ 	private Dept dept;   
+	//省略getter和setter 
+}
+ public class Dept {   
+	private Integer deptNo;  
+	 private String deptName; 
+	//省略getter和setter 
+} 
+public class EmpDaoImpl implements EmpDao { 
+	private static final String SQL_FIND_ALL_EMP = "      空白处1   ";     
+	public List<Emp> findAllEmp() throws Exception {         
+		Connection con = null;        
+ 		PreparedStatement stmt = null;       
+ 	 	try {            
+	 	con = ConnectionUtils.getConnection();//获取数据库连接             
+		stmt = con.prepareStatement(SQL_FIND_ALL_EMP);      
+		空白处2               
+		 List<Emp> list = new ArrayList<Emp>();       
+		空白处3                
+			while (rs.next()) {                
+ 			Emp emp = new Emp();                 
+			emp.setEmpNo(rs.getInt(1));                 
+			emp.setEmpName(rs.getString(2));                 
+			emp.setSalary(rs.getBigDecimal(3));               
+  			int deptNo = rs.getInt(4);                
+ 			Dept dept = null;                
+ 			if (     空白处4   ) {                     
+			dept = depts.get(deptNo);                
+			 } else {                     
+			dept = new Dept();                     
+			dept.setDeptNo(deptNo);                    
+	 		dept.setDeptName(rs.getString(5));                    
+	 		depts.put(deptNo, dept);                
+	 		}                      
+			空白处5                   
+			 list.add(emp);            
+			 }             
+			return list;         
+		} catch (SQLException e) {            
+ 		e.printStackTrace();            
+ 		throw e;        
+ 		} finally {             
+  		//释放资源           
+  		if (stmt != null)                
+ 		stmt.close();            
+ 		if (con != null)                 
+		con.close();        
+		 }     
+}
+
+(1). 下列选项中，能填入空白处1的代码是(    ) 
+  A. select e.empno,e.ename,e.sal, d.dname from emp e join dept d on  e.deptno=d.deptno 
+ B. select e.empno,e.ename,e.sal, d.dname from emp e join dept d where  e.deptno=d.deptno 
+ C. select e.empno,e.ename,e.sal, d.dname from emp e join dept d and  e.deptno=d.deptno 
+ D. select e.empno,e.ename,e.sal, d.dname from emp e ，dept d on  e.deptno=d.deptno 
+正确答案：A
+(2). 下列选项中，能填入空白处2的代码是(    ) 
+  A. ResultSet  rs = stmt.executeQuery(SQL_FIND_ALL_EMP); 
+ B. ResultSet  rs = stmt.executeQuery(); 
+ C. ResultSet  rs = stmt.executeUpdate(); 
+ D. ResultSet  rs = stmt.execute(); 
+正确答案：B
+(3). 下列选项中，能填入空白处3的代码是(    ) 
+  A. Map<String, Dept> depts = new HashMap<String, Dept>(); 
+ B. Map<Integer, String> depts = new HashMap<Integer, String>(); 
+ C. Map<Integer, Emp> depts = new HashMap<Integer, Emp>(); 
+ D. Map<Integer, Dept> depts = new HashMap<Integer, Dept>(); 
+正确答案：D
+(4). 下列选项中，能填入空白处4的代码是(    ) 
+  A. depts.contains(deptNo) 
+ B. depts.exists(deptNo) 
+ C. depts.containsKey(deptNo) 
+ D. depts.isExists(deptNo) 
+正确答案：C
+(5). 下列选项中，能填入空白处5的代码是(    ) 
+  A. emp.setDept(deptno); 
+ B. emp.setDept(dept); 
+ C. dept.setDept(empno); 
+ D. dept.setDept(emp); 
+正确答案：B

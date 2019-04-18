@@ -1,0 +1,71 @@
+
+======登录=======
+1.发送Ajax请求（前端）
+  --发请求时机？
+    点登录按钮发送
+  --请求提交的数据？
+    用户名和密码
+  --发请求类型（POST）
+2.服务端处理（服务器端）
+ /user/login.do
+-->DispatcherServlet-->HandlerMapping
+-->UserLoginController.execute
+    -->UserService.checkLogin
+    -->UserDao.findByName-->cn_user(按用户名查询)
+-->Controller返回NoteResult结构的JSON格式数据
+
+a.实现UserDao
+b.实现UserService
+c.实现UserLoginController
+d.配置MVC流程
+
+3.Ajax回调处理（前端）
+  解析返回的NoteResult结构的数据,成功进入edit.html
+  失败在log_in.html显示错误信息
+
+==========================
+org.tarena.note.controller
+org.tarena.note.controller.user
+org.tarena.note.controller.notebook
+org.tarena.note.controller.note
+org.tarena.note.controller.test
+org.tarena.note.service
+org.tarena.note.service.test
+org.tarena.note.dao
+org.tarena.note.dao.test
+org.tarena.note.entity
+org.tarena.note.sql
+org.tarena.note.util
+
+
+User user = userDao.findByName(xx);
+if(user == null){
+   xxxxx;//用户不存在
+}else{
+  if(user.getCn_user_password.equals(password)){
+     xxxx;//用户和密码都正确
+  }else{
+     xxxxx;//密码错误
+  }
+}
+
+
+
+http://localhost:8088/cloud_note/user/login.do?username=scott&password=123
+
+
+MD5算法处理：不可逆
+
+demo
+123456
+---------------------->Controller-------->Service.checkLogin
+ 密码比对：
+  将用户输入的密码加密,
+  然后和数据库表中密文对比 
+
+
+
+
+
+
+

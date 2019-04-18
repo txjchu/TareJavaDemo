@@ -1,0 +1,18 @@
+需求：
+使用JDBC实现对EMP数据的CRUD操作
+
+* 添加职员信息
+* 删除职员信息
+* 更新职员信息
+  update emp set ename=?,job=?,sal=?...
+  where empno=?
+* 查询某个职员信息
+  select * from emp where empno=?;
+  返回：empno,ename,sal,comm,hiredate....
+  
+* 查询所有职员信息
+  select * from emp;
+  ArrayList
+
+
+

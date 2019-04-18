@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<package name="demo1" extends="struts-default"
+		namespace="/emp">
+		<!-- strutsspringplugin.jar按class值
+		去Spring容器抓取对象使用 -->
+		<action name="list" class="empListAction">
+			<result name="success" type="dispatcher">
+				/emp_list.jsp
+			</result>
+		</action>
+	</package>
+	
+	<!-- 1.引入strutsjson包;2.package继承jsondefault -->
+	<package name="demo2" extends="json-default"
+		namespace="/emp">
+		<interceptors>
+			<interceptor name="some" 
+				class="org.tarena.interceptor.SomeInterceptor"/>
+			<interceptor-stack name="someStack">
+				<interceptor-ref name="some"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+	
+		<action name="ajaxlist" class="empListAction">
+			<interceptor-ref name="someStack"/>
+			<result name="success" type="json">
+				<param name="root">emps</param>
+			</result>
+			<!-- 多个属性includeProperties -->
+		</action>
+	
+		<action name="ajaxdelete" 
+			class="empDeleteAction">
+			<interceptor-ref name="someStack"/>
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	
+	</package>
+	
+	
+</struts>
+
+
+
+

@@ -1,0 +1,61 @@
+<html>
+<head>
+<script type="text/javascript" 
+	src="scripts/jquery.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#btn1").click(function(){
+		//$.getJSON()
+		$.get(
+		"http://localhost:8088/ajax01/demo4.do",
+		function(data){//data接收服务器返回内容
+			//var user = JSON.parse(data);
+			var id = data.id;
+			var name = data.name;
+			var str = "客户编号:"+id+"<br/>"
+				+"客户名称:"+name;
+			$("#msg_span").html(str);
+		},
+		"json");//jQuery将服务器返回的字符串内容转成JSON类型
+	});
+});
+</script>
+<!-- btn2处理 -->
+<script type="text/javascript">
+$(function(){
+	$("#btn2").click(function(){
+		$.get(
+		"http://localhost:8088/ajax01/demo5.do",
+		function(data){//data是服务器返回的json对象数组信息
+			//清除原有li列表元素
+			//$("#user_list").empty();//清空ul
+			$("#user_list li").remove();//删除li
+			//循环提取用户信息,生成li列表元素
+			for(var i=0;i<data.length;i++){
+				var name = data[i].name;
+				//拼一个li字符串
+				var sli = "<li>"+name+"</li>";
+				//将li字符串添加到ul元素中
+				$("#user_list").append(sli);
+			}
+		},
+		"json");
+	});
+});
+</script>
+</head>
+<body>
+<input type="button" id="btn1" value="查看个人信息">
+<br/>
+<span id="msg_span"></span>
+<hr/>
+<input type="button" id="btn2" value="加载客户信息">
+<br/>
+<ul id="user_list">
+</ul>
+</body>
+</html>
+
+
+

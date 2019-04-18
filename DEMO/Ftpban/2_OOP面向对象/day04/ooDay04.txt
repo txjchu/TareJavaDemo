@@ -1,0 +1,642 @@
+回顾:
+1.内存管理
+    堆、栈、方法区
+2.继承
+    代码的重用、extends
+    父:共有的 子:特有的
+    子具有:父的+子的
+    单一继承、传递性
+    super():默认的，不写则默认，写了则不给了
+3.super:指代当前对象的父类
+    super.成员变量
+    super.方法名()
+    super()
+4.向上造型:
+  1)父类的引用指向子类的对象
+  2)能点出来什么，看引用的类型
+
+
+继承后，子类可以使用父类中的东西
+注意:不要单单因为想用某个数据而继承
+继承要符合is a的关系(是)
+
+
+class Student extends Person{
+}
+class Teacher extends Person{
+}
+class T extends Tetromino{
+}
+class J extends Tetromino{
+}
+
+
+class Dog{
+  String name;
+  int age;
+}
+class Person extends Dog{
+  
+}
+
+
+
+
+
+子类可以继承父类的构造方法吗?
+不能----不是继承的，而是super()调用的
+
+
+class Tetromino{
+  Cell[] cells;
+  Tetromino(){
+    cells = new Cell[4];
+  }
+  void drop(){
+  }
+}
+class T extends Tetromino{
+  T(int row,int col){
+    super();
+    cells = new Cell(row,col);
+    ......
+  }
+}
+
+
+
+笔记:
+1.方法的重写(Override):
+  1)发生在父子类中，方法签名相同，方法体不同
+  2)重写方法被调用时，看对象的类型
+  3)重写的"两同两小一大"原则:了解
+    3.1)两同:
+        3.1.1)方法名相同
+	3.1.2)参数列表相同
+    3.2)两小:----一般都等于
+        3.2.1)子类方法的返回值类型小于或等于父类的
+	      1)void和基本类型时，子类必须等于父类的
+	      2)引用类型时，子类小于等于父类的
+	3.2.2)子类方法抛出的异常小于或等于父类的---异常后就明白了
+    3.3)一大:---一般都等于
+        3.3.1)子类方法的访问权限大于或等于父类的
+
+2.重写(override)与重载(overload)的区别---常见面试题
+  1)重载:同一个类中，方法名相同，参数列表不同
+         遵循"编译期绑定"，根据参数(引用)的类型绑定方法
+  2)重写:在父子类中，方法名相同，参数列表相同
+         遵循"运行期绑定"，根据对象的类型调用方法
+3.package:
+  1)避免类的命名冲突
+  2)常常有层次结构
+  3)类的全称/完全限定名:包名.类名
+  4)包名建议所有字母都小写
+  import:
+  1)作用:声明类/引入类
+  2)同包中的类可以直接访问
+    不同包中的类访问如下两种方式:
+    2.1)import声明，再直接使用类名
+    2.2)完全限定名----繁琐，不建议
+4.访问控制修饰符:
+  1)public:公开的，任何类
+  2)private:私有的，本类
+  3)protected:受保护的，本类、子类、同包类
+  4)默认的:什么也不写，本类，同包类
+  注意:
+    1)类只能用public或默认的
+    2)类中成员如上4种都可以
+5.static:
+  1)静态变量:
+    1.1)由static修饰
+    1.2)属于类的，只有一份，存在方法区中
+    1.3)常常能过类名点来访问
+    1.4)何时用:所有对象数据都一样时使用
+  2)静态方法:
+    2.1)由static修饰
+    2.2)静态方法没有隐式的this传递
+        静态方法中不能直接访问实例成员
+    2.3)常常通过类名点来访问
+    2.4)何时用:方法的操作仅与参数相关而与对象无关
+  3)静态块:
+    3.1)属于类的代码块，类被加载期间执行，
+        因为类只被加载一次，所以静态块只执行一次
+    3.2)何时用:常常用于初始化静态资源(图片、音频、视频...)
+6.final:意为不可改变
+  1)修饰变量:变量不可被改变
+  2)修饰方法:方法不可被重写
+  3)修饰类:类不可被继承
+
+
+FinalDemo
+
+
+
+
+
+
+
+
+
+
+
+public,protected,默认的,private
+
+
+
+
+
+
+final修饰成员变量，两种初始化方式:
+1.声明同时初始化
+2.构造方法中初始化
+
+final修饰局部变量，只要用之前初始化即可
+
+
+
+
+
+
+
+
+
+
+
+
+
+地图.png，枪，人物---------图片(一份)
+传奇.mp3-------------------音频(一份)
+吸血鬼日记7----------------视频(一份)
+
+
+
+
+
+
+
+
+
+
+
+一般情况下，实例方法是最多的
+因为方法的操作一般都与对象有关
+
+
+
+
+
+
+
+问:drop()行为与对象有关吗?
+
+c1点和c2点，最终的结果不一样
+说明:drop()的操作与对象有关
+
+Cell c1 = new Cell(2,5);
+c1.drop(); //2变到3
+
+Cell c2 = new Cell(0,3);
+c2.drop(); //0变到1
+
+
+class Cell{
+  int row;
+  int col;
+  void drop(){
+    row++;
+  }
+}
+
+
+
+
+
+
+
+
+double b = Math.sqrt(25); //静态方法
+
+a,b,c的值一样，都是5.0
+m1点的和m2点的和m3点的，最终结果一样
+意味着----与对象无关
+
+
+Math m1 = new Math();
+double a = m1.sqrt(25); //实例方法
+
+Math m2 = new Math();
+double b = m2.sqrt(25);
+
+Math m3 = new Math();
+double c = m3.sqrt(25);
+
+
+
+
+
+
+
+
+
+
+//实例方法
+Scanner scan = new Scanner(System.in);
+int a = scan.nextInt();
+double b = scan.nextDouble();
+
+
+//静态方法
+double a = Math.random();
+double b = Math.sqrt(25);
+int[] c  = Arrays.copyOf(arr,6);
+Arrays.sort(arr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{
+  int a; //实例变量，只能对象点来访问
+  static int b; //静态变量
+  void show(){ //实例方法，有this
+    a = 1;
+    b = 1;
+  }
+  static void test(){ //静态方法，没有this
+    a = 1; //编译错误
+    b = 1;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Bank{
+  String cardId;
+  String cardPwd;
+  double balance; //余额
+  static double pir; //利率
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Student.className = "JSD1509";
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "廊坊";
+
+Student ls = new Student();
+ls.name = "lisi";
+ls.age = 26;
+ls.address = "佳木斯";
+
+
+
+class Student{
+  String name;
+  int age;
+  String address;
+  static String className;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{
+  int a;
+  static int b;
+  Aoo(){
+    a++;
+    b++;
+  }
+}
+
+
+
+StaticDemo
+
+
+
+
+
+
+
+
+
+成员变量:
+1.实例变量:
+    属于对象，有几个对象有几份，存在堆中，通过对象点来访问
+2.静态变量:
+    属于类，只有一份，存在方法区中，通过类名点来访问
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Aoo{
+  int a; //实例变量，属于对象的，存在堆中，通过对象点来访问
+  static int b; //静态变量，属于类的，存在方法区中，通过类名点来访问
+}
+
+
+
+
+
+
+
+数据私有化，行为公开化
+
+Bank o = new Bank();
+boolean b = o.checkPwd("123456");
+
+
+class Bank{
+  private String cardId;  //卡号
+  private String cardPwd; //密码
+  private double balance; //余额
+
+  public boolean tackMoney(double money){
+    balance -= money;
+    return true/false;
+  }
+
+  public boolean checkPwd(String pwd){
+    if(cardPwd.equals(pwd)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package a;
+class Aoo{
+}
+class Boo{
+  void show(){
+    Aoo o = new Aoo();
+  }
+}
+
+package b;
+import a.Aoo; //声明Aoo类
+class Coo{
+  void show(){
+    a.Aoo o = new a.Aoo(); //全称
+    Aoo o = new Aoo(); //直接用类名
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package a;
+class Aoo{
+}
+class Boo{
+  void show(){
+    Aoo o = new Aoo();
+  }
+}
+
+package b;
+class Coo{
+  void show(){
+    Aoo o = new Aoo(); //编译错误
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+民生银行:
+A公司:
+   a.b.c.Aoo
+B公司:
+   a.b.c.Aoo
+
+域名反写:避免公司和公司之间的冲突
+项目名称:避免同公司不同项目的冲突
+模块名称:避免同项目不同模块的冲突
+
+
+
+
+
+
+域名反写   . 项目名称 . 模块名称 . 类名
+com.tarena . tts       . course
+com.abc    . tts       . student
+
+建议是不是必须的
+
+
+
+
+
+
+
+
+
+
+package a.b.c.d.e.f;
+class Aoo{
+}
+
+package a;
+class Aoo{
+}
+
+
+
+
+
+
+
+
+
+
+
+package a;
+class Aoo{
+}
+a.Aoo
+
+
+package b;
+class Aoo{
+}
+b.Aoo
+
+
+
+
+
+
+
+
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "廊坊";
+zs.className = "JSD1509";
+zs.sayHi(); //zhangsan,25,廊坊,JSD1509
+
+Teacher wkj = new Teacher();
+wkj.name = "wangkejing";
+wkj.age = 37;
+wkj.address = "佳木斯";
+wkj.salary = 5000;
+wkj.sayHi(); //wangkejing,37,佳木斯,5000
+
+Doctor doc = new Doctor();
+doc.name = "zhaoliu";
+doc.age = 56;
+doc.address = "山东";
+doc.level = "主任医生";
+doc.sayHi(); //zhaoliu,56,山东
+
+Person p1 = new Student(); //向上造型
+p1.sayHi(); //调Student类的
+
+
+class Person{
+  String name;
+  int age;
+  String address;
+  void sayHi(){
+    System.out.println(name+","+age+","+address);
+  }
+}
+class Student extends Person{
+  String className;
+  void sayHi(){ //重写(重新写，覆盖)
+    System.out.println(name+","+age+","+address+","+className);
+  }
+}
+class Teacher extends Person{
+  double salary;
+  void sayHi(){
+    System.out.println(name+","+age+","+address+","+salary);
+  }
+}
+class Doctor extends Person{
+  String level;
+}
+
+
+class Aoo{
+  void show(){
+  }
+}
+class Boo extends Aoo{
+  void show(String name){ //重载
+  }
+  void show(){
+  }
+}
+Boo o = new Boo();
+o.show("zhangsan");
+o.show();
+
+
+
+
+
+
+
+
+
+
+
+

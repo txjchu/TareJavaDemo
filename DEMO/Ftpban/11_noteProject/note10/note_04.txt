@@ -1,0 +1,47 @@
+====加载笔记列表======
+1.客户端
+ a.发送请求
+  --点击笔记本li时发送请求
+  --提交li绑定的bookId
+
+ b.回调函数
+  解析返回的NoteResult结构的josn数据，
+  循环生成笔记li显示
+
+2.服务器端
+/note/loadnotes.do
+-->LoadNotesController
+   -->NoteService
+   -->NoteDao-->cn_note(按笔记本ID查)
+-->返回NoteResult结构的json
+
+
+父元素对象.on("事件类型",子元素选择器，事件fn);
+$("#book_list").on("click","li",function(){
+   //绑定逻辑
+});
+
+========显示笔记信息=============
+1.客户端
+ a.发送请求
+   --单击笔记li发送ajax请求
+   --提交笔记ID
+ b.回调处理
+   --解析返回的笔记信息,填充到编辑区
+
+2.服务器端
+/note/load.do
+-->LoadNoteController.execute
+   -->NoteService.loadNote
+   -->NoteDao.findById-->cn_note(按ID查)
+-->返回NoteResult结构的json数据
+   
+
+
+click()-->给现有选择出来的元素绑定单击 （静态元素绑定）
+on()-->给现有及未来选择出来的元素绑定单击 （动态元素绑定）
+
+
+
+
+

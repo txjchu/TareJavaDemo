@@ -1,0 +1,529 @@
+回顾:
+1.static final常量:
+   声明同时初始化、不能改、类名点访问
+   所有字母大写、编译时自动替换为具体的值
+2.抽象方法
+   abstract，只有方法的定义，没有方法的实现
+3.抽象类
+   abstract，包含抽象方法的类必须是抽象类，
+   不能被实例化，需要被继承的，子类:
+   要么声明为抽象类，要么重写所有抽象方法(常用)
+   意义:
+     1)封装公共的被子类共享使用
+     2)为所有子类提供一个公共的类型
+     3)抽象方法，为所有子类提供一个统一的入口
+4.接口
+   interface，常量和抽象方法
+   不能被实例化，需要被实现的，实现类:
+   必须重写接口中的的所有抽象方法
+   可以实现多个接口，先继承后实现
+   接口可以继承接口 
+
+听得懂，写不出来-------正常的
+
+欠练
+
+接口中没有构造方法，抽象类中有构造方法
+
+
+class Six extends Shape{
+  public Six(double c){
+    this.c = c;
+  }
+  public double area(){
+    return 0.0721*c*c;
+  }
+}
+
+interface CCB extends UnionPay{ //建行接口
+  public void payFire(); //支付燃气费
+}
+class CCBImpl implements CCB{ //建行卡
+  重写UnionPay中的三个+payFire()
+}
+
+
+
+
+
+正课:
+1.多态:
+  1)多态的意义:
+    1.1)同一类型的引用指向不同的对象时，有不同的实现
+        --------行为的多态: cut(),run()
+    1.2)同一个对象被造型为不同的类型时，有不同的功能
+        --------对象的多态: 我,水
+  2)向上造型:
+    2.1)父类型引用指向子类的对象
+    2.2)一个类能造型为:
+          父类、实现的接口
+    2.3)能点出来什么，看引用的类型
+  3)强制类型转换，成功的条件:
+    3.1)引用所指向的对象，就是该类型
+    3.2)引用所指向的对象，实现了该接口
+  4)若强转失败则发生类型转换异常(ClassCastException)
+    在强转之前使用instanceof来判断引用所指向的对象是否是该类型
+2.成员内部类:不常用
+  1)类中套类，里面的称为Inner内部类，外面的称为Outer外部类
+  2)内部类通常只服务于外部类，对外不具备可见性
+  3)内部类对象通常只在外部类中创建
+  4)内部类中可以直接访问外部类的成员(包括私有的)
+    内部类中有一个隐式的引用指向了创建它的外部类对象
+      外部类名.this
+3.匿名内部类:较常用
+  1)若想创建一个类的对象，并且该对象只想创建一次，
+    该类不必命名，称之为匿名内部类
+  2)匿名内部类中想访问外部的成员，
+    该成员必须是final的
+
+4.面向对象三大特征:
+  1)封装:
+    1.1)类:封装的是对象的特征和行为
+    1.2)方法:封装的是功能的具体实现
+    1.3)访问控制修饰符:封装的是访问的权限
+  2)继承:
+    2.1)代码的重用
+    2.2)父类:所有子类共有的特征和行为
+        子类:子类所特有的特征和行为
+    2.3)子类继承父类后，具有:父类+子类
+  3)多态:
+    3.1)意义:
+        3.1.1)同一类型的引用指向不同的对象时，有不同的实现
+	      行为的多态
+	3.1.2)同一个对象被造型为不同的类型时，有不同的功能
+	      对象的多态
+    3.2)向上造型、强制类型转换、instanceof
+    3.3)两种表现形式:
+          重写、重载
+
+
+每日课程:
+第一天:
+  1.什么是类？什么是对象？
+  2.如何创建类？如何创建对象？
+  3.引用类型之间画等号
+  4.null和NullPointerException
+第二天:
+  1.方法的重载
+  2.构造方法
+  3.this
+  4.引用类型数组
+第三天:
+  1.内存管理:堆、栈、方法区
+  2.继承
+  3.super
+  4.向上造型
+第四天:
+  1.方法的重写、重写与重载的区别
+  2.package和import
+  3.访问控制修饰符
+  4.static
+  5.final
+  6.static final常量
+第五天:
+  1.抽象方法
+  2.抽象类
+  3.接口
+第六天:
+  1.多态:意义、向上造型、强制类型转换、instanceof
+  2.成员内部类、匿名内部类
+
+
+任务:
+1.完成完整的ATM系统
+2.面向对象自己小结下
+
+课后作业:
+  第2题不用写
+
+
+
+
+案例:
+1.Cell类
+2.Cell类、T类、J类
+3.Cell类、Tetromino类、T类、J类
+4.Cell类、Tetromino类、T类、J类
+5.Shape类、Circle类、Square类
+  UnionPay接口、ICBC接口、ABC接口、ICBCImpl类、ABCImpl类
+6.UnionPay接口、ICBC接口、ABC接口、ICBCImpl类、ABCImpl类
+  ABCATM类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+重写与重载的区别----面试题
+
+
+
+
+
+
+
+
+System.out.println();
+System.out.println(2);
+System.out.println(25.5);
+System.out.println(true);
+System.out.println("helloWorld");
+
+支付行为
+pay(550);
+pay("123456","111");
+pay("tarena",300);
+
+
+
+
+常见面试题:
+问:内部类有独立的.class吗?
+答:有
+
+
+
+
+
+
+
+
+
+
+每一个类都有自己的.class
+
+
+Mama$Baby.class
+
+NstInnerDemo$1.class
+NstInnerDemo$2.class
+NstInnerDemo$3.class
+
+
+
+
+
+
+
+
+NstInnerDemo
+
+
+
+
+
+
+
+
+
+
+class Test{
+  main(){
+    Aoo o1 = new Aoo();
+    Aoo o2 = new Aoo();
+  }
+}
+class Aoo{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+InnerDemo
+
+
+
+class Test{
+  main(){
+    Aoo o1 = new Aoo();
+    Boo o2 = new Boo(); //编译错误
+  }
+}
+class Aoo{
+  void test(){
+    Boo o = new Boo(); //正确
+  }
+  class Boo{
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+农行的ATM机系统:
+1.什么银行卡都能插
+2.只有农行卡才能支付电话费
+
+
+
+ATM机只是提供了一堆功能(按钮)，
+点击按钮后，实质上操作的是卡
+
+
+
+
+
+
+
+查询余额
+
+
+ATM机只是提供了一堆按钮，
+点击按钮之后操作的具体的对象为那张卡
+
+
+ATM机不具备任何功能
+只有卡才具备具体功能
+而ATM机只是提供了一堆按钮(入口)
+
+
+
+
+
+
+UnionPay card = new ABCImpl(); //向上造型
+UnionPay card = new ICBCImpl();
+UnionPay card = new CCBImpl();
+
+main(){
+  ABCATM atm = new ABCATM(); //atm机对象
+  UnionPay card = new CCBImpl(); //银联卡-农行卡
+  atm.insertCard(card); //插卡
+}
+
+class ABCATM{ //农行ATM机
+  UnionPay card;  //银联卡
+  void insertCard(UnionPay card){ //插卡
+    this.card = card;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aoo o1 = new Boo(); //向上造型
+Boo o2 = (Boo)o1; //强制类型转换---成功
+Inter1 o3 = (Inter1)o1; //强制类型转换(成功)
+Coo o4 = (Coo)o1; //失败,ClassCastException类型转换异常
+
+
+if(o1 instanceof Coo){ //false
+  Coo o4 = (Coo)o1;
+}
+
+
+
+Aoo o1 = new Boo(); //向上造型
+System.out.println(o1 instanceof Boo); //true
+System.out.println(o1 instanceof Inter1); //true
+System.out.println(o1 instanceof Coo); //false
+
+interface Inter1{
+}
+class Aoo{
+}
+class Boo extends Aoo implements Inter1{
+}
+class Coo extends Aoo{
+}
+
+
+
+
+
+
+
+
+父类大，子类小
+Person p1 = new Student(); //向上造型(自动类型转换)
+Student p2 = new Person(); //编译错误
+
+
+
+我 me = new 我();
+讲师       p1 = me; //向上造型
+孩子他妈   p2 = me;
+老公的老婆 p3 = me;
+
+me.讲课()/揍他()/咬他()/收工资()
+p1.讲课();
+p2.揍他();
+p3.咬他();
+p3.收工资(); //能点出来的肯定是少了
+
+
+
+interface 讲师{
+  讲课();
+}
+interface 孩子他妈{
+  揍他();
+}
+interface 老公的老婆{
+  咬他();
+  收工资();
+}
+class 我 implements 讲师，孩子他妈，老公的老婆{
+  讲课(){}
+  揍他(){}
+  咬他(){}
+  收工资(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+动物-----------run()
+不同动物run()的实现一样吗?
+
+
+
+
+
+
+
+cut():多种形态
+Person p1 = new 理发师();   //向上造型
+Person p2 = new 外科医生();
+Person p3 = new 演员();
+
+p1.cut();-----剪发
+p2.cut();-----开刀
+p3.cut();-----停止表演
+
+
+abstract class Person{
+  abstract cut();
+}
+class 理发师 extends Person{
+  cut(){剪发}
+}
+class 外科医生 extends Person{
+  cut(){开刀}
+}
+class 演员 extends Person{
+  cut(){停止表演}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+设计原则:
+1.将所有子类共有的数据和行为抽到父类中
+2.若所有子类行为都一样，则方法为普通方法
+  若所有子类行为不一样，则方法为抽象方法
+3.符合既是也是的原则，使用接口
+
+
+
+
+
+
+
+
+
+
+接口是对继承单根性的扩展
+
+
+
+
+
+
+教学副总裁 extends 达内职员
+CEO extends 达内职员
+
+CEO:       编辑稿件，培训员工，解决问题
+教学副总裁:编辑稿件，培训员工，解决问题
+讲师:      编辑稿件，培训员工，解决问题
+项目经理:  编辑稿件
+
+
+interface 企业技术顾问{
+  培训员工();
+  解决问题();
+}
+interface 技术图书作者{
+  编辑稿件();
+}
+abstract class 达内职员{
+  姓名，年龄，工资
+  上班打卡(){按个手纹，拍个照}
+  下班打卡(){按个手纹，拍个照}
+  abstract 完成工作();
+}
+class CEO extends 达内职员 implements 企业技术顾问，技术图书作者{
+}
+class 教学副总裁 extends 达内职员 implements 企业技术顾问，技术图书作者{
+}
+class 讲师 extends 达内职员 implements 企业技术顾问，技术图书作者{
+}
+class 项目经理 extends 达内职员 implements 技术图书作者{
+}
+class 班主任 extends 达内职员{
+}
+
+
+
+
+
+
+

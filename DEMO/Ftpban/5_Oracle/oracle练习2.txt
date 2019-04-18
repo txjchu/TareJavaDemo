@@ -1,0 +1,853 @@
+
+一、 单选(31小题共62.0分)
+1.
+代码 result.push(curCode) 用于将产生的整数 curCode 放入数组变量 result 中。下列代码中，可以替换此代码的是（A）。
+ A.	
+result[i] = curCode;
+ B.	
+result.add(curCode);
+ C.	
+result.join(curCode);
+ D.	
+result.concat(curCode);
+2.
+下面的描述错误的是：(B )。
+ A.	
+Statement的executeQuery()方法会返回一个结果集
+ B.	
+Statement的executeUpdate()方法会返回是否更新成功的boolean值
+ C.	
+使用ResultSet中的getString()可以获得一个对应于数据库中char类型的值
+ D.	
+ResultSet中的next()方法会使结果集中的下一行成为当前行
+3.
+下列不属于CSS选择器的有（C）。
+ A.	
+ID选择器
+ B.	
+类选择器
+ C.	
+JS选择器
+ D.	
+元素选择器
+4.
+下面不属于表单属性的有（D）。
+ A.	
+action
+ B.	
+method
+ C.	
+enctype
+ D.	
+size
+5.
+Oracle中查询的时候可以去掉重复记录的是(A)
+ A.	
+SELECT DISTINCT name FROM user
+ B.	
+SELECT name DISTINCT FROM user
+ C.	
+SELECT name FROM user
+ D.	
+SELECT name FROM user LIMIT 1
+6.
+下列Oracle语句中，属于DDL语句的是（A）
+ A.	
+DROP
+ B.	
+INSERT
+ C.	
+DELETE
+ D.	
+SELECT
+7.
+试图使用下面句子查询数据：
+SELECT 100/NVL(quantity, 0) FROM inventory;
+quantity为 NULL 空值时，将导致出错，其原因是：（D）。
+ A.	
+除数表达式为空值.
+ B.	
+函数参数数据类型不一致.
+ C.	
+空值不能被转成实际值
+ D.	
+除数表达式为零
+8.
+在Oracle中，若想查询家庭地址在’北京’,’上海’,’广州’的用户信息，下列Sql语句正确的是（C）。
+ A.	
+SELECT * FROM student
+WHERE address=’北京’,’上海’,’广州’
+ B.	
+SELECT * FROM student
+WHERE address LIKE(’北京’,’上海’,’广州’)
+ C.	
+SELECT * FROM student
+WHERE address IN(’北京’,’上海’,’广州’)
+ D.	
+SELECT * FROM student
+WHERE address=‘北京’ AND address=’上海’ AND address=‘广州’
+9.
+下列属于DML语句的是 ：（B） 。
+ A.	
+COMMIT        
+ B.	
+INSERT    
+ C.	
+DROP  
+ D.	
+GRANT
+10.
+在JavaScript中,表单文本框（Text）不支持的事件有（B）。
+ A.	
+onblur
+ B.	
+onlostfocused
+ C.	
+onfocus
+ D.	
+onchange
+12.
+给按钮添加onclick事件，下列写法不正确的是：（A）
+ A.	
+<html>
+<head>
+<script>
+   function save(){alert('tarena')；}
+    var btnObj=document.getElementById("btn_save");
+    btnObj.onclick=save;
+</script>
+</head>
+<body>
+  <input type="button" id="btn_save" value="SAVE">
+</body>
+</html>
+ B.	
+<html>
+<head>
+<script>
+   function show(){alert('tarena')；}
+</script>
+</head>
+<body>
+  <input type="button" id="btn_save" onClick="show();" value="SAVE">
+</body>
+</html>
+ C.	
+<html>
+<head>
+<script>
+   function show(){alert('tarena')；}
+</script>
+</head>
+<body>
+  <input type="button" id="btn_save" value="SAVE">
+  <script>
+     var btnObj=document.getElementById("btn_save");
+     btnObj.onclick=show;
+  </script>
+</body>
+</html>
+ D.	
+<html>
+<head>
+</head>
+<body>
+  <input type="button" id="btn_save" value="SAVE">
+  <script>
+     var btnObj=document.getElementById("btn_save");
+     btnObj.onclick=function(){alert('tarena')};
+  </script>
+</body>
+</html>
+13.
+对于Oracle数据库采用分页查询的方式查询表emp的no和name从第100（包括）条到110（不包括）条记录的SQL语句是：（C）。
+ A.	
+select no,name from emp where rownum< 110 and rownum>=100
+ B.	
+select no, name from (select no,name rownum num from emp where rownum>= 100) where num<110
+ C.	
+select no, name from (select no,name rownum num from emp where rownum< 110) where num>=100
+ D.	
+select no,name from emp limit 99, 10
+14.
+以下代码的功能是：点击超链接，使div的内容显示，并且显示的内容和超链接在同一行。
+<html>
+       <head>
+              </script>
+              <script>
+                     function show(){
+                         var obj_java=document.getElementById("d_java");
+                            《插入代码》
+                     }
+              </script>
+       </head>
+       <body style="font-size:30px;" >
+              <a href="javascript:;" onclick="show();">what is java</a>
+              <div id="d_java" style="display:none;">java is open source</div>
+       </body>
+</html>
+《插入代码》处应该填入的内容为：（A）。
+ A.	
+obj_java.style.display = 'inline';
+ B.	
+obj_java.style.display = none;
+ C.	
+obj_java.style.display = 'block';
+ D.	
+obj_java.style.show = 'inline';
+15.
+请看下列代码，文字“红旗飘飘”显示的颜色是：（D）
+<html>
+       <head>
+<style>
+    body {
+           color: blue;
+    }
+</style>
+       </head>
+       <body style="color: green;">
+              <div style="color:red">
+                 红旗飘飘
+           </div>
+       </body>
+</html>
+ A.	
+绿色
+ B.	
+蓝色
+ C.	
+黑色
+ D.	
+红色
+16.
+现有一个网页需要引用外部样式表mystyle.css，下列方式中，正确的是（A）。
+ A.	
+<link rel="stylesheet" type="text/css" href="mystyle.css"></style>
+ B.	
+<style src="mystyle.css"></style>
+ C.	
+<stylesheet>mystyle.css</stylesheet>
+ D.	
+<css>mystyle.css</css>
+17.
+分析如下代码，语法正确的Sql语句是（A）。
+ A.	
+SELECT class,COUNT(stuId) FROM students
+WHERE stuAge>18
+GROUP BY class
+
+HAVING count(stuId)>3
+ B.	
+SELECT name,class,COUNT(stuId) FROM students
+WHERE stuAge>18
+GROUP BY class
+HAVING count(stuId)>3
+ C.	
+SELECT class,COUNT(stuId) FROM students
+GROUP BY class
+HAVING stuAge>18
+ D.	
+SELECT name,class,COUNT(stuId) FROM students
+WHERE COUNT(stuId)>3
+GROUP BY class
+18.
+在Oracle中，现有Student表，其中包括学号stuId,姓名stuName,成绩stuGrade，现要查询成绩为80分的学生姓名，并且结果按照学号降序排列，下面查询语句正确的是（B）。
+ A.	
+SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId
+ B.	
+SELECT stuName FROM student WHERE stuGrade=80 ORDER BY stuId DESC
+ C.	
+SELECT stuName FROM student WHERE stuGrade like 80 GROUP BY stuId
+ D.	
+SELECT stuName FROM student WHERE stuGrade=80 GROUP BY stuId DESC
+19.
+操作cost表，若一个月使用了200小时,计算每种资费标准对应的最终费用是多少（考虑单位费用和基础费用为null的情况，最终费用=固定费用+超时部分×单位费用），下列sql语句正确的是：A
+ A.	
+select id,
+nvl(base_cost,0) + (200 - nvl(base_duration,0)) * nvl(unit_cost,0)  fee
+from cost;
+ B.	
+select id,nvl(base_cost,0)  fee from cost;
+ C.	
+select id,200*nvl(unit_cost,0)  fee from cost;
+ D.	
+select id, base_cost + (200 - base_duration)*unit_cost fee from cost;
+20.
+在XHTML中，电子邮件链接的正确写法是:（B）。
+ A.	
+<a href="http:电子邮件地址">...</a>
+ B.	
+<a href="mailto:电子邮件地址">...</a>
+ C.	
+<a href="ftp:电子邮件地址">...</a>
+ D.	
+<a href="smtp:电子邮件地址">...</a>
+21.
+如果需要设置 div 中的文本的颜色为红色，下列代码中，正确的是（D）。
+ A.	
+document.getElementById("divResult").color = red;
+ B.	
+document.getElementById("divResult").style.color = red;
+ C.	
+document.getElementById("divResult").color = “red“;
+ D.	
+document.getElementById("divResult").style.color = “red“;
+22.
+下列Oracle语句中，属于DCL的有（A）
+ A.	
+GRANT
+ B.	
+DESC
+ C.	
+CONNECT
+ D.	
+INSERT
+23.
+下面约束中只能定义在列级的是：（B）。
+ A.	
+UNIQUE
+ B.	
+NOT NULL
+ C.	
+FOREIGN KEY
+ D.	
+PRIMARY KEY
+24.
+下列不属于浏览器内置的对象的是：（D）
+ A.	
+navigator
+ B.	
+document
+ C.	
+window
+ D.	
+request
+25.
+以下选项中不是window对象的方法的是（B）。
+ A.	
+prompt;
+ B.	
+opener;
+ C.	
+alert
+ D.	
+close
+26.
+查询tarena23和tarena20上的远程登录业务使用了哪些相同的资费标准，下列sql语句正确的是：A
+ A.	
+select cost_id from service
+where unix_host = '192.168.0.20'
+intersect
+select cost_id from service
+where unix_host = '192.168.0.23';
+ B.	
+select cost_id from service
+where unix_host = '192.168.0.20'
+union
+select cost_id from service
+where unix_host = '192.168.0.23';
+ C.	
+select cost_id from service
+where unix_host = '192.168.0.20'
+union all
+select cost_id from service
+where unix_host = '192.168.0.23';
+ D.	
+select cost_id from service
+where unix_host = '192.168.0.20'
+minus
+select cost_id from service
+where unix_host = '192.168.0.23';
+27.
+实现一个多行文本输入域的HTML代码是：（C）
+ A.	
+<input type="textarea">                  
+ B.	
+<input type="textbox">
+ C.	
+<textarea>                                      
+ D.	
+<textbox>
+28.
+下列JavaScript代码可以实现每隔一秒钟弹出一个对话框，此弹出过程持续1分钟的代码是：（D）。
+ A.	
+var id = setInterval(alert("Hello JavaScript"), 1000);
+setTimeout(clearInterval(id), 5 * 1000);
+ B.	
+setInterval(function() {
+        alert("Hello JavaScript")
+}, 1000);
+setTimeout(function() {
+      alert("Hello JavaScript")
+}, 5 * 1000);
+ C.	
+setInterval(
+        alert("Hello JavaScript"), 1000);
+setTimeout(clearInterval(id), 5 * 1000);
+ D.	
+var id = setInterval(function() {
+     alert("Hello JavaScript")}, 1000);
+setTimeout(function() {
+      clearInterval(id)}, 5 * 1000);
+29.
+下面不属于接口的是：（C）。
+ A.	
+java.sql.Connection
+ B.	
+java.sql.Driver
+ C.	
+java.sql.DriverManager
+ D.	
+java.sql.ResultSet
+30.
+DELETE和 TRUNCATE 都可以用来删除表内容，以下描述正确的是：（A）。
+ A.	
+TRUNCATE 不需要 RollbackSegment
+ B.	
+DELETE 不需要RollbackSegment
+ C.	
+TRUNCATE在 提交COMMIT之前仍可回滚
+ D.	
+TRUNCATE还可以删除表结构
+31.
+如果查询表a(有3行数据)和表b（有4行数据），使用SELECT  * FROM a,b，返回的查询结果的行数是：（D）。
+ A.	
+7        
+ B.	
+1        
+ C.	
+0        
+ D.	
+12
+
+二、 多选(4小题共8.0分)
+
+1.
+操作account表和age_segment表，查询客户huangrong的年龄段，下列sql语句正确的是：AC
+ A.	
+select real_name,birthdate,s.name
+from account a join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+and real_name = 'huangrong';
+ B.	
+select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+and real_name = 'huangrong';
+ C.	
+select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+where real_name = 'huangrong';
+ D.	
+select real_name,birthdate,s.name
+from account a left join age_segment s
+on round((sysdate - birthdate)/365) between lowage and hiage
+2.
+请看下列建表语句：
+create table  test
+(c1 number(3)  constraint  test_c1_pk primary key,
+ c2 number(2) ,
+ c3 number(2) , 
+  constraint test_c2_ck  check (( c2 + c3  ) > 100 )  
+);
+下列选项中能向test表中成功实施插入数据的插入语句是：BD
+ A.	
+insert into test values (1,40,60);
+ B.	
+insert into test values (2,41,61);
+ C.	
+insert into test values (3,101,1);
+ D.	
+insert into test values (4,50,51);
+3.
+操作account表和service表，查询申请远程登录业务的客户的数据，下列sql语句正确的是：CD
+ A.	
+select real_name from account
+where in (select account_id from service);
+ B.	
+select real_name from account o
+where id exists
+             (select 1 from service i
+              where o.id = i.account_id); 
+ C.	
+select real_name from account
+where id in (select account_id from service);
+ D.	
+select real_name from account o
+where exists
+             (select 1 from service i
+              where o.id = i.account_id);
+4.
+下列语句在建表的同时在c2,c3列上创建了唯一约束，其中正确的是：CD
+ A.	
+create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number constraint test_c2_uk
+           foreign key,
+ c3 number constraint test_c3_uk
+           foreign key);
+ B.	
+create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number ,
+ c3 number ,
+ constraint test_c3_uk foreign key(c2,c3));  
+ C.	
+create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number ,
+ c3 number ,
+ constraint test_c3_uk unique(c2,c3));
+ D.	
+create table test
+(c1 number constraint test_c1_pk
+           primary key,
+ c2 number constraint test_c2_uk
+           unique,
+ c3 number constraint test_c3_uk
+           unique);
+三、 完形填空(3小题共30.0分)
+1.
+EmpDaoImpl类的findAllEmp方法用于实现从员工表（emp）和部门表（dept）中查询所有员工的empno，ename，sal,deptno和dname信息。dept表和emp表的表结构如下：
+部门表：dept
+字段名     数据类型       约束
+deptno     number(4)      primary key
+dname     varchar2(20)   not null
+员工表：emp
+字段名       数据类型        约束
+empno       number(4)       primary key
+deptno       number(4)      foreign key
+ename       varchar2(20)
+sal           number(8,2)
+程序代码如下所示：
+public class Emp {
+  private Integer empNo;
+  private String empName;
+  private BigDecimal salary;
+  private Dept dept;
+  //省略getter和setter
+}
+public class Dept {
+  private Integer deptNo;
+  private String deptName;
+//省略getter和setter
+}
+public class EmpDaoImpl implements EmpDao {
+private static final String SQL_FIND_ALL_EMP = "      空白处1   ";
+    public List<Emp> findAllEmp() throws Exception {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = ConnectionUtils.getConnection();//获取数据库连接
+            stmt = con.prepareStatement(SQL_FIND_ALL_EMP);
+     空白处2   
+            List<Emp> list = new ArrayList<Emp>();
+      空白处3   
+            while (rs.next()) {
+                Emp emp = new Emp();
+                emp.setEmpNo(rs.getInt(1));
+                emp.setEmpName(rs.getString(2));
+                emp.setSalary(rs.getBigDecimal(3));
+                int deptNo = rs.getInt(4);
+                Dept dept = null;
+                if (     空白处4   ) {
+                    dept = depts.get(deptNo);
+                } else {
+                    dept = new Dept();
+                    dept.setDeptNo(deptNo);
+                    dept.setDeptName(rs.getString(5));
+                    depts.put(deptNo, dept);
+                }
+                     空白处5   
+                list.add(emp);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+             //释放资源
+            if (stmt != null)
+                stmt.close();
+            if (con != null)
+                con.close();
+        }
+    }
+
+(1).
+下列选项中，能填入空白处1的代码是( A   )
+ A.	
+select e.empno,e.ename,e.sal, d.dname from emp e join dept d
+	on  e.deptno=d.deptno
+ B.	
+select e.empno,e.ename,e.sal, d.dname from emp e join dept d
+	where  e.deptno=d.deptno
+ C.	
+select e.empno,e.ename,e.sal, d.dname from emp e join dept d
+	and  e.deptno=d.deptno
+ D.	
+select e.empno,e.ename,e.sal, d.dname from emp e ，dept d
+	on  e.deptno=d.deptno
+(2).
+下列选项中，能填入空白处2的代码是( B   )
+ A.	
+ResultSet  rs = stmt.executeQuery(SQL_FIND_ALL_EMP);
+ B.	
+ResultSet  rs = stmt.executeQuery();
+ C.	
+ResultSet  rs = stmt.executeUpdate();
+ D.	
+ResultSet  rs = stmt.execute();
+(3).
+下列选项中，能填入空白处3的代码是(  D  )
+ A.	
+Map<String, Dept> depts = new HashMap<String, Dept>();
+ B.	
+Map<Integer, String> depts = new HashMap<Integer, String>();
+ C.	
+Map<Integer, Emp> depts = new HashMap<Integer, Emp>();
+ D.	
+Map<Integer, Dept> depts = new HashMap<Integer, Dept>();
+(4).
+下列选项中，能填入空白处4的代码是(  C  )
+ A.	
+depts.contains(deptNo)
+ B.	
+depts.exists(deptNo)
+ C.	
+depts.containsKey(deptNo)
+ D.	
+depts.isExists(deptNo)
+
+(5).
+下列选项中，能填入空白处5的代码是(  B  )
+ A.	
+emp.setDept(deptno);
+ B.	
+emp.setDept(dept);
+ C.	
+dept.setDept(empno);
+ D.	
+dept.setDept(emp);
+
+
+2.
+阅读以下代码，并完成下边5题：
+
+班级表：classInfo
+
+字段名      数据类型       约束
+claId       number(4)      primary key
+claName   varchar2(20)    not null
+
+INSERT INTO classInfo(claId,claName)VALUES(1,'Java1209');
+
+INSERT INTO classInfo(claId,claName)VALUES(2,'Java1210');
+
+INSERT INTO classInfo(claId,claName)VALUES(3,'Java1211');
+
+学生表：student
+
+字段名         数据类型           约束
+userName     varchar2(20)       primary key
+claId          number(4)         foreign key
+sex            char(3)            check(sex=’男’ or sex=’女’)
+age            number(4)         default 20
+score          number(4)          default 0
+ 
+INSERT INTO student(username,claId,sex,age,score)
+
+VALUES(1，'张明',1,'男','30',97);
+
+INSERT INTO student(username,claId,sex,age,score)
+
+VALUES(2，'李小飞',1,'男','21',97);
+
+INSERT INTO student(username,claId,sex,age,score)
+
+VALUES(3，'许银亮',3,'女','27',97);
+
+INSERT INTO student(username,claId,sex,age,score)
+
+VALUES(4，'何姗',2,'女','25',97);
+
+INSERT INTO student(username,claId,sex,age,score)
+
+VALUES(5，'史小今',1,'男','33',97);
+
+INSERT INTO student(username,claId,sex)
+
+VALUES(6，'伍次友',3,'男');
+
+(1).
+ ”伍次友”的年龄与成绩分别是(  C )
+ A.	
+  0   0
+ B.	
+  30  97
+ C.	
+  20  0
+ D.	
+  20  20
+(2).
+SELECT * FROM student WHERE userName LIKE '%小%'，该语句能查询到记录数是（B）
+ A.	
+1
+ B.	
+2
+ C.	
+3
+ D.	
+4
+(3).
+ 查询Java1209班和Java1210班所有学生信息。以下语句正确的是（A）
+ A.	
+SELECT * FROM student WHERE claId in
+	(SELECT claId FROM classInfo WHERE claName='Java1209'
+				OR claName='Java1210');
+ B.	
+SELECT * FROM student WHERE claId =
+	(SELECT claId FROM classInfo WHERE claName='Java1209'
+				OR claName='Java1210');
+ C.	
+SELECT userName,a.claId,sex,age,score FROM student a,classInfo b
+	WHERE claName=' Java1209' OR claName=' Java1210';
+ D.	
+SELECT * FROM student WHERE claId in
+	(SELECT claId FROM classInfo WHERE claName='Java1209' AND claName='Java1210');
+
+(4).
+关于下边语句说法正确的是（D）。
+
+SELECT SUM(score),sex FROM student GROUP BY sex 
+ A.	
+查询语句报错
+ B.	
+该查询语句无意义
+ C.	
+用于查询所有学生的成绩总和
+ D.	
+用于查询男生和女生的成绩总和分别是多少
+(5).
+查询所有班级信息，并显示每个班级的学生人数，实现效果如下图：
+claId   claName      stuNum
+1       Java1209       3
+2       Java1210       1
+3       Java1211       2  
+以下查询语句能够实现上述功能的是（A）。
+ A.	
+SELECT claId,claName,
+	(SELECT COUNT(*) FROM student b WHERE b.claId=a.claId) AS stuNum
+FROM classInfo a;
+ B.	
+SELECT claId,claName,
+	(SELECT COUNT(*) FROM student) AS stuNum FROM classInfo;
+ C.	
+SELECT claId,claName,
+	(SELECT COUNT(*) FROM classInfo) AS stuNum
+FROM classInfo;
+ D.	
+SELECT claId,claName,
+	(SELECT SUM(userName) FROM student b WHERE a.claId=b.claId) AS stuNum
+FROM classInfo b;
+
+3.
+以下CSS类需要完成的要求如下，根据需要在下划线填写相应的代码。
+
+1)   宽度:120像素
+
+2)   高度:36像素
+
+3)   行高:36像素
+
+4)   溢出部分隐藏
+
+5)   背景颜色为#B41F9D,背景图像为与images/nav.jpg，背景图像不重复，背景图像的水平位置为：-90像素，垂直位置为-50像素
+
+6)   四条边框为实线，线宽为1像素，颜色为#ffffff
+
+7)   上外边距为0像素，左外边距为5像素，右外边距为5像素，下外边距为5像素
+
+8)   鼠标指针呈现手形
+
+.nav{
+
+    width:120px;
+
+    height:36px;
+
+    line-height:36px;
+
+     空白处1     ;
+
+     空白处2     ;
+
+     空白处3     ;
+
+     空白处4     ;
+
+     空白处5     ;
+
+}
+
+(1).
+下列选项中，能填入空白处1的代码是(   C )
+ A.	
+overflow:scroll
+ B.	
+overflow:visible
+ C.	
+overflow:hidden
+ D.	
+overflow:auto
+
+(2).
+下列选项中，能填入空白处2的代码是(  C  )
+ A.	
+background-color:#B41F9D url(images/nav.jpg) no-repeat -90px -50px
+
+ B.	
+background-image:#B41F9D url(images/nav.jpg) no-repeat -90px -50px
+
+ C.	
+background:#B41F9D url(images/nav.jpg) no-repeat -90px -50px
+
+ D.	
+background: url(images/nav.jpg) #B41F9D no-repeat -50px -90px
+
+(3).
+下列选项中，能填入空白处3的代码是(  A  )
+ A.	
+border:1px solid #fff
+ B.	
+border-all:1px solid #fff
+ C.	
+border:width:1px style:solid color:#fff
+ D.	
+border-top:1px solid #fff
+
+(4).
+下列选项中，能填入空白处4的代码是(  C  )
+ A.	
+padding:0px 5px 5px
+ B.	
+padding:0px 5px
+ C.	
+margin:0px 5px 5px
+ D.	
+margin:0px 5px
+
+(5).
+下列选项中，能填入空白处5的代码是(  B  )
+ A.	
+cursor:hand
+ B.	
+cursor:pointer
+ C.	
+cursor:wait
+ D.	
+cursor:text
