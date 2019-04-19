@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="EmpManagerbak"
+  id="myeclipse.1449823072556"
+  context-root="/EmpManager"
+  j2ee-spec="5.0"
+  archive="EmpManagerbak.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

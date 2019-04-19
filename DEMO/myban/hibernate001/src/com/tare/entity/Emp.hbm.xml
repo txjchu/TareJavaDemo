@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 配置实体类与数据表的对应关系.ORM -->
+	<class name="com.tare.entity.Emp" table="emp_h">
+		<id name="id" type="integer" column="id">		<!-- 配置主键属性与表中字段的关系 -->
+			<generator class="sequence">						<!-- 用于指定主键生成的方式 -->
+				<param name="sequence">emp_seq</param>			<!-- 用于指定生成主键的具体序列 -->
+			</generator>
+		</id>
+		<property name="name" type="string" column="name"></property>
+		<property name="age" type="integer" column="age"></property>
+		<property name="salary" type="double" column="salary"></property>
+		<property name="marry" type="yes_no" column="marry"></property>
+		<property name="birthday" type="date" column="birthday"></property>
+		<property name="last_login_time" type="timestamp" column="last_login_time"></property>
+	</class>
+</hibernate-mapping>
