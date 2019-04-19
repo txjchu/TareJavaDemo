@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ajax04_校验用户名练习</title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function check_name(){
+				var xhr = getXhr();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4 && xhr.status == 200){
+						document.getElementById("name_msg").innerHTML = xhr.responseText;
+					}
+				}; 
+				xhr.open("post", "check_name.do",true);
+				xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');//post请求没有消息头，需要手动调用设置。否则？
+				document.getElementById("name_msg").innerHTML = "正在检查..."
+				var name = document.getElementById("name")
+				xhr.send("name="+ name.value);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 验证注册信息中的用户名是否可用 -->
+		<form action="" methos="post">
+			<fieldset>
+				<legend>注册信息</legend>	<!-- legend n. 传奇；说明；图例；刻印文字 -->
+				用户名:<input name="uname" id="name">
+				<input type="button" value="给我检查一下吧！" onclick="check_name();">
+				<span id="name_msg" style="color:red;"></span>
+				<br/><br/>
+				<input type="submit" value="注册">	
+			</fieldset>
+		</form>
+	</body>
+</html>		

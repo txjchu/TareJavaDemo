@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title></title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/prototype-1.6.0.3.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function getCity(v1){
+				addOption(v1, "/ajax001/getCity2.do", "s2");
+				
+			}
+			function getStreet(v2){
+				addOption(v2, "/ajax001/getStreet.do","s3");
+			}
+		</script>
+	</head>
+	<body>
+		<select id="s1" onchange="getCity(this.value);" style="width: 120px;">
+			<option value="bj">北京</option>
+			<option value="sh">上海</option>
+			<option value="gz">广州</option>
+		</select>	
+		<select id="s2" onchange="getStreet(this.value);" style="width: 120px;">
+		
+		</select>
+		<select id="s3" style="width: 120px;">
+		
+		</select>
+	</body>
+</html>		

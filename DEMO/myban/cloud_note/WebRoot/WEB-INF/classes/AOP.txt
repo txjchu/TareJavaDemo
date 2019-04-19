@@ -1,0 +1,24 @@
+	<!-- 指定txManager作用在哪些组件上
+<aop:config>
+	<aop:pointcut id="servicePoint" expression="within(org.tarena.note.service.*)"></aop:pointcut>
+	<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePoint"></aop:advisor>
+</aop:config>	
+	 -->
+	 
+	  <aop:config>
+		<!-- 前置通知 ,将debugLogger指定为切面组件-->
+ 	<aop:aspect ref="debugLogger">
+ 		<!-- 采用前置通知，将debugController方法作用到所有controller组件上 -->
+ 		<aop:before method="debugController" pointcut="within(org.tarena.note.controller..*"/>
+ 	</aop:aspect>
+ </aop:config>	
+	 
+<!-- 
+	<tx:method name="checkLogin" read-only="true" propagation="R"/>
+	<tx:method name="Load*" read-only="true"/>
+	<tx:method name="*"/>
+ -->	 
+	 
+<bean id="debugLogger" class="org.tarena.note.aop.DebugLoggerBean"></bean>	 
+
+<context:component-scan base-package="org.tarena.note.aop.DebugLoggerBean"/>

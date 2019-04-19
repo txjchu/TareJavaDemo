@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ajax03_通过ajax对象获取文本_post请求</title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function getText(){
+				//发送post请求
+				var xhr = getXhr();//1.获取xhr对象
+				xhr.onreadystatechange = function (){
+					if(xhr.readyState == 4 && xhr.status == 200){
+						var txt = xhr.responseText;
+						$("p").text(txt);
+						//alert(txt);
+					}
+				};
+				xhr.open("post", "post_text.do", true);
+				//post提交方式缺少消息头，因此通过这句代码设置消息头，但是必须放在open语句之后，保证xhr.status打开的。
+				xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+				xhr.send("uname=POST");
+				//xhr.send("uname="+ $("#btn").value);	//使用jQuery选择器需要引入其js文件
+			}
+		</script>
+	</head>
+	<body>
+		<h2>
+			<!-- 通过ajax发送post类型请求，并获取响应文本 -->
+			<input type="button" id="btn" onclick="getText();" value="POST请求">
+			<p></p>	
+		</h2>
+	</body>
+</html>

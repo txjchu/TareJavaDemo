@@ -1,0 +1,2 @@
+1.	04-23:30，数据库连接通顺，TestUserDAO的testFindAll方法测试成功。
+	NoteResult中的status状态码对应：1 = 用户名不存在，即登录失败; 2 = 密码有误; 0 = 登录成功。 

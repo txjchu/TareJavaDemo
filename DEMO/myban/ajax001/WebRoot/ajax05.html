@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ajax05_校验用户名练习_get请求方式</title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function check_name2(){
+				//1.获取ajax对象
+				var xhr = getXhr();
+				//2.注册回调函数
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4 && xhr.status){
+						var msg = xhr.responseText;//获取响应对象中的返回的数据
+						document.getElementById("name_msg").innerHTML = msg;//将数据文本赋值给某一元素中
+					}
+				};
+				//3.开启ajax对象准备发送请求
+				var name = document.getElementById("name");//获取到用户输入的数据的元素input，然后通过.value获取到中间的文本。
+				var uri = "check_name2.do?name="+ name.value +"."+Math.random();	//必须name.value，否则name=[object HTMLInputElement]
+				//var uri = "check_name2.do?name="+ name.value;//若是IE浏览器，则会发生缓存问题，相同的请求路径只能发出一次，因此使用追加随机数拼接uri，使请求发生变化。
+				xhr.open("get",encodeURI(uri),true);
+				//4.模拟网路延迟
+				document.getElementById("name_msg").innerHTML = "正在检查...";
+				//5.发送请求
+				xhr.send(null);//get请求send方法传入空。
+				
+			}
+		</script>
+	</head>
+	<body>
+		<form action="" >
+			<fieldset>
+				<legend>注册用户信息</legend>	<!-- legnd 图例说明 -->
+				用户名:<input name="uname" id="name">
+					  <input type="button" value="给我检查一下" onclick="check_name2();"/>  <!-- 此处调用js中的函数，函数发送请求路径 -->
+					  <span id="name_msg" style="color:red;"></span>
+				<br/><br/>
+				<input type="submit" value="注册">
+			</fieldset>
+		</form>	
+	</body>
+</html>		

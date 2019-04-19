@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8">
+		<title>获取AJAX对象练习</title>
+		<script type="text/javascript">
+			function getXhr(){
+				var xhr = null;
+				if(window.XMLHttpRequest){//若是非IE浏览器
+					xhr = new XMLHttpRequest();
+				} else {//若是IE6及以下的浏览器
+					xhr = new ActionXObject('Microsoft.XMLHttp');
+				}
+				return xhr;
+			}
+		</script>
+	</head>
+	<body>
+		<h1><a href="javascript:" onclick="alert(getXhr());">获取ajax对象</a></h1>
+	</body>
+</html>

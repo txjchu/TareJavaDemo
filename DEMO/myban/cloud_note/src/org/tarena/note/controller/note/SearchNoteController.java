@@ -1,0 +1,27 @@
+package org.tarena.note.controller.note;
+/**
+ * 动态查询，组合查询，高级查询
+ */
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.tarena.note.service.NoteService;
+import org.tarena.note.util.NoteResult;
+import org.tarena.note.vo.SearchBean;
+
+@Controller
+@RequestMapping("/note")
+public class SearchNoteController {
+	
+	@Resource
+	private NoteService noteService;
+	
+	@RequestMapping("/highSearch.do")
+	@ResponseBody
+	public NoteResult execute(SearchBean params){
+		NoteResult result = noteService.searchNotes(params);
+		return result;
+	}
+}

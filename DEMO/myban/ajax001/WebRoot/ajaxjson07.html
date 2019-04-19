@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>07_使用json实现联动下拉选</title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/prototype-1.6.0.3.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function getCity(v1){
+				var xhr = getXhr();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4 && xhr.status == 200){
+						var jsonStr = xhr.responseText;//接收到服务器发送过来的json字符串
+						$("s3").innerHTML = "jsonStr:"+ jsonStr;
+						var jsObj = jsonStr.evalJSON();//将jsonStr字符串转变为js对象
+						$("s4").innerHTML = "jsObj:"+ jsObj;
+						$("s2").innerHTML = "";//先清空s2
+						for(var i = 0; i < jsObj.length; i ++){
+							/*
+							 * 创建Option对象，将其放入Options中，为s2增加数据
+							 */
+							 var op = new Option(jsObj[i].name, jsObj[i].value);
+							 $("s2").options[i] = op;
+						}
+					}
+				};
+				xhr.open("get","getCity2.do?name="+ v1, true);
+				xhr.send(null);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 实现ajax联动，使用json传输数据 -->
+		<select id="s1" style="width:120px;" onchange="getCity(this.value);">
+			<option value="bj">北京</option>
+			<option value="sh">上海</option>
+			<option value="gz">广州</option>
+		</select>	
+		<select id="s2" style="width:120px;">
+		
+		</select><br><br/>
+		<span id="s3"></span><br/>
+		<span id="s4"></span>
+	</body>
+</html>		

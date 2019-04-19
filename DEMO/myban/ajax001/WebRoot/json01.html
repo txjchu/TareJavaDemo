@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>json01_获取json对象属性_案例练习</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- 
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		 -->
+		<script type="text/javascript" src="scripts/prototype-1.6.0.3.js"></script>
+											
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function f1(){
+				//定义一个json对象
+				var obj = {'name':'Lucy','age':22};
+				//alert(obj.name +' '+ obj.age);
+				$("s1").innerHTML = obj.name +','+ obj.age;
+			}
+			function f2(){
+				//定义一个嵌套的json对象
+				var obj = {'name':'Lucy', 'age':22, 'address':{'city':'北京', 'street':"长安街", 'room':117}}
+				$("s2").innerHTML = obj.name +','+ obj.address.city;
+			}
+			function f3(){
+				var obj = [{'name':'Lucy','age':22}, {'name':'lilei','age':21}];
+				$("s3").innerHTML = obj[1].name;
+			}
+			function f4(){
+				var obj = {'name':'Lucy','age':22, 'friends':[{'name':'lilei','age':21}, {'name':'jim','age':20}]};
+				$("s4").innerHTML = obj.name +","+ obj.age +','+ obj.friends[1].name;
+			}
+			function f5(){
+				/*
+				 * JSON字符串{}内必须使用""双引号，括号外使用''单引号。否则，会报下列异常。
+				 */
+				var str = '{"name":"Luffy","age":19}';
+				//alert(str.name);
+				//1.使用eval()方法，不需要json.js
+				//var obj = eval("("+ str +")");	//SyntaxError: missing ] after element list???
+				//var obj = eval("("+str+")");
+				//2.使用JSON.parse(str)方法，不需要json.js
+				//var obj = JSON.parse(str);		//SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+				//3.使用str.parseJSON();方法，需要json.js
+				//var obj = str.parseJSON();
+				//4.使用prototype.js提供的evalJSON()方法
+				var obj = str.evalJSON();
+				//alert(obj.name);	
+				$("s5").innerHTML = "转换后为："+ obj.name;
+			}
+		</script>
+	</head>
+	<body>
+		<a href="javascript:" onclick="f1();">查看对象</a>	<!-- href属性若不设定，则连接没有外在表现形式，即不带下划线不变色。 -->
+		<span name="s1" id="s1"></span><br/>
+		<a href="javascript:" onclick="f2();">查看对象中的属性</a>		<!-- href属性若设置为空，则会重复发送当前页面的连接地址。 -->
+		<span id="s2"></span><br/>	
+		<a href="javascript:" onclick="f3();">查看数组</a>
+		<span id="s3"></span><br/>
+		<a href="javascript:" onclick="f4();">查看数组中的对象的属性</a>
+		<span id="s4"></span><br/>
+		<a href="javascript:" onclick="f5();">JSON对象-->JS对象</a>
+		<span id="s5"></span><br/>
+	</body>
+</html>		

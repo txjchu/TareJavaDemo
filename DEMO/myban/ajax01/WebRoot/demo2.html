@@ -1,0 +1,65 @@
+<html>
+<head>
+<!-- 添加jQuery框架 -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+<!-- btn1处理 -->
+<script type="text/javascript">
+//$(function(){}),浏览器载入body内容后执行fn函数处理
+$(function(){
+	$("#btn1").click(function(){
+		alert("----ajax----");
+		$.get("http://localhost:9080/ajax01/demo01.do",
+			function(result){//result是服务器返回的结果
+			$("#msg_span").html(result);
+		});
+		//提示
+		$("#msg_span").html("正在加载....");
+	});	
+});
+</script>	
+
+<!-- 用户名检测 -->
+<script type="text/javascript">
+$(function(){
+	$("#username").blur(function(){
+		alert("----");
+		//获取用户名
+		var name = $(this).val().trim();
+		//发送ajax检测
+		$.post("http://localhost:9080/ajax01/demo02.do",
+			{"name":name},//---<-jsion格式写法----"name="+name,
+			function(data){//data是服务器返回结果
+				$("#name_span").html(data);
+			},
+			"html"//服务器返回结果类型
+		);
+	});
+});
+</script>
+
+<!-- load加载ajax信息 -->
+<script type="text/javascript">
+$(function(){
+	$("#btn2").click(function(){
+		//利用load加载demo1.do信息，填充到msg_span中
+		$("#msg_span").load("http://localhost:9080/ajax01/demo01.do");
+		//提示等待
+		$("#msg_span").html("正在加载中...");
+	});
+});
+</script>
+</head>
+
+<body>
+	<input type="button" value="获取Ajax对象"/>
+	<input type="button" id="btn1" value="发送Ajax请求"/>
+	<input type="button" id="btn2" value="发送Ajax2请求"/>
+	<hr/><span id="msg_span"></span>
+	<!-- 绑定事件onblur,光标闪烁，获取焦点 -->
+	用户名：<input type="text" id="username"/>
+	<span id="name_span"></span><br/>
+	&nbsp密码：<input type="password" id="password"/><br>
+	<input type="button" value="注册"/>
+	
+</body>
+</html>

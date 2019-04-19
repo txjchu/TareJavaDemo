@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>热销产品列表_每隔5秒刷新一次</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			#d1{
+				width:500px;
+		        height:180px;
+           		background-color:#fff8dc;
+           		border:1px solid red;
+           		margin-left:350px;
+           		margin-top:50px;
+			}
+		</style>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/prototype-1.6.0.3.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function f1(){
+				setInterval(f2,5000);//设定周期定时器
+			}
+			function f2(){
+				var xhr = getXhr();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4 && xhr.status == 200){
+						var jsonStr = xhr.responseText;//获取响应对象中的文本
+						var sales = jsonStr.evalJSON();//将字jsonStr符串转变为javascript对象，这是一个集合对象。
+						var saleInfo = "当前销量前三的商品是:<br/>"
+						for(var i = 0; i < sales.length; i ++){
+							saleInfo += "商品名称："+ sales[i].prodName +" 销量:"+ sales[i].qty + "<br/>";
+						}
+						$("d1").innerHTML = saleInfo;
+					}
+				};
+				var uri = "sale.do?random="+ Math.random() ;
+				xhr.open("get", uri, true);
+				xhr.send(null);
+			}
+		</script>
+	</head>
+	<body onload="f1();">
+		<div id="d1">
+			
+		</div>	
+	</body>
+</html>		

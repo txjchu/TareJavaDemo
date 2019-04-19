@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ajax06_动态加载下拉选</title>
+		<script type="text/javascript" src="scripts/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="js/my.js"></script>
+		<script type="text/javascript">
+			function getCity(v1){
+				//1.获取ajax对象
+				var xhr = getXhr();
+				//2.定义回调函数
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4 && xhr.status == 200){
+						var txt = xhr.responseText;//获取响应对象中的字符串
+						var strs = txt.split(";");//获取到的字符串形式：静安,ja;黄埔,hp;浦东新,pdx
+						//先清空s2
+						$("s2").innerHTML = "";//调用自定义的js函数，通过id获取元素。
+						for(var i = 0; i < strs.length; i ++){
+							var str1s = strs[i].split(",");//获取到字符串数组中的一个元素字符串，并再次将字符串转变为一个字符串数组。
+							var op = new Option(str1s[0], str1s[1]);//构造一个Option对象，其构造函数中的第一个参数为元素中的text文本，第二个参数为元素的value.
+							/*
+							 * options是select中的一个属性，其值是一个数组，数组中的元素是Option对象。
+							 */
+							$("s2").options[i] = op;//利用自定义的获取元素的方法获取s2下拉选，将Option对象填充到options数组中。
+						}
+					}		
+				};
+				//3.准备请求
+				var uri = "getCity.do?name="+ v1;
+				xhr.open("get", encodeURI(uri), true);
+				//4.发送请求
+				xhr.send(null);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Ajax实现连级下拉列表 -->
+		<select id="s1" style="width:120px;" onchange="getCity(this.value);">	<!-- getCity()中的参数this.value为改变下拉选的option后，当前下拉选的value -->
+			<option value="bj">北京</option>
+			<option value="sh">上海</option>
+			<option value="gz">广州</option>
+		</select>	
+		<select id="s2" style="width:120px;"></select>
+	</body>
+</html>		

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.tarena.note.dao.NoteDao">
+	<!-- 动态SQL -->
+	<delete id="deleteNotes">
+		delete from cn_note
+		where cn_note_id in
+		<!-- foreach标签用来循环数组或集合。 --> 
+		<foreach collection="array" item="id" separator="," open="(" close=")">
+		<!-- array,list都是关键字，指代传进来的数据。separator关键字表示用什么分隔符将元素分隔。
+			 open和close关键字表示在元素的前后拼接字符。item[条款项目] -->
+			#{id}
+		</foreach>
+	</delete>
+	<update id="dynamicUpdate" parameterType="org.tarena.note.entity.Note">
+		update cn_note
+		<set> <!-- set标签代替set关键字，并io且可以过滤更新字段中后多余的逗号。 -->
+			<if test="cn_notebook_id!=null">
+				cn_notebook_id=#{cn_notebook_id},
+			</if>
+			<if test="cn_user_id!=null">
+				cn_user_id=#{cn_user_id},
+			</if>
+			<if test="cn_note_status_id!=null">
+				cn_note_status_id=#{cn_note_status_id},
+			</if>	
+			<if test="cn_note_type_id!=null">
+				cn_note_type_id=#{cn_note_type_id},
+			</if>
+			<if test="cn_note_title!=null">
+				cn_note_title=#{cn_note_title},
+			</if>
+			<if test="cn_note_body!=null">
+				cn_note_body=#{cn_note_body},
+			</if>
+			<if test="cn_note_create_time!=null">
+				cn_note_create_time=#{cn_note_create_time},
+			</if>
+			<if test="cn_note_last_modify_time!=null">
+				cn_note_last_modify_time=#{cn_note_last_modify_time}
+			</if>
+		</set>
+		where cn_note_id=#{cn_note_id}
+	</update>
+	<select id="findNotes" parameterType="org.tarena.note.vo.SearchBean">
+		select * from cn_note
+		<!-- where标签可以生成where关键字，并可以自动过滤条件语句最前面多余的and和or关键字(如重复条件) --> 
+		<where>
+			<if test="title != null">
+			and cn_note_title like #{title}
+			</if>
+			<if test="status != null">
+			and cn_note_status_id=#{status}
+			</if>
+			<if test="longBeginTime != null">
+			and cn_note_create_time>#{longBeginTime}
+			</if>
+			<if test="longEndTime != null">
+			and cn_note_create_time&lt;=#{longEndTime}
+			</if>
+		</where>
+	</select>
+
+  <select id="findByBookId" parameterType="string" resultType="org.tarena.note.entity.Note">
+  	select * from cn_note where cn_notebook_id=#{bookId} and cn_note_status_id != '2'
+  </select>
+  <select id="findById" parameterType="string" resultType="org.tarena.note.entity.Note"> 
+  	select * from cn_note where cn_note_id=#{id} 
+  </select>
+  <insert id="save" parameterType="org.tarena.note.entity.Note">
+  	insert into cn_note (cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,cn_note_type_id,cn_note_title,
+  							cn_note_body,cn_note_create_time,cn_note_last_modify_time)
+  	value(#{cn_note_id},#{cn_notebook_id},#{cn_user_id},#{cn_note_status_id},#{cn_note_type_id},#{cn_note_title},
+  			#{cn_note_body},#{cn_note_create_time},#{cn_note_last_modify_time})
+  </insert>
+  <!--  -->
+  <update id="update" parameterType="org.tarena.note.entity.Note">
+  	update cn_note set cn_note_title=#{cn_note_title},cn_note_body=#{cn_note_body},
+  						cn_note_last_modify_time=#{cn_note_last_modify_time}
+  	where cn_note_id=#{cn_note_id}
+  </update>
+  <update id="updateStatus" parameterType="string">
+  	update cn_note set cn_note_status_id='2' where cn_note_id=#{noteId}
+  </update>
+  <update id="updateBookId" parameterType="org.tarena.note.entity.Note">
+  	update cn_note set cn_notebook_id=#{cn_notebook_id} where cn_note_id=#{cn_note_id}
+  </update>
+  
+</mapper>
