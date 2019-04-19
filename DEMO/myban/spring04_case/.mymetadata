@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="spring04_case"
+  id="myeclipse.1451271626174"
+  context-root="/spring04_case"
+  j2ee-spec="5.0"
+  archive="spring04_case.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

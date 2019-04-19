@@ -1,0 +1,19 @@
+需求：
+使用JDBC实现对EMP数据的CRUD操作
+
+
+*添加职员信息，
+*删除职员信息，
+*更新职员信息，（修改）
+update emp_zyl set ename=?,job=?,mgr=？,hiredate=?,sal=?,comm=?,deptno=? where empno=?
+
+*查询所有职员信息，
+select empno,ename,job,mgr,hiredate,sal,comm,deptno from emp_zyl where empno=?
+
+返回：empno,ename,sal,comm,hiredate,sal,comm,deptno ----对象
+
+*查询某个职员信息。
+select *from emp_zyl;
+
+statement/perprastatement
+ArrayList(集合)

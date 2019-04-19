@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.tarena.entity.Cost" table="COST">
+		<id name="cost_id" column="COST_ID" type="integer">
+			<generator class="sequence"><!-- 在添加的时候自动调用主键值，写入一个ID，此仅Oracle独有配置 -->
+				<param name="sequence">cost_seq</param>
+			</generator>
+		</id>
+		<property name="name" column="NAME" type="string"></property>
+		<property name="base_duration" column="BASE_DURATION" type="long"></property>
+		<property name="base_cost" column="BASE_COST" type="double"></property>
+		<property name="unit_cost" column="UNIT_COST" type="double"></property>
+		<property name="status" column="STATUS" type="string"></property>
+		<property name="descr" column="DESCR" type="string"></property>
+		<property name="creatime" column="CREATIME" type="date"></property>
+		<property name="startime" column="STARTIME" type="date"></property>
+		<property name="cost_type" column="COST_TYPE" type="string"></property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tare.Emp.dao.EmpMapper">
+	<select id="findAll" resultType="com.tare.Emp.entity.Emp">
+		select * from emp order by empno
+	</select>
+	<select id="findById" resultMap="empMap" parameterType="integer">
+		select * from emp where  empno = #{empno} 
+	</select>
+	<select id="findDept" resultType="com.tare.Emp.entity.Dept" parameterType="integer">
+		select * from dept where deptno = #{deptno}
+	</select>
+	<resultMap id="empMap" type="com.tare.Emp.entity.Emp">		<!-- resolve决定解决分解坚决 -->
+		<association property="dept" column="deptno" javaType="com.tare.Emp.entity.Dept" select="findDept"/>
+	</resultMap>
+	<select id="findById2" resultMap="empMap2" parameterType="int">
+		<!-- 
+		select e.*, d.* from emp e       join dept d on (e.deptno = d.deptno) where e.empno = #{empno}
+		 --> 
+		select e.*, d.* from emp e inner join dept d on e.deptno = d.deptno where e.empno = #{id}
+	</select>
+	<resultMap id="empMap2" type="com.tare.Emp.entity.Emp">		<!-- 此处必须写全resultMap中相互对应的值 -->
+		<id property="empno" column="empno"></id>	
+		<result property="ename" column="ename"></result>
+		<result property="job" column="job"></result>
+		<result property="deptno" column="deptno"></result>
+		<result property="mgr" column="mgr"></result>
+		<result property="sal" column="sal"></result>
+		<result property="comm" column="comm"></result>
+		<result property="hiredate" column="hiredate"></result>
+		<association property="dept" column="deptno" javaType="com.tare.Emp.entity.Dept" resultMap="deptMap"/>
+	</resultMap>
+	<resultMap id="deptMap" type="com.tare.Emp.entity.Dept">
+		<id property="deptno" column="deptno"></id>
+		<result property="dname" column="dname"></result>
+		<result property="loc" column="loc"></result>
+	</resultMap>
+	
+	
+	<insert id="saveEmp" parameterType="com.tare.Emp.entity.Emp" >
+		<selectKey keyProperty="empno" order="BEFORE" resultType="Integer">
+			select emp_seq.nextval from dual
+			<!-- select emp_seq.nextval from dual; -->
+		</selectKey>
+		insert into emp values(
+            #{empno},
+            #{ename},
+            #{job},
+            #{mgr,jdbcType=NUMERIC},
+            #{hiredate},
+            #{sal},
+            #{comm,jdbcType=NUMERIC},
+            #{deptno}
+        )		
+		<!-- ...values()内直接罗列字段即可。	注 意空值null要插入时，必须给字段定义jdbcType=...数据库数据类型。
+		insert into emp values(
+			empno = #{empno}, ename = #{ename,jdbcType=VARCHAR}, job = #{job,jdbcType=VARCHAR}, sal = #{sal,jdbcType=NUMERIC}, 
+			comm = #{comm,jdbcType=NUMERIC}, mgr = #{mgr,jdbcType=NUMERIC}, deptno = #{deptno,jdbcType=NUMERIC}, hiredate = #{hiredate,jdbcType=DATE} 
+		)
+		  -->
+	</insert>
+</mapper>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta content="text/html;charset=UTF-8">	
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript">
+	/*
+	 * 页面载入完毕后，执行此处代码
+	 */
+	 $(function(){
+		$("#btn1").click(function(){
+			//发送ajax请求
+			$.get("http://localhost:9080/ssm/cost/list.do",
+			//路径正确时回调的函数
+			function(data){
+			$("#cost_list tr:gt(0)").remove();
+				//解析返回的资费数组
+				for(var i=0;i<data.length;i++){
+					var id = data[i].cost_id;
+					var name = data[i].name; 
+					var creatime = data[i].creatime;
+					var startime = data[i].startime;
+					//拼成一个tr
+					var str = '<tr><td>'+id+'</td><td>'+name+'</td><td>'+creatime+'</td><td>'+startime+'</td></tr>';
+					//将tr添加到table元素中
+					$("#cost_list").append(str);
+				}
+				
+			},"json");
+		}); 
+	 });
+</script>
+</head>
+<body>
+	<input type="button" id="btn1" value="显示资费列表"/>
+	<hr/>
+	<table id="cost_list">
+		<tr>
+			<th>编号</th>
+			<th>资费名</th>
+			<th>创建日期</th>
+			<th>开通日期</th>
+		</tr>
+	</table>
+</body>
+</html>

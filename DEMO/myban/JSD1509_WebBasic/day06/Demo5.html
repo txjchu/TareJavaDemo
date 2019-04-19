@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：简版计算器</title>
+		<script type="text/javascript">
+			function cal(){
+				//获取输入的算式
+				var exp = document.getElementById("exp").value;
+				//捕获异常，因为输入会有各种情况
+				var p = document.getElementById("result");
+				try{
+					
+					//【eval函数-重点】执行算式
+					var r = eval(exp);
+					//执行正确，输出结果
+					p.innerHTML=r;
+				}catch(e){
+					//执行有误，给予提示
+					p.innerHTML = "Error.[]";
+				}
+			}
+		</script>	
+	</head>
+	<body>
+		<input type="text" id="exp"/>
+		<button onclick="cal();">=</button>
+		<p id="result" ></p>
+	</body>
+</html>
+

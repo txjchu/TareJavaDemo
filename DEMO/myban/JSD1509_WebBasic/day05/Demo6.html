@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：计算平方</title>	
+		<script type="text/javascript">
+			//计算输入数字的平方
+			function cal(){
+				
+				//【打桩检查错误】如果整个方法有错，采取排除法+二分法来排除。
+				
+				//【打桩】在第一行打桩可以看出程序是否进入该方法。
+				console.log("打桩1");
+				//1.获取要操作(读写)的元素【document.getElementById】
+				var input=document.getElementById("num");
+				var span=document.getElementById("result");
+				//【打桩】关键部位
+				console.log("input");
+				console.log(span);
+				//2.读取文本框内的值
+				var n=input.value;
+				console.log(n);
+				//3.判断该值是否为数字
+				//如果文本框中没有内容，则获取的值是“”(空字符串)，不会是null。
+				if(n=="" || isNaN(n)){
+					console.log("error");
+					//输入非法，给予错误提示【输出.innerHTML】
+					span.innerHTML = "请输入数字！";
+				}else{
+					console.log("OK");
+					//计算平方，写入span(数字特有的运算，js会自动转型，不需要加引号或者强转类型)
+					span.innerHTML = n*n;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 输入 -->
+		<input type="text" id="num"/>
+		<input type="button" value="平方" onclick="cal();"/>
+		<!-- 显示结果 -->
+		=<span id="result"></span>
+	</body>
+</html>

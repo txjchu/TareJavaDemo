@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8"/>
+		<!-- <title>文本元素</title> -->
+		<title>表格、超链接、图像</title>
+		
+	</head>
+	<body>
+		<!-- 使用超链接链到本页的锚点处 -->
+		<p>
+			真实<i>个好</i>老师，
+			<span>行内<b>分区</b>元素</span>不但会讲课，还会拍片子。<br>
+			p元素是个段落。br元素是手动换行。
+			<a name="cang" href="#dibu">苍老师_锚点_和底部锚点相互连接锚点</a><br/>
+		</p>
+		<!-- 标题 -->
+		<h1>标题1曹老师</h1>
+		<h2>标题2王老师</h2>
+		<h3>标题3李老师</h3>
+		<!-- 有序列表ol -->
+		<ol>山东省
+			<li>日照市</li>
+			<li>青岛市</li>
+		</ol>
+		<ol>陕西省
+			<li>西安市</li>
+			<li>咸阳市</li>
+		</ol>
+		<ol>
+			<li>有序列表
+				<ul>无序列表
+					<li>列表项1</li>
+					<li>列表项2</li>
+					<li>列表项3</li>
+				</ul>
+			</li>
+		</ol>
+		<!-- 行内元素 -->
+		<p>北京市<b>海淀区</b><i>北三环</i><u>西甲路</u><span style = "color:red;">中鼎大厦</span>B8号</p>
+		<!-- 表格 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>第一行第一列</td>
+				<td>第一行第二列</td>
+			</tr>
+			<tr>
+				<td>第二行第一列</td>
+				<td>第二行第二列</td>
+			</tr>		
+		</table>
+		<!-- 跨行 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td rowspan="2">跨行</td>
+				<td>第一行第二列</td>
+			</tr>
+			<tr>
+				<td>第二行第一列</td>
+				<td>第二行第二列</td>
+			</tr>		
+		</table>
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr><!-- 跨列 -->
+				<td colspan = "2">第一行第一列</td>
+				<td>第一行第二列</td>
+			</tr>
+			<tr>
+				<td>第二行第一列</td>
+				<td>第二行第二列</td>
+			</tr>		
+		</table>
+		<!-- 表格：行分组 -->
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th>表头1</th>
+					<th>表头2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>第1行第一列</td>
+					<td>第1行第二列</td>
+				</tr>
+				<tr>
+					<td>第2行第一列</td>
+					<td>第2行第二列</td>
+				</tr>
+				<tr>
+					<td>第3行第一列</td>
+					<td>第3行第二列</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>表尾1</td>
+					<td>表尾2</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<table border="1px width="60%">
+			<thead>
+				<tr>
+					<th>设备</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>鼠标</td>
+					<td>100</td>
+					<td>1</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>键盘</td>
+					<td>200</td>
+					<td>3</td>
+					<td>600</td>
+				</tr>
+				<tr>
+					<td>硬盘</td>
+					<td>200</td>
+					<td>3</td>
+					<td>600</td>
+				</tr>
+				<tr>
+					<td>内存条</td>
+					<td>50</td>
+					<td>4</td>
+					<td>200</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan = "3">合计：</td>
+					<td>1400</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<!-- 分区 -->
+		<div style="color:red">
+			<p>这里是按钮</p>
+		</div>
+		<div style="color:bule">
+			<p>呵呵大</p>
+			<p>可敬</p>
+		</div>
+		<div style="color:green">
+			<p>版权所有，违者必究。&copy</p>
+		</div>
+		
+		
+		<a href="#cang" name="dibu">超链接_回到锚点</a>
+		<a href="#">TOP_默认锚点回到顶部</a>
+		<img  src="D:\Workspaces\MyEclipse 8.6\JSD1509_WebBasic\day01\02.jpg" width = "200">
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

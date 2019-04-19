@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SpringNetctoss"
+  id="myeclipse.1451356550446"
+  context-root="/SpringNetctoss"
+  j2ee-spec="5.0"
+  archive="SpringNetctoss.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

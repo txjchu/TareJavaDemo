@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+  <!-- 配置opensessioninviewfilter，jsp执行后回收session -->
+  <filter>
+  	<filter-name>opensession</filter-name>
+  	<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+  </filter>		
+  <filter-mapping>
+  	<filter-name>opensession</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- 实现请求进入到filter里 -->
+  <filter>
+  	<filter-name>strutsfilter</filter-name>
+  	<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  	<!-- 默认加载src/struts.xml -->
+  </filter>
+  <filter-mapping>
+  	<filter-name>strutsfilter</filter-name>
+  	<!-- struts默认识别2种请求：1.*.action2./hello.action,/hello..不能写成*.do。 -->
+  	<url-pattern>*.action</url-pattern>
+  </filter-mapping>
+  
+  <!-- 实例化Spring容器 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- 开启事务管理 -->
+  
+  
+</web-app>

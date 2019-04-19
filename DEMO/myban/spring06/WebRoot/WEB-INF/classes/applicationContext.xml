@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"  
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+	
+	<!-- 配置注解扫描标注注入 -->
+	<context:component-scan base-package="dao"/>
+	<!-- 使用标注的方式来设计MVC模式，需要配置 。@RequestMapping-->
+	<mvc:annotation-driven/>
+	<!-- 配置视图ViewResolver(视图解析器)，负责将视图名解析成具体的视图技术，比如解析成jsp -->
+	<bean id="VR" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 配置异常解析器 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/**"/><!-- /**表示应用名后不管是什么，都可以拦截 -->
+		<mvc:exclude-mapping path="/hello1.do"/>
+		<bean class="interceptor.SomeInterceptor"/>
+	</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 配置db.properties -->
+	<util:properties id="jdbc" location="classpath:db.properties"/>
+	<!-- 配置DataSource -->
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{jdbc.driver}"/><!-- 此  表达式读取其他bean的属性 -->
+		<property name="url" value="#{jdbc.url}"/>
+		<property name="username" value="#{jdbc.user}"/>
+		<property name="password" value="#{jdbc.pwd}"/>
+	</bean>
+	<!-- 配置JDBCTemplate -->
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="ds"/>
+	</bean>	
+</beans>

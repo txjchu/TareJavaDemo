@@ -1,0 +1,145 @@
+正则表达式的方法：
+reg.test(str);
+判断整个字符串str是否和reg相匹配。
+var str="abc123def";
+var reg=/^\d{3,6}$/;----返回结果为false.
+
+str.replace(reg,to);----(常用)
+将str中reg匹配的子串替换成to;
+var str="JavaScript很像Java";
+var reg=/Java/g;
+vat to="KK";
+替换后结果为“KKScript很像KK”
+
+
+
+
+
+var s="JavaScript起始很像Java";
+undefined
+s
+"JavaScript起始很像Java"
+s.length;
+18
+s.toUp
+undefined
+s.toUp
+undefined
+s.toUpperCase();
+"JAVASCRIPT起始很像JAVA"
+s.charAt(12);
+"很"
+s.charCodeAt(12);
+24456
+s.indexOf("Java");
+0
+s.lastindexOf("Java");
+TypeError: Object JavaScript起始很像Java has no method 'lastindexOf'
+s.lastIndexOf("Java");
+14
+s.substring(10,14);
+"起始很像"
+s.replace("Java","kk");
+"kkScript起始很像Java"
+如果都要改就需要正则表达式
+ReferenceError: 如果都要改就需要正则表达式 is not defined
+var str="1,2,3,4,5,6,7";
+undefined
+str.split(",");
+["1", "2", "3", "4", "5", "6", "7"]
+得到一个含有7个字符串的数组
+ReferenceError: 得到一个含有7个字符串的数组 is not defined
+
+
+var ary=[[1,2],[3,4]];
+undefined
+ary
+[
+Array[2]
+0: 1
+1: 2
+length: 2
+__proto__: Array[0]
+, 
+Array[2]
+0: 3
+1: 4
+length: 2
+__proto__: Array[0]
+]
+var c = [6,3,8,2,7,2];
+undefined
+c.rreverse();
+TypeError: Object [object Array] has no method 'rreverse'
+c.reverse();
+[2, 7, 2, 8, 3, 6]
+c.sort();
+[2, 2, 3, 6, 7, 8]
+排序,默认升序排序
+ReferenceError: 排序 is not defined
+c.sort(function(a,b){return b-a;});
+[8, 7, 6, 3, 2, 2]
+js---.sort(function(a,b){return a-b});
+SyntaxError: Unexpected token .
+比较方法可以置换，排序规则是固定，不可改变的。
+
+
+var s="abcdefg12345678ABCDEF";
+undefined
+s
+"abcdefg12345678ABCDEF"
+var r1=/\d{3}/;
+undefined
+r1.exec(s);
+["123"]
+pa判断一下原字符串中是否有该字符串
+ReferenceError: pa判断一下原字符串中是否有该字符串 is not defined
+var r1=/\d(3)/g;
+undefined
+r1.exec(s);
+["23", "3"]
+r1.text(s);
+TypeError: Object [object RegExp] has no method 'text'
+r1.test(s);
+false
+pa判断字符串和正则是否匹配。
+SyntaxError: Unexpected token ILLEGAL
+var r2=/^\d(3,6)$/;
+undefined
+r2.test(s);
+false
+
+
+var s="abcdefg12345678ABCDEF";
+undefined
+s
+"abcdefg12345678ABCDEF"
+var r1=/\d{3}/;
+undefined
+r1.exec(s);
+["123"]
+pa判断一下原字符串中是否有该字符串
+ReferenceError: pa判断一下原字符串中是否有该字符串 is not defined
+var r1=/\d(3)/g;
+undefined
+r1.exec(s);
+["23", "3"]
+r1.text(s);
+TypeError: Object [object RegExp] has no method 'text'
+r1.test(s);
+false
+pa判断字符串和正则是否匹配。
+SyntaxError: Unexpected token ILLEGAL
+var r2=/^\d(3,6)$/;
+undefined
+r2.test(s);
+false
+
+
+var s="2+3";
+undefined
+s
+"2+3"
+eval(s);
+5
+能够将一个字符串表达式当数字运算，输出计算结果。

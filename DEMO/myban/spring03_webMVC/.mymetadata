@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="spring03_webMVC"
+  id="myeclipse.1451025192878"
+  context-root="/spring03_web02"
+  j2ee-spec="5.0"
+  archive="spring03_webMVC.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

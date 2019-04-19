@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>z-index堆叠顺序</title>
+		<style type="text/css">
+			div{
+				border:1px solid #888;
+				width:700px;
+				height:500px;
+				background-color:#300;
+				/*设置外边距，用auto属性可以使居中。*/
+				margin:50px auto;
+				/*设置相对位置*/
+				position:relative;
+			}
+			#img1{
+				position:absolute;
+				left:60px;
+				top:30px;
+			}
+			#img2{
+				position:absolute;
+				left:220px;
+				top:120px;
+			}
+			#img3{
+				position:absolute;
+				left:150px;
+				top:180px;
+			}
+			/*调整堆叠顺序*/
+			img:hover{
+				z-index:0;
+			}
+			
+		</style>
+	</head>
+	<body>
+	 	<div>
+	 		<img src="../images/1.jpg" id="img1"/>
+	 		<img src="../images/2.jpg" id="img2"/>
+	 		<img src="../images/3.jpg" id="img3"/>	 
+	 	</div>
+	</body>
+</html>
+

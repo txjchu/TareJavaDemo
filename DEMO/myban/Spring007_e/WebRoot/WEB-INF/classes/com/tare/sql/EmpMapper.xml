@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <mapper namespace="com.tare.dao.EmpMapper">
+ 	<select id="findAll" resultMap="EmpMap">
+ 		select * from t_emp order by id
+ 	</select>
+ 	<select id="findById" parameterType="Integer" resultMap="EmpMap">
+ 		select * from t_emp where id = #{id}
+ 	</select>
+ 	<select id="findByName" parameterType="String" resultMap="EmpMap">
+ 		select * from t_emp where name = #{name}
+ 	</select>
+ 	<insert id="save" parameterType="com.tare.entity.Emp">
+ 		insert into t_emp values(t_emp_seq.nextval, #{name}, #{salary}, #{age})
+ 	</insert>
+ 	<update id="update" parameterType="com.tare.entity.Emp"><!-- com.tare.entity.Emp -->
+ 		update t_emp set name = #{name}, salary = #{salary}, age = #{age} where id = #{id}
+ 	</update>
+ 	<delete id="delete" parameterType="Integer">
+ 		delete from t_emp where id = #{id}
+ 	</delete>
+ 	<resultMap type="com.tare.entity.Emp" id="EmpMap">
+ 		<result property="id" column="ID"/>
+ 		<result property="name" column="NAME"/>
+ 		<result property="salary" column="SALARY"/>
+ 		<result property="age" column="AGE"/>
+ 	</resultMap>
+ </mapper>

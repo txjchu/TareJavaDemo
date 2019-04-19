@@ -1,0 +1,32 @@
+<list>
+	<emp id = "1">
+		<name>张三</name>
+		<age>22</age>
+		<salary>3000</salary>
+		<gender>男</gender>
+	</emp>
+	<emp id = "2">
+		<name>李四</name>
+		<age>23</age>
+		<salary>4000</salary>
+		<gender>女</gender>
+	</emp>
+	<emp id = "3">
+		<name>王五</name>
+		<age>25</age>
+		<salary>5000</salary>
+		<gender>男</gender>
+	</emp>
+	<emp id = "4">
+		<name>赵六</name>
+		<age>26</age>
+		<salary>6000</salary>
+		<gender>男</gender>
+	</emp>
+	<emp id = "5">
+		<name>钱七</name>
+		<age>27</age>
+		<salary>8000</salary>
+		<gender>女</gender>
+	</emp>
+</list>

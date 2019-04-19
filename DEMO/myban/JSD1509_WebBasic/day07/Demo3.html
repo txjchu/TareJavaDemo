@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：图片轮播</title>
+		<style type="text/css">
+			.show{
+				display:block;
+			}
+			.hide{
+				display:none;
+			}
+			ul{
+				border:1px solid red;
+				width:480px;
+				height:360px;
+				list-style-type:none;
+				padding:0;
+			}
+			
+		</style>
+		<script type="text/javascript">
+			var id;
+			var count = 0;//循环次数、----与显示图片的下标关系是除4取余的关系----悬停后开始，继续轮播，而不是从头开始
+			//start()函数，开始图片轮播
+			function start(){
+				
+				//每隔2秒执行一次，切换图片
+				id = setInterval(function(){ //----启动定时器，给id赋值
+					count++;
+					//先获取所有的li
+					var ul = document.getElementById("photos");
+					var lis = ul.getElementsByTagName("li");
+					//遍历这些li，全隐藏
+					for(var i=0;i<lis.length;i++){
+						lis[i].className = "hide";
+					}
+					//找到要显示的li，显示它
+					var index = count%lis.length;
+					lis[index].className = "show";
+				},1000);
+			}
+			//停止图片轮播
+			function stop(){  //----关闭定时器	
+				clearInterval(id);
+			}
+		</script>	
+	</head>
+	<!-- onload是页面加载事件，在页面加载后出发。 -->
+	<body onload="start();">			<!-- 开始轮播 -->
+		<!-- onmouseover鼠标悬停事件，
+			 onmouseout 鼠标撤出事件。 -->
+		<ul id="photos" onmouseover="stop();" onmouseout="start();">
+			<li class="show"><img src="../images/f1.jpg"/></li>
+			<li class="hide"><img src="../images/f2.jpg"/></li>
+			<li class="hide"><img src="../images/f3.jpg"/></li>
+			<li class="hide"><img src="../images/f4.jpg"/></li>
+		</ul>
+	</body>
+</html>
+

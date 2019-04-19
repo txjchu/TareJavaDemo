@@ -1,0 +1,8 @@
+driverName=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@ip:1521:orcl,
+userName=chris,
+password=123456
+
+
+ÊôĞÔÎÄ¼ş 		.properties
+key=value

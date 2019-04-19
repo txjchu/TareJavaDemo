@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>actionServlet</servlet-name>
+  	<servlet-class>web.ActionServle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>actionServlet</servlet-name>
+  	
+<!-- Servlet访问路径有3种注册方案 -->
+<!-- 1.精确匹配方案：该servlet有且只有一个访问名；(比较直观) -->
+  	<!-- <url-pattern>/action</url-pattern> -->
+  	
+<!-- 2.通配符(/*)：该servlet可以通过任何访问名访问，即可以处理一切请求。 -->
+	<!-- <url-pattern>/*</url-pattern> -->
+
+<!-- 3.后缀(.hi):该Servlet可以通过.hi为后缀的请求来访问，即它可以处理一切.hi为后缀的请求。 -->
+<!-- 3.1 可以指定Servlet1处理.dept后缀的请求；也可以指定Servlet2处理.emp后缀的请求；即一个Servlet处理一个模块的请求。
+	 3.2 也可以把整个项目看做成一个大模块，使用一个Servlet处理所有.xxx为后缀的请求。 -->
+	<url-pattern>*.hi</url-pattern>	  	
+	
+  </servlet-mapping>
+</web-app>

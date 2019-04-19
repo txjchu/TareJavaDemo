@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    
+  <description>该标签库的描述</description>
+  <display-name>该标签库的名字</display-name>	<!-- 自定义的标签库的名字 -->
+  <tlib-version>1.1</tlib-version>
+  <short-name>h</short-name>
+  <uri>/mytag/HelloTag</uri><!-- 自定义的uri -->
+  
+  <tag>
+  	<description>某一个标签HelloTag循环输出指定次数的指定字符串</description>
+    <name>sayHello</name>
+    <tag-class>mytag.HelloTag</tag-class>	<!-- 引用路径 -->
+    <!-- 标签内是否可以写内容，什么类型的内容。 -->
+    <body-content>empty</body-content>
+     <!-- 这个标签可以写属性 <attribute></attribute> -->
+    <attribute>
+        <description>指定字符串</description>
+        <!-- 属性名 -->
+        <name>info</name>
+        <!-- 是否必输项？ -->
+        <required>true</required>
+        <!-- 是否可以通过EL表达式给这个属性传值 -->
+        <rtexprvalue>true</rtexprvalue>        
+    </attribute>
+	<attribute>
+		<description>指定次数</description>
+		<name>count</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+  </tag>
+</taglib>

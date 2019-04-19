@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" 
+    "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<environments default="environment">
+		<environment id="environment">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="chris"/>
+				
+				<property name="password" value="123456"/>			
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 配置加载SQLMapper.xml文件 -->
+	<mappers>
+		<mapper resource="com/tare/sql/EmpMapper.xml"/>
+	</mappers>
+</configuration>    

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.tare.Emp.dao.VehicleMapper">
+	<select id="findAll" resultMap="vehicleMap">
+		select * from t_car
+	</select>
+	<resultMap id="vehicleMap" type="com.tare.Emp.entity.Vehicle">
+		<id property="id" column="id"></id>
+		<result property="color" column="color"></result>
+		<discriminator javaType="String" column="type">
+			<case value="T" resultType="com.tare.Emp.entity.Truck">
+				<result property="boxSize" column="boxsize"></result>
+			</case>
+			<case value="C" resultType="com.tare.Emp.entity.Car">
+				<result property="doorSize" column="doorSize"></result>
+			</case>
+		</discriminator>
+	</resultMap>
+</mapper> 

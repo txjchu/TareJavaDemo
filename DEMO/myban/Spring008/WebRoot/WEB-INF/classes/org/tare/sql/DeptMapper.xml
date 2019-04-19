@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.tare.dao.DeptMapper">
+	<select id="findAll" resultType="org.tare.entity.Dept">
+		select * from Dept order by deptno
+	</select>
+	<select id="findById" parameterType="Integer" resultType="org.tare.entity.Dept">
+		select * from Dept where deptno = #{deptno} 
+	</select>
+	<insert id="save" parameterType="org.tare.entity.Dept" >
+		insert into dept values(dept_seq.nextval, #{dname}, #{loc})
+	</insert>
+	<update id="update" parameterType="org.tare.entity.Dept" >
+		update dept set dname = #{dname}, loc = #{loc} where deptno = #{deptno}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		delete dept where deptno = #{deptno}
+	</delete>
+</mapper> 

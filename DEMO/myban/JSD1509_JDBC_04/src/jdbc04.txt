@@ -1,0 +1,62 @@
+JDBC 晋级
+=============================
+专题一、可滚动的结果集
+
+专题二、事务处理
+	insert.......
+	insert.......
+	Update.......
+	delete.......
+	.........
+	(一个事务，一组操作的逻辑单元)原子性
+	commit;-------提交到数据库，结束事务。
+	
+	Update t_account set balance = balance-1000 where id = 1001;
+	
+	stmt.executeUpdate(sql1);//-----JDBC默认的自动提交一个事务
+	
+	Update t_account set balance = balance+1000 where id =1002;
+
+	stmt.executeUpdate(sql2);
+	
+	
+	实验：
+	*创建账号表
+	
+专题三、批处理（批量数据处理）
+	批量保存数据
+	批量删除数据
+	
+	for(int i=1;i<=100;i++){
+		save(emp);
+	}这样要和数据库交互100次，性能降低
+	将这些语句添加到SQL语句列表里，一次性执行100句SQL		
+	
+专题四、关联保存
+	返回自动主键
+
+专题五、分页
+
+Oracle分页：子查询+rownum
+
+	查表中一部分记录，如：第6~10条记录
+	
+	select *from(
+	select rownum rn, empno,ename from emp where rownum<=10)	
+	where rn=>6;
+	select *from(
+	select rownum rn ,empno,ename from emp order by ...(排序))
+	where rn between 6 and 10;
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	int page = 2;
+	int pageSize = 10;
+	
+	int begin = (page-1)*pageSize+1;
+	int end = page*pageSize;
+
+
+
+
+
+
+

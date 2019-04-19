@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tare.emp.dao.EmpMapper">
+	<select id="findAll" resultType="com.tare.emp.entity.Emp">
+		select * from emp order by empno
+	</select>
+	<select id="findById" parameterType="Integer" resultType="com.tare.emp.entity.Emp">
+		select * from emp where empno = #{empno}
+	</select>
+	<insert id="save" parameterType="com.tare.emp.entity.Emp">
+		insert into emp values(
+			emp_seq.nextval,
+            #{ename,jdbcType=VARCHAR},
+            #{job,jdbcType=VARCHAR},
+            #{mgr,jdbcType=NUMERIC},
+            #{hiredate,jdbcType=DATE},
+            #{sal,jdbcType=NUMERIC},
+            #{comm,jdbcType=NUMERIC},
+            #{deptno,jdbcType=NUMERIC}
+		) 		
+	</insert>
+	<update id="update" parameterType="com.tare.emp.entity.Emp">
+		update emp set ename = #{ename,jdbcType=VARCHAR},
+			           job =  #{job,jdbcType=VARCHAR},
+			           mgr =  #{mgr,jdbcType=NUMERIC},
+			           hiredate = #{hiredate,jdbcType=DATE},
+			           sal = #{sal,jdbcType=NUMERIC},
+			           comm = #{comm,jdbcType=NUMERIC},
+			           deptno = #{deptno,jdbcType=NUMERIC}
+			       where empno = #{empno}     
+	</update>
+	<delete id="delete" parameterType="Integer">
+		delete from emp where empno = #{empno}
+	</delete>
+	
+	<!-- 
+	<resultMap id="empMap" type="com.tare.emp.entity.Emp">
+		<id property="empno" column="empno"/>
+		<result property="ename" column="ename"/>
+		<result property="job" column="job"/>
+		<result property="sal" column="sal"/>
+		<result property="comm" column="comm"/>
+		<result property="mgr" column="mgr"/>
+		<result property="deptno" column="deptno"/>
+		<result property="hiredate" column="hiredate"/>
+	</resultMap>
+	 -->
+</mapper> 

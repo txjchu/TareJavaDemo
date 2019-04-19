@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- 配置公共包，封装通用拦截器及Result -->
+	<package name="netctoss" extends="json-default">
+		<interceptors>
+			<interceptor name="exceptionInterceptor" class="com.tare.netctoss.interceptor.ExceptionInterceptor"/>
+			<interceptor name="loginInterceptor" class="com.tare.netctoss.interceptor.LoginInterceptor"/>
+			<interceptor-stack name="netctossStack">	
+				<interceptor-ref name="exceptionInterceptor"/>	<!-- 异常的AOP意义的拦截器 -->
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义全局拦截器 -->
+		<default-interceptor-ref name="netctossStack"/>
+		<!-- 定义全局result -->
+		<global-results>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+			<result name="login" type="redirectAction">
+				<param name="namespace">/netctoss/login</param>
+				<param name="actionName">tologin</param>
+			</result>
+		</global-results>
+	</package>
+	
+	<!-- 登录相关业务 -->
+	<package name="login" namespace="/netctoss/login" extends="struts-default">
+		<action name="tologin" >
+			<result name="success">/WEB-INF/main/login.jsp</result>
+		</action>
+		<action name="login" class="loginAction" method="login">
+			<result name="success" type="redirectAction">
+				<!-- 
+				<param name="namespace">/netctoss/cost</param>
+				<param name="actionName">findcost</param>
+				<param name="method">load</param>
+				 -->
+				<param name="namespace">/netctoss/index</param>
+				<param name="actionName">toindex</param>
+			</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+			<result name="fail">/WEB-INF/main/login.jsp</result>
+		</action>
+		<action name="createimage" class="createImageAction" method="execute">
+			<result name="success" type="stream">
+				<param name="inputName">imageStream</param>
+			</result>
+		</action>
+	</package>
+	<!-- 主页相关业务 -->
+	<package name="index" namespace="/netctoss/index" extends="netctoss">
+		<action name="toindex">
+			<result name="success">/WEB-INF/main/index.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 资费列表相关业务 -->
+	<package name="cost" namespace="/netctoss/cost" extends="netctoss">
+		<action name="findcost" class="findCostAction" method="load">
+			<param name="pageSize">6</param>	<!-- 用来指定页容量 -->
+			<result name="success">/WEB-INF/cost/cost_list.jsp</result>
+		</action>
+		<action name="toupdatecost" class="toUpdateCostAction" method="toUpdate">
+			<result name="success">/WEB-INF/cost/update_cost.jsp</result>
+		</action>
+		<action name="updatecost" class="updateCostAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="actionName">findcost</param>
+				<param name="method">load</param>
+			</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="toaddcost" >
+			<result name="success">/WEB-INF/cost/add_cost.jsp</result>
+		</action>
+		<action name="addcost" class="addCostAction" method="add">
+			<result name="success" type="redirectAction">	<!-- 添加成功后重定向方式，返回Cost列表页 -->
+				<param name="actionName">findcost</param>
+				<param name="method">load</param>
+			</result>
+		</action>
+		<action name="deletecost" class="deleteCostAction" method="delete">
+			<result name="success" type="redirectAction">	<!-- 添加成功后重定向方式，返回Cost列表页 -->
+				<param name="actionName">findcost</param>
+				<param name="method">load</param>
+			</result>
+		</action>
+		<action name="checkcostname" class="checkCostNameAction" method="checkCostName">
+			<result name="success" type="json">
+				<param name="root">info</param> 	<!-- 将单个属性用json方式输出 -->
+			</result>
+		</action>
+		<action name="checkcostname2" class="checkCostNameAction" method="checkCostName2">	<!-- 修改页面的资费名检查 -->
+			<result name="success" type="json">
+				<param name="root">info</param> 	
+			</result>
+		</action>
+		<action name="updatestatus" class="updateStatusAction" method="updatestatus">
+			<result name="success" type="redirectAction">	
+				<param name="actionName">findcost</param>
+				<param name="method">load</param>
+			</result>
+		</action>
+		<action name="exit" class="exitAction" method="exit">
+			<!-- 是否使用全局result
+			<result name="login" type="redirectAction">
+				<param name="namespace">/netctoss/login</param>
+				<param name="actionName">tologin</param>
+			</result>
+			 -->
+		</action>
+	</package>
+	
+	<package name="demo" namespace="/demo" extends="struts-default" >
+		<action name="hello" class="helloAction">
+			<result name="success">/WEB-INF/hello.jsp</result>
+		</action>
+	</package>
+</struts>
+
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tare.empmgr.dao.EmpMapper">
+ 	<select id="findAll" resultType="com.tare.empmgr.entity.Emp">
+ 		select * from emp order by empno
+ 	</select>
+ 	<select id="findById" resultType="com.tare.empmgr.entity.Emp" parameterType="Integer"><!-- 没有配置参数类型，也能正常查询。。。 -->
+ 		select * from emp where empno = #{empno}
+ 	</select>
+ 	<!-- 查询部门下的所有员工 -->
+ 	<select id="findByDept" parameterType="com.tare.empmgr.entity.Condition" resultType="com.tare.empmgr.entity.Emp">
+		select * from emp 
+			<if test="deptno != null">
+				where deptno = #{deptno}
+			</if> 	
+ 	</select>
+ 	<!-- 查询大于当前收入的员工 -->
+ 	<select id="findBySal" parameterType="com.tare.empmgr.entity.Condition" resultType="com.tare.empmgr.entity.Emp">
+		select * from emp where
+			<choose>
+				<when test="sal > 3000">sal > #{sal}</when>		<!-- where也可以写在when-otherwise标签内，但是写2次。 -->
+				<otherwise>sal >= 2000</otherwise>
+			</choose>
+ 	</select>
+ 	<!-- 查询当前部门下大于当前收入的员工 -->
+ 	<select id="findByDeptAndSal" parameterType="com.tare.empmgr.entity.Condition" resultType="com.tare.empmgr.entity.Emp">
+ 		select * from emp 
+ 		<where> <if test="deptno != null"> deptno = #{deptno}</if>
+ 				<choose>
+ 					<when test="sal > 2000">and sal >= #{sal}</when>
+ 					<otherwise> and sal >= 2000</otherwise>
+ 				</choose>
+ 		</where>
+ 	</select>
+ 	<!-- 动态更新员工信息 -->
+ 	<update id="update" parameterType="com.tare.empmgr.entity.Emp" >
+ 		update emp 
+ 		<set>
+ 			<if test="ename != null">ename = #{ename},</if>
+ 			<if test="job != null">job = #{job},</if>
+ 			<if test="sal != null">sal = #{sal},</if>
+ 		</set>
+ 		where empno = #{empno}
+ 	</update>
+ 	<!-- 动态更新员工信息：使用trim元素代替set功能 -->
+ 	<update id="update2" parameterType="com.tare.empmgr.entity.Emp">
+ 		update emp
+ 		<trim prefix="set" suffixOverrides=",">
+ 			<if test="deptno != null">deptno = #{deptno},</if>
+ 			<if test="sal != null">sal = #{sal},</if>
+ 		</trim>
+ 		<where>
+ 			<if test="empno != null"> empno = #{empno}</if>
+ 		</where>
+ 	</update>
+	<!-- 按部门编号和工资查询员工。使用trim元素代替where功能 -->
+	<select id="findByCondition" resultType="com.tare.empmgr.entity.Emp" parameterType="com.tare.empmgr.entity.Condition">
+		select * from emp 
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="deptno != null">
+				and deptno = #{deptno}
+			</if>
+			<if test="sal != null">
+				and sal >= #{sal}
+			</if>
+		</trim>
+	</select>
+	<!-- 按照员工编号集合查找员工 -->
+	<select id="findByEmpnos" resultType="com.tare.empmgr.entity.Emp">
+		select * from emp
+		<!-- 
+		 --> 
+		<if test="array != null">	<!-- 若调用的方法参数不是封装类，是数组，集合或Map，那么此处应该写成：类型!=null ，foreach元素中collection同理。--> 
+			<where>
+				empno in
+				<foreach collection="array" item="empno" open="(" close=")" separator=",">	<!-- //错误说法：参数collection是从传入的参数中获取，即参数.属性是此处需要的集合。 -->
+					#{empno}
+				</foreach>
+			</where>
+		</if>
+	</select> 	
+	 	
+</mapper>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery对象</title>
+		<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+		
+		<script type="text/javascript">
+			function f1(){
+				//通过选择器选中的是jQuery对象，它本质上就是DOM数组。即：$obj = [p,p,p];----获取所有的P,
+				//使用$符号来区分jQuery对象和DOM对象。
+				var $obj = $("p");
+				//遍历此数组，输出每一个值
+				for(var i=0;i<$obj.length;i++){
+					//$obj[i]	等价于 	$obj.gei(i);
+					//从数组中获取一个DOM，
+					var p = $obj[i];
+					//输出DOM的内容
+					alert(p.innerHTML);
+				}
+			}
+			//变大----需要接收变量this，所以要声明参数接收this的值，参数名不能写成关键字。
+			function big(img){
+				//传入的图片对象是DOM对象。将其转成jQuery方法使其变大。
+				$(img).width("300px").height("300px");
+			}
+			//缩小
+			function small(img){
+				//调完jQuery方法后还是jQuery对象，因此可以直接继续调用jQuery的.height()方法。
+				$(img).width("218px").height("218px");
+			}
+		</script>	
+	</head>
+	<body>
+		<h1>jQuery对象</h1>
+		<p>1.是jQuery统一封装的对象</p>
+		<p>2.jQuery选择器选中的是jQuery对象</p>
+		<p>3.本质上是DOM数组</p>
+		<!-- ondblclick双击事件 -->
+		<button ondblclick="f1();">按钮1</button>
+		<div>
+			<!-- 注册事件时传入的this，就是当前事件的目标元素。 -->
+			<img src="../images/01.jpg"/ onclick="big(this);" ondblclick="small(this);">
+			<img src="../images/02.jpg"/ onclick="big(this);" ondblclick="small(this);">
+			<img src="../images/03.jpg"/ onclick="big(this);" ondblclick="small(this);">
+		</div>
+	</body>
+</html>
+

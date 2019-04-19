@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：创建自定义对象</title>
+		<script type="text/javascript">
+			//方法一：直接创建对象
+			function f1(){
+				//创建对象-------特点：简单，但是对象的结构不方便阅读。
+				var obj = new Object();
+				//为对象赋值
+				obj.name = "孙悟空";
+				obj.age = "40";
+				obj.work = function(){
+					alert("我是齐天大圣！");
+				}
+				//使用该对象----输出一下对象的属性，调用一下对象的方法
+				alert(obj.name+","+obj.age);
+				obj.work();
+			}
+			//方法二：使用构造器创建对象-----特点：麻烦，但是对象的结构便于阅读。
+			function f2(){
+				var obj = new Teacher("猪八戒",380,function(){alert("我是天蓬元帅！a");});
+				alert(obj.name + ',' + obj.age);
+				obj.work();
+			}
+			function Teacher(name,age,work){
+				this.name = name;
+				this.age = age;
+				this.work = work;
+			}
+			//方法三：创建json对象-----特点：
+			
+			/*
+			 * json是轻量级的数据对象(轻量级：代码对于调用方的依赖度低，格式简单)，常用在异步请求中传递数据。
+			 * 异步请求在Ajax课程中讲解。
+			 * 
+			 * 按照json的格式去创建对象，本质上也是Object。 
+			 */
+			function f3(){
+//				var obj = {"key1":"value1","key2":"value2",...};------------json的语法格式。key必须是字符串，value可以是各种类型。
+				var obj = {"name":"小白龙","age":300,"work":function(){alert("我是浪里小白龙！a1");}};
+				alert(obj.name + ',' + obj.age);
+				obj.work();
+			}
+		</script>	
+	</head>
+	<body>
+		<button onclick="f1();">孙悟空</button>
+		<button onclick="f2();">猪八戒</button>
+		<button onclick="f3();">小白龙</button>
+	</body>
+</html>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.tare.netctoss.entity.Admin" table="admin_info" dynamic-update="true">	<!-- 动态更新字段 -->
+		<id name="admin_id" type="integer" column="admin_id">
+			<generator class="sequence">
+				<param name="sequence">admin_seq</param>
+			</generator>
+		</id>
+		<property name="name" type="string" column="name"/>
+		<property name="admin_code" type="string" column="admin_code"/>
+		<property name="password" type="string" column="password"/>
+		<property name="telephone" type="string" column="telephone"/>
+		<property name="email" type="string" column="email"/>
+		<property name="enrollDate" type="date" column="enrolldate"/>
+		
+	</class>	
+</hibernate-mapping>  

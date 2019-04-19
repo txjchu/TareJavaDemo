@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>注册</title>	
+	</head>
+	<body>
+		<h1>注册用户</h1>
+		<!-- 1.action:提交的目标(Servlet)----相对路径;
+			   Servlet路径：/Servlet03/register;当前页面路径：/Servlet03/register.html
+			         绝对路径：/Servlet03/register
+			         相对路径：register 
+			 2.method:提交的方式，后面再讲; -->
+		<form action="register" method="post"> 		<!-- mothod两种：get请求，或者post请求 -->
+			<!-- 表单中要提交的数据，其input元素上必须通过name属性，给该数据取名(变量名)。 -->
+			<p>账号：<input type="text" name="code"/></p>
+			<p>密码：<input type="password" name="pwd"/></p>
+			<p>性别：
+			<!-- 1.单选框的name可以保证它们是一组，彼此互斥的；
+				 2.单选框的name可以保证它的数据能传递到服务器；
+				 3.传递给服务器的是单选框的value属性值。	
+			 -->
+					<input type="radio" name="sex" value="male"/>男
+					<input type="radio" name="sex" value="female"/>女
+			</p>
+			<p>兴趣：
+			<!-- 1.复选框的name可以保证它们是一组，但不互斥；传值时浏览器会将选中的一组值作为数组传递给服务器。
+				 2.传递的是复选框的value属性值。				
+			 -->
+				<input type="checkbox" name="love" value="basketball"/>篮球
+				<input type="checkbox" name="love" value="football"/>足球
+				<input type="checkbox" name="love" value="lol"/>LOL
+				<input type="checkbox" name="love" value="ppball"/>乒乓球
+			</p>
+			<p>
+				<input type="submit" value="注册账号"/>注册
+			</p>
+		</form>
+	</body>
+</html>

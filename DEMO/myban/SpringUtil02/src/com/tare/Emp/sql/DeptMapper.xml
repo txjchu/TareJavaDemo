@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.tare.Emp.dao.DeptMapper">
+	<select id="findAll" resultType="com.tare.Emp.entity.Dept">
+		select * from dept order by deptno
+	</select>
+	
+	<select id="findById" parameterType="Integer" resultMap="deptMap">
+		select * from dept where deptno = #{deptno}
+	</select>
+	<select id="selectEmps" parameterType="Integer" resultType="com.tare.Emp.entity.Emp">
+		select * from emp where deptno = #{deptno}
+	</select>
+	<resultMap id="deptMap" type="com.tare.Emp.entity.Dept">
+		<id column="deptno" property="deptno"></id>			<!-- 嵌套查询中可以不写此行。 -->
+		<collection property="emps" ofType="com.tare.Emp.entity.Emp" column="deptno" javaType="List" select="selectEmps"/>
+	</resultMap>
+	<select id="findById2" parameterType="Integer" resultMap="deptMap2">
+		select d.* , e.* from emp e  join dept d on e.deptno = d.deptno where d.deptno = #{deptno} 
+	</select>
+	<resultMap id="deptMap2" type="com.tare.Emp.entity.Dept">
+		<id property="deptno" column="deptno"/>
+		<result property="dname" column="dname"/>
+		<result property="loc" column="loc"/>
+		<collection property="emps" ofType="com.tare.Emp.entity.Emp" javaType="List" column="deptno" resultMap="empResult"></collection>
+	</resultMap>
+	<resultMap id="empResult" type="com.tare.Emp.entity.Emp">
+		<id property="empno" column="empno"/>
+		<result property="sal" column="sal"></result>
+		<result property="mgr" column="mgr"></result>
+		<result property="comm" column="comm"></result>
+		<result property="job" column="job"></result>
+		<result property="deptno" column="deptno"></result>
+		<result property="ename" column="ename"></result>
+		<result property="hiredate" column="hiredate"></result>
+	</resultMap>	
+</mapper>

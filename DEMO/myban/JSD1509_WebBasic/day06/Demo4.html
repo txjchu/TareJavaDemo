@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：arguments</title>	
+		<script type="text/javascript">
+			//求和
+			function sum(){
+				var sum=0;
+				//计算数组内元素的和，需要循环
+				for(var i=0;i<arguments.length;i++){
+					sum += arguments[i];
+				}
+				alert(sum);
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="sum(1,2);">按钮1</button>
+		<button onclick="sum(1,2,3);" >按钮2</button>
+		<button onclick="sum(1,2,3,4);" >按钮3</button>
+	</body>
+</html>
+

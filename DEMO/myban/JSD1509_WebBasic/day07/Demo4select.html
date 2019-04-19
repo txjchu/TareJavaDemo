@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示:联动菜单</title>
+		<script type="text/javascript">
+			//预置要查询的城市
+			var cities=[
+				["杭州","宁波","嘉兴"],
+				["南京","无锡","苏州"],
+				["济南","青岛","烟台"]	
+			];
+			function chg(){
+				//打桩输出----弹窗
+				alert("onchange触发成功");
+				//1.获取选中的省，
+				var s1 = document.getElementById("province");
+				alert("获取下拉框选中省份"+s1.value+"号省成功");
+					//select.value是获取下拉选内选中的option的值。
+				var index = s1.value;
+				//2.查询省对应的城市(模拟--提前预置要查询的城市)，
+					//通过获取到的省的值-1得到省对应的市
+				var p_cities = cities[index-1];
+					//打桩----控制台输出
+					console.log(p_cities);
+				//3.先清除已有的城市选项，
+				var s2 = document.getElementById("city");
+					//得到一组option
+				//var opns = s2.children;
+				//for(var i=1;i<opns.length;i++){		//-----从头往后删除中间会更改数组的下标，会有元素未删除，因此要采用从后往前删。(var i=opes.lenght;i>0;i--)
+					//删除已有的市，----删除省下面的城市，需要先读取
+					
+					//打桩----输出到控制台
+				//	console.log(opns[i]);
+				//	s2.removeChild(opns[i]);
+				//}
+				s2.innerHTML="<option>-请选择-</option>"
+				//4.添加查询到的市。
+					if(p_cities){
+						//选中了某省，重置市
+						for(var i=0;i<p_cities.length;i++){
+							//创建一个节点，然后将节点添加到父节点下
+							var opn = document.createElement("option");
+							//给option赋值
+							opn.innerHTML = p_cities[i];
+							//添加此节点
+							s2.appendChild(opn);
+						}						
+					}
+			}
+		</script>	
+	</head>
+	<body>
+		<!-- onchange是值改变事件，当值发生改变时触发。 -->
+		<select id="province" onchange="chg();">
+					<!-- 下拉选传值不推荐汉字(流量大)，给option设置value值属性，不设置默认为其内容。 -->
+			<option value="0">-请选择-</option>
+			<option value="1">浙江</option>
+			<option value="2">江苏</option>
+			<option value="3">山东</option>
+		</select>省
+		&nbsp;
+		<select id="city">
+			<option>-请选择-</option>
+		</select>市
+	</body>
+</html>
+

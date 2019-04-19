@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery事件</title>
+		<style type="text/css">
+			div{
+				border:1px solid red;
+				margin:20px;
+			}
+			#d1{
+				width:200px;
+				height:200px;
+			}
+			#d2{
+				width:150px;
+				height:150px;
+			}
+			#d3{
+				width:100px;
+				height:100px;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="d1.js">
+			//引用了.js文件，则该标签中不应该再写入其他js代码。
+		</script>	
+	</head>
+	<body>
+		<button>按钮1</button>
+		<div id="d1">
+			<div id="d2">
+				<div id="d3"></div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+

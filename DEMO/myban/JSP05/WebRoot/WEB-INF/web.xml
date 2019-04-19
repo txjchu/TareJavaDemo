@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+
+  <!-- 配置过滤器 -->
+  <filter>
+  	<filter-name>commentFilter</filter-name>
+  	<filter-class>web.CommentFilter</filter-class>
+  	<init-param>
+  		<param-name>illegalStr</param-name>
+  		<param-value>damn</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>commentFilter</filter-name>
+  	<url-pattern>/comment</url-pattern>
+  </filter-mapping>
+  <!-- 
+   -->
+  <filter>
+  	<filter-name>commentFilter2</filter-name>
+  	<filter-class>web.CommentFilter2</filter-class>
+  	<init-param>
+  		<param-name>size</param-name>
+  		<param-value>20</param-value>
+  	</init-param>
+  </filter>  
+  <filter-mapping>
+  	<filter-name>commentFilter2</filter-name>
+  	<url-pattern>/comment</url-pattern>
+  </filter-mapping>
+   <!-- 配置时过滤器filter要放在servlet前面 -->
+  <servlet>
+  	<servlet-name>comment</servlet-name>
+  	<servlet-class>web.CommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>comment</servlet-name>
+  	<url-pattern>/comment</url-pattern>
+  </servlet-mapping>  
+  <!-- 监听器 -->
+  <!-- 
+  <listener>
+  	<listener-class>web.CountListener</listener-class>
+  </listener>			
+   -->
+  <listener>
+  	<listener-class>web.CountListener01</listener-class>
+  </listener>
+  
+  <servlet>
+  	<servlet-name>FileUploadServlet</servlet-name>
+  	<servlet-class>web.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FileUploadServlet</servlet-name>
+  	<url-pattern>/fileupload</url-pattern>
+  </servlet-mapping>
+  
+<!-- 
+  <servlet>
+  	<servlet-name>hello</servlet-name>
+  	<servlet-class>web.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>hello</servlet-name>
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+ -->
+  
+  <!-- 配置Filter (和配置Servlet一样)-->
+  <!-- 多个Filter的调用顺序以filter-mapping的顺序为准。 -->
+<!-- 
+  <filter>
+  	<filter-name>first</filter-name>
+  	<filter-class>web.FirstFilter</filter-class>
+  </filter>
+-->
+   
+  	<!-- 可以过滤的路径，通常写成“/*”，可以过滤一切 -->
+<!-- 
+  <filter-mapping>
+  	<filter-name>first</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+  	<filter-name>second</filter-name>
+  	<filter-class>web.SecondFilter</filter-class>
+ -->
+  	<!-- 给该Filter预置参数 -->
+ <!-- 
+  	<init-param>
+  		<param-name>city</param-name>
+  		<param-value>北京</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>second</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  --> 	
+  
+  <!-- 注册listener -->
+  <!-- 
+  <listener>
+  	<listener-class>web.MyListener</listener-class>
+  </listener>
+   -->
+</web-app>

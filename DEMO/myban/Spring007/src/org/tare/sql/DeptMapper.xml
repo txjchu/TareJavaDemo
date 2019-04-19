@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.tare.dao.DeptMapper">
+	<select id="findAll" resultMap="deptMap">
+		select * from dept order by deptno
+	</select>
+	<select id = "findById" parameterType="Integer" resultType = "org.tare.entity.Dept">
+		select * from dept where deptno = #{deptno}
+	</select>
+	<resultMap type="org.tare.entity.Dept" id="deptMap">
+		<result property="no" column="DEPTNO"/>
+		<result property="name" column="DNAME"/>
+		<result property="loc" column="LOC"/>
+	</resultMap>
+</mapper> 

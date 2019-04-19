@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：登录</title>	
+		<style type="text/css">
+			
+			/*验证成功的样式*/
+			/*通过类选择器*/
+			.ok{
+				color:green;
+				border:1px solid green;
+			}
+			
+			/*验证失败的样式*/
+			.error{
+				color:red;
+				border:1px solid red;
+			}
+			
+		</style>
+		<script type="text/javascript">
+			//该方法是校验用户名的格式正确性。
+			function check_name(){
+				//1.获取账号文本框内的值
+				var code = document.getElementById("code").value;
+				console.log(code);
+				//2.判断账号的格式（正则）
+				var reg = /^\w{6,20}$/;
+				var span = document.getElementById("code_msg");
+				console.log(span);
+				if(!reg.test(code)){
+				//3.返回判断的结果(a.格式错误,给span加error的样式；
+					console.log("error");
+					//【className】就是元素的class属性，通class
+					span.className = "error";
+					return false;
+				}else{
+					//b.格式正确，给span加ok的样式)
+					console.log("ok");
+					span.className = "ok";
+					return true;
+				}
+			}
+			function check_pwd(){
+				var pwd=document.getElementById("pwd").value;
+				console.log(pwd);
+				var reg = /^\w{8,16}$/;
+				var span = document.getElementById("pwd_msg");
+				console.log(span);
+				if(!reg.test(pwd)){
+					console.log("ok");
+					span.className = "error";
+					return false;
+				}else{
+					console.log("ok");
+					span.className = "ok";
+					return true;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- form上的onsubmit事件，是表单提交事件，当提交表单时触发。 -->
+		<!-- onsubmit中的js若返回false，则表单提交的行为被终止；若返回true，则表单会被提交。(onsubmit会对表单中数据有拦截功能onsubmit="return true;") -->
+		<!-- boolean+boolean==2,表示两个boolean值都是true.true=1,false=0. -->
+		<form action="http://www.tmooc.cn" onsubmit="return check_name()+ check_pwd()==2;">
+		<p>
+			<!-- onblur光标移除或切换事件，在光标移除时触发。 -->
+			<!-- 标签的属性没有顺序，但是不能重复。 -->
+			账号：<input type="text" onblur="check_name();" id="code"/>
+			<span id="code_msg">6-20位字母数字下划线的组合</span>
+		</p>
+		<p>
+			密码：<input type="password" id="pwd" onblur="check_pwd();"/>
+			<span id="pwd_msg">8-16位字母数字下划线的组合</span>
+		</p>
+		<p>
+			<!-- submit一点按钮就自动提交表单内容 -->
+			<input type="submit" value="登录"/>
+		</p>		
+		</form>
+	</body>
+</html>
+

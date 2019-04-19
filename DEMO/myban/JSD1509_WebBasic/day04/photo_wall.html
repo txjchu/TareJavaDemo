@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>照片墙案例演示</title>	
+		<style type="text/css">
+			
+			/*设置ul列表的总宽度，使之刚好能容纳下3个li（(218+2+20*2)*3=780），*/
+			ul{
+				width:780px;
+				/*border:1px solid red;*/
+				/*margin设置外边距，内外边距上下，左右；10px，auto;*/
+				margin:10px auto;
+				/*去掉列表的图标*/
+				list-style-type:none;
+			}
+			li{
+				border:1px solid #ccc;
+				width:218px;
+				padding:10px;
+				margin:10px;
+				float:left;
+				background-color:#ffc;
+			}
+			p{
+				font-family:'微软雅黑';
+				text-align:center;
+			}
+			/*给整面墙设置颜色*/
+			body{
+				background-color:#300;
+			}
+			/* 相对定位演示，鼠标悬停照片上时，照片位移到中间并放大 */
+			img:hover{
+				/*相对
+				position:relative;
+				*/
+				/*固定
+				*/
+				position:fixed;
+				
+				left:50%;
+				top:50%;
+			}
+				/*
+				float:right;					
+				*/
+			/*
+			#qiu:hover{
+				font-weight:bold;	
+			}
+			.qiu{
+				background-color:green;
+			}
+			*/
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="qiu">
+				<img src="../images/01.jpg"/>
+				<p id="qiu">美丽的秋天</p>
+			</li>	
+			<li>
+				<img src="../images/02.jpg"/>
+				<p >枫叶落满天</p>
+			</li>
+			<li>
+				<img src="../images/03.jpg"/>
+				<p>有你的世界</p>
+			</li>
+			<li>
+				<img src="../images/04.jpg"/>
+				<p>没有色彩的世界</p>
+			</li>
+			<li>
+				<img src="../images/05.jpg"/>
+				<p>纤夫的爱</p>
+			</li>
+			<li>
+				<img src="../images/06.jpg"/>
+				<p>夕阳无限好</p>
+			</li>
+		</ul>
+	</body>
+</html>
+

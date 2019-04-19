@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>计算器</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      .panel {
+        border: 4px solid #ddd;
+        width: 192px;
+        margin: 100px auto;
+        /*-------------边框边角变成圆弧角*/
+        border-radius: 6px;
+      }
+      .panel p, .panel input {
+        font-family: "微软雅黑";
+        font-size: 20px;
+        margin: 4px;
+        float: left;
+        border-radius: 4px;
+      }
+      .panel p {
+        width: 122px;
+        height: 26px;
+        border: 1px solid #ddd;
+        padding: 6px;
+        overflow: hidden;
+      }
+      .panel input {
+        width: 40px;
+        height: 40px;
+        border:1px solid #ddd;
+      }
+    </style>
+    <script type="text/javascript">
+    	//声明参数e接收事件对象，用来获取事件源
+    	function cal(e){
+    		//1.获取事件源
+    		var obj = e.srcElement || e.target;
+    			//----在判断之前取到P
+    		var p = document.getElementById("screen");
+    			//打桩
+    		console.log(obj);
+    		//2.只处理button的事件
+    		if(obj.nodeName != "INPUT"){
+    			return;
+    		}
+    		//3.判断button的value，做不同的处理。
+    		var val = obj.value;
+    		if(val == "C"){
+    			//清屏
+    			p.innerHTML = "";
+    		}else if(val == "="){
+    			//计算
+    			try{
+	    			var r = eval(p.innerHTML);
+    				p.innerHTML = r;
+    			}catch(e){
+    				//错误时给予提示
+    				p.innerHTML = "Error.";
+    			}
+    		}else{
+    			//累加----如果是其他数字按钮，则将数字累加到P里
+    			p.innerHTML += val;
+    		}
+    	}
+    </script>
+  </head>
+  <body>
+  	<!-- 利用event获取事件源，减少事件注册的次数。 -->
+  	<!-- 将单击事件注册在父元素上，通过event获取事件源对象，就可以判断出点击的是哪个按钮，就可以处理该按钮的业务逻辑。 -->
+    <div class="panel" onclick="cal(event);">
+      <div>
+        <p id="screen"></p>
+        <input type="button" value="C">
+        <div style="clear:both"></div>
+      </div>
+      <div>
+        <input type="button" value="7">
+        <input type="button" value="8">
+        <input type="button" value="9">
+        <input type="button" value="/">
+        
+        <input type="button" value="4">
+        <input type="button" value="5">
+        <input type="button" value="6">
+        <input type="button" value="*">
+        
+        <input type="button" value="1">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <input type="button" value="-">
+        
+        <input type="button" value="0">
+        <input type="button" value=".">
+        <input type="button" value="=">
+        <input type="button" value="+">
+        
+        <div style="clear:both"></div>
+      </div>
+    </div>    
+  </body>
+</html>

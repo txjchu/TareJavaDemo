@@ -1,0 +1,30 @@
+select *FROM emp_zyl;
+create sequence empseq start with 2000 increment by 5;----创建了一个序列
+select emp_seq.currval from dual;
+select emp_seq.nextval from dual;
+select empseq.currval from dual;
+select empseq.nextval from dual;
+select * from emp order by empno;
+insert into emp values(1000, 'zhang', 'www', 2222, );
+DESC from emp;
+select * from account;
+select * from cost;
+select empseq.currval from dual;
+select empseq.nextval from dual;
+--删除序列
+drop sequence empseq;
+create sequence empseq Start with 3000 increment by 1;
+delete from emp where ename like '员工%';
+select deptseq.currval from dual;
+select deptseq.nextval from dual;
+select * from dept;
+select * from emp;
+select * from account;
+select * from t_account;
+DROP TABLE t_account;
+Rename account To t_account;
+Create Table account(id char(1), amount NUMBER(10, 2));
+select * from account;
+insert into account values('A', 1000);
+insert into account values('B', 2000);
+commit;

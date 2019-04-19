@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js演示：定时器</title>
+		<style>
+			#p1{
+				width:200px;
+				height:25px;
+				border:1px solid blue;
+			}
+			#p2{
+				border:1px solid red;
+				width:100px;
+				text-align:center;
+			}
+			
+			.show{
+				dispaly:none;
+			}
+			.hide{
+				dispaly:block;
+			}
+		</style>	
+		<script type="text/javascript">
+			var id;
+			var is_start = false;	//是否启动
+			//启动电子时钟
+			function start(){
+				//打桩，查看is_start的状态变化，检查错误
+				console.log();
+				//如果已经启动，就不必再启动了
+				if(is_start){
+					return;
+				}
+				//如果写在setInterval里面，会在一秒后才开始进行，如果1秒内多次启动的话，会出现错误。
+				is_start = true;
+				//启动周期性定时器，	每1s执行一次function
+				id = setInterval(function(){
+					//刷新当前时间，并将时间输出到P里显示。
+					var d = new Date();
+					var now = d.toLocaleTimeString();
+					//将
+					var p = document.getElementById("p1");
+					p.innerHTML = now;
+				},1000);
+			}
+			//暂停电子时钟
+			function stop(){
+				//如果已经暂停，就不能再暂停
+				if(!is_start){
+					return;
+				}
+				is_start = false;
+				clearInterval(id);
+			}
+			//删除，模拟实现----方法名，注意关键字保护，如果和关键字相同，会被浏览器占用。
+			function del(){
+				//删除数据
+				//给予提示
+				var p = document.getElementById("p2");
+				p2.className = "show";
+				//2s以后自动关闭提示。
+				setTimeout(function(){
+					p2.className = "hide";
+				},2000);
+			}
+			
+		</script>
+	</head>
+	<body>
+		<button onclick="start();" id="start">启动</button>
+		<button onclick="stop();" id="stop">暂停</button>
+		<p id="p1"></p>
+		
+		<!-- 页面添加一条分割线 -->
+		<hr/>
+		<button onclick="del()">删除</button>
+		<p id="p2" class="hide">操作成功！</p>
+		
+
+	</body>
+</html>
+

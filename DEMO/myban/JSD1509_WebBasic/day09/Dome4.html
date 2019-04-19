@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>演示：图片轮播_JQ定义动画</title>
+		<style type="text/css">
+			.show{
+				display:block;
+			}
+			.hide{
+				display:none;
+			}
+			ul{
+				border:1px solid red;
+				width:480px;
+				height:360px;
+				list-style-type:none;
+				padding:0;
+			}
+			
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			
+			var id;
+			var count = 0;
+			function start(){
+				//1.启动定时器----两个参数，可以写成匿名参数
+				id = setInterval(function(){
+			
+					/*
+					//隐藏所有的li,------隐藏所有会降低性能	
+					$("li").attr("class","hide");
+					//将下一个li显示
+					var next = ++count%$("li").length;	//----循环次数，(count+1)%.length
+					$("li:eq("+next+")").attr("class","show");
+					*/
+			
+					//隐藏目前显示的li
+					$("li:visible").hide();
+					//将下一个li显示--------可见性选择器--------+next+？？？--next为显示下一张图片，next以一个算法的结果赋值。
+					var next = ++count%$("li").length;
+					$("li:eq("+next+")").show();
+				},1000);			
+			}	
+			function stop(){
+				clearInterval(id);
+			}
+		</script>	
+	</head>
+	<!-- onload是页面加载事件，在页面加载后出发。 -->
+	<body onload="start();">			<!-- 开始轮播 -->
+		<!-- onmouseover鼠标悬停事件，
+			 onmouseout 鼠标撤出事件。 -->
+		<ul id="photos" onmouseover="stop();" onmouseout="start();">
+			<li class="show"><img src="../images/f1.jpg"/></li>
+			<li class="hide"><img src="../images/f2.jpg"/></li>
+			<li class="hide"><img src="../images/f3.jpg"/></li>
+			<li class="hide"><img src="../images/f4.jpg"/></li>
+		</ul>
+	</body>
+</html>
+

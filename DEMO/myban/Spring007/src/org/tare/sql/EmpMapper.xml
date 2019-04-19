@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+					<!-- 此处声明的是哪个EmpMapper映射器，则哪个映射器起作用，没有声明的dao组件中想要调用这里的SQL语句，可以
+							在session.selectList("")中通过namespace中的限定全名（加.findAll）点SQL语句的id调用。 -->
+ <mapper namespace="org.tare.dao.EmpMapper" >	<!-- org.tare.dao.MyBatisEmpDaoEmpMapper -->
+ 	<select id="findAll" resultType="org.tare.entity.Emp">
+ 		select * from emp order by empno
+ 	</select>
+ 	<select id="findById" parameterType="Integer" resultType="org.tare.entity.Emp">
+ 		select * from emp where empno = #{empno}
+ 	</select>
+ 	
+ 	<!-- 用Map封装结果集，即结果的类型为Map -->
+ 	<select id="findByDeptno" parameterType="Integer" resultType="map">	
+ 		select * from emp where deptno = #{deptno}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="org.tare.entity.Emp" >
+ 		update emp set ename = #{ename}, job = #{job}, mgr = #{mgr}, sal = #{sal},
+ 					comm = #{comm}, deptno = #{deptno}, hiredate = #{hiredate} where empno = #{empno} 
+ 	</update>
+ 	<insert id="save" parameterType="org.tare.entity.Emp">
+ 		insert into emp values(empseq.nextval, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+ 	</insert>
+ 	<delete id="delete" parameterType="integer">
+ 		delete from emp where empno = #{empno}
+ 	</delete>
+ </mapper>

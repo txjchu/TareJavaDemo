@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>ActionServlet</servlet-name>
+  	<servlet-class>emp.ActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ActionServlet</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <!-- d
+  <servlet>
+  	<servlet-name>vcode</servlet-name>
+  	<servlet-class>emp.ValidateCode</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>vcode</servlet-name>
+  	<url-pattern>vcode.img</url-pattern>
+  </servlet-mapping>
+    -->
+<!-- 声明式处理异常 -->
+<error-page>
+	<exception-type>ServletException</exception-type>
+	<location>/error.jsp</location>
+</error-page>  
+  
+  
+  
+ <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+  <!-- 添加员工jsp -->
+  <servlet>
+  	<servlet-name>addEmp</servlet-name>
+  	<servlet-class>WebRoot.addEmp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addEmp</servlet-name>
+  	<url-pattern>/addEmp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>listEmp1</servlet-name>
+  	<servlet-class>WebRoot.listEmp1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>listEmp1</servlet-name>
+  	<url-pattern>/listEmp1</url-pattern>
+  </servlet-mapping>
+    <servlet>
+  	<servlet-name>listEmp2</servlet-name>
+  	<servlet-class>WebRoot.listEmp2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>listEmp2</servlet-name>
+  	<url-pattern>/listEmp2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>date1</servlet-name>
+  	<servlet-class>WebRoot.date_t</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>date1</servlet-name>
+  	<url-pattern>/date_t</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>date</servlet-name>
+  	<servlet-class>WebRoot.date</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>date</servlet-name>
+  	<url-pattern>/date</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>hello1</servlet-name>
+  	<servlet-class>WebRoot.hello1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>hello1</servlet-name>
+  	<url-pattern>/hello1</url-pattern>
+  </servlet-mapping>
+</web-app>

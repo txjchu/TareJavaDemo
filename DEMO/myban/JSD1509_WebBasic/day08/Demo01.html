@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>自定义对象_js中</title>
+		<script type="text/javascript">
+			//1.直接创建		简单，但是对象的结构不方便阅读
+			function f1(){
+				var p = new Object();
+				//加属性
+				p.name = "孙悟空";
+				p.age = 600;
+				p.work = function(){
+						alert("我是大圣，我大妖怪！");
+				};
+				//使用对象
+				alert(p.name +","+ p.age);
+				p.work();
+			}
+			//2.使用构造器创建		麻烦，但是对象的结构便于阅读
+			function f2(){
+				var obj = new tudi("猪八戒", 500, function(){
+									alert("我是八戒，我负责保护师傅！");
+							});
+				alert(obj.name +","+ obj.age);
+				obj.work();
+			}
+			function tudi(name, age, work){
+				this.name = name;
+				this.age = age;
+				this.work = work;
+			}
+			//3.使用JSON创建		json是简单格式的数据对象，常用在异步请求中传递数据，异步请求在Ajax可充中讲解。
+			function f3(){
+				var obj = {
+					"name":"小白龙",
+					"age":400,
+					"work":function work(){
+							alert("我是小白龙，我负责开车");
+						}
+					};
+				alert(obj.name +","+ obj.age);
+				obj.work();
+			}
+		</script>	
+	</head>
+	<body>
+		<button onclick="f1();">孙悟空</button>
+		<button onclick="f2();">猪八戒</button>
+		<button onclick="f3();">小白龙</button>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

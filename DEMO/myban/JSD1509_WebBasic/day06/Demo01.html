@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>猜数字练习</title>
+		<script type="text/javascript">
+			//全局变量，在页面加载后初始化
+			var num = parseInt(Math.random()* 100);
+			//猜数字
+			function guess(){
+				//获取文本框和段落P,准备读写数据
+				var input = document.getElementById("num");
+				var p = document.getElementById("result");
+				//获取输入的值，并判断其是否合法
+				var n = input.value;
+				if(n=="" || isNaN(n)){
+					//输入的值非法
+					p.innerHTML = "请输入0-100之间的整数";
+					
+				}else{
+					//值合法，做比较
+					if(n > num){
+						p.innerHTML = "大了";
+						
+					}else if(n < num){
+						p.innerHTML="小了";
+					}else{
+						p.innerHTML="猜对了！！恭喜";
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="num"/>
+		<button onclick='guess();'>猜</button>
+		<p id="result"></p>
+		
+	</body>	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

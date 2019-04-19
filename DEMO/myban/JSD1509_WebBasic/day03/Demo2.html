@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>box模型</title>
+		<!-- 演示box中提到的内外边距 -->
+		<style type="text/css">
+			/*先整体设置所有的div的宽高*/
+			div{
+				border:1px solid red;
+				width:100px;
+				height:100px;
+			}			
+			/*不设置d1的内外边距，做对比*/
+			/*1.四边设置d2的内外边距-----padding(内边距)margin（外边距）*/
+			#d2{
+				padding:10px;
+				margin:20px;
+			}
+			/*3.单边设置d3的内外边距*/
+			/*padding:top right bottom left;padding的属性设置，只写一个值则代表4个值一样，如果按顺序则是上右下左*/
+			/*margt:top right bottom left;按顺序则是上右下左,如padding*/
+			#d3{
+				padding:40px 30px 20px 10px;
+				margin:40px 30px 20px 10px;
+			}
+			/*4.单边设置d4的内外边距*/
+			#d4{
+				padding-top:40px;
+				padding-right:30px;
+				padding-bottom:20px;
+				padding-left:10px;
+				
+				margin-top:40px;
+				margin-right:30px;
+				margin-bottom:20px;
+				margin-left:10px;
+			}
+			/*5.按照对边设置内外边距(两个相对的边距同时设置)*/
+			/*padding:上下，左右；margin:上下，左右。*/
+			/*margin:上下 auto。------这种方式没有设置左右边距，系统会设置为元素居中。*/
+			#d5{
+				padding:30px 10px;
+				margin:40px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="d1">d1</div>
+		<div id="d2">d2</div>	
+		<div id="d3">d3</div>
+		<div id="d4">d4</div>
+		<div id="d5">d5</div>
+	
+	</body>
+</html>
+

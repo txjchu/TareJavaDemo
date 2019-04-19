@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>life</servlet-name>
+  	<servlet-class>
+  		web.LifeServlet
+  	</servlet-class>
+  	<!-- 在服务器启动时加载(创建/初始化)这个
+  		Servlet，加载顺序是1。 -->
+  	<load-on-startup>1</load-on-startup>
+  	<!-- init-param用来给这个Servlet预置参数；
+  		 param-name是参数的名字；
+  		 param-value是参数的值； 
+  		 服务器在创建ServletConfig后，
+  		 会利用ServletConfig读取这些参数。
+  		 因此在Servlet创建后，都可以
+  		 调用ServletConfig获取参数。 -->
+  	<init-param>
+  		<param-name>company</param-name>
+  		<param-value>Tarena</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>city</param-name>
+  		<param-value>BeiJing</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>life</servlet-name>
+  	<url-pattern>/life</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+
+
+
+
+
+
+

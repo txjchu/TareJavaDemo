@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>定时器</title>
+		<style type="text/css">
+			#p1{
+				width:200px;
+				height:30px;
+				border:1px solid blue;
+			}
+			#p2{
+				width:100px;
+				border:1px solid red;
+				text-align:center;
+			}
+			.show{/* 将元素显示为块 */
+				display:block
+			}
+			.hide{
+				display:none;/* 不显示该元素，并释放其占用的位置 */
+			}
+		</style>
+		<script type="text/javascript">
+			var id;
+			var is_start = false;//是否启动
+			//启动电子时钟方法
+			function start(){
+				console.log(is_start);
+				//如果启动了，就不必再启动了
+				if(is_start){
+					return;
+				}
+				//启动周期性定时器，每1秒执行一次function
+				is_start = true;
+				id = setInterval(function(){
+					//刷新当前时间
+					var d = new Date();
+					var now = d.toLocaleTimeString();
+					var p = document.getElementById("p1");
+					p.innerHTML = now;//将now的字符串给p1中写入
+				}, 1000);				
+			}
+			//暂停
+			function stop(){
+				console.log(is_start);
+				//若已经暂停了，就不必暂停了，跳出方法
+				if(!is_start){
+					return;
+				}
+				clearInterval(id);//关闭定时器对象，不再产生新的时间，不再刷新p1
+				is_start = false;
+			}
+			//清除时间
+			function del(){
+				//删除数据，
+				is_start = false;//启动状态改为false，则start方法就不会继续输出时间了。
+				var p = document.getElementById("p1");//获取p1
+				p.innerHTML = "";//将P1中文本设置为空
+				//给予提示
+				var p = document.getElementById("p2");
+				p.className = "show";//通过修改元素的类名，匹配类名选择器的CSS样式，show样式显示内容
+				setTimeout(function(){
+					p.className = "hide";		
+				}, 2000);
+			}
+			
+		</script>	
+	</head>
+	<body>
+		<button onclick="start();">启动</button>
+		<button onclick="stop();">暂停</button>
+		<p id="p1"></p>
+		<hr>
+		<button onclick="del();">删除！</button>
+		<p id="p2" class="hide">操作成功！</p>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

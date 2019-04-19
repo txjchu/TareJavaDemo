@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 1.引入struts_json包；2.package继承jsondefault -->
+	<!-- name包名(不要重复即可)；
+		 extends继承属性继承了类，里面有大量result；
+		 namespace默认"/"根路径	 -->
+	<package name="demo2" extends="json-default" namespace="/emp">
+	
+		<!-- name对应请求名(掐头去尾)；
+			 class类名，发送请求后调用的Action组件类名；
+			 method指定Action的业务方法名，默认execute -->
+	
+		<action name="ajaxlist" class="empListAction"><!-- 将整个action里的信息(emps)变成json输出。底层自动执行Action -->
+		
+			<!-- name标识符，与Action返回结果对应；
+				 type指的是result类型，默认是dispatcher -->
+		
+			<result name="success" type="json">
+				<param name="root">emps</param><!-- 只输出一个属性用root -->
+				<param name=""></param>
+			</result>
+		</action>
+		
+		<action name="ajaxdelete" class="empDeleteAction">
+			<result name="success" type="json">
+				<param name="root" >result</param><!-- 输出result -->
+			</result>
+		</action>
+		
+	</package>
+		
+	<package name="demo1" extends="struts-default"
+		namespace="/emp">
+		<!-- strutsspringplugin.jar按class的值去Spring容器抓取对象使用 -->
+		<action name="list" class="empListAction">
+			<result name="success">
+				/emp_list.jsp
+			</result>
+		</action>
+	</package>
+		
+
+</struts>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+    xmlns:jee="http://www.springframework.org/schema/jee" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<!-- 使用注解方式进行IOC控制反转DI依赖注入 -->
+	<!-- 指定开启扫描路径-不需要加项目名，容器会扫描ioc包及子包下的所有组件，并实例化bean -->
+	<context:component-scan base-package="org.tare.ioc"></context:component-scan>
+	<!-- 使用注解方式@Value注入Spring表达式 -->
+	<util:properties id="info" location="classpath:org/tare/ioc/info.properties"></util:properties>
+	
+	<!-- 课后练习：注入集合练习 -->
+	<bean id="messageBean" class="org.tare.ioc.MessageBean">
+		<property name="list"><!-- 语言 -->
+			<list>
+				<value>javaScript</value>
+				<value>CSS</value>
+			</list>
+		</property>
+		<property name="set"><!-- 城市 -->
+			<set>
+				<value>深圳</value>
+				<value>青岛</value>
+			</set>
+		</property>
+		<property name="map"><!-- 成绩 -->
+			<map>
+				<entry key="政治" value="99"></entry>
+				<entry key="体育" value="100"></entry>
+			</map>
+		</property>
+		<property name="props" ref="info">
+		
+		</property>
+	</bean>
+</beans>

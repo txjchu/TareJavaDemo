@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.tare.netctoss.entity.Cost" table="cost" dynamic-update="true">	<!-- 动态更新字段 -->
+		<id name="cost_id" type="integer" column="cost_id">
+			<generator class="sequence">
+				<param name="sequence">cost_seq</param>
+			</generator>
+		</id>
+		<property name="name" type="string" column="name"/>
+		<property name="base_duration" type="integer" column="base_duration"/>
+		<property name="base_cost" type="double" column="base_cost"/>
+		<property name="unit_cost" type="double" column="unit_cost"/>
+		<property name="status" type="string" column="status"/>
+		<property name="descr" type="string" column="descr"/>
+		<property name="creatime" type="date" column="creatime"/>
+		<property name="startime" type="date" column="startime"/>
+		<property name="cost_type" type="string" column="cost_type"/>
+		
+	</class>	
+</hibernate-mapping>    

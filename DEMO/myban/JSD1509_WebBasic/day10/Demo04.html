@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQ动画演示_图片的隐藏淡入淡出移动</title>	
+		<style type="text/css">
+			div {
+				border:1px solid #000;
+				background-color:#ccc;
+				padding:10px 5px;
+				width:100px;
+				text-align:center;
+				display:none;/*此处将div显示方式设置为不显示并释放其所占的位置。*/
+			}
+			img {
+				position:relative;/* 文件原位置空间不释放，相对与原位置做出偏移。 */
+			}
+			
+		</style>
+		<script type="text/javascript" src = "..\js\jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			function f1(){//显示按钮
+				//$("img").show(2000);//显示,通过改变元素的宽高
+				$("img").slideDown(2000);//向下滑动式显示出来,通过改变元素的高来实现
+				//$("img").fadeIn(2000);//淡入方式，通过改变不透明度实现图片的显示。参数表示毫秒数内完成动作
+			}
+			function f2(){//隐藏按钮的动作
+				//$("img").hide(2000);
+				$("img").slideUp(2000);
+				//$("img").fadeOut(2000);
+			}
+			function f3(){//提示按钮
+				$("div").fadeIn(2000).fadeOut(2000);
+			}
+			function f4(){//因为图片定位为相对定位，因此，此处的位置动作设置的像素为相对于原位置的原点。若设置为负数像素，则会在原点的左边和上边。
+				$("img").animate({"left":"500px"}, 2000).animate({"top":"300px"}, 2000);
+			}
+			function f5(){
+				$("img").animate({"left":"0px"}, 2000).animate({"top":"0px"}, 2000);
+			}
+		</script>
+	</head>
+	<body>
+		<p>
+			<button onclick="f1();">显示</button>
+			<button onclick="f2();">隐藏</button>
+			<button onclick="f3();">提示</button>
+			<button onclick="f4();">移动</button>
+			<button onclick="f5();">归位</button>
+		</p>
+		<p><img src="../images/01.jpg"/></p>
+		<div>操作成功</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

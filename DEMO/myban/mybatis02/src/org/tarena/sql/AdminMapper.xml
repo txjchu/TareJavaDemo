@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+<mapper namespace="org.tarena.dao.AdminDao">
+	<!-- SQL语句定义 -->
+	<select id="findByCode" parameterType="java.lang.String" resultType="org.tarena.entity.Admin">
+		select * from ADMIN_INFO where ADMIN_CODE=#{code}
+	</select>
+	
+	<!-- 增删改操作没有返回值，没有resultType属性 -->
+
+	
+	
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 

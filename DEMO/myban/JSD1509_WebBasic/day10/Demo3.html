@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery自动打分系统</title>
+		<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			//页面加载后
+			$(function(){
+				//给button注册单击事件
+				$("button").click(function(){
+					var index = 0;	//打分的次数
+					//启动定时器,每隔1.5s打一个分
+					var id = setInterval(function(){
+						//先判断定时器终止条件，--由于打分业务需要自动停止，（条件是：当打分次数=文本框个数时	    停止。）
+						if(index==$(":text").length){
+							clearInterval(id);
+						}
+						//生成随机的分数
+						var score = Math.round(Math.random()*100);	//----系统随机生成一个1-100的随即数。
+						//写入当前文本框内，打分次数变量+1
+						$(":text").eq(index++).trigger("focus").val(score);	//----模拟事件操作，光标点入事件
+						
+					},1500);
+				});
+			});
+		</script>	
+	</head>
+	<body>
+		<p><button>战斗力</button></p>
+		<p>孙悟空：&nbsp&nbsp		<input type="text"/></p>
+		<p>二郎神：&nbsp&nbsp		<input type="text"/></p>
+		<p>哪吒： &nbsp&nbsp&nbsp&nbsp<input type="text"/></p>
+		<p>镇元大仙：				<input type="text"/></p>
+		<p>菩提老祖：				<input type="text"/></p>
+	</body>
+</html>
+

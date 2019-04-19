@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>action</servlet-name>
+  	<servlet-class>web.ActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>action</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <!-- 让 Tomcat统一处理异常 -->
+  <!-- 按照类型指定异常对应的错误页面 -->
+  <error-page>
+  	<!-- 只要出现错误了，就去下面的页面 -->
+  	<exception-type>java.lang.Exception</exception-type>
+  	<location>/WWEB-INF/error.jsp</location>
+  </error-page>
+  <!-- 按照异常编号对应的错误页面 -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/WEB-INF/error.jsp</location>
+  </error-page>
+  <error-page>
+  	<exception-type>500</exception-type>
+  	<location>/WEB-INF/error.jsp</location>
+  </error-page>
+  
+  <!-- 登录检查Filter -->
+  <filter>
+  	<filter-name>loginFilter</filter-name>
+  	<filter-class>web.LoginFilter</filter-class>
+  	<!-- 预置不需要过滤的路径 -->
+  	<init-param>
+  		<param-name>excludePath</param-name>
+  		<param-value>/login/toLogin.do,/login/login.do,/login/createImage.do</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>loginFilter</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  	
+  	<!-- 注册判断模块的Filter -->
+  </filter-mapping>
+    <filter>
+  	<filter-name>moduleFilter</filter-name>
+  	<filter-class>web.ModuleFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>moduleFilter</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  </filter-mapping>
+</web-app>

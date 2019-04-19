@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js演示_事件</title>
+		<style type="text/css">
+			div{
+				border:1px solid red;/*边框*/
+				margin:20px;/*外边距*/
+			}	
+			#d1{
+				width:200px;
+				height:200px;
+			}
+			#d2{
+				width:150px;
+				height:150px;
+			}
+			#d3{
+				width:100px;
+				height:100px;
+			}
+		</style>
+		<script type="text/javascript">
+			//声明参数e接收传入的event对象
+			function f1(e){
+				//通过事件对象，获取单击的坐标
+				alert(e.clientX +","+ e.clientY);
+			}
+			function a(e){
+				alert("d1");
+				//获取事件源，即事件最初被触发的哪个对象
+				var obj = e.srcElement || e.target;
+				console.log(obj);
+			}
+			function b(e){
+				alert("d2");
+				alert(e.clientX+","+e.clientY);
+				
+			}
+			function c(e){
+				alert("d3");
+				//取消事件冒泡
+				if(e.stopPropagation){
+					e.stopPropagation();//非ie方式
+				} else {
+					e.cancelBubble = true;//IE浏览器
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="f1(event);">按钮1</button>
+		<div id="d1" onclick="a(event);">d1
+			<div id="d2" onclick="b(event);">d2
+				<div id="d3" onclick="c(event);">d3
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

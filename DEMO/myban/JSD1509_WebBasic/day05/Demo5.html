@@ -1,0 +1,83 @@
+<!docpyte html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>js的用法</title>
+		<!-- 2.嵌入式，在head下面的script标签内写js.格式如下 -->
+		<script type="text/javascript">
+			//声明一个函数
+			//由于js中变量不区分类型，所以不需要声明返回类型。
+			function f2(){
+				alert("齐天大圣");				
+			}
+			var s = 'a';
+			var n = 1;
+			var b = true;
+			console.log(s+n);
+			console.log(s+b);
+			console.log(n+b);
+			console.log(b+b);
+			var str = "javascript网页教程";
+			var n = str.indexOf("a");
+			console.log(n);
+			n = str.lastIndexOf("a");
+			console.log(n);
+			var a1 = new Array();
+			var a2 = new Array(7);
+			var a3 = new Array(100, "a", true);
+			var a4 = [100, 200, 300];
+			a1[0] = 1;
+			console.log(a1);
+			console.log(a3[1]);
+			console.log(a3);
+			
+			var arr1 = [3,6,2,4,8];
+			arr1.sort();
+			console.log(arr1);
+			arr1.sort(sortfunc);
+			console.log(arr1);
+			function sortfunc(a, b){
+				return b-a;
+			}
+			console.log(Math.round(3.56));
+			
+			var name = "aaa";
+			var reg = new RegExp("^[a-zA-Z0-9]{3,6}$");
+			console.log(reg.exec(name));
+			console.log(reg.test(name));
+			
+		</script>
+		<!-- 3.文件调用式，在.js文件中写js,然后将其引入到此页面中，等价于将.js文件中的代码复制到script标签下。 -->
+		<!-- 注意：1.如果用此标签引入js,就不要在此标签下写其他的js。2.此标签必须写成双标签。 -->
+		<script typt="text/javascript" src="d5.js"></script>
+	</head>
+	<body>
+		<!-- js代码必须通过时间出发，如单击事件，双击事件，光标切入事件，。。。等 -->
+		<!-- js中不区分单双引号 -->
+		<!-- 1.事件定义式，在声明事件时直接写js ----onclick单击事件-->
+		<input type="button" value="按钮1" onclick="alert('孙悟空');"/>
+        <input type="button" value="按钮2" onclick="f2();"/>
+		<input type="button" value="按钮3" onclick="f3();"/>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

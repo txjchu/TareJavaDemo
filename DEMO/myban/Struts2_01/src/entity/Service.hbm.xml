@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="entity.Service" table="service">
+		<id name="service_id" type="integer" column="service_id">
+			<generator class="sequence">
+				<param name="sequence">service_seq</param>
+			</generator>
+		</id>
+		<!-- 
+		<property name="account_id" type="integer" column="account_id" insert="false" update="false"/>
+		 -->
+		<property name="unix_host" type="string" column="unix_host"/>
+		<property name="os_username" type="string" column="os_username"/>
+		<property name="login_passwd" type="string" column="login_passwd"/>
+		<property name="status" type="integer" column="status"/>
+		<property name="create_date" type="date" column="create_date"/>
+		<property name="pause_date" type="date" column="pause_date"/>
+		<property name="close_date" type="date" column="close_date"/>
+		<property name="cost_id" type="integer" column="cost_id"/>
+		<!-- 追加关联属性，多对一模式 -->
+		<many-to-one name="account" column="account_id" class="entity.Account" lazy="false" fetch="join" />
+		
+	</class>
+</hibernate-mapping>

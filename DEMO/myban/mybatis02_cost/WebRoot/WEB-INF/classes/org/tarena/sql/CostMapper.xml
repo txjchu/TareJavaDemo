@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+<mapper namespace="org.tarena.dao.CostDao">
+	<!-- SQL语句定义 -->
+	<select id="findById" parameterType="java.lang.Integer" resultType="org.tarena.entity.Cost">
+		select * from COST where COST_ID=#{id}
+	</select>
+	
+	<select id="findAll" resultType="org.tarena.entity.Cost">
+		select * from COST	
+	</select>
+ 	<!-- 增删改操作没有返回值，没有resultType属性 -->
+
+	
+	
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 

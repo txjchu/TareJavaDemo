@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>addCookie1</servlet-name>
+  	<servlet-class>WebRoot.addCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addCookie1</servlet-name>
+  	<url-pattern>/addCookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>findCookie1</servlet-name>
+  	<servlet-class>WebRoot.findCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>findCookie1</servlet-name>
+  	<url-pattern>/findCookie1</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>PersistentCookie</servlet-name>
+  	<servlet-class>web.PersistentCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PersistentCookie</servlet-name>
+  	<url-pattern>/pCookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>updateCookie</servlet-name>
+  	<servlet-class>web.UpdateCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updateCookie</servlet-name>
+  	<url-pattern>/updateCookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>findCookie</servlet-name>
+  	<servlet-class>web.FindCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>findCookie</servlet-name>
+  	<url-pattern>/findCookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>cookie</servlet-name>
+  	<servlet-class>web.CookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cookie</servlet-name>
+  	<url-pattern>/cookie</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>action</servlet-name>
+  	<servlet-class>web.ActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>action</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>

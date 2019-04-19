@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- Struts2的URL拼接规则：http://IP:PORT/ProjectName/NameSpace/ActionName.action -->
+	<package name="day01case" namespace="/demo" extends="struts-default">
+		<action name="hello" class="action.HelloAction" method="sayHello">
+			<result name="success">/Hello.jsp</result>
+		</action>
+	</package>
+	<!-- 练习上传文件拦截器 -->
+	<constant name="struts.multipart.maxSize" value="5000000"/>
+	<package name="day05case" namespace="/demo5" extends="struts-default">
+		<interceptors>
+			<interceptor name="finterceptor" class="interceptor.FirstInterceptor"/>
+		</interceptors>
+		<!-- 
+		<default-interceptor-ref name="defaultStack defaultStack"/>
+		 -->
+		<action name="toupload">
+			<result name="success">/WEB-INF/upload/upload.jsp</result>
+		</action>
+		<action name="upload" class="action.UploadAction">
+			<interceptor-ref name="defaultStack"/>	<!-- 引用了其他自定义拦截器后，必须手动配置默认的拦截器，否则，文件拦截器就没有被引用到。 -->
+			<interceptor-ref name="finterceptor"/>
+			<result name="success">/WEB-INF/upload/ok.jsp</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+	</package>
+	<package name="day04case" namespace="/customer" extends="struts-default">
+		<interceptors>
+			<interceptor name="finterceptor" class="interceptor.FirstInterceptor"/>
+			<interceptor name="sinterceptor" class="interceptor.SecondInterceptor"/>
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="finterceptor"/>
+				<interceptor-ref name="sinterceptor"/>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 
+		<default-interceptor-ref name="mystack"/>
+		 -->
+		<action name="toupdatecustomer" class="action.ToUpdateCustomerAction">
+			<interceptor-ref name="mystack"/>
+			<result name="success">/WEB-INF/customer/toupdatecustomer.jsp</result>		
+		</action>
+	</package>
+	
+	
+	<!-- 公共的包，将多个模块的package中的拦截器、result等相同的配置放在此包中，其他包继承即可去掉重复代码。 -->
+	<package name="netctoss"  extends="json-default">	<!-- 没有namespace属性吗？ -->
+		<interceptors>
+			<!-- 设置登录检查拦截器 -->
+			<interceptor name="loginInterceptor" class="netctoss.interceptor.LoginInterceptor"></interceptor>
+			<interceptor name="openSessionInViewInterceptor" class="netctoss.interceptor.OpenSessionInViewInterceptor"/>
+			<interceptor-stack name="loginStack">
+				<!-- 配置自定义拦截器后，必须手动配置引用默认拦截器栈 -->
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="openSessionInViewInterceptor"/>		<!-- 避免session的延迟加载 -->
+			</interceptor-stack>	
+		</interceptors>
+		<!-- 配置全局拦截器 -->
+		<default-interceptor-ref name="loginStack"/>
+		<!-- 配置全局result，包下所有的action都可以使用。 -->
+		<global-results>
+			<!-- 跳转到登录页面的result -->
+			<result name="login" type="redirectAction">
+				<param name="namespace">/netctoss/login</param>	<!-- 重定向到package的namespace -->
+				<param name="actionName">toLogin</param>		<!-- 具体的哪个action -->
+			</result>
+		</global-results>
+	</package>								
+	<!-- 登录模块 -->
+	<package name="login" namespace="/netctoss/login" extends="struts-default">
+		<action name="toLogin">		<!-- 打开登录页面不需要Action处理业务，只是转发到login.jsp。因此可以省略class、method，Struts2会自动实例化默认的Action类ActionSupport，并调用该类中的默认业务方法execute(),并返回success. -->
+			<result name="success">/WEB-INF/main/login.jsp</result>
+		</action>
+		<!-- 登录校验 -->
+		<action name="login" class="netctoss.action.LoginAction" method="checkLogin">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/netctoss/cost</param>
+				<param name="actionName">findcost</param>
+				<param name="method">loadCost</param>
+				<!-- 
+				<param name="namespace">/netctoss/index</param>
+				<param name="action">toindex</param>
+				 -->
+			</result>
+			<result name="fail">/WEB-INF/main/login.jsp</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="createImage" class="netctoss.action.CreateImageAction" >
+			<result name="success" type="stream">	<!-- 使用stream类型的result -->
+				<param name="inputName">imageStream</param><!-- 指定输出内容，即输出流及包含的字节数据 -->
+			</result>			
+		</action>
+	</package>
+	<!-- 主页index页面的请求处理 -->
+	<package name="index" namespace="/netctoss/index" extends="netctoss">
+		<action name="toindex">
+			<result name="success">/WEB-INF/main/index.jsp</result>
+			<result name="fail">/WEB-INF/main/login.jsp</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="tocost" >
+			<result name="success" type="redirectAction">
+				<param name="namespace">/netctoss/cost</param>
+				<param name="action">findcost</param>
+				<param name="method">loadCost</param>
+			</result>
+		</action>
+	</package>
+	<!-- 一个模块封装到一个单独的package下，并以模块命名name和namespace -->
+	<package name="cost" namespace="/netctoss/cost" extends="netctoss">
+		<action name="findcost" class="netctoss.action.CostAction" method="loadCost"> 
+			<result name="success">/WEB-INF/cost/cost_list.jsp</result>	<!-- 正常情况返回成功的页面 -->
+			<result name="error">/WEB-INF/main/error.jsp</result>		<!-- 错误情况返回错误的页面 -->
+		</action>
+		<action name="deletecost" class="netctoss.action.DeleteAction" method="execute">	<!-- 方法名为execute时，method属性可以省略 -->
+			<result name="success" type="redirectAction">		<!-- 删除成功后重定向到加载列表页面 -->
+				<param name="namespace">/netctoss/cost</param>
+				<param name="actionName">findcost</param>
+				<param name="method">loadCost</param>
+			</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="toaddcost" >
+			<result name="success" >
+				/WEB-INF/cost/add_cost.jsp
+			</result>			
+		</action>
+		<action name="addcost" class="netctoss.action.AddCostAction">
+			<result name="success" type="redirectAction">		<!-- 添加成功后重定向到加载列表页面 -->
+				<param name="namespace">/netctoss/cost</param>
+				<param name="actionName">findcost</param>
+				<param name="method">loadCost</param>
+			</result>
+			<result name="fail">/WEB-INF/cost/add_cost.jsp</result>	<!-- 添加失败则，给出提示...未完成 -->
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="checkcostname" class="netctoss.action.CheckCostNameAction">
+			<result name="success" type="json">		<!-- 若检查成功，则响应异步请求，返回提示信息 -->
+				<param name="root">info</param>		<!-- 输出的信息 -->
+			</result>
+		</action>
+		<action name="toupdatecost" class="netctoss.action.ToUpdateCostAction">
+			<result name="success">/WEB-INF/cost/update_cost.jsp</result>
+			<result name="error">/WEB-INF/main/error.jsp</result>
+		</action>
+		<action name="updatecost" class="netctoss.action.UpdateCostAction">
+			<result name="success" type="redirectAction">		<!-- 修改成功后重定向到加载列表页面 -->
+				<param name="namespace">/netctoss/cost</param>
+				<param name="actionName">findcost</param>
+				<param name="method">loadCost</param>
+			</result>
+			<result name="fail">/WEB-INF/cost/update_cost.jsp</result>	<!-- 修改失败则，给出提示...未完成 -->
+			<result name="error">/WEB-INF/main/error.jsp</result>			
+		</action>
+	</package>
+</struts>
+
+
+
+
+
+
+
+	

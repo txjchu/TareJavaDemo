@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试css用法</title>
+		<!-- 2.内部样式，写在head元素中的style元素内 ，此样式可以被当前页面的元素复用。type="text/css"声明书写的文本类型。-->
+		<style type="text/css">
+			h2{
+				color:blue;	
+			}
+			.d1{
+				border:1px solid blue;
+				width:300px;
+				height:50px;
+				overflow:auto;
+			}	
+			.d3{
+				padding:20px 30px 20px 30px;
+				margin:20px 30px 20px 30px;
+				border:1px dashed red;
+			}		
+		</style>
+		
+		<!-- 3.外部样式，写在.css文件中。通过link标签引入到当前页面中。此文件中的样式可以被多个页面复用 -->
+		<!-- rel声明引入的文件是样式表文件。type声明引入的文件内容是css文本；href声明引入的文件名。 -->
+		<link rel="stylesheet" type="text/css" href="b.css"/>
+	</head>
+	<body>
+		<h1 style="color:red;">CSS有三种用用法</h1>
+		<h2>三种用法：</h2>
+		<p>1.内联样式</p>
+		<p>2.内部样式</p>
+		<p>3.外部样式</p>
+		<P>北京市<u>海淀区<strong>北三环</strong>西路</u>北大明宫西路<strong>东区家具城</strong>大厅左拐</P>		
+		<div>
+			<p class="d1">
+				元素选择器是最常见的 CSS 选择器，即，文档的元素就是最基本的选择器。选择器通常是某个HTML元素，比如等，甚至可以是元素本身。
+类选择器用于将样式规则与附带class属性的元素匹配，其中该class属性的值为类选择器中指定的值。使用类选择器时，首先需要定义样式类，其语法为：.className  { }所有能够附带class属性的元素都可以使用此样式声明。只需要将class属性的值设置为“className”，则可以将类选择器的样式与元素关联。
+在实际使用时，如果需要为某种元素定义样式，则往往使用元素选择器；如果要应用样式而不考虑具体设计的元素，最常用的方法就是使用类选择器。
+			</p>
+		</div>
+		<div class="d3">
+			样式规则与附带class属性的元素匹配，其中该class属性的值为类选择器中指定的值。使用类选择器时，首先需要定义样式类，其语法为：.className  { }所有能够附带class属性的元素都可以使用此样式声明。只需要将class属性的值设置为“className”，则可以将类选择器的样式与元素关联。
+在实际使用时，如果需要为某种元素定义样式，则往往使用元素选择器；如果要应用样式而
+		</div>
+	</body>	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

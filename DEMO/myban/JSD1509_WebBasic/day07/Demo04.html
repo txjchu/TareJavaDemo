@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>联动菜单练习_事务状态</title>
+		<script type="text/javascript">
+			//预置要查询的城市
+			var cities = [
+					//城市数组的排列和省的value值相对应。以此获取省和市的联动
+					["-请选择-"],
+					["杭州","宁波","嘉兴"],
+					["南京","无锡","苏州"],
+					["济南","青岛","烟台"]
+					];
+			//当发生状态改变事务则执行该方法
+			function chg(){
+				//1.获取选中的省
+				var s1 = document.getElementById("province");
+				//select.value获取下拉选中的option的值
+				var index = s1.value;
+				//2.查询该省对应的市
+				var p_cities = cities[index];
+				//3.删除已有的市
+				var s2 = document.getElementById("city");
+				//var opns = s2.childNodes;
+				//for(var i=1; i< opns.length; i++){
+				//		console.log(opns[i]);
+				//		s2.removeChild(opns[i]);//循环删除上一次生成的城市选项。	
+				//}
+				s2.innerHTML = "<option>-请选择-</option>";
+				//4.添加查询到的城市
+				if(p_cities){//若是非空，则是true
+					for(var i=0; i <p_cities.length;i++){
+						//创建option节点
+						var opn = document.createElement("option");
+						opn.innerHTML = p_cities[i];
+						//添加此节点
+						s2.appendChild(opn);
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- onchage是值改变事件。
+			 option的value默认是它的内容；当给option加value属性后，其value值就是value属性的值。 -->
+		省：
+		<select id="province" onchange="chg();">
+			<option value="0">-请选择-</option>
+			<option value="1">浙江省</option>
+			<option value="2">江苏省</option>
+			<option value="3">山东省</option>
+		</select> 	
+		&nbsp;&nbsp;市：
+		<select id="city" >
+			<option >-请选择-</option>
+		</select> 	
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

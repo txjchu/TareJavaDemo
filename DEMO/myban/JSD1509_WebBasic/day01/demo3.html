@@ -1,0 +1,191 @@
+<!doctypt html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>文本元素</title>
+	</head>
+	<body>
+		<!-- 使用超链接，连接到本页的锚点处 -->
+		<!-- 使用“#锚点名”链接到锚点。 -->
+		<p>
+			<a href="#cang">苍老师</a>，
+			真的是好老师，
+			不但会讲课，
+			还会拍片子。
+		</p>
+	
+		<!-- 标题 -->
+		<h1>苍老师canglaoshi223</h1>
+		<h2>王克晶</h2>
+		<h3>来自于黑龙江</h3>
+		<!-- 段落P -->
+		<p>范传奇老师王克静老师，苍老师吃醋！</p>
+		<!-- p可以默认限制字的大小，还能独立成行。直接写文字病患航，是不会独立成行的。 -->
+		aaa
+		bbb
+		cccioio
+		<p>ddd</p>
+		<!-- 有序列表order list ，下面包含列表项 li -->
+		<ol>
+			<li>浙江省</li>
+				<ul>
+					<li>杭州市</li>
+					<li>宁波市</li>
+				</ul>
+			<li>江苏省</li>
+			<li>山东省</li> 			
+		</ol>
+		<!--无序列表ul,下面包含列表项li -->
+		<ul>
+			<li>杭州市</li>
+			<li>宁波市</li>
+		</ul>
+		<!-- 列表嵌套，先写外层，再写内层 -->
+		<ol>
+			<ul>
+				<li>浙江省</li>
+					<ul>
+						<li>杭州市</li>
+						<li>宁波市</li>
+						<li>金华市</li>
+					</ul>
+				<li>
+					江苏省
+					<ul>
+						<li>无锡市</li>
+					</ul>
+				</li>
+					<ul>
+						<li>南京市</li>
+					</ul>
+				<li>
+					山东省
+					<ul>
+						<li>
+							济南市
+							<ul>
+								<li>某某区</li>
+							</ul>
+						</li>
+						<li>淄博市</li>
+						<li>青岛市</li>
+					</ul>
+				</li>		
+			</ul>
+		</ol>
+		
+		<!-- 行内元素 -->
+		<p><em>北京市</em><b>海淀区</b><i>北三环</i><strong>西路甲<u >18号</u></strong><span style="color:blue;">中鼎大厦</span>B8层</p>
+		<!-- 空格折叠 ，HTML中文字间的空格/换行/缩进都当作一个空格对待  -->
+		<p>
+			那&nbsp;&nbsp;&nbsp;是一个秋天，<br/>
+			看&nbsp;&nbsp;&nbsp;着传奇跑偏。<br/>
+			奔&nbsp;&nbsp;&nbsp;着可敬而去，<br/>
+			误&nbsp;&nbsp;&nbsp;入老苍心间。<br/>
+		</p>
+		<!-- 图片 -->
+		<p>
+			<!-- 绝对路径 -->
+			<img src="C:\Users\Administrator\Desktop\images\images\01.jpg"/>
+			<!-- 相对路径   -->
+			<!-- 1.图片和页面平级，可以直接写图片名 -->
+			<img src="02.jpg"/>
+			<!-- 2.图片在页面所在文件夹的下级文件夹里，写路径+图片名 -->
+			<img src="pic/03.jpg"/>
+			<!-- 3.图片在页面的上级，写../+图片名 （../表示当前页面向上跳一级） -->
+			<img src="../04.jpg"/>
+			<!-- 通常的情况 -->
+			<img src="../images/05.jpg"/>
+		</p>
+		<!-- 超链接 -->
+		<p>
+			<!-- href用来指定连接的网址。target用来指定打开网址的方式。
+										_self是在当前窗口打开；_blank是在新窗口打开。 -->
+			<a href="http://www.tmooc.cn" target="_blank">TMOOC苍老师</a>
+			
+			<!-- 利用a元素，做一个锚点，超链接可以直接链接到这个锚点上来。 -->
+			<!-- name用来声明锚点的名字  -->
+			<a name="cang">苍老师</a>
+			<!-- 顶部默认为锚点，且没名字。 -->
+			<a href="#">TOP</a>
+		</p>
+		
+		<!-- 表格 -->
+		<!-- table 是表格的范围；tr是表格的行，td是表格的单元格。2行2列，先画2行tr再各画2列td -->
+		<table border="1px" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td>苍老师</td>
+				<td>可敬老师</td>
+			</tr>
+			<tr>
+				<td>范传奇</td>
+				<td>李洪鹤</td>
+			</tr>
+		</table>
+		<table border="1px" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="2">苍老师</td>
+				<!-- <td>王克静</td> -->
+			</tr>
+			<tr>
+				<td>范传奇</td>
+				<td>李洪鹤</td>
+			</tr>
+		</table> 
+		<!-- 跨行 -->
+		<table border="1px" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td rowspan = "2">苍老师</td>
+				<td>可敬老师</td>
+			</tr>
+			<tr>
+				<!-- <td>范传奇</td> -->
+				<td>李洪鹤</td>
+			</tr>
+		</table>
+		
+		<!-- 行分组 -->
+		<table border="1px" width="60%" >
+			<!-- 标题 -->
+			<!-- 标题列可以写成th，th即带有默认样式的td -->
+			<thead>
+				<tr>
+					<th>商品名</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>金额</th>
+				</tr>
+			</thead>
+			<!-- 数据 -->
+			<tbody style="color:red;">
+				<tr>
+					<td>鼠标</td>
+					<td>100</td>
+					<td>1</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>耳机</td>
+					<td>50</td>
+					<td>1</td>
+					<td>50</td>
+				</tr>
+				<tr>
+					<td>键盘</td>
+					<td>200</td>
+					<td>1</td>
+					<td>200</td>
+				</tr>
+				
+			</tbody>
+			<!-- 合计 居右要使用属性align=“right” -->
+			<tfoot>
+				<tr>
+					<td align="right" colspan = "3">合计</td>
+					<td>350</td>
+				</tr>	
+			</tfoot>
+		</table>
+		
+	</body>
+</html>

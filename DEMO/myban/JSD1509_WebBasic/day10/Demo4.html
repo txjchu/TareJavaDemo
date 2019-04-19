@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>jQuery动画</title>	
+		<style type="text/css">
+			div{
+				border:1px solid #000;
+				background-color:#ccc;
+				padding:10px 5px;
+				width:100px;
+				text-align:center;
+				display:none;		<!--元素   -->
+			}
+			img{
+				position:relative;
+			}
+		</style>
+		<script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			 
+			 function f1(){		//三种方式：1.2.3.渐进渐出
+				//$("img").show(2000);
+				//$("img").slideDown(2000);
+				$("img").fadeIn(2000);
+			}
+			function f2(){
+				//$("img").hide(2000);
+				//$("img").slideUp(2000);
+				$("img").fadeOut(2000);
+			}
+			function f3(){
+				$("div").fadeIn(1500).fadeOut(1500);
+			}
+			function f4(){
+				$("img").animate({"left":"500px"},2000).animate({"top":"300px"},2000).animate({"left":"500px"},2000).animate({"top":"300px"},2000);
+				//$("img").animate({"width":"300px"},2000).animate({"width":"218px"},2000);
+				//----img是同时变换宽高，为了保护图片比例尺寸--animate({"right":"500px"},2000).animate({"bottom":"300px"},2000)
+				
+			}
+		</script>
+	</head>
+	<body>
+		<p><img src="../images/01.jpg"/></p>
+		<p>
+			<button onclick="f1();">显示</button>
+			<button onclick="f2();">隐藏</button>
+			<button onclick="f3();">提示</button>
+			<button onclick="f4();">移动</button>
+		</p>
+		<div >操作成功</div>
+	</body>
+</html>
+
