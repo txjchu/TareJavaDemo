@@ -1,0 +1,39 @@
+1. MySQL 聚合函数嵌套使用
+
+MySQL 中聚合函数不可用直接嵌套使用，比如： MAX(AVG(sal))、MAX(COUNT(*))...
+
+解决思路：可以使用嵌套子查询，先分组取出被嵌套的聚合函数结果，再使用外聚合函数嵌套。
+（应该有更合适方式，待补充）
+
+示例：
+
+```
+-- 查询平均工资最高的部门信息
+SELECT deptno, MAX(SELECT AVG(sal) FROM emp GROUP BY deptno) FROM emp; -- 错误语法
+
+SELECT MAX(AVG(sal)) FROM emp GROUP BY deptno; -- Invalid use of group function Oracle 可用
+SELECT deptno, AVG(sal) FROM emp GROUP BY deptno;
+SELECT e.deptno, MAX(e.avg_sal) FROM (SELECT deptno, AVG(sal) avg_sal FROM emp GROUP BY deptno) e ; -- 错误
+SELECT * FROM emp ORDER BY sal DESC; 
+SELECT empno, ename, job, mgr, hiredate, MAX(sal), deptno FROM emp ; -- 错误
+SELECT e.empno, e.ename, e.job, e.mgr, e.hiredate, AVG(e.sal), e.deptno FROM emp e,( SELECT MAX(e1.avg_sal) max_avg_sal FROM (SELECT AVG(sal) avg_sal, deptno FROM emp GROUP BY deptno) e1) e2 GROUP BY deptno HAVING AVG(e.sal) = e1.max_avg_sal; -- 错误
+
+SELECT
+    AVG( e.sal ),
+    e.deptno 
+FROM
+    emp e,
+    (SELECT AVG( sal ) avg_sal, deptno FROM emp GROUP BY deptno) ea1,
+    (SELECT MAX(ea.avg_sal) ma FROM (SELECT AVG( sal ) avg_sal FROM emp GROUP BY deptno) ea) ea2
+WHERE
+    e.deptno = ea1.deptno AND ea1.avg_sal = ea2.ma
+GROUP BY
+    deptno ; -- 正确（???）
+
+```
+
+Oracle 中可以直接嵌套聚合函数，非常方便，难道 MySQL 中没有更好的方法吗？应该是有 :thinking:
+
+
+> 参考：[MySQL5.7用group by分组根据组中某个字段的最大值求取那条记录（注意是整条记录）](https://blog.csdn.net/weixin_38450840/article/details/88836170)
+[leetcode - 184. 部门工资最高的员工](https://leetcode-cn.com/problems/department-highest-salary/)

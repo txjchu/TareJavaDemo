@@ -1,0 +1,178 @@
+MySQL 语句知识点
+
+## 1. 数据类型
+
+    在 MySQL 中，可用的数据类型共分为四个主要类别：
+        - 数值        数字值（整数、浮点、定点数、位字段值）
+        - 字符        文本字符串
+        - 二进制    二进制数据字符串
+        - 时间        时间和日期
+
+    ABC的数据类型 ？？
+        - A) Apt
+        - B) Brief
+        - C) Complete
+
+    ### 1.1 数值数据类型
+        为了保存数值数据，MySQL提供以下类型：
+            – 整数类型：保存整数数字
+            – 浮点类型：保存近似数值数据
+            – 定点类型：保存精确数值
+            – 位类型：保存位字段数值
+
+        当选择一个数值数据类型时，应考虑以下因素：
+            – 数据类型数值的范围
+            – 列值所需要的存储空间数量
+            – 列的精度和标度（适用于浮点和定点数）
+
+        #### a. 整数类型
+            以下列表是MySQL支持的整数数据类型：
+                – TINYINT 
+                – SMALLINT 
+                – MEDIUMINT 
+                – INT或INTEGER
+                – BIGINT 
+            • 例如：
+                Population INT(11)
+        #### b. 浮点类型
+            浮点数据类型包括FLOAT和DOUBLE。它们都被用来表示近似数值数据，包含整数部分、小数部分或二者都有。
+                – FLOAT
+                – DOUBLE
+            对于FLOAT和DOUBLE，如果列可以为NULL，则缺省值是NULL，如果列不能为NULL，其缺省值是0。
+            FLOAT数据类型可以用以下不同的表示法来指定：
+                – 不指定精度：FLOAT
+                – 使用二进制精度：FLOAT (M)
+                – 指定总的数字位数与小数部分的数字位数：FLOAT (D，F)
+                – 没有任何精度：DOUBLE
+                – 指定数值的位数与小数部分位数：DOUBLE（D，F）
+            例如：
+                GDP  FLOAT（10，2）
+        #### c. 定点类型
+            - 定点数据类型是DECIMAL，它被用来保存精确数值。它们包含整数部分、小数部分或二者都有。
+            - DECIMAL数据类型用下列语法定义：
+                DECIMAL(P，S)
+                例如：
+                cost DECIMAL(10，2)
+            - 在MySQL中，NUMERIC数据类型与DECIMAL是相同的类型。
+        #### d. BIT 类型
+            - BIT数据类型表示位字段值。BIT 列制定了每个值所需要的位数，从1到54位。
+                例如：
+                bit_col1 BIT(4)
+                bit_col2 BIT(20)
+            - BIT 列可以用数字表达式复制。例如，b'1111'等于15，b'1000000'等于64。
+
+    ### 1.2 字符串数据类型
+        以下列出了MySQL提供的字符串数据类型。所有这些
+        类型都可用于保存非结构化格式的字符串：
+            – CHAR       固定长度字符串(固定长度不论是否需要全部占用)
+            – VARCHAR  可变长度字符串(设定允许最大长度，只占用实际长度)
+            – TEXT       可变长度字符串
+                文本类型由一组非结构化的、可变长度的字符串组成，它最适合于存储访问频率低且相当大的字符串。
+                – TINYTEXT
+                – TEXT
+                – MEDIUMTEXT
+                – LONGTEXT
+
+
+        MySQL还定义了两种结构化字符串类型：
+            – ENUM      由一组固定的有效值组成的枚举
+                语法：ENUM('value1','value2',...,'valueN')
+                eg: Continent ENUM('Asia', 'Europe', 'North Americal', 'Africa', 'Oceania', 'Antarctica', 'South American')
+            – SET        由一组固定的有效值组成的集合。可以从给定的列表中选择将多个值组合为一个有效的值。
+            语法：SET（‘value1’，…，‘valueN’）
+
+
+
+    ### 1.3 二进制类型
+        BLOB（Binary Large Object）二进制大对象是一种可变长度的非结构化的二进制数据集合。通常的，BLOB 是图像、语音或其他多媒体对象。
+        MySQL 支持的 BLOB 类型有以下几种：
+            – TINYBLOB
+            – BLOB
+            – MEDIUMBLOB
+            – LONGBLOB
+
+    ### 1.4 时间数据类型
+        MySQL提供了用来存储不同类型时间信息的数据类型。
+        
+        |类型|字节数|最小值|最大值|
+        |-|-|-|-|
+        |DATE|3|1000-01-01|9999-12-31|
+        |TIME|3|-838:59:59|838:59:59|
+        |DATETIME|8|1000-01-01 00:00:00|9999-12-31 00:00:00|
+        |TIMESTAMP|4|1970-01-01 00:00:00||
+        |YEAR(2)|1|(19)70|(20)69|
+        |YEAR(4)|1|1901|2155|
+
+    ### 1.5 NULL 的含义
+        在SQL中，NULL值是一个特殊的值，表示无法计算或未知的值。
+        对于可为NULL的列，出现NULL值有不同的含义。所有原因都可以归为两类：未知/不可用。
+        在MySQL中，列缺省是可以为NULL的（除了TIMESTAMP列，主键列也不能为 NULL），除非特定声明它不能为NULL。
+        eg:‘IsOfficial’ ENUM(‘T’, ‘F’) NOT NULL DEFAULT ‘F’
+
+## 2. 基础语句
+
+**数据定义语言（DDL）**
+
+```
+-- 创建表
+CREATE TABLE student(
+    id NUMERIC(4),
+    name VARCHAR(20),
+    gender CHAR(1),
+    fee NUMERIC(7,2)    
+);
+DESC student;  --查看表结构
+
+--添加列
+ALTER TABLE student ADD c1(CHAR(1)); -- 错误语法
+ALTER TABLE student ADD c1; -- 错误语法
+ALTER TABLE student ADD COLUMN c1; -- 语法错误
+ALTER TABLE student ADD COLUMN c1 VARCHAR(2);
+ALTER TABLE student ADD COLUMNS (c2 VARCHAR(2), c3 VARCHAR(1)); -- 错误语法
+ALTER TABLE student ADD COLUMNS c2 VARCHAR(2), c3 VARCHAR(1); -- 错误语法
+
+-- 删除列
+ALTER TABLE student DROP c1; -- ok
+DESC student;
+ALTER TABLE STUDENT ADD COLUMN C1; -- 错误语法，表名大小写敏感
+ALTER TABLE student ADD COLUMN c2 VARCHAR(2);
+DESC student;
+ALTER TABLE student DROP COLUMN c2; -- OK
+
+-- 修改列
+-- 可以改变列的数据类型，长度，默认值（1.只针对之后插入的数据有效，(已有数据不会改变？)2.对已有数据的列将长度改小可能失败）
+-- MySQL 中可以使用 `MODIFY` 和 `CHANGE` 两种方式修改列。
+ALTER TABLE student MODIFY name VARCHAR(10);
+DESC student;
+ALTER TABLE student CHANGE name VARCHAR(15); -- 错误语法
+ALTER TABLE student CHANGE name name VARCHAR(15);
+DESC student;
+ALTER TABLE student CHANGE name name1 VARCHAR(15);
+DESC student;
+ALTER TABLE student CHANGE name1 name VARCHAR(12);
+DESC student;
+
+
+
+```
+
+
+数据操纵语言（DML）
+
+```
+    
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

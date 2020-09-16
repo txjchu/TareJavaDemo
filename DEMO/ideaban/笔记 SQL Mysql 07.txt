@@ -1,0 +1,78 @@
+在 MySQL 中循环插入测试数据
+
+
+## 题目
+1.创建sales_tab，该表存储了2010-2011年每月每天的销售额。
+2.向sales_tab表中插入1000条测试数据。
+1000条随机数据，年的范围为2010-2011年，月范围为1-12月，日范围为1-31天，销售额的范围为1到100（不包括100）的随机浮点数。
+
+建表SQL:
+```
+CREATE TABLE sales_tab(
+    year_id NUMERIC(10) NOT NULL,
+    month_id NUMERIC(10) NOT NULL,
+    day_id NUMERIC(10) NOT NULL,
+    sales_value NUMERIC(10,2) NOT NULL
+); -- Oracle MySQL 中都可用
+```
+插入测试数据：(Oracle 中语句)
+```
+INSERT INTO sales_tab 
+    SELECT TRUNC(DBMS_RANDOM.VALUE(2010,2012)) AS year_id,
+                 TRUNC(DBMS_RANDOM.VALUE(1, 13)) AS month_id,
+                 TRUNC(DBMS_RANDOM, VALUE(1, 32)) AS day_id,
+                 ROUND(DBMS_RANDOM, VALUE(1, 100), 2) AS sales_value
+  FROM dual 
+CONNECT BY level <= 1000; -- Oracle 中可用
+```
+
+## 如何在 MySQL 中实现
+
+上述插入语句中无法在 MySQL 中使用，因为 MySQL 里没有几个函数，
+- TRUNC() 取整，
+   在 MySQL 中同样功能的函数为：TRUNCATE(x,y)，返回数值 x 保留到小数点后 y 位的值（与 ROUND 最大的区别是不会进行四舍五入）
+- DBMS_RANDOM.VALUE() 生产随机数，在 MySQL 中如果想要使用，需要安装支持包。
+   在 MySQL 中生成随机数可以使用：RAND()    返回 0 到 1 的随机数。　　
+   eg: eg: 7≤n≤12， TRUNCATE((7 + RAND() * 6), 0)
+- FROM dual 在 MySQL 中使用虚拟表 dual 比较麻烦。
+- ROUND(x) 函数，    返回离 x 最近的整数，Oracle 与 MySQL 中共用。
+- CONNECT BY 语句，MySQL 中暂时没有什么比较简单的替代方式。
+
+至于循环插入，则可以通过编写 MySQL 的存储过程- PROCEDURE，循环执行插入语句实现。
+
+```
+SELECT CURRENT_USER(); -- 返回当前MySQL用户名：root@localhost
+SELECT DATABASE(); -- 返回当前 MySQL 数据库名；lianxishujuku
+SELECT dbms_random.VALUE FROM dual; -- Unknown table 'dbms_random' in field list
+SELECT 2010 + TRUNCATE(RAND() * 3, 0); -- truncate(x, y) 直接截取小数点后y位的x
+
+-- 使用存储过程，创建循环语句，执行 procedure 程序
+DELIMITER $  -- 设定界定符从 ; 改为 $
+CREATE PROCEDURE per() -- 创建匿名块
+    BEGIN
+    DECLARE i INT;
+    SET i = 0;
+    WHILE i < 1000 DO
+        INSERT INTO sales_tab VALUES(TRUNCATE(2010 + RAND() * 3, 0), TRUNCATE(1 + RAND() * 12, 0), TRUNCATE(1 + RAND() * 32, 0), ROUND(1 + RAND() * 100, 2));
+        SET i = i + 1;
+        END WHILE;
+    END $
+DELIMITER ; -- 恢复隔离符为 ;
+CALL per();  -- 调用匿名块，执行循环插入1000条数据
+SELECT * FROM sales_tab;
+SELECT COUNT(1) FROM sales_tab;
+```
+
+
+> 参考：[Mysql向表中循环插入数据](https://blog.csdn.net/ashic/article/details/46574865)
+[RUNOOB-MySQL函数](https://www.runoob.com/mysql/mysql-functions.html)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,222 @@
+MySQL 中的高级分组函数
+
+*对照着 Oracle 学习 MySQL 中的高级分组函数。测试表见上一篇。*
+## Oracle 中的高级分组函数 ROLLUP、CUBE、GROUPING SETS
+
+ROLLUP、CUBE 和 GROUPING SETS 运算符是 GROUP BY 子句的扩展，可以生成与使用 UNION ALL 来组合单个分组查询时相同的结果集，用来简化和高效的实现统计查询。语法形式如下：
+
+   - GROUP BY ROLLUP(a, b, c)
+   - GROUP BY CUBE(a, b, c)
+   - GROUP BY GROUPING SETS ( (a), (b))
+
+### ROLLUP
+
+假设有表test，有a、b、c、d四个列。
+   ```
+   SELECT a,b,c,SUM(d) FROM test GROUP BY ROLLUP(a,b,c);
+   ```
+等价于：
+   ```
+   SELECT a,b,c,SUM(d) FROM test GROUP BY a,b,c
+   UNION ALL
+   SELECT a,b,null,SUM(d) FROM test GROUP BY a,b
+   UNION ALL
+   SELECT a,null,null,SUM(d) FROM test GROUP BY a
+   UNION ALL
+   SELECT null,null,null,sum(d) FROM test;
+   ```
+对ROLLUP的列从右到左以一次少一列的方式进行分组直到所有列都去掉后的分组(也就是全表分组)。对于n个参数的ROLLUP，有n+1次分组。
+
+ROLLUP函数的用法：
+   ```
+   -- 统计年月销售数据
+   SELECT year_id, month_id, 
+SUM(sales_value) AS sales_value
+FROM   sales_tab
+GROUP BY 
+ROLLUP (year_id, month_id)
+ORDER BY year_id, month_id;
+   ```
+
+   ```
+   -- 统计年月日销售数据
+   SELECT year_id, month_id, day_id, SUM(sales_value) AS sales_value
+FROM   sales_tab
+GROUP BY ROLLUP (year_id, month_id, day_id)
+ORDER BY year_id, month_id, day_id;
+   ```
+
+### CUBE
+
+CUBE函数的语法形式：
+
+```
+GROUP BY CUBE(a, b, c)
+```
+对cube的每个参数，都可以理解为取值为参与分组和不参与分组两个值的一个维度，所有维度取值组合的集合就是分组后的集合。对于n个参数的cube，有2^n次分组。
+
+如果GROUP BY CUBE(a,b,c)，首先对(a,b,c)进行GROUP BY，然后依次是(a,b)，(a,c)，(a)，(b,c)，(b)，(c)，最后对全表进行GROUP BY操作，所以一共是2^3=8次分组。
+
+```
+SELECT a,b,c,SUM(d) FROM test GROUP BY CUBE(a,b,c);
+```
+等价于：
+```
+SELECT a,b,c,SUM(d) FROM test GROUP BY a,b,c
+UNION ALL
+SELECT a,b,NULL,SUM(d) FROM test GROUP BY a,b
+UNION ALL
+SELECT a,NULL,c,SUM(d) FROM test GROUP BY a,c
+UNION ALL
+SELECT a,NULL,NULL,SUM(d) FROM test GROUP BY a
+UNION ALL
+SELECT NULL,b,c,SUM(d) FROM test GROUP BY b,c
+UNION ALL
+SELECT NULL,b,NULL,SUM(d) FROM test GROUP BY b
+UNION ALL
+SELECT NULL,NULL,c,SUM(d) FROM test GROUP BY c
+UNION ALL
+SELECT NULL,NULL,NULL,SUM(d) FROM test ;
+```
+
+等价于只是方便理解，其内部运行机制并不相同，其效率远高于UNION ALL。
+
+在sales_value表中使用cube函数：
+```
+-- 统计年月销售数据
+SELECT year_id, month_id,
+SUM(sales_value) AS sales_value
+FROM   sales_tab
+GROUP BY CUBE (year_id, month_id)
+ORDER BY year_id, month_id;
+```
+```
+-- 统计年月日销售数据
+SELECT year_id,  month_id, day_id,
+SUM(sales_value) AS sales_value
+FROM   sales_tab
+GROUP BY CUBE (year_id, month_id, day_id)
+ORDER BY year_id, month_id, day_id;
+```
+
+### GROUPING SETS
+
+GROUPING SETS 运算符可以生成与使用单个 GROUP BY、ROLLUP 或 CUBE 运算符所生成的结果集相同的结果集，但是使用更灵活。
+
+如果不需要获得由完备的 ROLLUP 或 CUBE 运算符生成的全部分组，则可以使用 GROUPING SETS 仅指定所需的分组。GROUPING SETS 列表可以包含重复的分组。
+
+GROUPING SETS示例：
+
+```
+SELECT year_id, month_id, SUM(sales_value)  
+FROM sales_tab
+GROUP BY CUBE (year_id,month_id)
+order by 1, 2; 
+SELECT year_id, month_id, SUM(sales_value)  
+FROM sales_tab
+GROUP BY GROUPING SETS (  (year_id), (month_id))
+order by 1, 2
+```
+
+其中分组方式示例如下：
+
+   - 使用GROUP BY GROUPING SETS(a,b,c)，则对(a),(b),(c)进行GROUP BY
+   - 使用GROUP BY GROUPING SETS((a,b),c), 则对(a,b),(c)进行GROUP BY
+   - GROUPING BY GROUPING SET(a,a) , 则对(a)进行2次GROUP BY, GROUPING SETS的参数允许重复
+
+## 集合操作
+
+### UNION、UNION ALL
+
+为了合并多个SELECT语句的结果，可以使用集合操作符，实现集合的并、交、差。
+
+集合操作符包括UNION、UNION ALL、INTERSECT和MINUS。多条作集合操作的SELECT语句的列的个数和数据类型必须匹配。
+
+ORDER BY子句只能放在最后的一个查询语句中。
+
+集合操作的语法如下：
+
+```
+SELECT statement1
+[UNION | UNION ALL | INTERSECT | MINUS]
+SELECT statement2;
+```
+
+UNION和UNION ALL用来获取两个或两个以上结果集的并集：
+
+   - UNION操作符会自动去掉合并后的重复记录。
+   - UNION ALL返回两个结果集中的所有行，包括重复的行。
+   - UNION操作符对查询结果排序，UNION ALL不排序。
+
+### INTERSECT
+
+INTERSECT函数获得两个结果集的交集，只有同时存在于两个结果集中的数据，才被显示输出。使用INTERSECT操作符后的结果集会以第一列的数据作升序排列。
+
+### MINUS
+
+MINUS函数获取两个结果集的差集。只有在第一个结果集中存在，在第二个结果集中不存在的数据，才能够被显示出来。也就是结果集一减去结果集二的结果。
+
+
+## MySQL 中高级分组的实现
+
+### WITH ROLLUP
+
+with rollup 通常和group by 语句一起使用，是根据维度在分组的结果集中进行聚合操作。——对group by的分组进行汇总。
+
+假设用户需要对N个纬度进行聚合查询操作，普通的groupby语句需要N个查询和N次group by操作。而rollup的有点是一次可以去的N次groupby的结果，这样可以提高查询效率，同时大大减少网络的传输流量。
+
+```
+SELECT year_id, month_id, day_id, SUM(sales_value) AS sales_values FROM sales_tab GROUP BY year_id, month_id, day_id WITH ROLLUP ORDER BY year_id, month_id;
+```
+
+**注意**
+1）ORDER BY不能在rollup中使用，两者为互斥关键字；（???MySQL8.0中测试可以同时使用，不知这里是否正确）
+2）如果分组的列包含NULL值，那么rollup的结果可能不正确，因为在rollup中进行的分组统计时，null具有特殊意义。因此在进行rollup时可以先将
+null转换成一个不可能存在的值，或者没有特别含义的值，比如：IFNULL(xxx,0)
+3）mysql中没有像oracle那样的grouping()函数；
+
+### 对于 CUBE 与 GROUPING SETS() 函数，在 MySQL 中可以通过使用集合操作函数实现。
+
+### 示例
+
+```
+-- 使用ROLLUP函数统计2010-2011年每月每日的销售额
+-- 对ROLLUP的列从右到左以一次少一列的方式进行分组直到所有列都去掉后的分组(也就是全表分组)。对于n个参数的ROLLUP，有n+1次分组。
+SELECT year_id, month_id, day_id, SUM(sales_value) AS sales_values FROM sales_tab GROUP BY ROLLUP(year_id, month_id, day_id) ORDER BY year_id, month_id, day_id; -- Oracle 中可用
+-- 上述SQL语句会依次按照（year_id, month_id, day_id）分组、（year_id, month_id）分组、（day_id）分组以及全表分组。
+SELECT year_id, month_id, day_id, SUM(sales_value) AS sales_values FROM sales_tab GROUP BY year_id, month_id, day_id WITH ROLLUP ORDER BY year_id, month_id; -- MySQL 中可用用 WITH ROLLUP 替代 ROLLUP 函数。GROUP BY 后面不能加()，否则 Operand should contain 1 column(s)
+
+-- 使用 CUBE 函数统计年月的销售额
+-- GROUP BY CUBE(a, b, c) 对cube的每个参数，都可以理解为取值为参与分组和不参与分组两个值的一个维度，所有维度取值组合的集合就是分组后的集合。对于n个参数的cube，有2^n次分组。
+-- 如果GROUP BY CUBE(a,b,c)，首先对(a,b,c)进行GROUP BY，然后依次是(a,b)，(a,c)，(a)，(b,c)，(b)，(c)，最后对全表进行GROUP BY操作，所以一共是2^3=8次分组。
+-- 等价于 UNION ALL 所有分组组合查询结果。返回两个结果集中的所有行，包括重复的行。UNION 则不包含重复记录，且对结果排序。
+-- MySQL 中 WITH ROLLUP 与 ORDER BY 冲突???MySQL 8.0 不冲突。
+SELECT year_id, month_id, SUM(sales_value) AS sales_value FROM sales_tab GROUP BY CUBE(year_id, month_id) ORDER BY year_id, month_id; -- Oracle 中可用
+-- 上述SQL语句会依次按照(year_id, month_id)分组、（year_id）分组、（month_id）分组以及全表分组。
+
+-- 在 MySQL 中使用 UNION ALL 实现 CUBE 函数的效果。一共查询可得 52 条结果。
+SELECT year_id, month_id, SUM(sales_value) AS sales_value FROM sales_tab GROUP BY year_id, month_id -- 36条结果，此处不能加 WITH ROLLUP,因为会整合第3,4条SQL的查询结果。
+-- ORDER BY year_id, month_id 不能使用排序
+UNION ALL
+SELECT  NULL, month_id, SUM(sales_value) AS sales_value FROM sales_tab GROUP BY month_id -- 12条结果，按月份分组总计
+-- ORDER BY month_id
+UNION ALL
+SELECT year_id, NULL, SUM(sales_value) AS sales_value FROM sales_tab GROUP BY year_id -- 3条结果，按年度分组总计
+UNION ALL
+SELECT NULL, NULL, SUM(sales_value) AS sales_value FROM sales_tab; -- 1条结果，共计
+
+-- 使用GROUPING SETS函数统计年月的销售额
+SELECT year_id, month_id, SUM(sales_value) FROM sales_tab GROUP BY GROUPING SETS((year_id), (month_id)) ORDER BY 1, 2; -- Oracle 中可用，该SQL语句会依次按照(year_id)分组、(month_id)分组。
+SELECT year_id, month_id, SUM(sales_value) FROM sales_tab GROUP BY year_id, month_id ORDER BY year_id, month_id; -- 36条记录
+SELECT year_id, month_id, SUM(sales_value) FROM sales_tab GROUP BY year_id, month_id WITH ROLLUP ORDER BY year_id, month_id; -- 40条记录，多了(a,null)*3,(null,b),(null,null)*1 4条记录。
+SELECT null, month_id, SUM(sales_value) FROM sales_tab GROUP BY month_id ORDER BY  month_id; -- 12条记录
+SELECT year_id, null, SUM(sales_value) FROM sales_tab GROUP BY year_id ORDER BY year_id; -- 3条记录
+SELECT null, null, SUM(sales_values) FROM sales_tab; -- 1条记录
+```
+
+
+
+
+> [mysql聚合函数rollup和cube](https://blog.csdn.net/liuxiao723846/article/details/48970443)
+[mysql - rollup 使用](https://www.cnblogs.com/weixiaotao/p/10935157.html)
+[RUNOOB-MySQL GROUP BY 语句](https://www.runoob.com/mysql/mysql-group-by-statement.html)

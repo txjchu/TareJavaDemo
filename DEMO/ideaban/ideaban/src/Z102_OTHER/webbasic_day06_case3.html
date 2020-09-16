@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>docment对象操作：读取、修改</title>
+        <style type="text/css">
+            .photo {
+                list-style-type:  none;
+                border: 2px solid #ccc;
+                width: 480px;
+                height: 360px;
+                margin: 0;
+                padding: 0;
+            }
+            .photo li{
+                width: 480px;
+                height: 360;
+                margin: 0;
+                padding: 0;
+            }
+            .show{
+                display:  block;
+            }
+            .hide {
+                display:  none;
+            }
+
+        </style>
+        <script type="text/javascript">
+            var timer;
+            var index = 0;
+            // 鼠标移动出图片范围，开始轮播图片，悬停图片上，则暂停轮播
+            function start (){
+                timer = setInterval(function(){
+                        var ul = document.getElementById("photo");
+                        var lis = ul.getElementsByTagName("li");
+                        // 轮播包含图片标签的 lis
+                        for(var i=0; i<lis.length; i++){
+                            lis[i].className = "hide";// 先将所有li都设置为 hide
+                        }
+                        index ++;
+                        lis[index%lis.length].className = "show";// 通过定时自增辅助变量 index 除 lis 长度的余数来确定将哪个图片显示出来。
+                    }, 1000);
+            }
+
+            function stop() {
+                clearInterval(timer);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>图片轮播</h1>
+        <ul class="photo" id="photo" onmouseover="stop();" onmouseout="start();">
+            <li class="show">
+                <img src="1.jpg">
+            </li>
+            <li class="hide">
+                <img src="2.jpg">
+            </li>
+            <li class="hide">
+                <img src="3.jpg">
+            </li>
+            <li class="hide">
+                <img src="4.jpg">
+            </li>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+MySQL 中的窗口函数 ROWNUM 实现
+
+
+
+### MySQL 8.0后开始有窗口函数的。
+
+窗口函数是作用域于每条语句上的，会返回相同数据量的行数。聚合函数会根据计算结果返回一个值。
+
+窗口函数的一般格式：
+```
+function_name()over(write SQL) 
+```
+
+### 按照功能划分，可以把MySQL支持的窗口函数分为如下几类：
+- 序号函数：row_number() / rank() / dense_rank()
+- 分布函数：percent_rank() / cume_dist()
+- 前后函数：lag() / lead()
+- 头尾函数：first_val() / last_val()
+- 其他函数：nth_value() / nfile()
+
+### 题目：
+```
+-- 查询 emp 表前5条记录
+SELECT * FROM emp WHERE rownum <= 5; -- Oracle 中可行。 MySQL 中语法错误 Unknown column 'rownum' in 'where clause'
+SELECT * FROM emp;
+SELECT * FROM emp e, (SELECT ROW_NUMBER() OVER() AS rowno, empno FROM emp) t WHERE t.rowno <= 5 AND e.empno = t.empno;
+-- 查询工资最高的5名员工的信息
+SELECT *, t.rowno FROM emp e, (SELECT row_number() OVER(ORDER BY sal DESC) AS rowno, empno FROM emp ) t WHERE t.rowno <= 5 AND e.empno = t.empno ORDER BY e.sal DESC;
+SELECT * FROM emp ORDER BY sal DESC;
+
+```
+
+---
+> ### 参考文章：
+[MySQL中的窗口函数](https://blog.csdn.net/foneone/article/details/108173490)
+[MySQL 8.0窗口函数](https://www.cnblogs.com/DataArt/p/9961676.html)
+
+

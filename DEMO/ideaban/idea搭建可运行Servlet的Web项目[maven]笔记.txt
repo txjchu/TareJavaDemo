@@ -1,0 +1,29 @@
+在 idea 中使用 Maven 搭建 Servlet的Web项目  笔记
+
+
+1. 使用 「新建项目」->「Java 模块」->Web Application->WebServices 创建后，在「项目结构」配置中的「Libraries」中手动引入 `servlet-api.jar` jar 包后，进行 servlet 项目的编写。
+**注意**：
+- 目录结构
+- webapp目录结构
+- web.xml 中 servlet 配置
+- 在此项目创建模式下，「项目结构」中的「Artifacts」中是自动设定好 war 包的打包方式、路径等打包配置。如果不是该创建模式搭建的 `servlet` 项目，则需要注意添加打包为 war 包配置。
+- 运行/调试配置：新建 Tomcat Server ，需要注意端口，Server 中的 URL `localhost:8080/` 后紧跟的路径是否与 「Deployment」中的`Application context` 中是否一致。客户端/浏览器访问路径访问路径必须为 war 包名，即`Application context` 开头，然后再跟 `web.xml` 中配置的访问路径寻找相对应的 Servlet.
+
+
+2. 在 idea 中使用 Maven 搭建 Servlet
+
+参考[idea搭建可运行Servlet的Web项目[maven]](https://www.cnblogs.com/niceyoo/p/10617899.html)博客，安装博客中的步骤即可实现。
+**注意**：
+- pom.xml 中的配置
+- 通过「Create from archetype」创建的项目内有自带一个 `index.jsp` 
+- 配置 运行/测试 配置时需要注意 URL 中的路径与Deployment」中的`Application context` 中是否一致。
+- web.xml 中的配置
+- 访问自己编写的 `Servlet.java` 的路径。
+- [IntelliJ IDEA运行项目成功后，无法访问Tomcat主页](https://www.cnblogs.com/yayazi/p/7920257.html)， 解决方法如文中所讲，将`D:\Program Files\Apache Software Foundation\Tomcat 8.5\webapps\ROOT` 文件夹 「Add 」+ 添加到 「Deployment」中，让该文件夹随着容器启动时同 Servlet 项目一起部署，然后在 「Run」 运行后即可通过 `localhost:8080` 访问 Tomcat 主页了。
+- [tomcat中war 和 war exploded的区别](https://blog.csdn.net/weixin_36210698/article/details/72585429)，war exploed模式：将web工程以当前文件夹的位置关系上传到服务器，这种方式支持热部署，一般在开发的时候可以使用。两种方式获取项目的相对路径不同。
+
+> [idea搭建可运行Servlet的Web项目[maven]](https://www.cnblogs.com/niceyoo/p/10617899.html)
+[Intellij IDEA创建Maven Web项目](https://my.oschina.net/lujianing/blog/266172)
+
+
+
