@@ -1,0 +1,10 @@
+1. Servlet中getAttribute()和getParameter()的区别
+
+[Servlet中getAttribute()和getParameter()的区别](https://blog.csdn.net/qq997404392/article/details/73920423)
+[getParameter和getAttribute区别（超详细分析）](https://blog.csdn.net/wz2292667460/article/details/79366493)
+
+      a. 有setAttribute()方法，没有setParameter()方法。
+      b. getAttribute()返回的是Object类型，getParameter()返回的是String类型。
+      c. getParameter()方法传递的数据，会从Web客户端传到Web服务器端，代表HTTP请求数据；setAttribute()和getAttribute()方法传递的数据只会存在于Web容器内部，在具有转发关系的Web组件之间共享。即request.getAttribute()方法返回request范围内存在的对象，而request.getParameter()方法是获取http提交过来的数据。
+
+2. [解决IDEA JSP没有代码提示问题的几种方法](https://www.jb51.net/article/171764.htm)

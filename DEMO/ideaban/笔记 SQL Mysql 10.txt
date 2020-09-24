@@ -1,0 +1,368 @@
+Oracle 与 MySQL 中的视图、索引、序列
+
+## 视图
+
+视图(VIEW)也被称作虚表，即虚拟的表，是一组数据的逻辑表示,其本质是对应于一条SELECT语句，结果集被赋予一个名字，即视图名字。
+
+视图本身并不包含任何数据，它只包含映射到基表的一个查询语句，当基表数据发生变化，视图数据也随之变化。
+
+
+1. 视图的作用：
+
+如果需要经常执行某项复杂查询，可以基于这个复杂查询建立视图，此后查询此视图即可，简化复杂查询；
+
+视图本质上就是一条SELECT语句，所以当访问视图时，只能访问到所对应的SELECT语句中涉及到的列，对基表中的其它列起到安全和保密的作用，可以限制数据访问。
+
+2. 创建视图的DDL语句是CREATE VIEW，用户必须有CREATE VIEW系统权限，才能创建视图。如果没有权限，创建视图时会提示：权限不足。
+
+管理员可以通过DCL语句授予用户创建视图的权限。
+
+3. 视图的特点。
+
+   - 视图中的数据并不属于视图本身，而是属于基本的表，对视图可以像表一样进行insert,update,delete操作。
+   - 视图不能被修改，表修改或者删除后应该删除视图再重建。
+   - 视图的数量没有限制，但是命名不能和视图以及表重复，具有唯一性。
+   - 视图可以被嵌套，一个视图中可以嵌套另一个视图。
+   - 视图不能索引，不能有相关联的触发器和默认值，sql server不能在视图后使用order by排序。
+
+4. 视图的特点。
+
+   - 视图中的数据并不属于视图本身，而是属于基本的表，对视图可以像表一样进行insert,update,delete操作。
+   - 视图不能被修改，表修改或者删除后应该删除视图再重建。
+   - 视图的数量没有限制，但是命名不能和视图以及表重复，具有唯一性。
+   - 视图可以被嵌套，一个视图中可以嵌套另一个视图。
+   - 视图不能索引，不能有相关联的触发器和默认值，sql server不能在视图后使用order by排序。
+
+
+### Oracle 中的视图
+
+创建视图的语法：
+
+```
+CREATE [OR REPLACE] VIEW view_name[(alias[, alias…])] AS subquery ;
+```
+视图创建后，可以像操作表一样操作视图，主要是查询操作。
+
+语法中的Subquery是SELECT查询语句，对应的表被称作基表。
+
+根据视图所对应的子查询种类分为几种类型:
+
+   - SELECT语句是基于单表建立的，且不包含任何函数运算、表达式或分组函数，叫做简单视图，此时视图是基表的子集；
+   - SELECT语句同样是基于单表，但包含了单行函数、表达式、分组函数或GROUP BY子句，叫做复杂视图；
+   - SELECT语句是基于多个表的，叫做连接视图。
+
+#### 创建简单视图（单表）
+
+创建一个简单视图V_EMP_10，来显示部门10中的员工的编码、姓名和薪水：
+
+```
+CREATE VIEW v_emp_10
+AS 
+SELECT empno, ename, sal, deptno FROM emp WHERE deptno = 10;
+```
+查看视图结构：
+```
+DESC v_emp_10;
+```
+
+查询视图和查询表的操作相同：
+
+```
+SELECT * FROM v_emp_10;
+-- 此时视图的列名，和创建视图时的列名一致，不一定是原列名：
+SELECT id, name, salary FROM v_emp_10;
+```
+
+#### 对视图进行INSERT操作
+
+视图本身并不包含数据，只是基表数据的逻辑映射。所以当对视图执行DML操作时，实际上是对基表的DML操作。对视图执行DML操作的基本原则：
+
+   - 简单视图能够执行DML操作，下列情况除外：在基表中定义了非空列，但简单视图对应的SELECT语句并没有包含这个非空列，导致这个非空列对视图不可见，这时无法对视图执行INSERT操作；
+   - 如果视图定义中包含了函数、表达式、分组语句、DISTINCT关键字或ROWNUM伪列，不允许执行DML操作；
+   - DML操作不能违反基表的约束条件。
+
+对简单视图执行INSERT操作，成功插入数据到基表中:
+
+```
+INSERT INTO v_emp_10 VALUES(1234, 'DOCTOR', 4000, 10);
+```
+**简单视图可以通过DML操作影响到基表数据。**
+
+#### 创建具有CHECK OPTION约束的视图
+
+语法如下：
+
+```
+CREATE [OR REPLACE] VIEW view_name[(alias[, alias…])]
+AS subquery 
+[WITH CHECK OPTION];
+```
+其中：WITH CHECK OPTION短语表示，通过视图所做的修改，必须在视图的可见范围内：
+
+   - 假设INSERT，新增的记录在视图仍可查看
+   - 假设UPDATE，修改后的结果必须能通过视图查看到
+   - 假设DELETE，只能删除现有视图里能查到的记录
+
+创建带有CHECK OPTION约束的视图：
+
+```
+CREATE OR REPLACE VIEW v_emp_10
+AS
+SELECT empno id, ename name, sal salary, deptno FROM emp WHERE deptno = 10 WITH CHECK OPTION;
+```
+
+下述DML语句操作失败，因为部门20不在视图可见范围内：
+```
+INSERT INTO v_emp_10 VALUES(1008,‘donna’,5500, 20); 
+UPDATE v_emp_10 SET deptno = 20 WHERE id = 7782;
+```
+
+#### 创建具有READ ONLY约束的视图
+
+对简单视图进行DML操作是合法的，但是不安全的。如果没有在视图上执行 DML 操作的必要，在建立视图时声明为只读来避免这种情况，保证视图对应的基表数据不会被非法修改。加入READ ONLY约束的视图语法如下：
+
+```
+CREATE [OR REPLACE] VIEW view_name[(alias[, alias…])]
+AS subquery 
+[WITHREAD ONLY];
+```
+对只读视图执行DML操作，将会失败。
+
+#### 创建复杂视图（多表关联）
+
+复杂视图指在子查询中包含了表达式、单行函数或分组函数的视图。此时必须为子查询中的表达式或函数定义别名。
+
+例如，创建一个视图V_EMP_SALARY，把职员表的数据按部门分组，获得每个部门的平均薪水、薪水总和、最高薪水和最低薪水：
+
+```
+CREATE VIEW v_emp_salary
+AS
+SELECT d.dname, avg(e.sal) avg_sal, sum(e.sal) sum_sal, 
+max(e.sal) max_sal, min(e.sal) min_sal 
+FROM emp e join dept d ON e.deptno = d.deptno 
+GROUP BY d.dname;
+-- 查询复杂视图：
+SELECT * FROM v_emp_salary;
+```
+**复杂视图不允许DML操作，会报错。**
+
+当不再需要视图的定义，可以使用DROP VIEW语句删除视图，语法如下：
+
+```
+DROP VIEW view_name;
+-- 例如删除视图v_emp_10：
+DROP VIEW v_emp_10;
+```
+
+**视图虽然是存放在数据字典中的独立对象，但视图仅仅是基于表的一个查询定义，所以对视图的删除不会导致基表数据的丢失，不会影响基表数据。**
+
+#### 通过查询USER_VIEWS获取相关信息
+
+和视图相关的数据字典有：
+
+   - USER_OBJECTS
+   - USER_VIEWS
+   - USER_UPDATABLE_COLUMNS
+
+例一：在数据字典USER_OBJECTS中查询所有视图名称：
+```
+SELECT object_name FROM user_objects WHERE object_type = 'VIEW';
+```
+
+例二：在数据字典USER_VIEWS中查询指定视图：
+```
+SELECT text FROM user_views WHERE view_name = 'V_EMP_10';
+```
+例三：在数据字典USER_UPDATABLE_COLUMNS中查询视图：
+```
+SELECT column_name, insertable, updatable, deletable 
+FROM user_updatable_columns
+WHERE table_name = 'V_EMP_10';
+```
+
+
+
+
+
+
+
+### MySQL 中的视图
+
+-
+- 
+- 
+
+
+## 索引
+
+### Oracle 中的索引
+
+   索引是一种允许直接访问数据表中某一数据行的树型结构，为了提高查询效率而引入，是独立于表的对象，可以存放在与表不同的表空间（TABLESPACE）中。索引记录中存有索引关键字和指向表中数据的指针（地址）。对索引进行的I/O操作比对表进行操作要少很多。
+
+   索引一旦被建立就将被Oracle系统自动维护，查询语句中不用指定使用哪个索引，是一种提高查询效率的机制。
+
+   ROWID: 伪列，唯一标识一条数据记录，可理解为行地址。
+
+#### 合理使用索引提升查询效率
+
+为提升查询效率，创建和使用索引的原则：
+
+   - 为经常出现在WHERE子句中的列创建索引
+   - 为经常出现在ORDER BY、DISTINCT后面的字段建立索引。如果建立的是复合索引，索引的字段顺序要和这些关键字后面的字段顺序一致
+   - 为经常作为表的连接条件的列上创建索引
+   - 不要在经常做DML操作的表上建立索引
+   - 不要在小表上建立索引
+   - 限制表上的索引数目，索引并不是越多越好
+   - 删除很少被使用的、不合理的索引
+
+
+#### 创建索引
+
+创建索引的语法：
+
+```
+CREATE [UNIQUE] INDEX index_name ON table(column[, column…]);
+```
+其中：
+
+   - index_name表示索引名称
+   - table表示表名
+   - column表示列名，可以建立单列索引或复合索引
+   - UNIQUE表示唯一索引
+
+在EMP表的ENAME列上建立索引：
+
+```
+CREATE INDEX idx_emp_ename ON emp(ename);
+```
+
+复合索引也叫多列索引，是基于多个列的索引。如果经常在ORDER BY子句中使用job和salary作为排序依据，可以建立复合索引：
+```
+CREATE INDEX idx_emp_job_sal ON emp(job, sal);
+-- 当做下面的查询时，会自动应用索引idx_emp_job_sal
+SELECT empno, ename, sal, job FROM emp ORDER BY job, sal;
+```
+
+#### 创建基于函数的索引
+
+如果需要在emp表的ename列上执行大小写无关搜索，可以在此列上建立一个基于UPPER函数的索引:
+
+```
+CREATE INDEX emp_ename_upper_idx ON emp(UPPER(ename));
+-- 当做下面的查询时，会自动应用刚刚建立的索引:
+SELECT * FROM emp WHERE UPPER(ename) = 'KING';
+```
+
+#### 修改和删除索引
+
+如果经常在索引列上执行DML操作，需要定期重建索引，提高索引的空间利用率，语法如下：
+```
+ALTER INDEX index_name REBUILD;
+```
+重建索引idx_emp_ename：
+```
+ALTER INDEX idx_emp_ename REBUILD;
+```
+
+当一个表上有不合理的索引，会导致操作性能下降，删除索引的语法：
+```
+DROP INDEX index_name;
+```
+
+删除索引idx_emp_ename：
+```
+DROP INDEX idx_emp_ename;
+```
+
+
+
+
+### MySQL 中的索引
+
+   -
+   -
+   -
+
+
+## 序列
+
+序列(SEQUENCE)是一种用来生成唯一数字值的数据库对象。序列的值由Oracle程序按递增或递减顺序自动生成，通常用来自动产生表的主键值，是一种高效率获得唯一键值的途径。
+
+序列是独立的数据库对象，和表是独立的对象，序列并不依附于表。
+
+通常情况下，一个序列为一个表提供主键值，但一个序列也可以为多个表提供主键值。
+
+### Oracle 中的序列
+
+#### 创建序列
+
+创建序列的语法：
+
+```
+CREATE SEQUENCE [schema.]sequence_name
+    [ START WITH i ] [ INCREMENT BY j ]
+    [ MAXVALUE m | NOMAXVALUE ]
+    [ MINVALUE n | NOMINVALUE ]
+    [ CYCLE | NOCYCLE ][ CACHE p | NOCACHE ]
+```
+
+其中：
+
+   - sequence_name是序列名，将创建在schema方案下
+   - 序列的第一个序列值是i，步进是j
+   - 如果j是正数，表示递增，如果是负数，表示递减
+   - 序列可生成的最大值是m，最小值是n
+   - 如果没有设置任何可选参数，序列的第一个值是1，步进是1
+   - CYCLE表示在递增至最大值或递减至最小值之后是否继续生成序列号，默认是NOCYCLE
+   - CACHE用来指定先预取p个数据在缓存中，以提高序列值的生成效率，默认是20
+
+#### 使用序列
+
+举例说明，创建一个序列，起始数据是100，步进是10：
+
+```
+CREATE SEQUENCE emp_seq START WITH 100 INCREMENT BY 10;
+```
+
+当序列被创建后，第一个序列值将是100，将要生成的序列号分别是110、120、130等。
+
+序列中有两个伪列：
+   - NEXTVAL：获取序列的下个值
+   - CURRVAL：获取序列的当前值
+
+当序列创建以后，必须先执行一次NEXTVAL，之后才能使用CURRVAL。
+
+```
+-- 获取序列的第一个值，并且使用序列值为EMP表插入新的记录：
+SELECT emp_seq.NEXTVAL FROM DUAL;
+INSERT INTO emp(empno, ename) VALUES(emp_seq.NEXTVAL, 'donna');
+-- 查询刚刚生成的记录，主键值将是110：
+SELECT empno, ename FROM emp WHERE ename = 'DONNA';    
+-- 此时查询序列的当前值，会得到110的数字。
+SELECT emp_seq.CURRVAL FROM DUAL;
+-- 在序列的使用过程中，比如执行了一条语句：
+SELECT emp_seq.NEXTVAL FROM DUAL
+-- 则浪费了一个序列值，会导致表的主键值不连续。而CURRVAL的使用不会导致序列值的递进。
+```
+
+#### 删除序列
+
+语法如下：
+```
+DROP SEQUENCE sequence_name;
+```
+删除序列emp_seq：
+```
+DROP SEQUENCE emp_seq;
+```
+
+
+### MySQL 中的序列
+
+> 见[Oracle 与 MySQL 中的约束](../../../2020/09/17/1600351466767.html#toc_h3_26)
+
+
+
+> [MySQL中视图的那点东西](https://www.cnblogs.com/aixinyiji/p/11017557.html)
+[MySQL/Oracle视图的创建与使用](https://www.cnblogs.com/iloverain/p/9298947.html)
+[RUNOOB_MySQL 索引](https://www.runoob.com/mysql/mysql-index.html)

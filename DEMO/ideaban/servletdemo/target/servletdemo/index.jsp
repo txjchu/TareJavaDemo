@@ -15,7 +15,8 @@
     <body>
         <h2>Hello World!</h2>
 
-        username : <%= request.getAttribute("username")%>
-        password : <%= request.getAttribute("password")%>
+        username : <%= request.getAttribute("username")%></br>
+        password : <%= request.getAttribute("password")%></br>
+        <%= request.getAttribute("date")%>
     </body>
 </html>
