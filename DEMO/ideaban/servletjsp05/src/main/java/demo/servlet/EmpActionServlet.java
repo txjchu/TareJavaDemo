@@ -1,7 +1,9 @@
 package demo.servlet;
 
 import demo.dao.EmployeeDAO;
+import demo.dao.UserDAO;
 import demo.entity.Employee;
+import demo.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -76,6 +79,28 @@ public class EmpActionServlet extends HttpServlet {
             // 编程式处理异常
             req.setAttribute("err_msg", "系统出错，请重试！(编程式处理异常)");
             req.getRequestDispatcher("error.jsp").forward(req, resp);
+        } else if ("regist".equals(action)){
+
+
+        } else if ("login".equals(action)){
+            // 用户登录
+            String userName = req.getParameter("username");
+            String pwd = req.getParameter("pwd");
+            UserDAO userDAO = new UserDAO();
+            try {
+                User user = userDAO.findByUserName(userName);
+                if(user == null || !user.getPwd().equals(pwd)){ // 登录名为空，或者登录名正确密码不正确
+                    req.setAttribute("login_err", "用户名或密码错误！"+ userName +","+ pwd);
+                    req.getRequestDispatcher("login.jsp").forward(req, resp);
+                } else {
+                    req.setAttribute("login_msg", "登录成功！");
+                    resp.sendRedirect("list.do");// 登录成功，则跳转到 listEmp.jsp 页面
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new ServletException(e);
+            }
         }
 
     }

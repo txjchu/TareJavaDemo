@@ -52,8 +52,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="CSS File" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -80,12 +81,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletjsp05\src\main\webapp" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="demo.servlet" />
       <recent name="demo.test" />
@@ -110,7 +115,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestUserDAO.testFindAll">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 8.5">
     <configuration name="TestUserDAO.testFindAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="servletjsp05" />
       <extension name="coverage">
@@ -270,12 +275,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@1bf4f21d" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@f206eaf3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@1bf4f21d" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@25a73dc2" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@f206eaf3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@5cc66686" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -294,7 +299,11 @@
       <option name="presentableId" value="Default" />
       <updated>1600879822928</updated>
       <workItem from="1600879826410" duration="4325000" />
-      <workItem from="1600950221070" duration="7146000" />
+      <workItem from="1600950221070" duration="8802000" />
+      <workItem from="1601035835285" duration="1223000" />
+      <workItem from="1601217325848" duration="584000" />
+      <workItem from="1601287227660" duration="9728000" />
+      <workItem from="1601648116066" duration="620000" />
     </task>
     <servers />
   </component>
