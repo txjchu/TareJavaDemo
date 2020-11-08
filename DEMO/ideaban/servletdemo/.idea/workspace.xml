@@ -341,7 +341,17 @@
       <serviceView>
         <option name="contentProportion" value="0.1786543" />
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c76aeac3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c76aeac3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@77541df4" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>
@@ -368,6 +378,7 @@
       <workItem from="1600774385353" duration="15276000" />
       <workItem from="1600859212126" duration="5174000" />
       <workItem from="1600950172312" duration="638000" />
+      <workItem from="1601730252692" duration="233000" />
     </task>
     <servers />
   </component>
@@ -379,17 +390,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/demo/dao/AccountDAO.java</url>
-          <line>114</line>
+          <line>116</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/demo/dao/AccountDAO.java</url>
-          <line>120</line>
+          <line>122</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/demo/dao/AccountDAO.java</url>
-          <line>121</line>
+          <line>123</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

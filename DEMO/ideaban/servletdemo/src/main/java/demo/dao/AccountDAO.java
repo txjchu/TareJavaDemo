@@ -13,6 +13,8 @@ import java.util.List;
 /**
  * @author: Peter
  * @date: 2020/9/21 2:00
+ *
+ * 因为在 netctoss 中需要使用 account 表，因此需要将之前的 account 表名修改为 account1
  */
 public class AccountDAO {
 
@@ -28,7 +30,7 @@ public class AccountDAO {
         ResultSet rs = null;
         try {
             conn = JDBCUtil.openConnection();
-            ps = conn.prepareStatement("SELECT * FROM account");
+            ps = conn.prepareStatement("SELECT * FROM account1");
             rs = ps.executeQuery();
             while(rs.next()){
                 Account account = new Account();
@@ -60,7 +62,7 @@ public class AccountDAO {
         ResultSet rs = null;
         try {
             conn = JDBCUtil.openConnection();
-            ps = conn.prepareStatement("SELECT * FROM account WHERE account_id = ?");
+            ps = conn.prepareStatement("SELECT * FROM account1 WHERE account_id = ?");
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -92,7 +94,7 @@ public class AccountDAO {
         PreparedStatement ps = null;
         try {
             conn = JDBCUtil.openConnection();
-            ps = conn.prepareStatement("DELETE FROM account WHERE account_id = ?");
+            ps = conn.prepareStatement("DELETE FROM account1 WHERE account_id = ?");
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
