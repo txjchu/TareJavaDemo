@@ -27,7 +27,8 @@
             }
             else {
                 window.clearInterval(timer);
-                location.href = "<%=request.getContextPath()%>/login/toLogin.do";
+                <%--location.href = "<%=request.getContextPath()%>/login/toLogin.do";--%>
+                location.href = "<%=request.getContextPath()%>/index.do";
             }
         }
 
@@ -35,16 +36,17 @@
         function resetTimer() {
             if (timer != null && timer != undefined) {
                 window.clearInterval(timer);
-                //location.href = "login.html";
-                history.back();
+                location.href = "<%=request.getContextPath() %>/index.do";
+                // history.back();
             }
         }
+        startTimes(); /*笔记 在js中定义的方法，如果需要调用，可以直接如此调用。*/
     </script>
 </head>
 <body>
     <h1 id="error">
         遇到错误，&nbsp;<span id="secondes">5</span>&nbsp;秒后将自动跳转，立即跳转请点击&nbsp;
-        <a  href="javascript:resetTimer();">返回</a>
+        <a  href="javascript:;" onclick="resetTimer();">返回</a>
     </h1>
 </body>
 </html>

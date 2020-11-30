@@ -32,15 +32,21 @@
                 btnObj.className = "sort_desc";
         }
 
+        // 参考：[js中的 location.href 用法](https://www.cnblogs.com/shuilangyizu/p/6604646.html)
+
+
         //启用
-        function startFee() {
+        function startFee(id, status) {
             var r = window.confirm("确定要启用此资费吗？资费启用后将不能修改和删除。");
-            document.getElementById("operate_result_info").style.display = "block";
+            window.location.href = "startCost.do?id="+id+"&status="+status;
+            document.getElementById("operate_result_info1").style.display = "block";
         }
         //删除
-        function deleteFee() {
+        function deleteFee(id) {
             var r = window.confirm("确定要删除此资费吗？");
+            window.location.href = "delete.do?id="+id;
             document.getElementById("operate_result_info").style.display = "block";
+
         }
 
 
@@ -55,12 +61,33 @@
         }
 
     </script>
+    <style>
+        #operate_result_info1
+        {
+            width: 400px;
+            line-height: 70px;
+            padding-left: 40px;
+            font-size: 16px;
+            display: none;
+            position: absolute;
+            z-index: 100;
+            top: 90px;
+            left: 30%;
+        }
+        #operate_result_info1 img
+        {
+            float: right;
+            margin-right: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!--Logo区域开始-->
     <div id="header">
         <img src="../images/logo.png" alt="logo" class="left"/>
-        <a href="#">[退出]</a>
+        <a href="../logout.do">[退出]</a>
     </div>
     <!--Logo区域结束-->
     <!--导航区域开始-->
@@ -83,6 +110,11 @@
                 <input type="button" value="增加" class="btn_add" onclick="location.href='toAdd.do';" />
             </div>
             <!--启用操作的操作提示-->
+            <div id="operate_result_info1" class="operate_success">
+                <img src="../images/close.png" onclick="this.parentNode.style.display='none';" />
+                启动成功！
+            </div>
+            <!-- 删除操作的操作结果提示 -->
             <div id="operate_result_info" class="operate_success">
                 <img src="../images/close.png" onclick="this.parentNode.style.display='none';" />
                 删除成功！
@@ -90,6 +122,13 @@
             <!--数据区域：用表格展示数据-->
             <div id="data">
                 <table id="datalist">
+
+                    <tr>
+                        <th colspan="9">
+                            NETCTOSS系统被访问过<%=application.getAttribute("count")%>次
+                        </th>
+                    </tr>
+
                     <tr>
                         <th>资费ID</th>
                         <th class="width100">资费名称</th>
@@ -104,7 +143,7 @@
                     <c:forEach items="${costs}" var="c">
                         <tr>
                             <td>${c.costId}</td>
-                            <td><a href="fee_detail.html">${c.name}</a></td>
+                            <td><a href="toDetail.do?id=${c.costId}">${c.name}</a></td>
                             <td>${c.baseDuration}</td>
                             <td>${c.baseCost}</td>
                             <td>${c.unitCost}</td>
@@ -114,11 +153,11 @@
                                     ${c.status==0?"开通":"暂停"}
                             </td>
                             <td>
-                                <input type="button" value="启用" class="btn_start" onclick="startFee();" />
+                                <input type="button" value="启用" class="btn_start" onclick="startFee(${c.costId},${c.status});" />
                                 <!-- /netctoss/cost/find.do -->
                                 <!-- /netctoss/cost/toUpdate.do -->
                                 <input type="button" value="修改" class="btn_modify" onclick="location.href='toUpdate.do?id=${c.costId}';" />
-                                <input type="button" value="删除" class="btn_delete" onclick="deleteFee();" />
+                                <input type="button" value="删除" class="btn_delete" onclick="deleteFee(${c.costId});" />
                             </td>
                         </tr>
                     </c:forEach>
