@@ -62,10 +62,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="Interface" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="7ee79762-5fe6-4326-bd7d-c6ae60253821" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -90,9 +94,13 @@
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="preferences.updates" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\netctoss\src\main\webapp\WEB-INF" />
+      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\netctoss\src\main\webapp" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="utils" />
     </key>
@@ -114,6 +122,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 8.5">
+    <configuration name="TestCostDAO.testDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="netctoss" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestCostDAO" />
+      <option name="METHOD_NAME" value="testDelete" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestCostDAO.testFindAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="netctoss" />
       <extension name="coverage">
@@ -130,7 +154,56 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestCostDAO.testFindById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="netctoss" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestCostDAO" />
+      <option name="METHOD_NAME" value="testFindById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCostDAO.testSave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="netctoss" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestCostDAO" />
+      <option name="METHOD_NAME" value="testSave" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCostDAO.testUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="netctoss" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.TestCostDAO" />
+      <option name="METHOD_NAME" value="testUpdate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 8.5" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/netctoss/toLogin.do" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
@@ -205,10 +278,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.TestCostDAO.testFindAll" />
+      <item itemvalue="JUnit.TestCostDAO.testFindById" />
+      <item itemvalue="JUnit.TestCostDAO.testSave" />
+      <item itemvalue="JUnit.TestCostDAO.testUpdate" />
+      <item itemvalue="JUnit.TestCostDAO.testDelete" />
       <item itemvalue="Tomcat Server.Tomcat 8.5" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestCostDAO.testDelete" />
+        <item itemvalue="JUnit.TestCostDAO.testUpdate" />
+        <item itemvalue="JUnit.TestCostDAO.testSave" />
+        <item itemvalue="JUnit.TestCostDAO.testFindById" />
         <item itemvalue="JUnit.TestCostDAO.testFindAll" />
       </list>
     </recent_temporary>
@@ -216,16 +297,17 @@
   <component name="ServiceViewManager">
     <option name="allServicesViewState">
       <serviceView>
+        <option name="contentProportion" value="0.13843775" />
         <treeState>
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@49c23afa" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@ee2923c" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@49c23afa" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@6c6252de" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@ee2923c" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@40aa6bdb" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -246,11 +328,48 @@
       <workItem from="1601727681653" duration="15914000" />
       <workItem from="1601818926142" duration="1986000" />
       <workItem from="1604821102928" duration="3512000" />
-      <workItem from="1605093912925" duration="4094000" />
+      <workItem from="1605093912925" duration="5194000" />
+      <workItem from="1605710495242" duration="4942000" />
+      <workItem from="1605773472865" duration="8664000" />
+      <workItem from="1605862910309" duration="1334000" />
+      <workItem from="1605946336875" duration="10838000" />
+      <workItem from="1606114226366" duration="675000" />
+      <workItem from="1606220380731" duration="4304000" />
+      <workItem from="1606381343040" duration="9066000" />
+      <workItem from="1606467191617" duration="11766000" />
+      <workItem from="1606559942882" duration="591000" />
+      <workItem from="1606631334290" duration="28337000" />
+      <workItem from="1606725001420" duration="4366000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dao/CostDAOImpl.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/account/account_add.jsp</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/web/ActionServlet.java</url>
+          <line>648</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/web/ActionServlet.java</url>
+          <line>563</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
