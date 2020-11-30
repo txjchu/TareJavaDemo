@@ -1,11 +1,54 @@
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Servlet 规范的2.3版本，不支持 EL 表达式 -->
+<!--<!DOCTYPE web-app PUBLIC-->
+<!--        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"-->
+<!--        "http://java.sun.com/dtd/web-app_2_3.dtd" >-->
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>Archetype Created Web Application</display-name>
 
 
+
+
+    <!-- 监听器 Listener -->
+    <listener>
+        <listener-class>demo.day08.CountListener</listener-class>
+    </listener>
+
+    <!-- 过滤器 Filter -->
+    <filter>
+        <filter-name>filter1</filter-name>
+        <filter-class>demo.CommentFilter1</filter-class>
+        <init-param>
+            <param-name>illegalWord</param-name>
+            <param-value>胡萝卜</param-value>
+        </init-param>
+    </filter>
+
+    <!-- 多个过滤器的执行顺序是按照滤器的 filter-mapping 声明顺序。 -->
+    <!-- 动态设置过滤器的初始化参数 -->
+    <filter>
+        <filter-name>filter2</filter-name>
+        <filter-class>demo.CommentFilter2</filter-class>
+        <init-param>
+            <param-name>illegalLength</param-name>
+            <param-value>20</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter2</filter-name>
+        <url-pattern>/comment</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>filter1</filter-name>
+        <url-pattern>/comment</url-pattern>
+    </filter-mapping>
+
+    <!--Servlet-->
     <!-- 注册HelloServlet -->
     <servlet>
         <servlet-name>helloServlet</servlet-name>
@@ -139,7 +182,7 @@
     
     <!-- 注册 Context01Servlet,Context02Servlet   -->
     <!--  学习 ServletContext 的使用  -->
-
+    <!-- 全局化初始参数 -->
     <context-param>
         <param-name>count</param-name>
         <param-value>1000</param-value>
@@ -170,4 +213,116 @@
         <url-pattern>/safe</url-pattern>
     </servlet-mapping>
 
+    <!-- cookie 的练习   -->
+    <servlet>
+        <servlet-name>addCookie</servlet-name>
+        <servlet-class>demo.AddCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCookie</servlet-name>
+        <url-pattern>/addCookie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>findCookie</servlet-name>
+        <servlet-class>demo.FindCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>findCookie</servlet-name>
+        <url-pattern>/findCookie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updateCookie</servlet-name>
+        <servlet-class>demo.UpdateCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateCookie</servlet-name>
+        <url-pattern>/updateCookie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>persistentCookie</servlet-name>
+        <servlet-class>demo.PersistentCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>persistentCookie</servlet-name>
+        <url-pattern>/persistentCookie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>encodeCookie</servlet-name>
+        <servlet-class>demo.EncodeCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>encodeCookie</servlet-name>
+        <url-pattern>/encodeCookie</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>decodeCookie</servlet-name>
+        <servlet-class>demo.DecodeCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>decodeCookie</servlet-name>
+        <url-pattern>/decodeCookie</url-pattern>
+    </servlet-mapping>
+
+    <!-- 练习 session    -->
+    <servlet>
+        <servlet-name>countServlet</servlet-name>
+        <servlet-class>demo.CountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>countServlet</servlet-name>
+        <url-pattern>/count</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ActionServlet</servlet-name>
+        <servlet-class>demo.ActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActionServlet</servlet-name>
+        <url-pattern>*.action</url-pattern> <!--为了避免与之前的 .do 请求路径冲突-->
+    </servlet-mapping>
+
+    <!--练习验证码-->
+    <servlet>
+        <servlet-name>validateCodeServlet</servlet-name>
+        <servlet-class>demo.ValidateCode</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>validateCodeServlet</servlet-name>
+        <url-pattern>/code</url-pattern>
+    </servlet-mapping>
+
+    <!-- 声明式设置 session 的有效时间，单位分钟 -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>demo.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+
+    <!--监听器练习：登出-->
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>demo.day08.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/day08/logout</url-pattern>
+    </servlet-mapping>
+
+    <!-- jstl 标签的练习 -->
+    <servlet>
+        <servlet-name>day09ActionServlet</servlet-name>
+        <servlet-class>demo.day09.ActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>day09ActionServlet</servlet-name>
+        <url-pattern>/day09/list.action</url-pattern> <!-- 不能.do,上面有 *.do 冲突 -->
+    </servlet-mapping>
 </web-app>

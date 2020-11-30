@@ -11,6 +11,7 @@ public class Employee {
     private String name;
     private double salary;
     private int age;
+    private String gender;
 
     public Employee(){
         super();
@@ -25,7 +26,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return id +" "+ name +" "+ salary +" "+ age;
+        return id +" "+ name +" "+ salary +" "+ age +" "+ gender;
     }
 
     public int getId() {
@@ -58,5 +59,13 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

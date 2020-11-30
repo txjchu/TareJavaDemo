@@ -59,9 +59,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
         <option value="jsf" />
+        <option value="Class" />
         <option value="Jsp File" />
       </list>
     </option>
@@ -100,6 +100,9 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletdemo\src\main\webapp" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="demo" />
     </key>
@@ -341,17 +344,7 @@
       <serviceView>
         <option name="contentProportion" value="0.1786543" />
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c76aeac3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@c76aeac3" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@77541df4" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -379,6 +372,13 @@
       <workItem from="1600859212126" duration="5174000" />
       <workItem from="1600950172312" duration="638000" />
       <workItem from="1601730252692" duration="233000" />
+      <workItem from="1605105580906" duration="611000" />
+      <workItem from="1605163878130" duration="16454000" />
+      <workItem from="1605256299356" duration="1918000" />
+      <workItem from="1605425731832" duration="8199000" />
+      <workItem from="1605509427243" duration="12440000" />
+      <workItem from="1605596676102" duration="14896000" />
+      <workItem from="1605696029326" duration="6413000" />
     </task>
     <servers />
   </component>
@@ -402,6 +402,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/demo/dao/AccountDAO.java</url>
           <line>123</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/demo/emp/ActionServlet.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

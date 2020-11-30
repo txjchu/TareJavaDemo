@@ -25,6 +25,7 @@
             <td>姓名</td>
             <td>薪水</td>
             <td>年龄</td>
+            <td>操作</td>
         </tr>
         <%
             EmployeeDAO dao = new EmployeeDAO();
@@ -37,6 +38,10 @@
             <td><%=emp.getName() %></td>
             <td><%=emp.getSalary() %></td>
             <td><%=emp.getAge() %></td>
+            <td>
+                <a href="load.do?id=<%=emp.getId()%>">修改</a>
+                <a href="delete.do?id=<%=emp.getId()%>">删除</a>
+            </td>
         </tr>
         <%
             }
