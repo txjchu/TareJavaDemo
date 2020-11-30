@@ -88,8 +88,9 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletjsp05\src\main\webapp" />
+      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletjsp05\src\main\resources\properties" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="demo.servlet" />
@@ -98,9 +99,8 @@
       <recent name="demo.entity" />
       <recent name="demo.utils" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletjsp05\src\main\webapp" />
-      <recent name="F:\JAVA\TareJavaDemo.git\trunk\DEMO\ideaban\servletjsp05\src\main\resources\properties" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -272,12 +272,7 @@
       <serviceView>
         <option name="contentProportion" value="0.17401393" />
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@b43c11f4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -301,6 +296,7 @@
       <workItem from="1601648116066" duration="620000" />
       <workItem from="1601727086331" duration="5995000" />
       <workItem from="1604833645570" duration="783000" />
+      <workItem from="1605707589111" duration="2830000" />
     </task>
     <servers />
   </component>

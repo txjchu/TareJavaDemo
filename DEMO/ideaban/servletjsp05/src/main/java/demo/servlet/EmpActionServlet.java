@@ -39,7 +39,8 @@ public class EmpActionServlet extends HttpServlet {
         if("list".equals(action)){ // 添加记录
             List<Employee> emps = dao.findAll();
             req.setAttribute("emps", emps); // 绑定数据
-            req.getRequestDispatcher("listEmp.jsp").forward(req, resp);// 转发到 listEmp.jsp ，并绑定请求对象与相应对象
+//            req.getRequestDispatcher("listEmp.jsp").forward(req, resp);// 转发到 listEmp.jsp ，并绑定请求对象与相应对象
+            req.getRequestDispatcher("listEmp_jstl.jsp").forward(req, resp);
 
         } else if("add".equals(action)){ // 新加记录
             String name = req.getParameter("name");
@@ -56,7 +57,8 @@ public class EmpActionServlet extends HttpServlet {
             Employee emp = dao.findById(id);
 
             req.setAttribute("emp", emp);
-            req.getRequestDispatcher("updateEmp.jsp").forward(req, resp);
+//            req.getRequestDispatcher("updateEmp.jsp").forward(req, resp);
+            req.getRequestDispatcher("updateEmp_jstl.jsp").forward(req, resp);
 
         } else if("update".equals(action)){ // 修改记录
             Employee emp = new Employee();
