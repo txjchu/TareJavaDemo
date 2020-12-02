@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 笔记 -->
+
+    <!--day01-->
+    <!-- 通过构造器实例化 bean -->
+    <bean id="obj1" class="java.util.GregorianCalendar"></bean>
+    <!-- 通过静态工厂方法实例化 bean -->
+    <bean id="obj2" class="java.util.Calendar" factory-method="getInstance"/>
+    <!-- 通过实例工厂方法实例化 bean -->
+    <bean id="obj3" class="java.util.GregorianCalendar"/>
+    <bean id="obj4" factory-bean="obj3" factory-method="getTime"/>
+
+    <!-- bean 的作用域 -->
+    <!-- 默认 singleton 单例，整个容器中只有1个实例对象。
+              prototype 原型，每获取一次该 bean 则会创建1个新对象 -->
+    <bean id="obj5" class="java.util.GregorianCalendar"/>
+    <bean id="obj6" class="java.util.GregorianCalendar" scope="prototype"/>
+
+    <!-- bean 的生命周期 -->
+    <!-- bean 延迟实例化 -->
+    <!-- lazy-init 延迟实例化默认false，即容器启动时就初始化，改为true后，则表示该bean会在第一次被调用时才进行初始化。beans标签中 default-lazy-init 可以为所有bean统一设置 -->
+    <bean id="exampleBean" class="day01.ExampleBean" init-method="init" destroy-method="destroy" lazy-init="true"/>
+
+    <!-- setter 方式为 bean 注入值  -->
+    <bean id="computer" class="day01.Computer" >
+        <property name="mainboard" value="技嘉"/>
+        <property name="hdd" value="希捷"/>
+        <property name="ram" value="金士顿"/>
+    </bean>
+
+    <!-- 使用构造器方式为 bean 注入值 -->
+    <bean id="telephone" class="day01.Telephone">
+        <constructor-arg index="0" value="ARM"/>
+        <constructor-arg index="1" value="2G"/>
+    </bean>
+
+    <!-- 自动注入 -->
+    <bean id="student" class="day01.Student" autowire="byType"/>
+
+    <!-- setter 注入 -->
+    <bean id="jdbcDeptDAO" class="day01.dao.JdbcDeptDAO"/>
+    <!--<bean id="deptDAO" class="day01.dao.DeptDAO"/>--> <!-- 必须是 class -->
+    <bean id="deptService" class="day01.service.DeptService">
+         <property name="dao" ref="jdbcDeptDAO"/>
+    </bean>
+
+
+    <!--day02-->
+    <bean id="computer2" class="day02.Computer">
+        <property name="mainboard"><value>技嘉</value></property>
+        <property name="ram"><value>金士顿</value></property>
+        <property name="hdd"><value>希捷</value></property>
+    </bean>
+    <!--注入参数值-->
+    <bean id="messageBean" class="day02.MessageBean">
+        <property name="name" >
+            <value>张三</value>
+        </property>
+        <property name="age"><value>14</value></property>
+        <property name="computer" ref="computer2"/><!--Bean must be of 'day02.Computer' type 不能直接使用 day01 中的bean，因为类中该属性的类型是day02中的-->
+        <property name="langs">
+            <list>
+                <value>Java</value>
+                <value>PHP</value>
+                <value>.net</value>
+            </list>
+        </property>
+        <property name="cities">
+            <set>
+                <value>北京</value>
+                <value>上海</value>
+                <value>广州</value>
+            </set>
+        </property>
+        <property name="score">
+            <map>
+                <entry key="语文" value="98"></entry>
+                <entry key="数学" value="99"/>
+                <entry key="英语" value="97"></entry>
+            </map>
+        </property>
+        <property name="props">
+            <props>
+                <prop key="user">xyz</prop>
+                <prop key="password">123</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!--使用注入表达式来给bean 注入属性数据 #{xxx.xxx}-->
+    <!-- 声明Properties集合，读取 const.properties 中的参数 -->
+    <util:properties id="const" location="classpath:const.properties"/> <!--注意文件的路径，应该将其与 applicationContext.xml放在同一资源目录中-->
+    <bean id="demo" class="day02.DemoBean">
+        <property name="name" value="#{messageBean.name}"></property>
+        <property name="lang" value="#{messageBean.langs[0]}"></property> <!--注意 list 根据下标获取元素-->
+        <property name="score" value="#{messageBean.score.get('语文')}" /><!--注意 map 获取 value 的方式 -->
+        <property name="pageSize" value="#{const.PAGE_SIZE}"/>
+    </bean>
+    <!--测试同一个类定义2个bean-->
+    <!--测试 util:map 的使用-->
+    <!--测试 #{map.key}的使用 可以直接使用，但是 key 不能有中文字符-->
+    <util:map id="map1" >
+        <entry key="JSD1" value="11"></entry>
+        <entry key="JSD2" value="22"/>
+    </util:map>
+    <bean id="demo2" class="day02.DemoBean">
+        <property name="name" value=""/><!--注入空字符串-->
+        <property name="lang" ><null></null></property><!--注入null-->
+        <property name="score" value="#{map1.JSD1}"/>
+    </bean>
+
+
+    <!--4 使用注解为bean注入-->
+    <!--开启注解扫描，使用注解注册bean后，就不需要再进行手动配置bean-->
+    <context:component-scan base-package="day02"/><!--扫描day02包下的文件-->
+
+
+
+</beans>
