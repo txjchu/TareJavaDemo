@@ -63,23 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestDemo.test1">
-    <configuration name="TestCase.test10" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springmybatis1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="day02.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="day02" />
-      <option name="MAIN_CLASS_NAME" value="day02.TestCase" />
-      <option name="METHOD_NAME" value="test10" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TestCase.test13">
     <configuration name="TestCase.test11" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springmybatis1" />
       <extension name="coverage">
@@ -107,6 +91,22 @@
       <option name="PACKAGE_NAME" value="day02" />
       <option name="MAIN_CLASS_NAME" value="day02.TestCase" />
       <option name="METHOD_NAME" value="test12" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCase.test13" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springmybatis1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="day02.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="day02" />
+      <option name="MAIN_CLASS_NAME" value="day02.TestCase" />
+      <option name="METHOD_NAME" value="test13" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -146,11 +146,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestCase.test13" />
         <item itemvalue="JUnit.TestDemo.test1" />
         <item itemvalue="JUnit.test.test1" />
         <item itemvalue="JUnit.TestCase.test12" />
         <item itemvalue="JUnit.TestCase.test11" />
-        <item itemvalue="JUnit.TestCase.test10" />
       </list>
     </recent_temporary>
   </component>
@@ -177,7 +177,8 @@
       <workItem from="1606746812632" duration="2865000" />
       <workItem from="1606811552356" duration="12229000" />
       <workItem from="1606901993098" duration="6552000" />
-      <workItem from="1606915435451" duration="5781000" />
+      <workItem from="1606915435451" duration="6386000" />
+      <workItem from="1607264087837" duration="2869000" />
     </task>
     <servers />
   </component>
