@@ -124,4 +124,10 @@ public class TestCase {
         DBean dBean = ctx.getBean("DBean", DBean.class); // 注意该 bean 的 id
         System.out.println(dBean);
     }
+
+    @Test
+    public void test13(){
+        Zoo zoo = new Zoo();
+        zoo.perform();      // NullPointerException 如果不为Zoo 实例化其Animal 属性，则会报该异常。在练习中是在 xml 中通过配置为bean注入属性实现 Animal 实例化。：<property name="animal" ref="elephone1"/>
+    }
 }
