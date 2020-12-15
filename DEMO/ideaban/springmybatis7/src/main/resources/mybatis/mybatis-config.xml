@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/lianxishujuku?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8"/><!--笔记 注意此处 & 必须写作 &amp;-->
+                <property name="username" value="root"/>
+                <property name="password" value="1234"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--xml 文件位于 src/main/resources 目录下时的路径的写法。-->
+        <mapper resource="com/pc/mapper/EmpMapper.xml"/>
+
+
+
+        <!--xml 文件位于 src/main/java/com/pc 目录下时的路径写法，注意：需要在 pom.xml 中配置 build>resources>resource 将该目录下的 xml 编译。-->
+        <!--<mapper resource="com/pc/dao/xml/EmpMapper1.xml"/>-->
+        <mapper resource="com/pc/dao/xml/DeptMapper.xml"/>
+    </mappers>
+
+
+</configuration>

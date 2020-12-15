@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+  例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)-->
+<!--<mapper namespace="com.pc.dao.EmpMapper">-->
+<mapper namespace="com.pc.dao.IEmpMapper">
+
+
+    <select id="findAll" resultType="com.pc.entity.Emp">
+        select * from emp;
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.pc.entity.Emp">
+        select * from emp where empno = #{empno};
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.pc.entity.Emp">
+        select * from emp where ename = #{ename};
+    </select>
+
+    <insert id="save" parameterType="com.pc.entity.Emp">
+        insert into emp values(
+                                #{empno},
+                                #{ename},
+                                #{job},
+                                #{mgr},
+                                #{hiredate},
+                                #{sal},
+                                #{comm},
+                                #{deptno});
+    </insert>
+    <!--insert into emp values(empno = null, );-->
+
+    <update id="update" parameterType="com.pc.entity.Emp">
+        update emp set  ename = #{ename},
+                        job = #{job},
+                        mgr = #{mgr},
+                        hiredate = #{hiredate},
+                        sal = #{sal},
+                        comm = #{comm},
+                        deptno = #{deptno}
+                    where empno = #{empno};
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from emp where empno = #{empno}
+    </delete>
+
+
+    <select id="findByDeptno" parameterType="int" resultType="Map">
+        select * from emp where deptno = #{deptno}
+    </select>
+</mapper>

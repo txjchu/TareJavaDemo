@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+  例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)-->
+<mapper namespace="com.pc.dao.EmpMapper">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+   User类就是users表所对应的实体类-->
+
+    <!--区分 EmpMapper.xml -->
+
+
+    <select id="findAll" resultType="com.pc.entity.Emp">
+        select * from emp;
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.pc.entity.Emp">
+        select * from emp where empno = #{empno};
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.pc.entity.Emp">
+        select * from emp where ename = #{ename};
+    </select>
+
+    <insert id="save" parameterType="com.pc.entity.Emp">
+        insert into emp values(
+                                #{empno},
+                                #{ename},
+                                #{job},
+                                #{mgr},
+                                #{hiredate},
+                                #{sal},
+                                #{comm},
+                                #{deptno});
+    </insert>
+    <!--insert into emp values(empno = null, );-->
+
+    <update id="update" parameterType="com.pc.entity.Emp">
+        update emp set  ename = #{ename},
+                        job = #{job},
+                        mgr = #{mgr},
+                        hiredate = #{hiredate},
+                        sal = #{sal},
+                        comm = #{comm},
+                        deptno = #{deptno}
+                    where empno = #{empno};
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from emp where empno = #{empno}
+    </delete>
+</mapper>

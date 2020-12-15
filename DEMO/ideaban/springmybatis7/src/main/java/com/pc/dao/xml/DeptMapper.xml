@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pc.dao.IDeptMapper">
+    <select id="findAll" resultMap="deptMap">
+        select * from dept
+    </select>
+
+    <select id="findById" resultMap="deptMap">
+        select * from dept where deptno = #{id};
+    </select>
+
+    <select id="findByName" resultMap="deptMap">
+        select * from dept where dname = #{name}
+    </select>
+
+    <!--注意表中字段与实体类属性名不一致的问题-->
+    <resultMap id="deptMap" type="com.pc.entity.Dept">
+        <result column="deptno" property="id"/>
+        <result column="dname" property="name"/>
+        <result column="loc" property="loc"/>
+    </resultMap>
+</mapper>
