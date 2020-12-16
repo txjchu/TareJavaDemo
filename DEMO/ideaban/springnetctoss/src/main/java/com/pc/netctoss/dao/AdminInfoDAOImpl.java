@@ -57,7 +57,6 @@ public class AdminInfoDAOImpl implements IAdminInfoDAO , Serializable {
      * 登录时，根据登录名查找记录
      * @param adminCode
      * @return
-     * @throws SQLException
      */
     public AdminInfo findByCode(String adminCode)  {
 
@@ -83,6 +82,7 @@ public class AdminInfoDAOImpl implements IAdminInfoDAO , Serializable {
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new RuntimeException("关闭连接失败！", e);
             }
         }
 

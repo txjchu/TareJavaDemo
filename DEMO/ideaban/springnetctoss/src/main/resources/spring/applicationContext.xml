@@ -21,6 +21,12 @@
     </bean>
 
 
+    <!--Spring 整合 JDBC-->
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+
+
     <!--开启注解扫描-->
     <context:component-scan base-package="com.pc"/>
 
@@ -31,4 +37,25 @@
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--处理系统异常-->
+    <!--使用 SpringMVC 提供的简单异常控制器处理系统异常-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">main/error</prop> <!--系统异常处理方式为返回指定的异常页面-->
+            </props>
+        </property>
+    </bean>
+    
+    <!--注册登录验证拦截器 如果请求中 session 没有 adminInfo 对象信息则表示没有登录，返回登录页面-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login/checkLogin.do"/>
+            <mvc:exclude-mapping path="/login/toLogin.do"/>
+            <bean class="com.pc.netctoss.interceptor.LonginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

@@ -31,7 +31,7 @@ public class JDBCUtil {
 
 //    private static String path = "src\\main\\resources\\properties\\database.properties";
 //    private static String path = "src\\main\\java\\demo\\database.properties";
-    private static String path = ".\\properties\\database.properties";
+    private static String path = ".\\properties\\jdbc.properties";
 
 
 

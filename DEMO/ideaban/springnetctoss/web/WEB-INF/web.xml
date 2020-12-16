@@ -19,4 +19,25 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+    <!--使用Spring自带的编码解析器处理前后端中文乱码的问题-->
+    <!--需要注意的是表单数据以POST方式提交，页面编码方式要与过滤器编码方式一致。-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--定义 error-page 页面，处理404问题-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/main/error.jsp</location>    <!--笔记 注意该路径的写法-->
+    </error-page>
 </web-app>
