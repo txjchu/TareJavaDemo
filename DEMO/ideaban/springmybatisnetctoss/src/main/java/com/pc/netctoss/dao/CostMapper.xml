@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pc.netctoss.dao.CostMapper">
+
+    <select id="findAll" resultMap="costMap">
+        select * from cost
+    </select>
+
+    <select id="findById" resultMap="costMap" parameterType="Integer">
+        select * from cost where cost_id = #{costId}
+    </select>
+
+
+    <resultMap id="costMap" type="com.pc.netctoss.entity.Cost">
+        <result column="cost_id" property="costId"/>
+        <result column="name" property="name"/>
+        <result column="base_duration" property="baseDuration"/>
+        <result column="base_cost" property="baseCost"/>
+        <result column="unit_cost" property="unitCost"/>
+        <result column="status" property="status"/>
+        <result column="descr" property="descr"/>
+        <result column="creatime" property="creatime"/>
+        <result column="startime" property="startime"/>
+        <result column="cost_type" property="costType"/>
+    </resultMap>
+
+</mapper>

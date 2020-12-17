@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--注册数据源 DataSource-->
+    <util:properties id="jdbc" location="classpath:properties/jdbc.properties"/>
+    <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="#{jdbc.driver}"/>
+        <property name="url" value="#{jdbc.url}"/>
+        <property name="username" value="#{jdbc.username}"/>
+        <property name="password" value="#{jdbc.password}"/>
+    </bean>
+
+    <!--开启注解扫描-->
+    <context:component-scan base-package="com.pc.netctoss"/>
+
+    <!--开启MVC注解扫描-->
+    <mvc:annotation-driven/>
+
+    <!--定义视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"></property>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--SqlSession 工厂-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="ds"/>
+        <!--<property name="mapperLocations" value="classpath:com/pc/demo/dao/xml/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:com/pc/netctoss/dao/*.xml"/>   <!--注意该路径-->
+    </bean>
+
+    <!-- 扫描指定包下所有的接口 MapperScannerConfigurer -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.pc.netctoss.dao" />
+        <!--<property name="annotationClass" value="com.pc.netctoss.annotation.MyBatisRepository"/>--> <!--奇怪 加了此 property 后，则 testEmpMapper 中 getBean() 获取不到 bean-->
+    </bean>
+</beans>
