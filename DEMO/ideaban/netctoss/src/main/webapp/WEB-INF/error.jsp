@@ -43,7 +43,7 @@
         startTimes(); /*笔记 在js中定义的方法，如果需要调用，可以直接如此调用。*/
     </script>
 </head>
-<body>
+<body class="error_page" onload="startTimes();">
     <h1 id="error">
         遇到错误，&nbsp;<span id="secondes">5</span>&nbsp;秒后将自动跳转，立即跳转请点击&nbsp;
         <a  href="javascript:;" onclick="resetTimer();">返回</a>
