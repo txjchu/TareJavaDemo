@@ -32,6 +32,9 @@ d. 练习重定向
 
     c. 使用@ModelAttribute注解
 
+     @ModelAttribute 注解用在 Controller 方法参数前，或 Bean 属性方法上。
+     @ModelAttribute 会利用 HttpServletRequest 的 Attribute 将数据传递到 JSP 页面。
+
 3) 在Controller方法参数上直接声明HttpSession即可使用
 
 4) 重定向有2种方式

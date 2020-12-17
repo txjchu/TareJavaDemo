@@ -17,4 +17,21 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--使用SimpleMappingExceptionResolver处理异常-->
+    <!--处理系统异常-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">jsp/error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--注册自定义拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.pc.interceptor.FirstInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

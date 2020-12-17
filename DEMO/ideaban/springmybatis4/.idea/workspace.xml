@@ -23,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -161,6 +161,9 @@
       <workItem from="1607341858763" duration="5131000" />
       <workItem from="1607432912411" duration="11373000" />
       <workItem from="1607505684768" duration="2315000" />
+      <workItem from="1607605907286" duration="2570000" />
+      <workItem from="1607692743647" duration="3215000" />
+      <workItem from="1607778517713" duration="43000" />
     </task>
     <servers />
   </component>
