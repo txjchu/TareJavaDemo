@@ -18,11 +18,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Tag Library Descriptor" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="TestMain.test3" />
+    </enabled-run-configurations>
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -50,7 +55,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="file.status.colors" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.postfix.templates" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -69,13 +74,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Servlet">
-    <configuration name="CommandBySwitch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Z1_FUNDAMENTAL.CommandBySwitch" />
+  <component name="RunManager" selected="JUnit.TestMain.test61">
+    <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="nowcoder_HUAWEI.TestMain" />
       <module name="ideaban" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Z1_FUNDAMENTAL.*" />
+          <option name="PATTERN" value="nowcoder_HUAWEI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -83,61 +88,66 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeapYear" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Z1_FUNDAMENTAL.LeapYear" />
+    <configuration name="TestMain.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ideaban" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Z1_FUNDAMENTAL.*" />
+          <option name="PATTERN" value="nowcoder_HUAWEI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LeapYear.testFor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ideaban" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Z1_FUNDAMENTAL.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Z1_FUNDAMENTAL" />
-      <option name="MAIN_CLASS_NAME" value="Z1_FUNDAMENTAL.LeapYear" />
-      <option name="METHOD_NAME" value="testFor" />
+      <option name="PACKAGE_NAME" value="nowcoder_HUAWEI" />
+      <option name="MAIN_CLASS_NAME" value="nowcoder_HUAWEI.TestMain" />
+      <option name="METHOD_NAME" value="test3" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeapYear.testScanner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestMain.test51" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ideaban" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Z1_FUNDAMENTAL.*" />
+          <option name="PATTERN" value="nowcoder_HUAWEI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Z1_FUNDAMENTAL" />
-      <option name="MAIN_CLASS_NAME" value="Z1_FUNDAMENTAL.LeapYear" />
-      <option name="METHOD_NAME" value="testScanner" />
+      <option name="PACKAGE_NAME" value="nowcoder_HUAWEI" />
+      <option name="MAIN_CLASS_NAME" value="nowcoder_HUAWEI.TestMain" />
+      <option name="METHOD_NAME" value="test51" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ideaban 中的 Z09_SERVLETJSP.web " type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestMain.test6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ideaban" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Z09_SERVLETJSP.web.*" />
+          <option name="PATTERN" value="nowcoder_HUAWEI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Z09_SERVLETJSP.web" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="nowcoder_HUAWEI" />
+      <option name="MAIN_CLASS_NAME" value="nowcoder_HUAWEI.TestMain" />
+      <option name="METHOD_NAME" value="test6" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestMain.test61" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ideaban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nowcoder_HUAWEI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="nowcoder_HUAWEI" />
+      <option name="MAIN_CLASS_NAME" value="nowcoder_HUAWEI.TestMain" />
+      <option name="METHOD_NAME" value="test61" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -280,21 +290,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CommandBySwitch" />
-      <item itemvalue="Application.LeapYear" />
-      <item itemvalue="JUnit.ideaban 中的 Z09_SERVLETJSP.web " />
-      <item itemvalue="JUnit.LeapYear.testFor" />
-      <item itemvalue="JUnit.LeapYear.testScanner" />
+      <item itemvalue="Application.TestMain" />
+      <item itemvalue="JUnit.TestMain.test3" />
+      <item itemvalue="JUnit.TestMain.test51" />
+      <item itemvalue="JUnit.TestMain.test6" />
+      <item itemvalue="JUnit.TestMain.test61" />
       <item itemvalue="Tomcat Server.Servlet" />
       <item itemvalue="Tomcat Server.Tomcat 8.5" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ideaban 中的 Z09_SERVLETJSP.web " />
-        <item itemvalue="JUnit.LeapYear.testScanner" />
-        <item itemvalue="JUnit.LeapYear.testFor" />
-        <item itemvalue="Application.LeapYear" />
-        <item itemvalue="Application.CommandBySwitch" />
+        <item itemvalue="JUnit.TestMain.test61" />
+        <item itemvalue="JUnit.TestMain.test6" />
+        <item itemvalue="Application.TestMain" />
+        <item itemvalue="JUnit.TestMain.test51" />
+        <item itemvalue="JUnit.TestMain.test3" />
       </list>
     </recent_temporary>
   </component>
@@ -341,10 +351,25 @@
       <workItem from="1599670328611" duration="72000" />
       <workItem from="1599925983851" duration="5278000" />
       <workItem from="1600229094405" duration="2818000" />
+      <workItem from="1608473362139" duration="4969000" />
+      <workItem from="1608526078851" duration="381000" />
+      <workItem from="1608526507924" duration="12609000" />
+      <workItem from="1608807807055" duration="2954000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/nowcoder_HUAWEI/TestMain.java</url>
+          <line>150</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
